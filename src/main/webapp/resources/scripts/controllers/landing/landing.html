@@ -1,6 +1,6 @@
 <div id="cards" ng-init="ctrl.init()" class="col-md-10">
 
-    <div class="col-md-3" ng-repeat="artist in ctrl.favorites | limitTo: 4">
+    <div class="col-md-3" ng-repeat="artist in ctrl.favorites track by $index | limitTo: 4">
         <div class="col-md-12 card card-blue">
             <div class="panel-body text-center">
                 <span class="label label-info">{{artist.track_count}}</span> track(s)

@@ -40,7 +40,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
 
     ctrl.getTracks = function () {
         SC.get('/users/' + ctrl.artist.id + '/tracks').then(function (response) {
-            ctrl.tracks = response;
+            ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
             ctrl.showInitList = false;
         });
     };

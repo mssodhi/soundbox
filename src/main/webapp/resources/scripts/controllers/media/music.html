@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="search-bar">
             <p>Powered by <b>SoundCloud</b></p>
-            <input type="text" class="col-md-3" ng-model="ctrl.search" ng-change="ctrl.getArtist()">
+            <input type="text" class="col-md-3" ng-model="ctrl.search" ng-model-options="{debounce: 250}" ng-change="ctrl.getArtist()">
             <a class="ml15" href="" ng-if="!ctrl.showInitList && ctrl.tracks.length > 0" ng-click="ctrl.init()">All music</a>
             <br>
         </div>
@@ -12,7 +12,7 @@
 
     <br>
 
-    <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists">
+    <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists track by $index">
         <div class="col-md-4" ng-if="artist.full_name">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
                 <div class="panel-body text-center">
@@ -42,7 +42,7 @@
     </div>
 
     <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
-        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks">
+        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks track by $index">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
@@ -60,7 +60,7 @@
             <h4>Artist: {{ctrl.artist.full_name}}</h4>
         </div>
 
-        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks | orderBy: '-playback_count'">
+        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks track by $index">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
@@ -82,7 +82,7 @@
             <div class="card-red panel-body">
                 <span class="fa fa-star-o"> Favorite Artists</span>
             </div>
-            <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites"
+            <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites track by $index"
                  ng-click="ctrl.setArtist(artist)">
                 <div class="panel-body">
                     <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
