@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="search-bar">
             <p>Powered by <b>YouTube</b></p>
-            <input type="text" class="col-md-3" ng-model="ctrl.q" ng-change="ctrl.search()">
+            <input type="text" class="col-md-3" ng-model="ctrl.q" ng-change="ctrl.search()" ng-model-options="{debounce: 250}">
             <a class="ml15" href="" ng-if="!ctrl.isPopular" ng-click="ctrl.getPopular()">Popular on YouTube</a>
             <br>
         </div>
