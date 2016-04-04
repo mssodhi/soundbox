@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService', 'profile', 'MusicService', function (MediaService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'FavoritesService', 'profile', 'MusicService', function ($http, MediaService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.tracks = [];
@@ -39,8 +39,19 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
     };
 
     ctrl.getTracks = function () {
-        SC.get('/tracks', {user_id: ctrl.artist.id, limit: 500}).then(function (response) {
-            ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
+        SC.get('/tracks', {user_id: ctrl.artist.permalink, limit: 500}).then(function (response) {
+            if(response.length == 0){
+                $http.get('http://api.soundcloud.com/tracks', {
+                        params: {
+                            client_id: '0f7c969c815f51078c1de513f666ecdb',
+                            q: ctrl.artist.permalink
+                        }
+                    }).success( function (data) {
+                        ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
+                });
+            }else{
+                ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
+            }
             ctrl.showInitList = false;
         });
     };

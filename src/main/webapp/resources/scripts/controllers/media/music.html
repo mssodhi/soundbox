@@ -12,6 +12,8 @@
 
     <br>
 
+
+    <!-- Artists search query list -->
     <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists track by $index">
         <div class="col-md-4" ng-if="artist.full_name">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
@@ -33,7 +35,8 @@
         </div>
     </div>
 
-    <div ng-if="ctrl.tracks.length === 0 && ctrl.artist" class="col-md-12">
+    <!-- Message when the user doesn't have any tracks -->
+    <div ng-if="ctrl.artist.track_count === 0" class="col-md-12">
         <div class="card card-red">
             <div class="panel-body">
                 <p>No tracks by {{ctrl.artist.full_name}}</p>
@@ -41,6 +44,17 @@
         </div>
     </div>
 
+    <!-- Message when the there's a technical error -->
+    <div ng-if="ctrl.tracks.length === 0 && ctrl.artist.track_count > 0" class="col-md-12">
+        <div class="card card-red">
+            <div class="panel-body">
+                <p>Unexpected error occured fetching tracks</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Initial songs list by all favorites -->
     <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
         <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks track by $index">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
@@ -55,6 +69,8 @@
         </div>
     </div>
 
+
+    <!-- The actual songs list by user -->
     <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && !ctrl.showInitList">
         <div class="col-md-12 mb10">
             <span style="font-size: medium">Artist: {{ctrl.artist.full_name}}</span>
@@ -76,8 +92,10 @@
 
 </div>
 
-<div class="col-md-3">
 
+
+<!-- Favorites List on the side -->
+<div class="col-md-3">
     <div ng-if="ctrl.favorites.length > 0">
         <div class="card">
             <div class="card-red panel-body">
