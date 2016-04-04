@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-social.css">
     <link rel="stylesheet" type="text/css" href="resources/css/font-awesome.min.css">
     <link rel="shortcut icon" href="resources/images/mainpic.jpeg">
-    <title>Sodhi</title>
+    <title>SoundBox</title>
 </head>
 <body ng-app="app">
 <div ng-include="'resources/scripts/controllers/nav/nav.html'"></div>
