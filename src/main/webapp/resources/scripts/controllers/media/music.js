@@ -26,7 +26,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
             for(var i = 0; i < response.length; i++){
                 SC.get('/users/' + response[i].artist_id).then(function(response){
                     ctrl.favorites.push(response);
-                    SC.get('/users/' + response.id + '/tracks').then(function (response) {
+                    SC.get('/tracks', {user_id: response.id, limit: 500}).then(function (response) {
                         ctrl.showInitList = true;
                         for(var i = 0; i < response.length; i++){
                             ctrl.tracks.push(response[i]);
@@ -39,7 +39,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
     };
 
     ctrl.getTracks = function () {
-        SC.get('/users/' + ctrl.artist.id + '/tracks').then(function (response) {
+        SC.get('/tracks', {user_id: ctrl.artist.id, limit: 500}).then(function (response) {
             ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
             ctrl.showInitList = false;
         });
