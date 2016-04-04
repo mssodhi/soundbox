@@ -54,20 +54,6 @@
         </div>
     </div>
 
-    <!--<div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">-->
-        <!--<div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks">-->
-            <!--<div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">-->
-                <!--<div class="panel-body text-center">-->
-                    <!--<img ng-src="{{track.artwork_url}}">-->
-                    <!--<h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>-->
-                    <!--<p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>-->
-                    <!--</p>-->
-                    <!--<h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
     <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && !ctrl.showInitList">
         <div class="col-md-12">
             <h4>Artist: {{ctrl.artist.full_name}}</h4>
