@@ -45,6 +45,15 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
         });
     };
 
+    ctrl.isFavorite = function (artist) {
+        for(var i = 0; i < ctrl.favorites.length; i++){
+            if(ctrl.favorites[i].id == artist.id){
+                return true;
+            }
+        }
+        return false;
+    };
+
     ctrl.setArtist = function (artist) {
         ctrl.artist = artist;
         ctrl.showArtists = false;

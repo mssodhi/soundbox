@@ -24,7 +24,8 @@
                             tracks</label>
                         <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}}
                             tracks</label>
-                        <a class="btn btn-success" ng-click="ctrl.addFavorite(artist)">Add Favorite</a>
+                        <a class="btn btn-success" ng-click="ctrl.addFavorite(artist)" ng-if="!ctrl.isFavorite(artist)">Add Favorite</a>
+                        <a class="btn btn-primary" ng-if="ctrl.isFavorite(artist)">Favorite Artist</a>
                     </h3>
 
                 </div>
