@@ -14,7 +14,7 @@
 <main ng-view class="container-fluid"></main>
 
 </body>
-<%--<script src="http://connect.facebook.net/en_US/all.js"></script>--%>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
 <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 <script src="resources/js/angular.min.js"></script>
 <script src="resources/js/angular-route.min.js"></script>
