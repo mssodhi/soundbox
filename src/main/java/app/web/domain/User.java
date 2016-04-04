@@ -1,0 +1,72 @@
+package app.web.domain;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
+public class User{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
+    private Integer id;
+
+    @Column(name = "name", length = 50, nullable = false)
+    @JsonProperty
+    private String name;
+
+    @Column(name = "email", length = 50, nullable = false, unique = true)
+    @JsonProperty
+    private String email;
+
+    @Column(name = "location", length = 50, nullable = true)
+    @JsonProperty
+    private  String location;
+
+    @OneToOne
+    @JoinColumn(foreignKey =  @ForeignKey(name ="FK_User_Settings"), name = "settings_id", referencedColumnName = "id")
+    @JsonProperty
+    private Settings settings;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+}

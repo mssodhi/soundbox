@@ -1,0 +1,109 @@
+<div ng-init="ctrl.init()" class="col-md-9">
+
+    <div class="col-md-12">
+        <div class="search-bar">
+            <p>Powered by <b>SoundCloud</b></p>
+            <input type="text" class="col-md-3" ng-model="ctrl.search" ng-change="ctrl.getArtist()">
+            <a class="ml15" href="" ng-if="!ctrl.showInitList && ctrl.tracks.length > 0" ng-click="ctrl.init()">All music</a>
+            <br>
+        </div>
+        <br>
+    </div>
+
+    <br>
+
+    <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists">
+        <div class="col-md-4" ng-if="artist.full_name">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
+                <div class="panel-body text-center">
+                    <img ng-src="{{artist.avatar_url}}">
+                    <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">{{artist.full_name
+                        | limitTo: 80}}</a></h6>
+                    <h3>
+                        <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}}
+                            tracks</label>
+                        <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}}
+                            tracks</label>
+                        <a class="btn btn-success" ng-click="ctrl.addFavorite(artist)">Add Favorite</a>
+                    </h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="ctrl.tracks.length === 0 && ctrl.artist" class="col-md-12">
+        <div class="card card-red">
+            <div class="panel-body">
+                <p>No tracks by {{ctrl.artist.full_name}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
+        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
+                <div class="panel-body text-center">
+                    <img ng-src="{{track.artwork_url}}">
+                    <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>
+                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>
+                    </p>
+                    <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">-->
+        <!--<div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks">-->
+            <!--<div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">-->
+                <!--<div class="panel-body text-center">-->
+                    <!--<img ng-src="{{track.artwork_url}}">-->
+                    <!--<h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>-->
+                    <!--<p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>-->
+                    <!--</p>-->
+                    <!--<h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && !ctrl.showInitList">
+        <div class="col-md-12">
+            <h4>Artist: {{ctrl.artist.full_name}}</h4>
+        </div>
+
+        <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks | orderBy: '-playback_count'">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
+                <div class="panel-body text-center">
+                    <img ng-src="{{track.artwork_url}}">
+                    <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>
+                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>
+                    </p>
+                    <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-3">
+
+    <div ng-if="ctrl.favorites.length > 0">
+        <div class="card">
+            <div class="card-red panel-body">
+                <span class="fa fa-star-o"> Favorite Artists</span>
+            </div>
+            <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites"
+                 ng-click="ctrl.setArtist(artist)">
+                <div class="panel-body">
+                    <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
+                    {{artist.full_name | limitTo: 80}}
+                    <a class="fa fa-remove pull-right" style="padding-top: inherit" ng-click="ctrl.removeFavorite(artist)"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

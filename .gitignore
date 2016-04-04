@@ -1,0 +1,38 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# Grunt & Bower
+bower_components/
+node_modules/
+
+# Node
+npm-debug.log
+
+# Hibernate Search
+lucene/
+
+# production build files
+vendor.js
+vendor.js.gz
+build.js
+templates.js
+
+
+#Netbeans
+/nb-configuration.xml
+/nbactions.xml

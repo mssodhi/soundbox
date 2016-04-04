@@ -1,0 +1,29 @@
+<div ng-init="ctrl.init()">
+
+    <div class="col-md-12">
+        <div class="search-bar">
+            <p>Powered by <b>YouTube</b></p>
+            <input type="text" class="col-md-3" ng-model="ctrl.q" ng-change="ctrl.search()">
+            <a class="ml15" href="" ng-if="!ctrl.isPopular" ng-click="ctrl.getPopular()">Popular on YouTube</a>
+            <br>
+        </div>
+        <br>
+    </div>
+
+    <iframe class="col-md-12 mb15" height="500" src={{ctrl.getSrc()}} allowfullscreen="allowfullscreen" frameborder="0" ng-if="ctrl.playVideo"></iframe>
+
+    <div class="col-md-12">
+
+
+    <div class="col-md-12 card" ng-if="ctrl.showList">
+        <h4 ng-if="ctrl.isPopular">Popular on YouTube</h4>
+        <div ng-repeat="video in ctrl.videosList">
+            <div ng-click="ctrl.play(video)" class="col-md-3 button mt10" style="height: 250px">
+                <img ng-src="{{video.snippet.thumbnails.medium.url}}" style="border-radius: 14px"><br>
+                <span><a>{{video.snippet.title}}</a></span><br>
+                <span>{{video.snippet.channelTitle}}</span><br>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
