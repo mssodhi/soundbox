@@ -75,7 +75,7 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
         ctrl.showArtists = true;
         ctrl.artist = null;
         ctrl.tracks = null;
-        SC.get('/users/', {q: ctrl.search, limit: 20}).then(function (response) {
+        SC.get('/users/', {q: ctrl.search, limit: 10}).then(function (response) {
             ctrl.artists = response;
         });
     };
