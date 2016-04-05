@@ -37,6 +37,7 @@
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
                 <div class="panel-body text-center">
                     <img ng-src="{{artist.avatar_url}}">
+                    <span ng-if="artist.avatar_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
                     <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">
                         {{artist.full_name | limitTo: 70}}</a><span ng-if="artist.full_name > 70"> . . . </span></h6>
                     <h3>
@@ -54,9 +55,10 @@
     <!-- Initial songs list by all favorites -->
     <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
         <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks track by $index">
-            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)" title="{{track.title}}">
+            <div class="col-md-12 card card-red button card-sc" ng-click= "ctrl.select(track)" title="{{track.title}}">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
+                    <span ng-if="track.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
                     <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 70}}<span ng-if="track.title.length > 70"> . . . </span></h6>
                     <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a></p>
                     <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
@@ -76,6 +78,7 @@
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)" title="{{track.title}}">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
+                    <span ng-if="track.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
                     <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 70}}<span ng-if="track.title.length > 70"> . . . </span></h6>
                     <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a></p>
                     <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
@@ -97,6 +100,7 @@
                  ng-click="ctrl.setArtist(artist)">
                 <div class="panel-body" title="{{artist.full_name}}">
                     <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
+                    <span ng-if="artist.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
                     {{artist.full_name | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
                     <a class="fa fa-remove pull-right" style="padding-top: inherit" ng-click="ctrl.removeFavorite(artist)"></a>
                 </div>
