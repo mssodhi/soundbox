@@ -15,16 +15,16 @@
 
     <!-- Artists search query list -->
     <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists track by $index">
-        <div class="col-md-4" ng-if="artist.full_name">
+        <div class="col-md-4" ng-if="artist.full_name" title="{{artist.full_name}}">
             <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
                 <div class="panel-body text-center">
                     <img ng-src="{{artist.avatar_url}}">
-                    <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">{{artist.full_name
-                        | limitTo: 80}}</a></h6>
+                    <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">{{::artist.full_name
+                        | limitTo: 70}}</a><span ng-if="artist.full_name > 70"> . . . </span></h6>
                     <h3>
-                        <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}}
+                        <label class="label label-info" ng-if="artist.track_count > 0">{{::artist.track_count | number}}
                             tracks</label>
-                        <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}}
+                        <label class="label label-danger" ng-if="artist.track_count === 0">{{::artist.track_count}}
                             tracks</label>
                         <a class="btn btn-success" ng-click="ctrl.addFavorite(artist)" ng-if="!ctrl.isFavorite(artist)">Add Favorite</a>
                         <a class="btn btn-primary" ng-if="ctrl.isFavorite(artist)">Favorite Artist</a>
@@ -57,13 +57,13 @@
     <!-- Initial songs list by all favorites -->
     <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
         <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks track by $index">
-            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)" title="{{::track.title}}">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
-                    <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>
-                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>
+                    <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 70}}<span ng-if="track.title.length > 70"> . . . </span></h6>
+                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{::track.user.username}}</a>
                     </p>
-                    <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
+                    <h3><label class="label label-primary">{{::track.playback_count | number}} plays</label></h3>
                 </div>
             </div>
         </div>
@@ -78,13 +78,13 @@
         </div>
 
         <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks | filter: search">
-            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.select(track)" title="{{::track.title}}">
                 <div class="panel-body text-center">
                     <img ng-src="{{track.artwork_url}}">
-                    <h6 class="custom-font" style="color: gray">{{track.title | limitTo: 80}}</h6>
-                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a>
+                    <h6 class="custom-font" style="color: gray">{{::track.title | limitTo: 70}}<span ng-if="track.title.length > 70"> . . . </span></h6>
+                    <p class="custom-font"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{::track.user.username}}</a>
                     </p>
-                    <h3><label class="label label-primary">{{track.playback_count | number}} plays</label></h3>
+                    <h3><label class="label label-primary">{{::track.playback_count | number}} plays</label></h3>
                 </div>
             </div>
         </div>
@@ -103,9 +103,9 @@
             </div>
             <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites track by $index"
                  ng-click="ctrl.setArtist(artist)">
-                <div class="panel-body">
+                <div class="panel-body" title="{{::artist.full_name}}">
                     <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                    {{artist.full_name | limitTo: 80}}
+                    {{artist.full_name | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
                     <a class="fa fa-remove pull-right" style="padding-top: inherit" ng-click="ctrl.removeFavorite(artist)"></a>
                 </div>
             </div>
