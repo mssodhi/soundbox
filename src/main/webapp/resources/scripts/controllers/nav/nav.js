@@ -17,6 +17,12 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
         });
     };
 
+    ctrl.isActive = function (location) {
+        if(location === $location.path()){
+            return 'active-menu-item';
+        }
+    };
+
     ctrl.getCurrentTime = function () {
 
         ctrl.inApp = !($location.path() == '/');

@@ -10,21 +10,21 @@
 
         <h3 class="text-center custom-font">Welcome {{ctrl.currentUser.name}}</h3>
 
-        <div id="menu-items" class="text-center">
+        <div id="menu-items" class="text-center menu-items">
             <a ng-href="#/music">
-                <div class="cell">
+                <div class="cell" ng-class="ctrl.isActive('/music')">
                     <p><span class="fa fa-headphones fa-2x"> </span> Music</p>
                 </div>
             </a>
 
             <a ng-href="#/videos">
-                <div class="cell">
+                <div class="cell" ng-class="ctrl.isActive('/videos')">
                     <p><span class="fa fa-tv fa-2x"></span> Videos</p>
                 </div>
             </a>
 
             <a ng-href="#/profile">
-                <div class="cell">
+                <div class="cell" ng-class="ctrl.isActive('/profile')">
                     <p><span class="fa fa-user fa-2x"></span> Profile</p>
                 </div>
             </a>
