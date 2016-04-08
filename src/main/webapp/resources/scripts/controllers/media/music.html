@@ -70,7 +70,9 @@
     <!-- The actual songs list by user -->
     <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && !ctrl.showInitList">
         <div class="col-md-12 mb10">
+            <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span>
             <span style="font-size: medium">Artist: {{ctrl.artist.full_name}}</span>
+            <!--<span ng-if="!ctrl.isFavorite(ctrl.artist)"><a class="button" ng-click="ctrl.addFavorite(ctrl.artist)">Add to favorites!</a></span>-->
             <span class="pull-right">Search <input type="text" ng-model="search"></span>
         </div>
 
