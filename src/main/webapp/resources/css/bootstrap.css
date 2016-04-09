@@ -6928,7 +6928,9 @@ button.list-group-item-danger.active:focus {
 .hover-under-line:hover{
     border-bottom: 4px solid deepskyblue;
 }
-
+.active-menu-item{
+    border-right: 4px solid red;
+}
 .cell:hover{
     border-right: 4px solid deepskyblue;
 }
@@ -8575,8 +8577,6 @@ button.close {
         display: none !important;
     }
 }
-
-
 
 
 .repeated-item.ng-enter, .repeated-item.ng-move {

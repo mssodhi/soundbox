@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService', 'profile', 'MusicService', function (MediaService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'FavoritesService', 'profile', 'MusicService', function ($http, MediaService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.tracks = [];
@@ -15,6 +15,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
                 redirect_uri: 'http://localhost:8080/test/#/'
             });
         });
+        ctrl.showInitList = true;
         ctrl.showArtists = false;
         ctrl.getFavorites();
     };
@@ -26,8 +27,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
             for(var i = 0; i < response.length; i++){
                 SC.get('/users/' + response[i].artist_id).then(function(response){
                     ctrl.favorites.push(response);
-                    SC.get('/users/' + response.id + '/tracks').then(function (response) {
-                        ctrl.showInitList = true;
+                    SC.get('/tracks', {user_id: response.id, limit: 500}).then(function (response) {
                         for(var i = 0; i < response.length; i++){
                             ctrl.tracks.push(response[i]);
                         }
@@ -39,9 +39,19 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
     };
 
     ctrl.getTracks = function () {
-        SC.get('/users/' + ctrl.artist.id + '/tracks').then(function (response) {
-            ctrl.tracks = response;
-            ctrl.showInitList = false;
+        SC.get('/tracks', {user_id: ctrl.artist.permalink, limit: 500}).then(function (response) {
+            if(response.length === 0){
+                $http.get('http://api.soundcloud.com/tracks', {
+                        params: {
+                            client_id: '0f7c969c815f51078c1de513f666ecdb',
+                            q: ctrl.artist.permalink
+                        }
+                    }).success( function (data) {
+                        ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
+                });
+            }else{
+                ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
+            }
         });
     };
 
@@ -57,6 +67,7 @@ angular.module('app').controller('MusicCtrl', ['MediaService', 'FavoritesService
     ctrl.setArtist = function (artist) {
         ctrl.artist = artist;
         ctrl.showArtists = false;
+        ctrl.showInitList = false;
         ctrl.getTracks();
     };
 
