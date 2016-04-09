@@ -15,6 +15,7 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
                 redirect_uri: 'http://localhost:8080/test/#/'
             });
         });
+        ctrl.showInitList = true;
         ctrl.showArtists = false;
         ctrl.getFavorites();
     };
@@ -31,7 +32,6 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
                             ctrl.tracks.push(response[i]);
                         }
                         ctrl.tracks = _.shuffle(ctrl.tracks);
-                        ctrl.showInitList = true;
                     });
                 });
             }
@@ -75,7 +75,7 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
         ctrl.showArtists = true;
         ctrl.artist = null;
         ctrl.tracks = null;
-        SC.get('/users/', {q: ctrl.search, limit: 10}).then(function (response) {
+        SC.get('/users/', {q: ctrl.search, limit: 20}).then(function (response) {
             ctrl.artists = response;
         });
     };

@@ -13,10 +13,10 @@
     <br>
 
     <!-- Message when the there's a technical error -->
-    <div ng-if="ctrl.tracks.length !== ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12">
+    <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12">
         <div class="card card-red">
             <div class="panel-body">
-                <p>Unexpected error occurred fetching tracks</p>
+                <p>Unexpected error occurred fetching tracks for {{ctrl.artist.full_name}}</p>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
             <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span>
             <span style="font-size: medium">Artist: {{ctrl.artist.full_name}}</span>
             <!--<span ng-if="!ctrl.isFavorite(ctrl.artist)"><a class="button" ng-click="ctrl.addFavorite(ctrl.artist)">Add to favorites!</a></span>-->
-            <span class="pull-right">Search <input type="text" ng-model="search"></span>
+            <span class="pull-right">Filter <input type="text" ng-model="search"></span>
         </div>
 
         <div class="col-md-4 repeated-item" ng-repeat="track in ctrl.tracks | filter: search">
