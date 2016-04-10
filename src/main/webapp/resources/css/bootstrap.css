@@ -6933,6 +6933,10 @@ button.list-group-item-danger.active:focus {
     width: 60px;
 }
 
+.track-is-playing {
+    border-bottom: 4px solid cornflowerblue;
+}
+
 .active-menu-item{
     border-right: 4px solid red;
 }

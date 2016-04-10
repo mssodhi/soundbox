@@ -98,7 +98,7 @@
             </tr>
             </thead>
             <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
-            <tr class="button" ng-click="ctrl.select(track)">
+            <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
                 <td>
                     <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
                     <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">

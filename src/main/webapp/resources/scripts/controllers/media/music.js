@@ -102,6 +102,12 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
 
     // Util methods
 
+    ctrl.isPlaying = function (track) {
+        if (MusicService.getTrack() === track) {
+            return 'track-is-playing';
+        }
+    };
+
     ctrl.milliToTime = function (milli) {
         var minutes = Math.floor(milli / 60000);
         var seconds = ((milli % 60000) / 1000).toFixed(0);
