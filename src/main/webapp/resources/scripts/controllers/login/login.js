@@ -1,20 +1,11 @@
 'use strict';
 
-angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'LocalStorage', 'FacebookService', function (UserService, $location, LocalStorage, FacebookService) {
+angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'LocalStorage', function (UserService, $location, LocalStorage) {
     var ctrl = this;
 
     ctrl.init = function () {
         ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
-        //FacebookService.getCredentials().$promise.then(function(response){
-        //    FB.init({
-        //        appId      : response.app_id,
-        //        cookie     : true,  // enable cookies to allow the server to access
-        //                            // the session
-        //        xfbml      : true,  // parse social plugins on this page
-        //        version    : 'v2.5' // use graph api version 2.5
-        //    });
-        //});
     };
 
     ctrl.register = function(){

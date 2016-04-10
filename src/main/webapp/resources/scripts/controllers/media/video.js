@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('app').controller('VideoCtrl', ['MediaService', 'profile', '$http', '$sce', function (MediaService, profile, $http, $sce) {
+angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', '$http', '$sce', function (CredentialsService, profile, $http, $sce) {
     var ctrl = this;
     ctrl.currentUser = profile;
     var key;
     ctrl.videosList = [];
 
     ctrl.init = function () {
-        MediaService.getYouTubeCredentials().$promise.then(function (response) {
+        CredentialsService.getYouTubeCredentials().$promise.then(function (response) {
             key = response.key;
             ctrl.getPopular();
         });

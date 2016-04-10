@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', ['$location', 'MediaService', 'profile', 'FavoritesService', function ($location, MediaService, profile, FavoritesService) {
+angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsService', 'profile', 'FavoritesService', function ($location, CredentialsService, profile, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
 
-        MediaService.getSoundCloudCredentials().$promise.then(function (response) {
+        CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
             SC.initialize({
                 client_id: response.id,
                 secret_token: response.secret,

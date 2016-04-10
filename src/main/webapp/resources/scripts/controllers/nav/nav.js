@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$location', 'MusicService', 'MediaService', function ($interval, LocalStorage, $location, MusicService, MediaService) {
+angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$location', 'MusicService', 'CredentialsService', function ($interval, LocalStorage, $location, MusicService, CredentialsService) {
     var ctrl = this;
+
+    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
+        SC.initialize({
+            client_id: response.id,
+            secret_token: response.secret,
+            redirect_uri: 'http://localhost:8080/test/#/'
+        });
+    });
 
     ctrl.currentUser = null;
 
     ctrl.init = function () {
         ctrl.getCurrentTime();
         $interval(ctrl.getCurrentTime, 250);
-        MediaService.getSoundCloudCredentials().$promise.then(function (response) {
-            SC.initialize({
-                client_id: response.id,
-                secret_token: response.secret,
-                redirect_uri: 'http://localhost:8080/test/#/'
-            });
-        });
     };
 
     ctrl.isActive = function (location) {

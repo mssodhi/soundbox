@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('app').factory('MusicService', ['MediaService', function (MediaService) {
+angular.module('app').factory('MusicService', ['CredentialsService', function (CredentialsService) {
     var player;
     var isPlaying;
     var track;
     var list;
 
-    MediaService.getSoundCloudCredentials().$promise.then(function (response) {
+    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
         SC.initialize({
             client_id: response.id,
             secret_token: response.secret,

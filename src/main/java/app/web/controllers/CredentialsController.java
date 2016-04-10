@@ -11,8 +11,8 @@ import javax.xml.bind.DataBindingException;
 import java.io.StringWriter;
 
 @RestController
-@RequestMapping(value = "/api/media/")
-public class MediaController {
+@RequestMapping(value = "/api/credentials/")
+public class CredentialsController {
 
     @Value("${soundcloud.client.id}")
     private String sc_client_id;
@@ -23,7 +23,32 @@ public class MediaController {
     @Value("${youtube.api.key}")
     private String youtube_key;
 
-    @RequestMapping(value = "getSoundCloudCredentials", method = RequestMethod.GET)
+    @Value("${fb.app.id}")
+    private String fb_app_id;
+
+    @Value("${fb.app.secret}")
+    private String fb_app_secret;
+
+    @RequestMapping(value = "getFacebook", method = RequestMethod.GET)
+    public String getCredentials() throws Exception {
+        try {
+            StringWriter sw = new StringWriter();
+
+            JsonFactory factory = new JsonFactory();
+            JsonGenerator json = factory.createGenerator(sw);
+            json.writeStartObject();
+            json.writeStringField("app_id", fb_app_id);
+            json.writeStringField("app_secret", fb_app_secret);
+            json.writeEndObject();
+            json.close();
+
+            return sw.toString();
+        } catch (Exception e) {
+            throw new DataBindingException(e);
+        }
+    }
+
+    @RequestMapping(value = "getSoundCloud", method = RequestMethod.GET)
     public String getSoundCloudCredentials() throws Exception {
         try {
             StringWriter sw = new StringWriter();
@@ -42,7 +67,7 @@ public class MediaController {
         }
     }
 
-    @RequestMapping(value = "getYoutubeCredentials", method = RequestMethod.GET)
+    @RequestMapping(value = "getYoutube", method = RequestMethod.GET)
     public String getYoutubeCredentials() throws Exception {
         try {
             StringWriter sw = new StringWriter();

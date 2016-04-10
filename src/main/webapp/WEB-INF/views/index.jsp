@@ -29,9 +29,8 @@
 <script src="resources/scripts/factories/local.storage.js"></script>
 <script src="resources/scripts/services/permission.js"></script>
 <script src="resources/scripts/services/user.service.js"></script>
-<script src="resources/scripts/services/media.service.js"></script>
+<script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/music-service.js"></script>
-<script src="resources/scripts/services/facebook.service.js"></script>
 <script src="resources/scripts/services/favorites.service.js"></script>
 <script src="resources/scripts/directives/ng-enter.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>

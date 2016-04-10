@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'FavoritesService', 'profile', 'MusicService', function ($http, MediaService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'FavoritesService', 'profile', 'MusicService', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.tracks = [];
@@ -8,7 +8,7 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
     ctrl.favorites = [];
 
     ctrl.init = function () {
-        MediaService.getSoundCloudCredentials().$promise.then(function (response) {
+        CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
             SC.initialize({
                 client_id: response.id,
                 secret_token: response.secret,
