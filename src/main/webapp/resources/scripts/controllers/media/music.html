@@ -53,7 +53,7 @@
     </div>
 
     <!-- Initial songs list by all favorites -->
-    <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList">
+    <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12">
 
         <table class="col-md-12 table">
             <thead>
@@ -75,7 +75,7 @@
                 </td>
                 <td style="vertical-align: middle"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a></td>
                 <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-                <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count}}</td>
+                <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
                 <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
                 <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
             </tr>
@@ -112,7 +112,7 @@
                     <a>{{track.title | limitTo: 50}}<span ng-if="track.title.length > 50">... </span></a>
                 </td>
                 <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-                <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count}}</td>
+                <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
                 <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
                 <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
             </tr>

@@ -6934,6 +6934,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .track-is-playing {
+    background-color: cornsilk;
     border-bottom: 4px solid cornflowerblue;
 }
 
