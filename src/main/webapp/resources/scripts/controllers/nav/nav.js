@@ -81,10 +81,11 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
     };
 
     ctrl.getPrevious = function () {
-        var previous = MusicService.getPrevious();
-        SC.stream('/tracks/' + previous.id, {autoPlay: true}).then(function (player) {
-            MusicService.setPlayer(player, previous);
-        });
+        ctrl.stream(MusicService.getPrevious());
+    };
+
+    ctrl.next = function() {
+        ctrl.stream(MusicService.getNext());
     };
 
     ctrl.milliToTime = function (milli) {
@@ -93,10 +94,9 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     };
 
-    ctrl.next = function() {
-        var nextTrack = MusicService.getNext();
-        SC.stream('/tracks/' + nextTrack.id, {autoPlay: true}).then(function (player) {
-            MusicService.setPlayer(player, nextTrack);
+    ctrl.stream = function (track) {
+        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
+            MusicService.setPlayer(player, track);
         });
     };
 
