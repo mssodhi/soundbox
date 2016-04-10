@@ -6933,6 +6933,10 @@ button.list-group-item-danger.active:focus {
     width: 60px;
 }
 
+tr.button:hover{
+    border-bottom: 4px solid cornflowerblue;
+}
+
 .track-is-playing {
     background-color: cornsilk;
     border-bottom: 4px solid cornflowerblue;
