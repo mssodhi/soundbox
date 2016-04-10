@@ -103,9 +103,13 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
     // Util methods
 
     ctrl.isPlaying = function (track) {
-        if (MusicService.getTrack() === track) {
-            return 'track-is-playing';
+        var playing = MusicService.getTrack();
+        if(playing){
+            if (playing.id === track.id) {
+                return 'track-is-playing';
+            }
         }
+
     };
 
     ctrl.milliToTime = function (milli) {
@@ -134,6 +138,9 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
                 break;
             case 'favorites':
                 ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count').reverse();
+                break;
+            case 'artist':
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'user.username');
                 break;
         }
     };
