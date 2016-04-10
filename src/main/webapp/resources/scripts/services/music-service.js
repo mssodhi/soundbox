@@ -69,6 +69,14 @@ angular.module('app').factory('MusicService', ['MediaService', function (MediaSe
             }else{
                 return list[0];
             }
+        },
+        getPrevious: function() {
+            var indexOfCurrent = list.indexOf(track);
+            if(list[indexOfCurrent - 1]){
+                return list[indexOfCurrent - 1];
+            }else{
+                return list[list.length - 1];
+            }
         }
     };
 }]);

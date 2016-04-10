@@ -80,6 +80,13 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
         MusicService.rewind();
     };
 
+    ctrl.getPrevious = function () {
+        var previous = MusicService.getPrevious();
+        SC.stream('/tracks/' + previous.id, {autoPlay: true}).then(function (player) {
+            MusicService.setPlayer(player, previous);
+        });
+    };
+
     ctrl.milliToTime = function (milli) {
         var minutes = Math.floor(milli / 60000);
         var seconds = ((milli % 60000) / 1000).toFixed(0);
@@ -91,5 +98,6 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
         SC.stream('/tracks/' + nextTrack.id, {autoPlay: true}).then(function (player) {
             MusicService.setPlayer(player, nextTrack);
         });
-    }
+    };
+
 }]);

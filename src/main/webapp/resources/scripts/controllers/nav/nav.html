@@ -33,7 +33,7 @@
         <div class="text-center" ng-if="ctrl.player">
             <img class="mb15" ng-src="{{ctrl.track.artwork_url}}">
             <br>
-            <span class="fa fa-2x fa-step-backward button pr15" ng-click="ctrl.rewind()"></span>
+            <span class="fa fa-2x fa-step-backward button pr15" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()"></span>
             <span class="fa fa-2x fa-play button" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()"></span>
             <span class="fa fa-2x fa-pause button" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()"></span>
             <span class="fa fa-2x fa-step-forward button pl15" ng-click="ctrl.next()"></span>
