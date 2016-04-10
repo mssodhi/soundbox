@@ -23,6 +23,7 @@
 <script src="resources/js/angulartics.min.js"></script>
 <script src="resources/js/angulartics-ga.min.js"></script>
 <script src="resources/js/lodash.js"></script>
+<script src="resources/js/moment.js"></script>
 <script src="resources/js/ui-bootstrap-1.2.5.min.js"></script>
 <script src="resources/scripts/app.js"></script>
 <script src="resources/scripts/factories/local.storage.js"></script>

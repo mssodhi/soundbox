@@ -99,4 +99,37 @@ angular.module('app').controller('MusicCtrl', ['$http', 'MediaService', 'Favorit
         });
     };
 
+
+    // Util methods
+
+    ctrl.milliToTime = function (milli) {
+        var minutes = Math.floor(milli / 60000);
+        var seconds = ((milli % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    };
+
+    ctrl.getDate = function (date) {
+        return moment(date).format("MMM DD, YYYY");
+    };
+
+    ctrl.sort = function (obj) {
+        switch (obj) {
+            case 'plays':
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'playback_count').reverse();
+                break;
+            case 'date':
+                ctrl.tracks = !_.sortBy(ctrl.tracks, 'created_at').reverse();
+                break;
+            case 'title':
+                ctrl.tracks = !_.sortBy(ctrl.tracks, 'title');
+                break;
+            case 'duration':
+                ctrl.tracks = !_.sortBy(ctrl.tracks, 'duration').reverse();
+                break;
+            case 'favorites':
+                ctrl.tracks = !_.sortBy(ctrl.tracks, 'favoritings_count').reverse();
+                break;
+        }
+    };
+
 }]);
