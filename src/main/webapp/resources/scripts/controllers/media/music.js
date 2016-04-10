@@ -124,16 +124,16 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
                 ctrl.tracks = _.sortBy(ctrl.tracks, 'playback_count').reverse();
                 break;
             case 'date':
-                ctrl.tracks = !_.sortBy(ctrl.tracks, 'created_at').reverse();
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'created_at').reverse();
                 break;
             case 'title':
-                ctrl.tracks = !_.sortBy(ctrl.tracks, 'title');
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'title');
                 break;
             case 'duration':
-                ctrl.tracks = !_.sortBy(ctrl.tracks, 'duration').reverse();
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'duration').reverse();
                 break;
             case 'favorites':
-                ctrl.tracks = !_.sortBy(ctrl.tracks, 'favoritings_count').reverse();
+                ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count').reverse();
                 break;
         }
     };
