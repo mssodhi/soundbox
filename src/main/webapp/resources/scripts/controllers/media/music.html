@@ -54,8 +54,10 @@
 
     <!-- Initial songs list by all favorites -->
     <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12">
+        <span class="pull-left"><b>Total {{ctrl.tracks.length}} tracks</b></span>
+        <span class="pull-right">Filter <input type="text" placeholder="e.g. track, artist, plays" ng-model="search"></span>
 
-        <table class="col-md-12 table">
+        <table class="col-md-12 table mt15">
             <thead>
             <tr>
                 <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
@@ -63,7 +65,7 @@
                 <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
                 <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
                 <th ng-click="ctrl.sort('duration')" class="button">Duration <i class="fa fa-sort"></i></th>
-                <th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>
+                <!--<th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>-->
             </tr>
             </thead>
             <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
@@ -77,7 +79,7 @@
                 <td style="vertical-align: middle">{{track.playback_count | number}}</td>
                 <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
                 <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
-                <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
+                <!--<td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>-->
             </tr>
 
             </tbody>
@@ -86,15 +88,15 @@
     </div>
 
     <!-- The actual songs list by user -->
-    <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && !ctrl.showInitList" class="col-md-12">
+    <div ng-if="ctrl.tracks.length > 0 && !ctrl.showArtists && ctrl.artist && !ctrl.showInitList" class="col-md-12">
         <div class="mb10">
             <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span>
             <span style="font-size: medium">Artist: <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.full_name}}</a></span>
-            <span ng-if="!ctrl.isFavorite(ctrl.artist)"><a class="button" ng-click="ctrl.addFavorite(ctrl.artist)">Add to favorites!</a></span>
-            <span class="pull-right">Filter <input type="text" ng-model="search"></span>
+            <span ng-if="!ctrl.isFavorite(ctrl.artist)"><a class="button" ng-click="ctrl.addFavorite(ctrl.artist)"></a></span>
+            <span class="pull-right">Filter <input type="text" placeholder="e.g. track, plays, etc." ng-model="search"></span>
         </div>
 
-        <table class="col-md-12 table">
+        <table class="col-md-12 mt15 table">
             <thead>
             <tr>
                 <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>

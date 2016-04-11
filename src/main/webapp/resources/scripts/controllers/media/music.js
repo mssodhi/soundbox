@@ -7,6 +7,9 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
     ctrl.artists = [];
     ctrl.favorites = [];
 
+    var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
+    var sb_plays = true;
+
     ctrl.init = function () {
         CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
             SC.initialize({
@@ -95,7 +98,8 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
 
     ctrl.removeFavorite = function(artist){
         FavoritesService.removeFavorites({email: ctrl.currentUser.email}, artist.id).$promise.then(function(){
-            ctrl.getFavorites();
+            ctrl.artist = null;
+            ctrl.init();
         });
     };
 
@@ -122,25 +126,55 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
         return moment(date).format("MMM DD, YYYY");
     };
 
-    ctrl.sort = function (obj) {
-        switch (obj) {
+    ctrl.sort = function (sortBy) {
+        switch (sortBy) {
             case 'plays':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'playback_count').reverse();
+                sb_plays = !sb_plays;
+                if(sb_plays){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'playback_count').reverse();
+                }else{
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'playback_count');
+                }
                 break;
             case 'date':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'created_at').reverse();
+                sb_date = !sb_date;
+                if(sb_date){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'created_at').reverse();
+                }else{
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'created_at');
+                }
                 break;
             case 'title':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'title');
+                sb_title = !sb_title;
+                if(sb_title){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'title');
+                }else {
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'title').reverse();
+                }
                 break;
             case 'duration':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'duration').reverse();
+                sb_duration = !sb_duration;
+                if(sb_duration){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'duration').reverse();
+                }else{
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'duration');
+                }
                 break;
             case 'favorites':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count').reverse();
+                sb_count = !sb_count;
+                if(sb_count){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count').reverse();
+                }else{
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count');
+                }
                 break;
             case 'artist':
-                ctrl.tracks = _.sortBy(ctrl.tracks, 'user.username');
+                sb_artist = !sb_artist;
+                if(sb_artist){
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'user.username');
+                }else{
+                    ctrl.tracks = _.sortBy(ctrl.tracks, 'user.username').reverse();
+                }
                 break;
         }
     };
