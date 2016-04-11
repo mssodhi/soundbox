@@ -1,18 +1,10 @@
 'use strict';
 
-angular.module('app').factory('MusicService', ['CredentialsService', function (CredentialsService) {
+angular.module('app').factory('MusicService', function () {
     var player;
     var isPlaying;
     var track;
     var list;
-
-    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
-        SC.initialize({
-            client_id: response.id,
-            secret_token: response.secret,
-            redirect_uri: 'http://localhost:8080/test/#/'
-        });
-    });
 
     return {
         getPlayer: function () {
@@ -79,4 +71,4 @@ angular.module('app').factory('MusicService', ['CredentialsService', function (C
             }
         }
     };
-}]);
+});
