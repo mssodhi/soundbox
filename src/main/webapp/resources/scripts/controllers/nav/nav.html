@@ -2,8 +2,8 @@
 
     <div class="sidemenu" ng-if="ctrl.inApp">
 
-        <a class="col-xs-12" ng-href="#/landing">
-            <h1 class="text-center custom-font"><p>Soundbox</p></h1>
+        <a class="col-xs-12" ng-href="#/landing" style="background-color: #0b97c4">
+            <h1 class="text-center custom-font"><p style="color: white">Soundbox</p></h1>
         </a>
 
         <img ng-src="/test/resources/images/pic.jpg" class="sidemenu-image"/>
@@ -30,29 +30,6 @@
             </a>
         </div>
 
-        <div class="text-center" ng-if="ctrl.player">
-            <img class="mb15" ng-src="{{ctrl.track.artwork_url}}">
-            <br>
-            <span class="fa fa-2x fa-step-backward button pr15" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()"></span>
-            <span class="fa fa-2x fa-play button" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()"></span>
-            <span class="fa fa-2x fa-pause button" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()"></span>
-            <span class="fa fa-2x fa-step-forward button pl15" ng-click="ctrl.next()"></span>
-
-            <div>
-                <span>{{ctrl.milliToTime(ctrl.player.currentTime())}}</span> of
-                <span>{{ctrl.milliToTime(ctrl.track.duration)}}</span>
-
-                <div id="progress-bar" class="button music-bar-background ml15 mb15 mr15">
-                    <div class="music-bar" ng-style="ctrl.myStyle"></div>
-                </div>
-            </div>
-
-            <div>
-                <span><a ng-href="{{ctrl.track.permalink_url}}" target="_blank">{{ctrl.track.title}}</a> by </span>
-                <span><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank">{{ctrl.track.user.username}}</a></span>
-            </div>
-        </div>
-
         <div class="col-xs-12 text-center pb15">
             <br>
             <span class="glyphicon glyphicon-apple"> Created on a MacBook Pro</span>
@@ -68,5 +45,30 @@
         </div>
     </div>
     <br>
+
+    <div class="footer" ng-if="ctrl.player">
+
+        <img class="pull-left" ng-src="{{ctrl.track.artwork_url}}">
+
+        <div class="col-md-3">
+            <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="ctrl.track.title">{{ctrl.track.title | limitTo: 40}}<span ng-if="ctrl.track.title.length > 40">... </span></a></h4>
+            <h6><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank" style="color: white">{{ctrl.track.user.username}}</a></h6>
+
+            <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
+        </div>
+
+        <div class="col-md-5 mt15 text-center">
+
+            <span class="fa fa-3x fa-backward button pr15 rewind-btn" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()"></span>
+            <span class="fa fa-3x fa-play button play-btn" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()"></span>
+            <span class="fa fa-3x fa-pause button pause-btn" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()"></span>
+            <span class="fa fa-3x fa-forward button next-btn pl15" ng-click="ctrl.next()"></span>
+
+            <div id="progress-bar" class="button music-bar-background ml15 mr15 mt15">
+                <div class="music-bar" ng-style="ctrl.myStyle"></div>
+            </div>
+        </div>
+
+    </div>
 
 </div>

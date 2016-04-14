@@ -6453,6 +6453,10 @@ a.thumbnail.active {
 
 }
 
+.play-btn:hover, .pause-btn:hover, .next-btn:hover, .rewind-btn:hover {
+    opacity: 0.5;
+}
+
 .music-bar{
     border-radius: 0;
     background-color: dodgerblue;
@@ -6900,6 +6904,7 @@ button.list-group-item-danger.active:focus {
     width:240px;
     position: fixed;
     overflow-y: overlay;
+    padding-bottom: 100px;
     height: 100%;
     float: left;
     z-index: 1;
@@ -6922,7 +6927,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .container-fluid {
-    padding: 49px 0 0 260px;
+    padding: 49px 0 100px 260px;
 }
 
 .hover-under-line:hover{
@@ -7094,6 +7099,18 @@ tr.button:hover{
 .panel-title > small > a,
 .panel-title > .small > a {
     color: inherit;
+}
+
+.footer {
+    background-color: #0b97c4;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
 }
 
 .panel-footer {
