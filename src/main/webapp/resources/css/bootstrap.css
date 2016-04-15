@@ -6459,7 +6459,7 @@ a.thumbnail.active {
 
 .music-bar{
     border-radius: 0;
-    background-color: dodgerblue;
+    background-color: red;
     float: left;
     width: 0;
     height: 100%;

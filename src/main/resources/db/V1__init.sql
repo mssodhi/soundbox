@@ -1,1 +1,0 @@
-INSERT INTO domination.user(id, name, email) VALUES (1, 'Manu', 'yahoo');
