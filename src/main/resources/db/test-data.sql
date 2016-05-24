@@ -1,0 +1,1 @@
+INSERT INTO domination.user (`id`, `email`, `name`) VALUES (1, 'root', 'Manu')

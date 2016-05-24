@@ -34,5 +34,10 @@ angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsServic
     ctrl.goToMusic = function(){
         $location.path('/music');
     };
+    
+    ctrl.hit = function () {
+        FavoritesService.testing();
+        console.log('hit');
+    }
 
 }]);

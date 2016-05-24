@@ -50,4 +50,9 @@ public class FavoritesController {
         Favorites favorites = favoritesService.findByEmailAndArtist(email, artist_id);
         return favoritesService.delete(favorites);
     }
+
+    @RequestMapping(value = "testing", method = RequestMethod.PUT)
+    public String testing(){
+        return "{\"id\":\"null\"}";
+    }
 }
