@@ -1,68 +1,94 @@
-<div class="col-sm-10" ng-init="ctrl.init()">
+<div class="login-page" ng-init="ctrl.init()">
 
-    <div ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="col-sm-12 text-center">
-        <div class="alert-warning">No user found!</div>
-    </div>
 
-    <!--<form action="/connect/facebook" method="POST">-->
-        <!--<input type="hidden" name="scope" value="user_posts" />-->
-        <!--<div class="formInfo">-->
-            <!--<p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>-->
-        <!--</div>-->
-        <!--<p><button type="submit">Connect to Facebook</button></p>-->
-    <!--</form>-->
+    <div class="page-one">
 
-    <div class="login-form">
-        <div class="panel">
-            <div class="panel-body">
 
-                <!-- Login Form -->
-                <div ng-if="ctrl.showLoginForm">
+        <div class="landing-main-text col-xs-12 pt15 text-center custom-font custom-white">
+            <div class="headliner">
+                SoundBox
+            </div>
+            <div class="subliner">
+                Enjoy your free unlimited stream of music
+            </div>
 
-                    <div class="col-sm-12 text-center mt5 mb15">
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-facebook">Log in with Facebook</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-twitter">Log in with Twitter</button>
-                        </div>
+            <a ng-click="ctrl.showLogin()" class="btn btn-lg btn-pill">Login </a>
+        </div>
+
+
+        <div ng-if="ctrl.showLoginForm" class="text-center">
+            <div ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="col-sm-12 text-center">
+                <div class="alert-warning">No user found!</div>
+            </div>
+            <div class="panel login-form">
+                <div class="panel-body">
+
+                    <!-- Login Form -->
+                    <div ng-if="ctrl.showLoginForm">
+
+                        <!--<div class="col-sm-12 text-center mt5 mb15">-->
+                        <!--<div class="col-sm-6">-->
+                        <!--<button type="button" class="btn btn-facebook">Log in with Facebook</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-6">-->
+                        <!--<button type="button" class="btn btn-twitter">Log in with Twitter</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
+
+                        <form class="form-signin">
+                            <span>Email: </span>
+                            <input type="text" ng-model="ctrl.email" class="form-control" ng-enter="ctrl.login()">
+                        </form>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email"
+                                ng-click="ctrl.login()">Sign in
+                        </button>
+
+                        <br>
+                        <p class="small">Don't have an account?<a href="" ng-click="ctrl.showRegisterForm = true; ctrl.showLoginForm = false"> Register
+                            here</a>
+                        </p>
                     </div>
 
-                    <form class="form-signin">
-                        <span>Email: </span>
-                        <input type="text" ng-model="ctrl.email" class="form-control" ng-enter="ctrl.login()">
-                    </form>
+                    <!-- Register Form -->
+                    <div ng-if="ctrl.showRegisterForm">
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email"
-                            ng-click="ctrl.login()">Sign in
-                    </button>
+                        <form class="form-register">
+                            <span>Name: </span>
+                            <input type="text" ng-model="ctrl.name" class="form-control">
+                            <span>Email: </span>
+                            <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
+                        </form>
 
-                    <br>
-                    <p class="small">Don't have an account?<a href="" ng-click="ctrl.showRegisterForm = true; ctrl.showLoginForm = false"> Register
-                        here</a>
-                    </p>
+                        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email"
+                                type="submit"
+                                ng-click="ctrl.register()">Register!
+                        </button>
+
+                        <br>
+                        <p class="small">Already have an account?<a href="" ng-click="ctrl.showRegisterForm = false; ctrl.showLoginForm = true"> Sign in </a></p>
+                    </div>
+
                 </div>
-
-                <!-- Register Form -->
-                <div ng-if="ctrl.showRegisterForm">
-
-                    <form class="form-register">
-                        <span>Name: </span>
-                        <input type="text" ng-model="ctrl.name" class="form-control">
-                        <span>Email: </span>
-                        <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
-                    </form>
-
-                    <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email"
-                            type="submit"
-                            ng-click="ctrl.register()">Register!
-                    </button>
-
-                    <br>
-                    <p class="small">Already have an account?<a href="" ng-click="ctrl.showRegisterForm = false; ctrl.showLoginForm = true"> Sign in </a></p>
-                </div>
-
             </div>
         </div>
+
+
     </div>
+
+    <div class="page-two">
+
+        <div class="header">
+            <!--<a id="loginBtn" class="mt15 btn btn-pill">Login</a>-->
+        </div>
+    </div>
+
+    <div class="page-three">
+
+
+    </div>
+
 </div>
+
+
+

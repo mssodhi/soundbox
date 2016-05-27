@@ -1814,6 +1814,136 @@ a.bg-danger:focus {
     border-bottom: transparent;
 }
 
+.login-page{
+    margin: -30px 0 0 0;
+    height: 125%;
+    width: 100%;
+    /*background-color: #0f4bac;*/
+}
+
+.page-one{
+    height: 1000px;
+    background: url('../images/desk.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /*-webkit-filter: blur(5px);*/
+    /*-moz-filter: blur(5px);*/
+    /*-o-filter: blur(5px);*/
+    /*-ms-filter: blur(5px);*/
+    /*filter: blur(5px);*/
+}
+
+.landing-main-text{
+
+}
+
+
+/* for iphone only*/
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2){
+
+    .landing-main-text .headliner{
+        font-size: 70px !important;
+    }
+    .landing-main-text .subliner{
+        font-size: 40px !important;
+    }
+    .page-one{
+        height: 667px !important;
+    }
+
+    #loginBtn{
+        margin-left: 275px !important;
+    }
+    .login-form{
+        position: absolute !important;
+        margin-top: 115% !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* for ipad only */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  { /* STYLES GO HERE */
+
+    .login-form{
+        position: absolute !important;
+        margin-top: 60% !important;
+        margin-left: 96px !important;
+        width: 75% !important;
+    }
+
+    .landing-main-text .headliner{
+        font-size: 100px !important;
+    }
+    .landing-main-text .subliner{
+        font-size: 50px !important;
+    }
+    .page-one{
+        height: 1024px !important;
+    }
+
+    #loginBtn{
+        margin-left: 640px !important;
+    }
+}
+
+.login-form{
+    width: 30%;
+    margin-left: 35%;
+    position: absolute;
+    margin-top: 30%;
+}
+
+.landing-main-text .headliner{
+    font-size: 175px;
+}
+.landing-main-text .subliner{
+    font-size: 50px;
+}
+
+.btn-pill{
+    color: white;
+    border: 1px solid white !important;
+    border-radius: 30px !important;
+}
+
+.page-two{
+    height: 800px;
+    background: url('../images/orange-gradient.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.page-two .header{
+    height: 50px;
+}
+
+
+#loginBtn{
+    margin-left: 1250px;
+}
+
+a#loginBtn:hover{
+    color: black;
+}
+
+.page-three{
+    height: 1000px;
+    background-color: #0b97c4;
+    background-position-y: -10px;
+}
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -7059,9 +7189,6 @@ tr.button:hover{
     margin: 20px 0 20px 0;
 }
 
-.login-form{
-    padding: 125px 350px 0 350px;
-}
 
 .panel {
     margin-bottom: 20px;
