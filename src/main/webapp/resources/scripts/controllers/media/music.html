@@ -127,35 +127,31 @@
 
             <span class="pull-right">Filter <input type="text" placeholder="e.g. track, plays, etc." ng-model="search"></span>
 
-            <div class="table-responsive">
-                <table class="col-md-12 mt15 table">
-                    <thead>
-                    <tr>
-                        <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
-                        <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
-                        <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
-                        <th ng-click="ctrl.sort('duration')" class="button">Duration <i class="fa fa-sort"></i></th>
-                        <th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>
-                    </tr>
-                    </thead>
-                    <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
-                    <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
-                        <td>
-                            <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
-                            <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
-                            <a>{{track.title | limitTo: 50}}<span ng-if="track.title.length > 50">... </span></a>
-                        </td>
-                        <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-                        <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
-                        <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
-                        <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
-                    </tr>
+            <table class="col-md-12 mt15 table">
+                <thead>
+                <tr>
+                    <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
+                    <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
+                    <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
+                    <th ng-click="ctrl.sort('duration')" class="button">Duration <i class="fa fa-sort"></i></th>
+                    <th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
+                <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
+                    <td>
+                        <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
+                        <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
+                        <a>{{track.title | limitTo: 50}}<span ng-if="track.title.length > 50">... </span></a>
+                    </td>
+                    <td style="vertical-align: middle">{{track.playback_count | number}}</td>
+                    <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
+                    <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
+                    <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
+                </tr>
 
-                    </tbody>
-                </table>
-            </div>
-
-
+                </tbody>
+            </table>
         </div>
 
 

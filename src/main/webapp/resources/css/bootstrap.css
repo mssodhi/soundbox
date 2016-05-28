@@ -1814,6 +1814,64 @@ a.bg-danger:focus {
     border-bottom: transparent;
 }
 
+/* for iphone only*/
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2){
+
+    .landing-main-text{
+        padding-top: 0 !important;
+    }
+
+    .landing-main-text .headliner{
+        font-size: 70px !important;
+    }
+    .landing-main-text .subliner{
+        margin-top: 10px !important;
+        font-size: 40px !important;
+    }
+    .page-one{
+        height: 677px !important;
+    }
+
+    .login-form{
+        position: absolute !important;
+        margin-top: 115% !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* for ipad only */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  { /* STYLES GO HERE */
+
+    .landing-main-text{
+        padding-top: 0 !important;
+    }
+
+    .login-form{
+        position: absolute !important;
+        margin-top: 60% !important;
+        margin-left: 96px !important;
+        width: 75% !important;
+    }
+
+    .landing-main-text .headliner{
+        font-size: 100px !important;
+    }
+    .landing-main-text .subliner{
+        font-size: 50px !important;
+    }
+    .page-one{
+        height: 1034px !important;
+    }
+}
+
+
 .login-page{
     margin: -30px 0 0 0;
     height: 125%;
@@ -1836,83 +1894,31 @@ a.bg-danger:focus {
 }
 
 .landing-main-text{
-
-}
-
-
-/* for iphone only*/
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 667px)
-and (orientation: portrait)
-and (-webkit-min-device-pixel-ratio: 2){
-
-    .landing-main-text .headliner{
-        font-size: 70px !important;
-    }
-    .landing-main-text .subliner{
-        font-size: 40px !important;
-    }
-    .page-one{
-        height: 667px !important;
-    }
-
-    #loginBtn{
-        margin-left: 275px !important;
-    }
-    .login-form{
-        position: absolute !important;
-        margin-top: 115% !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
-}
-
-/* for ipad only */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)  { /* STYLES GO HERE */
-
-    .login-form{
-        position: absolute !important;
-        margin-top: 60% !important;
-        margin-left: 96px !important;
-        width: 75% !important;
-    }
-
-    .landing-main-text .headliner{
-        font-size: 100px !important;
-    }
-    .landing-main-text .subliner{
-        font-size: 50px !important;
-    }
-    .page-one{
-        height: 1024px !important;
-    }
-
-    #loginBtn{
-        margin-left: 640px !important;
-    }
+    padding-top: 215px;
 }
 
 .login-form{
     width: 30%;
     margin-left: 35%;
     position: absolute;
-    margin-top: 30%;
+    margin-top: 45%;
 }
 
 .landing-main-text .headliner{
     font-size: 175px;
+    color: coral;
 }
 .landing-main-text .subliner{
+    color: deepskyblue;
     font-size: 50px;
+    margin-top: -30px;
+
 }
 
 .btn-pill{
     color: white;
     border: 1px solid white !important;
-    border-radius: 30px !important;
+    border-radius: 100px !important;
 }
 
 .page-two{
@@ -1930,7 +1936,8 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
 
 #loginBtn{
-    margin-left: 1250px;
+    margin-top: 50px;
+    font-size: 40px;
 }
 
 a#loginBtn:hover{
