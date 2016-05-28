@@ -16,8 +16,8 @@
         </div>
 
 
-        <div ng-if="ctrl.showLoginForm" class="text-center">
-            <div ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="col-sm-12 text-center">
+        <div ng-if="ctrl.showForms" class="text-center">
+            <div ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="col-sm-12">
                 <div class="alert-warning">No user found!</div>
             </div>
             <div class="panel login-form">
@@ -26,17 +26,8 @@
                     <!-- Login Form -->
                     <div ng-if="ctrl.showLoginForm">
 
-                        <!--<div class="col-sm-12 text-center mt5 mb15">-->
-                        <!--<div class="col-sm-6">-->
-                        <!--<button type="button" class="btn btn-facebook">Log in with Facebook</button>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-6">-->
-                        <!--<button type="button" class="btn btn-twitter">Log in with Twitter</button>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <form class="form-signin">
-                            <span>Email: </span>
+                        <form>
+                            <span class="pull-left">Email: </span>
                             <input type="text" ng-model="ctrl.email" class="form-control" ng-enter="ctrl.login()">
                         </form>
 
@@ -54,9 +45,9 @@
                     <div ng-if="ctrl.showRegisterForm">
 
                         <form class="form-register">
-                            <span>Name: </span>
+                            <span class="pull-left">Name: </span>
                             <input type="text" ng-model="ctrl.name" class="form-control">
-                            <span>Email: </span>
+                            <span class="pull-left">Email: </span>
                             <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
                         </form>
 
@@ -72,7 +63,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 

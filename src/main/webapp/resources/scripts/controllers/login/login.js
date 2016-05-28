@@ -4,12 +4,12 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'Loca
     var ctrl = this;
 
     ctrl.init = function () {
-        ctrl.showLoginForm = false;
+        ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
     };
 
     ctrl.showLogin = function () {
-        ctrl.showLoginForm = true;
+        ctrl.showForms = true;
     };
 
     ctrl.register = function(){
