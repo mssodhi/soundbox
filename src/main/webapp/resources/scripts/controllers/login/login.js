@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'LocalStorage', function (UserService, $location, LocalStorage) {
+angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'profile', function (UserService, $location, profile) {
     var ctrl = this;
 
+    
     ctrl.init = function () {
+        // console.log(profile);
+        if(profile.id != null){
+            ctrl.goToLanding();
+        }
+
         ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
     };
@@ -16,7 +22,8 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'Loca
         var user = {name: ctrl.name, email: ctrl.email};
         UserService.addUser(user).$promise.then(function(response){
             if(response){
-                LocalStorage.setData(response.email);
+                console.log(response);
+                // LocalStorage.setData(response.email);
                 $location.path('/landing');
             }else{
                 ctrl.idk()
@@ -27,14 +34,18 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'Loca
 
     ctrl.login = function(){
         ctrl.noUserFound = false;
-        UserService.getByEmail({email: ctrl.email}).$promise.then(function(response){
-            if(response.id != 'null'){
-                LocalStorage.setData(response.email);
-                $location.path('/landing');
-            }else{
+        UserService.login({email: ctrl.email}).$promise.then(function (res) {
+            if(res.id != null){
+                ctrl.goToLanding();
+            }
+            else{
                 ctrl.noUserFound = true;
             }
-        });
+        })
+    };
+
+    ctrl.goToLanding = function () {
+        $location.path('/landing');
     };
 
     ctrl.idk = function(){

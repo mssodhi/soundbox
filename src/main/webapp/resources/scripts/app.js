@@ -11,15 +11,20 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controller: 'LoginCtrl',
                 controllerAs: 'ctrl',
                 resolve:{
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck(1);
+                    profile: function (UserService) {
+                        return UserService.getCurrentUser().$promise;
                     }
                 }
             })
             .when('/deny',
             {
                 templateUrl: 'resources/scripts/controllers/deny/deny.html',
-                caseInsensitiveMatch: true
+                caseInsensitiveMatch: true,
+                resolve: {
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    }
+                }
             })
             .when('/music', {
                 templateUrl: 'resources/scripts/controllers/media/music.html',
@@ -27,10 +32,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
-                        return PermissionService.permissionCheck(0);
+                        return PermissionService.permissionCheck();
                     },
-                    profile: function(LocalStorage){
-                        return LocalStorage.getUser();
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
                     }
                 }
             })
@@ -40,10 +45,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
-                        return PermissionService.permissionCheck(0);
+                        return PermissionService.permissionCheck();
                     },
-                    profile: function(LocalStorage){
-                        return LocalStorage.getUser();
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
                     }
                 }
             })
@@ -53,10 +58,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
-                        return PermissionService.permissionCheck(0);
+                        return PermissionService.permissionCheck();
                     },
-                    profile: function(LocalStorage){
-                        return LocalStorage.getUser();
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
                     }
                 }
             })
@@ -66,10 +71,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
-                        return PermissionService.permissionCheck(0);
+                        return PermissionService.permissionCheck();
                     },
-                    profile: function(LocalStorage){
-                        return LocalStorage.getUser();
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
                     }
                 }
             })

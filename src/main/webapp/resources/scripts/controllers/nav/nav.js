@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$location', 'MusicService', 'CredentialsService', function ($interval, LocalStorage, $location, MusicService, CredentialsService) {
+angular.module('app').controller('NavCtrl', ['$interval', 'UserService', '$location', 'MusicService', 'CredentialsService', function ($interval, UserService, $location, MusicService, CredentialsService) {
     var ctrl = this;
 
     CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
@@ -35,7 +35,7 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
         }
 
         if (ctrl.inApp && ctrl.currentUser == null) {
-            LocalStorage.getUser().then(function (response) {
+            UserService.getCurrentUser().$promise.then(function (response) {
                 ctrl.currentUser = response;
             });
         }
@@ -66,7 +66,9 @@ angular.module('app').controller('NavCtrl', ['$interval', 'LocalStorage', '$loca
     };
 
     ctrl.signOut = function () {
-        LocalStorage.clear();
+        UserService.logout().$promise.then(function () {
+            $location.path('/');
+        });
     };
 
     ctrl.play = function () {

@@ -13,7 +13,7 @@ angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsServic
                 redirect_uri: 'http://localhost:8080/test/#/'
             });
         });
-
+        //ctrl.hit();
         ctrl.getFavorites();
 
     };
@@ -36,7 +36,9 @@ angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsServic
     };
     
     ctrl.hit = function () {
-        FavoritesService.testing();
+        FavoritesService.testing().$promise.then(function (response) {
+            console.log(response);
+        });
         console.log('hit');
     }
 

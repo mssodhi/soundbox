@@ -7,6 +7,10 @@ import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
@@ -18,6 +22,11 @@ public class FavoritesController {
 
     @Autowired
     FavoritesService favoritesService;
+
+    private String toEnCode = "String_To_EnCode";
+
+    private Charset utf_8 = Charset.forName("UTF-8");
+
 
     @RequestMapping(value = "getList/{email:.+}", method = RequestMethod.GET)
     public String getFavorites(@PathVariable String email) throws Exception{
@@ -52,7 +61,34 @@ public class FavoritesController {
     }
 
     @RequestMapping(value = "testing", method = RequestMethod.PUT)
-    public String testing(){
+    public String testing(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+//        Cookie cookie[]=request.getCookies();
+//        String uname="",pass="";
+//
+//
+//
+//
+//        byte[] encode = encodeMyString(toEnCode);
+//
+//        Cookie toStore = new Cookie("CustomCookie", encode.toString());
+//        toStore.setPath("/");
+//        toStore.setMaxAge(10000000);
+//        response.addCookie(toStore);
+//
+//        String originalDecoded = decodeMyString(encode);
+//
+//        System.out.println("Original: " + toEnCode + ", Encoded: " + encode.toString() + ", Converted: " + originalDecoded);
         return "{\"id\":\"null\"}";
     }
+
+//    private byte[] encodeMyString(String original) {
+//
+//        return original.getBytes(utf_8);
+//    }
+//
+//    private String decodeMyString(byte[] encodedBytes){
+//
+//        return new String(encodedBytes, utf_8);
+//    }
 }

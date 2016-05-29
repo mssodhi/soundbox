@@ -15,7 +15,7 @@
 
 </body>
 <%--<script src="http://connect.facebook.net/en_US/all.js"></script>--%>
-<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+<script src="resources/js/sc-sdk-3.0.0.js"></script>
 <script src="resources/js/angular.min.js"></script>
 <script src="resources/js/angular-route.min.js"></script>
 <script src="resources/js/angular-resource.min.js"></script>
@@ -26,7 +26,6 @@
 <script src="resources/js/moment.js"></script>
 <script src="resources/js/ui-bootstrap-1.2.5.min.js"></script>
 <script src="resources/scripts/app.js"></script>
-<script src="resources/scripts/factories/local.storage.js"></script>
 <script src="resources/scripts/services/permission.js"></script>
 <script src="resources/scripts/services/user.service.js"></script>
 <script src="resources/scripts/services/credentials.service.js"></script>
