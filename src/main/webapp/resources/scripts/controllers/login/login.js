@@ -5,13 +5,13 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
 
     
     ctrl.init = function () {
-        // console.log(profile);
         if(profile.id != null){
             ctrl.goToLanding();
         }
 
         ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
+        ctrl.emailTaken = false;
     };
 
     ctrl.showLogin = function () {
@@ -20,14 +20,20 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
 
     ctrl.register = function(){
         var user = {name: ctrl.name, email: ctrl.email};
-        UserService.addUser(user).$promise.then(function(response){
-            if(response){
-                console.log(response);
-                // LocalStorage.setData(response.email);
-                $location.path('/landing');
+
+        UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
+            if(!response.taken){
+                UserService.addUser(user).$promise.then(function(response){
+                    if(response){
+                        $location.path('/landing');
+                    }else{
+                        ctrl.idk()
+                    }
+                });
             }else{
-                ctrl.idk()
+                ctrl.emailTaken = true;
             }
+            
         });
 
     };
@@ -41,7 +47,7 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
             else{
                 ctrl.noUserFound = true;
             }
-        })
+        });
     };
 
     ctrl.goToLanding = function () {

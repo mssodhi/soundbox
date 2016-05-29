@@ -25,6 +25,18 @@ public class UserController {
     @Autowired
     FavoritesService favoritesService;
 
+    @RequestMapping(value = "checkAvailability/{email:.+}", method = RequestMethod.GET)
+    public String checkAvailability (@PathVariable String email) {
+
+        User user = userService.findByEmail(email);
+        if(user != null){
+            return "{\"taken\":\"true\"}";
+        }else{
+            return "{\"taken\":\"false\"}";
+        }
+
+    }
+
     @RequestMapping(value = "addUser", method = RequestMethod.PUT)
     public String addUser (@RequestBody User user, HttpServletResponse response) {
 

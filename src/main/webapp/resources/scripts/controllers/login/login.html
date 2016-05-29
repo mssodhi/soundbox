@@ -51,6 +51,8 @@
                             <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
                         </form>
 
+                        <span ng-if="ctrl.emailTaken" class="pb5"><i class="fa fa-exclamation-circle"></i> Sorry, but this email is already taken.</span>
+
                         <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email"
                                 type="submit"
                                 ng-click="ctrl.register()">Register!
