@@ -8,10 +8,6 @@ import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
 @RequestMapping(value = "/api/user/")
 public class UserController {
@@ -38,10 +34,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "addUser", method = RequestMethod.PUT)
-    public String addUser (@RequestBody User user, HttpServletResponse response) {
+    public String addUser (@RequestBody User user) {
 
         user = userService.save(user);
-        setCurrentUser(user.getEmail(), response);
+        userService.setCurrentUser(user.getEmail());
         return userService.toSimpleJson(user);
 
     }
@@ -80,55 +76,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "login/{email:.+}", method = RequestMethod.GET)
-    public String login(@PathVariable String email, HttpServletResponse response){
+    public String login(@PathVariable String email){
         User user = userService.findByEmail(email);
         if(user != null){
-            setCurrentUser(user.getEmail(), response);
+            userService.setCurrentUser(user.getEmail());
             return userService.toSimpleJson(user);
         }
         return null;
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public void logout(HttpServletResponse response){
-        setCurrentUser("", response);
+    public void logout(){
+        userService.setCurrentUser("");
     }
 
     @RequestMapping(value = "getCurrent", method = RequestMethod.GET)
-    public Object getCurrentUser(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-
-        String cookieValue;
-        String userEmail = null;
-
-        if (cookies != null) {
-            for(Cookie cookie: cookies){
-                if(cookie.getName().equalsIgnoreCase("sandbox_cookie")) {
-                    cookieValue = cookie.getValue();
-                    userEmail = cookieValue;
-                    break;
-                }
-            }
-        }
-
-        return userService.findByEmail(userEmail);
-
+    public Object getCurrentUser(){
+        return userService.getCurrentUser();
     }
 
-    private void setCurrentUser(String email, HttpServletResponse response){
-        Cookie cookie = new Cookie("sandbox_cookie", email);
-        cookie.setMaxAge(1000000);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-    }
-
-//    private byte[] encodeMyString(String original) {
-//    Charset utf_8 = Charset.forName("UTF-8");
-//        return original.getBytes(utf_8);
-//    }
-//
-//    private String decodeMyString(String encodedBytes){
-//        byte[] byteText = encodedBytes.getBytes(utf_8);
-//        return new String(byteText, utf_8);
-//    }
 }

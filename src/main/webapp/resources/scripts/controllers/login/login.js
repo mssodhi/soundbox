@@ -22,7 +22,7 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
         var user = {name: ctrl.name, email: ctrl.email};
 
         UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
-            if(!response.taken){
+            if(response.taken !== 'true'){
                 UserService.addUser(user).$promise.then(function(response){
                     if(response){
                         $location.path('/');
@@ -33,9 +33,7 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
             }else{
                 ctrl.emailTaken = true;
             }
-            
         });
-
     };
 
     ctrl.login = function(){

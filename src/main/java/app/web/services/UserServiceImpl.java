@@ -2,6 +2,7 @@ package app.web.services;
 
 import app.web.data.UserRepository;
 import app.web.domain.User;
+import app.web.helper.CookieHelper;
 import app.web.services.Base.BaseServiceImpl;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -20,6 +21,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CookieHelper cookieHelper;
+
     @Override
     public User findByEmail(String email){
 
@@ -32,6 +36,17 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
         } else {
             return null;
         }
+    }
+
+    @Override
+    public User getCurrentUser(){
+        String userEmail = cookieHelper.getEmailFromCookie();
+        return findByEmail(userEmail);
+    }
+
+    @Override
+    public void setCurrentUser(String email){
+        cookieHelper.setCurrentUser(email);
     }
 
     @Override
