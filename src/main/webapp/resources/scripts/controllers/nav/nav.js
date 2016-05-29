@@ -26,7 +26,7 @@ angular.module('app').controller('NavCtrl', ['$interval', 'UserService', '$locat
 
     ctrl.getCurrentTime = function () {
 
-        ctrl.inApp = !($location.path() == '/');
+        ctrl.inApp = !($location.path() == '/login');
 
         if (!ctrl.inApp) {
             ctrl.currentUser = null;
@@ -67,7 +67,7 @@ angular.module('app').controller('NavCtrl', ['$interval', 'UserService', '$locat
 
     ctrl.signOut = function () {
         UserService.logout().$promise.then(function () {
-            $location.path('/');
+            $location.path('/login');
         });
     };
 

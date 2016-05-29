@@ -25,7 +25,7 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
             if(!response.taken){
                 UserService.addUser(user).$promise.then(function(response){
                     if(response){
-                        $location.path('/landing');
+                        $location.path('/');
                     }else{
                         ctrl.idk()
                     }
@@ -51,7 +51,7 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
     };
 
     ctrl.goToLanding = function () {
-        $location.path('/landing');
+        $location.path('/');
     };
 
     ctrl.idk = function(){

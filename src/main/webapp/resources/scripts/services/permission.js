@@ -8,7 +8,7 @@ angular.module('app').factory('PermissionService', function ($location, UserServ
                 if(response.id != null){
                     return true;
                 }else{
-                    $location.path('/');
+                    $location.path('/login');
                 }
             })
         }

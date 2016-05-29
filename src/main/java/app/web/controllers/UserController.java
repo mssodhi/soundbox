@@ -81,7 +81,7 @@ public class UserController {
 
     @RequestMapping(value = "login/{email:.+}", method = RequestMethod.GET)
     public String login(@PathVariable String email, HttpServletResponse response){
-        User user = (User) userService.findByEmail(email);
+        User user = userService.findByEmail(email);
         if(user != null){
             setCurrentUser(user.getEmail(), response);
             return userService.toSimpleJson(user);

@@ -7,10 +7,13 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
 
         $routeProvider
             .when('/', {
-                templateUrl: 'resources/scripts/controllers/login/login.html',
-                controller: 'LoginCtrl',
+                templateUrl: 'resources/scripts/controllers/landing/landing.html',
+                controller: 'LandingCtrl',
                 controllerAs: 'ctrl',
                 resolve:{
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
                     profile: function (UserService) {
                         return UserService.getCurrentUser().$promise;
                     }
@@ -65,14 +68,11 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             })
-            .when('/landing', {
-                templateUrl: 'resources/scripts/controllers/landing/landing.html',
-                controller: 'LandingCtrl',
+            .when('/login', {
+                templateUrl: 'resources/scripts/controllers/login/login.html',
+                controller: 'LoginCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck();
-                    },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
                     }
