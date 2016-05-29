@@ -6,7 +6,7 @@
 
     <groupId>WorldDomination</groupId>
     <!--change test to whatever you want after 8080 or port number-->
-    <artifactId>test</artifactId>
+    <artifactId>soundbox</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
