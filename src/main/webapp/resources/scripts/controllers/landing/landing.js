@@ -1,18 +1,10 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsService', 'profile', 'FavoritesService', function ($location, CredentialsService, profile, FavoritesService) {
+angular.module('app').controller('LandingCtrl', ['$location', 'profile', 'FavoritesService', function ($location, profile, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
-
-        CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
-            SC.initialize({
-                client_id: response.id,
-                secret_token: response.secret,
-                redirect_uri: 'http://localhost:8080/test/#/'
-            });
-        });
         //ctrl.hit();
         ctrl.getFavorites();
 
@@ -39,7 +31,6 @@ angular.module('app').controller('LandingCtrl', ['$location', 'CredentialsServic
         FavoritesService.testing().$promise.then(function (response) {
             console.log(response);
         });
-        console.log('hit');
     }
 
 }]);
