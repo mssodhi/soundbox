@@ -68,6 +68,19 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             })
+            .when('/hot-n-new', {
+                templateUrl: 'resources/scripts/controllers/hot-n-new/hot-n-new.html',
+                controller: 'Hot-n-New-Ctrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
+                    }
+                }
+            })
             .when('/login', {
                 templateUrl: 'resources/scripts/controllers/login/login.html',
                 controller: 'LoginCtrl',
