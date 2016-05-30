@@ -29,7 +29,7 @@
                             <input type="password" ng-model="ctrl.password" class="form-control" ng-enter="ctrl.login()">
                         </form>
 
-                        <span ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="pb5"><i class="fa fa-exclamation-circle"></i> No user found!</span>
+                        <span ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="pb5"><i class="fa fa-exclamation-circle"></i> Invalid email or password</span>
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email || !ctrl.password"
                                 ng-click="ctrl.login()">Sign in
@@ -52,11 +52,11 @@
                             <span class="pull-left">Password: </span>
                             <input type="password" ng-model="ctrl.password" class="form-control">
                             <span class="pull-left">Re-enter Password: </span>
-                            <input type="password" ng-model="ctrl.password1" class="form-control" ng-enter="ctrl.register()">
+                            <input type="password" ng-model="ctrl.repeatedPassword" class="form-control" ng-enter="ctrl.register()">
                         </form>
 
-                        <span ng-if="ctrl.emailTaken" class="pb5"><i class="fa fa-exclamation-circle"></i> Sorry, but this email is already taken.</span>
-                        <span ng-if="ctrl.passwordNotSame" class="pb5"><i class="fa fa-exclamation-circle"></i> Sorry, but the passwords don't match.</span>
+                        <span ng-if="ctrl.emailTaken" class="pb5"><i class="fa fa-exclamation-circle"></i> This email is already taken.</span>
+                        <span ng-if="ctrl.passwordNotSame" class="pb5"><i class="fa fa-exclamation-circle"></i> The passwords don't match.</span>
 
                         <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email || !ctrl.password"
                                 type="submit"

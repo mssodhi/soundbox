@@ -75,14 +75,20 @@ public class UserController {
         return userService.toSimpleJson(user);
     }
 
-    @RequestMapping(value = "login/{email:.+}", method = RequestMethod.GET)
-    public String login(@PathVariable String email){
+    @RequestMapping(value = "login/{email:.+}", method = RequestMethod.PUT)
+    public Object login(@PathVariable String email, @RequestBody String password){
         User user = userService.findByEmail(email);
         if(user != null){
-            userService.setCurrentUser(user.getEmail());
-            return userService.toSimpleJson(user);
+            if(user.getPassword().equals(password)){
+                userService.setCurrentUser(user.getEmail());
+                return userService.toSimpleJson(user);
+            }else{
+                return null;
+            }
+        }else{
+            return null;
         }
-        return null;
+
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)

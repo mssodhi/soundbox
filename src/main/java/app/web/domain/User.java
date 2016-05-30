@@ -25,6 +25,10 @@ public class User{
     @JsonProperty
     private  String location;
 
+    @Column(name = "password", length = 50, nullable = false)
+    @JsonProperty
+    private  String password;
+
     @OneToOne
     @JoinColumn(foreignKey =  @ForeignKey(name ="FK_User_Settings"), name = "settings_id", referencedColumnName = "id")
     @JsonProperty
@@ -68,5 +72,13 @@ public class User{
 
     public void setSettings(Settings settings) {
         this.settings = settings;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
