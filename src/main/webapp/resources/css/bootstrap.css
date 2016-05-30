@@ -1846,7 +1846,7 @@ and (-webkit-min-device-pixel-ratio: 2){
 
     .login-form{
         position: absolute !important;
-        margin-top: 115% !important;
+        margin-top: 95% !important;
         margin-left: 0 !important;
         width: 100% !important;
     }
@@ -1909,7 +1909,7 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     width: 30%;
     margin-left: 35%;
     position: absolute;
-    margin-top: 41%;
+    margin-top: 33%;
 }
 
 .landing-main-text .headliner{

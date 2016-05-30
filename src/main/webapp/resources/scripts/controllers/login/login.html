@@ -24,12 +24,14 @@
 
                         <form>
                             <span class="pull-left">Email: </span>
-                            <input type="text" ng-model="ctrl.email" class="form-control" ng-enter="ctrl.login()">
+                            <input type="text" ng-model="ctrl.email" class="form-control">
+                            <span class="pull-left">Password: </span>
+                            <input type="password" ng-model="ctrl.password" class="form-control" ng-enter="ctrl.login()">
                         </form>
 
                         <span ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="pb5"><i class="fa fa-exclamation-circle"></i> No user found!</span>
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email"
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email || !ctrl.password"
                                 ng-click="ctrl.login()">Sign in
                         </button>
 
@@ -47,11 +49,16 @@
                             <input type="text" ng-model="ctrl.name" class="form-control">
                             <span class="pull-left">Email: </span>
                             <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
+                            <span class="pull-left">Password: </span>
+                            <input type="password" ng-model="ctrl.password" class="form-control">
+                            <span class="pull-left">Re-enter Password: </span>
+                            <input type="password" ng-model="ctrl.password1" class="form-control" ng-enter="ctrl.register()">
                         </form>
 
                         <span ng-if="ctrl.emailTaken" class="pb5"><i class="fa fa-exclamation-circle"></i> Sorry, but this email is already taken.</span>
+                        <span ng-if="ctrl.passwordNotSame" class="pb5"><i class="fa fa-exclamation-circle"></i> Sorry, but the passwords don't match.</span>
 
-                        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email"
+                        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email || !ctrl.password"
                                 type="submit"
                                 ng-click="ctrl.register()">Register!
                         </button>

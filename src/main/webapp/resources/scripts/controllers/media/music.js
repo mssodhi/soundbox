@@ -123,7 +123,7 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
     };
 
     ctrl.getDate = function (date) {
-        return moment(date).format("MMM DD, YYYY");
+        return moment(new Date(date)).format("MMM DD, YYYY");
     };
 
     ctrl.sort = function (sortBy) {

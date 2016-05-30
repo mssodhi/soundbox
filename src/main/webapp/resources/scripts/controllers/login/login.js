@@ -19,21 +19,26 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
     };
 
     ctrl.register = function(){
-        var user = {name: ctrl.name, email: ctrl.email};
-
-        UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
-            if(response.taken !== 'true'){
-                UserService.addUser(user).$promise.then(function(response){
-                    if(response){
-                        $location.path('/');
-                    }else{
-                        ctrl.idk()
-                    }
-                });
-            }else{
-                ctrl.emailTaken = true;
-            }
-        });
+        ctrl.passwordNotSame = false;
+        if(ctrl.password === ctrl.password1){
+            var user = {name: ctrl.name, email: ctrl.email};
+            UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
+                if(response.taken !== 'true'){
+                    UserService.addUser(user).$promise.then(function(response){
+                        if(response){
+                            $location.path('/');
+                        }else{
+                            ctrl.idk()
+                        }
+                    });
+                }else{
+                    ctrl.emailTaken = true;
+                }
+            });    
+        }else{
+            ctrl.passwordNotSame = true;
+        }
+        
     };
 
     ctrl.login = function(){
