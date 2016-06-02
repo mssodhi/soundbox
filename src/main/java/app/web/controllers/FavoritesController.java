@@ -28,35 +28,34 @@ public class FavoritesController {
     private Charset utf_8 = Charset.forName("UTF-8");
 
 
-    @RequestMapping(value = "getList/{email:.+}", method = RequestMethod.GET)
-    public String getFavorites(@PathVariable String email) throws Exception{
-        List<Favorites> favorites = favoritesService.getByEmail(email);
+    @RequestMapping(value = "getList", method = RequestMethod.GET)
+    public String getFavorites() throws Exception{
+        User currentUser = userService.getCurrentUser();
+        List<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
         return favoritesService.toSimpleJson(favorites);
     }
 
-    @RequestMapping(value = "addFavorite/{email:.+}", method = RequestMethod.PUT)
-    public String addFavorite(@RequestBody String artist_id, @PathVariable String email){
+    @RequestMapping(value = "addFavorite", method = RequestMethod.PUT)
+    public String addFavorite(@RequestBody String artist_id){
 
-        User user = userService.findByEmail(email);
+        User currentUser = userService.getCurrentUser();
 
         // make sure the artist isn't already in the favorites list
-        if(favoritesService.findByEmailAndArtist(email, artist_id) == null){
+        if(favoritesService.findByEmailAndArtist(currentUser.getEmail(), artist_id) == null){
             Favorites favorites = new Favorites();
-            favorites.setUser(user);
-            favorites.setUser_email(user.getEmail());
+            favorites.setUser(currentUser);
+            favorites.setUser_email(currentUser.getEmail());
             favorites.setArtist_id(artist_id);
-            favorites = favoritesService.save(favorites);
-
-            return favoritesService.toSimpleJson(favorites);
+            return favoritesService.toSimpleJson(favoritesService.save(favorites));
         }else{
             return null;
         }
-
     }
 
-    @RequestMapping(value = "removeFavorite/{email:.+}", method = RequestMethod.PUT)
-    public Boolean removeFavorite(@RequestBody String artist_id, @PathVariable String email){
-        Favorites favorites = favoritesService.findByEmailAndArtist(email, artist_id);
+    @RequestMapping(value = "removeFavorite", method = RequestMethod.PUT)
+    public Boolean removeFavorite(@RequestBody String artist_id){
+        User currentUser = userService.getCurrentUser();
+        Favorites favorites = favoritesService.findByEmailAndArtist(currentUser.getEmail(), artist_id);
         return favoritesService.delete(favorites);
     }
 

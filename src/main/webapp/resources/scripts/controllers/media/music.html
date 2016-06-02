@@ -61,6 +61,7 @@
             <table class="col-md-12 table mt15">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
                     <th ng-click="ctrl.sort('artist')" class="button">Artist <i class="fa fa-sort"></i></th>
                     <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
@@ -71,6 +72,7 @@
                 </thead>
                 <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
                 <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
+                    <td>{{$index+1}}</td>
                     <td>
                         <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
                         <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
@@ -130,6 +132,7 @@
             <table class="col-md-12 mt15 table">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
                     <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
                     <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
@@ -139,6 +142,7 @@
                 </thead>
                 <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
                 <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
+                    <td>{{$index+1}}</td>
                     <td>
                         <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
                         <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">

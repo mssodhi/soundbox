@@ -42,35 +42,32 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "updateLocation/{email:.+}", method = RequestMethod.POST)
-    public String updateLocation (@RequestBody String location, @PathVariable String email) {
+    @RequestMapping(value = "updateLocation", method = RequestMethod.POST)
+    public String updateLocation (@RequestBody String location) {
 
-        User user = userService.findByEmail(email);
+        User user = userService.getCurrentUser();
         user.setLocation(location);
         user = userService.save(user);
         return userService.toSimpleJson(user);
     }
 
-    @RequestMapping(value = "updateSettings/{email:.+}", method = RequestMethod.PUT)
-    public String updateSettings (@RequestBody Settings settings, @PathVariable String email) {
+    @RequestMapping(value = "updateSettings", method = RequestMethod.PUT)
+    public String updateSettings (@RequestBody Settings settings) {
 
         Settings updateSettings = settingsService.findById(settings.getId());
         updateSettings.setNotifications(settings.getNotifications());
         settingsService.save(updateSettings);
-
-        User user = userService.findByEmail(email);
-        return userService.toSimpleJson(user);
+        return userService.toSimpleJson(userService.getCurrentUser());
     }
 
-    @RequestMapping(value = "addSettings/{email:.+}", method = RequestMethod.POST)
-    public String addSettings (@RequestBody Settings settings, @PathVariable String email) {
+    @RequestMapping(value = "addSettings", method = RequestMethod.POST)
+    public String addSettings (@RequestBody Settings settings) {
 
-        User user = userService.findByEmail(email);
+        User user = userService.getCurrentUser();
         settings.setUser_email(user.getEmail());
         settings.setUser(user);
         settings = settingsService.save(settings);
         user.setSettings(settings);
-
         user = userService.save(user);
         return userService.toSimpleJson(user);
     }

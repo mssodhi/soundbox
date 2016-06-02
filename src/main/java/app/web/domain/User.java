@@ -1,5 +1,6 @@
 package app.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class User{
     private  String location;
 
     @Column(name = "password", length = 50, nullable = false)
-    @JsonProperty
+    @JsonIgnore
     private  String password;
 
     @OneToOne

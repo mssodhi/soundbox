@@ -24,7 +24,7 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.getFavorites = function(){
-        FavoritesService.getFavorites({email: ctrl.currentUser.email}).$promise.then(function (response) {
+        FavoritesService.getFavorites({}).$promise.then(function (response) {
             ctrl.favorites = [];
             ctrl.tracks = [];
             for(var i = 0; i < response.length; i++){
@@ -91,13 +91,13 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({email: ctrl.currentUser.email}, artist.id).$promise.then(function(){
+        FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
             ctrl.getFavorites();
         });
     };
 
     ctrl.removeFavorite = function(artist){
-        FavoritesService.removeFavorites({email: ctrl.currentUser.email}, artist.id).$promise.then(function(){
+        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
             ctrl.artist = null;
             ctrl.init();
         });

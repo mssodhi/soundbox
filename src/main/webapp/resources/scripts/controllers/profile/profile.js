@@ -16,14 +16,15 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
         if(ctrl.currentUser.settings.id){
             settings = {id: ctrl.currentUser.settings.id, notifications: ctrl.currentUser.settings.notifications};
 
-            UserService.updateSettings({email: ctrl.currentUser.email}, settings).$promise.then(function(response){
+            UserService.updateSettings({}, settings).$promise.then(function(response){
                 ctrl.currentUser = response;
             });
 
         }else{
             settings = {notifications: ctrl.currentUser.settings.notifications};
 
-            UserService.addSettings({email: ctrl.currentUser.email}, settings).$promise.then(function(response){
+            UserService.addSettings({}, settings).$promise.then(function(response){
+                console.log(response);
                 ctrl.currentUser = response;
             });
         }
@@ -31,7 +32,7 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
     };
 
     ctrl.saveLocation = function () {
-        UserService.updateLocation({email: ctrl.currentUser.email}, ctrl.currentUser.location).$promise.then(function(response){
+        UserService.updateLocation({}, ctrl.currentUser.location).$promise.then(function(response){
             ctrl.currentUser = response;
             ctrl.adjustProgress();
         })

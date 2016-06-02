@@ -11,7 +11,7 @@ angular.module('app').controller('LandingCtrl', function ($location, profile, Fa
     };
 
     ctrl.getFavorites = function(){
-        FavoritesService.getFavorites({email: ctrl.currentUser.email}).$promise.then(function (response) {
+        FavoritesService.getFavorites({}).$promise.then(function (response) {
             ctrl.favorites = [];
             ctrl.tracks = [];
             for(var i = 0; i < response.length; i++){
