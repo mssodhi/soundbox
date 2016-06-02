@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'FavoritesService', 'profile', 'MusicService', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.tracks = [];
@@ -179,4 +179,4 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
         }
     };
 
-}]);
+});

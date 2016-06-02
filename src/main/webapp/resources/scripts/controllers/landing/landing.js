@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', ['$location', 'profile', 'FavoritesService', function ($location, profile, FavoritesService) {
+angular.module('app').controller('LandingCtrl', function ($location, profile, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -33,4 +33,4 @@ angular.module('app').controller('LandingCtrl', ['$location', 'profile', 'Favori
         });
     }
 
-}]);
+});

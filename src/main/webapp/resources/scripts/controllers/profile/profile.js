@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ProfileCtrl', ['profile', 'UserService', function (profile, UserService) {
+angular.module('app').controller('ProfileCtrl', function (profile, UserService) {
     var ctrl = this;
 
     ctrl.currentUser = profile;
@@ -60,4 +60,4 @@ angular.module('app').controller('ProfileCtrl', ['profile', 'UserService', funct
             ctrl.showProfile = false;
         }
     };
-}]);
+});

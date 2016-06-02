@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <div id="cards" ng-init="ctrl.init()" class="col-md-10">
+<div class="container-fluid col-md-12">
+    <div id="cards" ng-init="ctrl.init()" class="col-md-12">
 
         <div class="col-md-3" ng-repeat="artist in ctrl.favorites track by $index | limitTo: 4">
             <div class="col-md-12 card card-blue">
@@ -21,7 +21,7 @@
     </div>
 
 
-    <div id="big-cars" class="col-md-10">
+    <div id="big-cars" class="col-md-12">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body text-center">

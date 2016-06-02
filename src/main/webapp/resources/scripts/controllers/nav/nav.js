@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', ['$interval', 'UserService', '$location', 'MusicService', 'CredentialsService', function ($interval, UserService, $location, MusicService, CredentialsService) {
+angular.module('app').controller('NavCtrl', function ($interval, UserService, $location, MusicService, CredentialsService) {
     var ctrl = this;
 
     CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
@@ -103,4 +103,4 @@ angular.module('app').controller('NavCtrl', ['$interval', 'UserService', '$locat
         });
     };
 
-}]);
+});

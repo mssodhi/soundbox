@@ -1887,6 +1887,24 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     /*background-color: #0f4bac;*/
 }
 
+.main-nav{
+    width: 100%;
+    height: 69px;
+    position: absolute;
+    background-color: gainsboro;
+}
+
+.nav-items{
+    display: inline-flex;
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: xx-large;
+}
+
+.nav-item{
+    margin-left: 50px;
+}
+
 .page-one{
     height: 101%;
     background: url('../images/desk.jpg') no-repeat center center;
@@ -2003,7 +2021,8 @@ html, body {
 }
 #social-nav {
     z-index: 1;
-    margin: 10px;
+    /*margin: 10px;*/
+    margin-top: 16px;
 }
 
 ul,
@@ -7072,7 +7091,9 @@ button.list-group-item-danger.active:focus {
 }
 
 .container-fluid {
-    padding: 49px 0 100px 260px;
+    /*padding: 49px 0 100px 260px;*/
+    margin-top: 45px;
+    /*min-width: 100%;*/
 }
 
 .hover-under-line:hover{

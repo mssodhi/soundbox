@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'profile', function (UserService, $location, profile) {
+angular.module('app').controller('LoginCtrl', function (UserService, $location, profile) {
     var ctrl = this;
 
     
@@ -60,4 +60,4 @@ angular.module('app').controller('LoginCtrl', ['UserService', '$location', 'prof
         $location.path('/deny');
     };
 
-}]);
+});
