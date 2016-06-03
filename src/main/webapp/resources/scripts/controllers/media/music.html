@@ -34,18 +34,18 @@
 
         <!-- Artists search query list -->
         <div ng-if="ctrl.artists.length > 0 && ctrl.showArtists" class="repeated-item" ng-repeat="artist in ctrl.artists track by $index">
-            <div class="col-md-4" ng-if="artist.full_name" title="{{artist.full_name}}">
-                <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.setArtist(artist)">
+            <div class="col-md-4"  title="{{artist.full_name}}">
+                <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.getSpecificArtist(artist.id)">
                     <div class="panel-body text-center">
                         <img ng-src="{{artist.avatar_url}}">
                         <span ng-if="artist.avatar_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
                         <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">
-                            {{artist.full_name | limitTo: 70}}</a><span ng-if="artist.full_name > 70"> . . . </span></h6>
+                            {{artist.permalink | limitTo: 70}}</a><span ng-if="artist.full_name > 70"> . . . </span></h6>
                         <h3>
                             <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}} tracks</label>
                             <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>
                             <a class="btn btn-success" ng-click="ctrl.addFavorite(artist)" ng-if="!ctrl.isFavorite(artist)">Add Favorite</a>
-                            <a class="btn btn-primary" ng-if="ctrl.isFavorite(artist)">Favorite Artist</a>
+                            <span class="label label-warning" ng-if="ctrl.isFavorite(artist)">Favorite Artist</span>
                         </h3>
 
                     </div>
@@ -95,7 +95,7 @@
 
             <div class="mb10 card-sc panel-body card card-purple col-md-8" style="min-height: 132px">
                 <div class="col-md-12 mb5">
-                    <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.full_name}}</a></span>
+                    <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink}}</a></span>
                     <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span><br>
                 </div>
 
@@ -172,7 +172,7 @@
                     <div class="panel-body" title="{{artist.full_name}}">
                         <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
                         <span ng-if="artist.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                        {{artist.full_name | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
+                        {{artist.permalink | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
                         <a class="fa fa-remove pull-right" style="padding-top: inherit" ng-click="ctrl.removeFavorite(artist)"></a>
                     </div>
                 </div>

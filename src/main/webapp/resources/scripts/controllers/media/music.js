@@ -73,13 +73,27 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         ctrl.showInitList = false;
         ctrl.getTracks();
     };
+    
+    ctrl.getSpecificArtist = function (id) {
+        SC.get('/users/' + id).then(function(response){
+            ctrl.setArtist(response);
+        });
+    };
 
     ctrl.getArtist = function () {
         ctrl.showArtists = true;
         ctrl.artist = null;
         ctrl.tracks = null;
-        SC.get('/users/', {q: ctrl.search, limit: 500}).then(function (response) {
-            ctrl.artists = response;
+        ctrl.artists = [];
+        SC.get('/search/', {q: ctrl.search, limit: 25, offset: 0}).then(function (response) {
+            response.collection.forEach(function (collection) {
+                if(collection.user){
+                    ctrl.artists.push(collection.user);
+                }
+                ctrl.artists = _.uniq(ctrl.artists, function (artist) {
+                    return artist.id;
+                });
+            });
         });
     };
 
