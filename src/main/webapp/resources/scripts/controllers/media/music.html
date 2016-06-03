@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="search-bar">
                 <p>Powered by <b>SoundCloud</b></p>
-                <input type="text" placeholder="Search for an artist" class="col-md-3" ng-model="ctrl.search" ng-model-options="{debounce: 250}" ng-change="ctrl.getArtist()">
+                <input type="text" placeholder="Search for an artist" class="col-md-3" ng-model="ctrl.search" ng-change="ctrl.getArtist()">
                 <a class="ml15" href="" ng-if="!ctrl.showInitList && ctrl.tracks.length > 0" ng-click="ctrl.init()">All music</a>
                 <br>
             </div>
