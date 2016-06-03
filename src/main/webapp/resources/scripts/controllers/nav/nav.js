@@ -123,7 +123,6 @@ angular.module('app').controller('NavCtrl', function ($interval, UserService, $l
             }
         }
     });
-
     hotkeys.add({
         combo: 'left',
         description: 'Previous',

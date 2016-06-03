@@ -25,7 +25,7 @@
 <%-- Angular injects --%>
 
 <%-- Third part injects --%>
-<script src="resources/js/sc-sdk-3.0.0.js"></script>
+<script src="resources/js/sc-sdk-3.1.1.js"></script>
 <script src="resources/js/lodash.min.js"></script>
 <script src="resources/js/moment.min.js"></script>
 <script src="resources/js/ui-bootstrap-1.2.5.min.js"></script>
