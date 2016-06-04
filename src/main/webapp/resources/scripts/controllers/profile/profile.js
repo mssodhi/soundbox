@@ -24,11 +24,16 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
             settings = {notifications: ctrl.currentUser.settings.notifications};
 
             UserService.addSettings({}, settings).$promise.then(function(response){
-                console.log(response);
+                // console.log(response);
                 ctrl.currentUser = response;
             });
         }
 
+    };
+
+    ctrl.resetPassword = function () {
+
+        // console.log(ctrl.currentPass + ctrl.reset1 + ctrl.reset2);
     };
 
     ctrl.saveLocation = function () {
