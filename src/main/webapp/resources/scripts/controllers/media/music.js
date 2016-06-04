@@ -3,9 +3,6 @@
 angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
-    ctrl.tracks = [];
-    ctrl.artists = [];
-    ctrl.favorites = [];
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
@@ -18,8 +15,11 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
                 redirect_uri: 'http://localhost:8080/test/#/'
             });
         });
+        ctrl.tracks = [];
+        ctrl.searchResponse = [];
+        ctrl.favorites = [];
         ctrl.showInitList = true;
-        ctrl.showArtists = false;
+        ctrl.q = '';
         ctrl.getFavorites();
     };
 
@@ -69,7 +69,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
 
     ctrl.setArtist = function (artist) {
         ctrl.artist = artist;
-        ctrl.showArtists = false;
         ctrl.showInitList = false;
         ctrl.getTracks();
     };
@@ -80,21 +79,18 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         });
     };
 
-    ctrl.getArtist = function () {
-        ctrl.showArtists = true;
-        ctrl.artist = null;
-        ctrl.tracks = null;
-        ctrl.artists = [];
-        SC.get('/search/', {q: ctrl.search, limit: 25, offset: 0}).then(function (response) {
+    ctrl.search = function () {
+        ctrl.searchResponse = [];
+        SC.get('/search/', {q: ctrl.q, limit: 10}).then(function (response) {
             response.collection.forEach(function (collection) {
-                if(collection.user){
-                    ctrl.artists.push(collection.user);
-                }
-                ctrl.artists = _.uniq(ctrl.artists, function (artist) {
-                    return artist.id;
-                });
+                ctrl.searchResponse.push(collection);
             });
         });
+    };
+
+    ctrl.getSpecificTrack = function (track) {
+        ctrl.getSpecificArtist(track.user.id);
+        ctrl.select(track);
     };
 
     ctrl.select = function (track) {
