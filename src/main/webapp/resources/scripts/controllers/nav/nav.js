@@ -23,6 +23,14 @@ angular.module('app').controller('NavCtrl', function ($interval, UserService, $l
             return 'active-menu-item';
         }
     };
+    
+    ctrl.getNavBrandName = function () {
+        if($location.path() !== '/'){
+            return 'SB | ' + $location.path().charAt(1).toUpperCase();
+        }else{
+            return 'SoundBox';
+        }
+    };
 
     ctrl.runLoop = function () {
 
