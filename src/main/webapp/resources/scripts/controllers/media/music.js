@@ -80,12 +80,25 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.search = function (query) {
-        ctrl.searchResponse = [];
-        SC.get('/search/', {q: query, limit: 10}).then(function (response) {
-            response.collection.forEach(function (collection) {
-                ctrl.searchResponse.push(collection);
+        if(query.length > 0){
+            ctrl.searchResponse = [];
+            SC.get('/search/', {q: query, limit: 10}).then(function (response) {
+                response.collection.forEach(function (collection) {
+                    ctrl.searchResponse.push(collection);
+                });
             });
-        });
+        }else{
+            ctrl.searchResponse = [];
+        }
+    };
+
+    ctrl.selectFromTypeahead = function (obj) {
+        if(obj.kind === 'user'){
+            ctrl.getSpecificArtist(obj.id);
+        }
+        if(obj.kind === 'track'){
+            ctrl.getSpecificTrack(obj);
+        }
     };
 
     ctrl.getSpecificTrack = function (track) {
@@ -125,7 +138,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
             });
         });
     };
-
 
     // Util methods
 
