@@ -101,15 +101,28 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.addFavorite = function(artist){
+        ctrl.favorites = [];
         FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
-            ctrl.getFavorites();
+            FavoritesService.getFavorites({}).$promise.then(function (response) {
+               response.forEach(function (artist) {
+                   SC.get('/users/' + artist.artist_id).then(function(response){
+                       ctrl.favorites.push(response);
+                   });
+               })
+            });
         });
     };
 
     ctrl.removeFavorite = function(artist){
+        ctrl.favorites = [];
         FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
-            ctrl.artist = null;
-            ctrl.init();
+            FavoritesService.getFavorites({}).$promise.then(function (response) {
+                response.forEach(function (artist) {
+                    SC.get('/users/' + artist.artist_id).then(function(response){
+                        ctrl.favorites.push(response);
+                    });
+                })
+            });
         });
     };
 
