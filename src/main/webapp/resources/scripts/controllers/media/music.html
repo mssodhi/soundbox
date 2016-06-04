@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="search-bar">
                 <p>Powered by <b>SoundCloud</b></p>
-                <input type="text" placeholder="Search" class="col-md-6" ng-model="ctrl.q" ng-model-options="{debounce: 250}" ng-change="ctrl.search()"
+                <input type="text" placeholder="Search" class="col-md-6" ng-model="ctrl.q" ng-change="ctrl.search()"
                        uib-typeahead="obj as obj.permalink for obj in ctrl.searchResponse"
                        typeahead-template-url="customTemplate.html" typeahead-show-hint="true" typeahead-min-length="0">
                 <a class="ml15" href="" ng-if="!ctrl.showInitList" ng-click="ctrl.init()">All music</a>
@@ -166,13 +166,13 @@
     <a ng-if="match.model.kind === 'user'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
         <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
         <span>{{match.model.permalink | limitTo: 50}}</span>
-        <i class="pull-right fa fa-user pt15"></i>
+        <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
 
     <a ng-if="match.model.kind === 'track'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
         <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
         <span>{{match.model.title | limitTo: 50}}, by {{match.model.user.permalink | limitTo: 25}}</span>
-        <i class="pull-right fa fa-music pt15"></i>
+        <i class="pull-right fa fa-music custom-orange pt15"></i>
     </a>
 
 </script>
