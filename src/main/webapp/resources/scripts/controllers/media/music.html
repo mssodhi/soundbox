@@ -14,7 +14,7 @@
         </div>
 
         <!-- Message when the there's a technical error -->
-        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12">
+        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12 mt15">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>Unexpected error occurred fetching tracks for {{ctrl.artist.full_name}}</p>
@@ -23,7 +23,7 @@
         </div>
 
         <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.artist.track_count === 0 && !ctrl.showInitList" class="col-md-12">
+        <div ng-if="ctrl.artist.track_count === 0 && !ctrl.showInitList" class="col-md-12 mt15">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>No tracks by {{ctrl.artist.full_name}}</p>
