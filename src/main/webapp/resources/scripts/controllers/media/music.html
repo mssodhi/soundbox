@@ -1,19 +1,17 @@
 <div class="container-fluid col-md-12">
     <div ng-init="ctrl.init()" class="col-md-9">
 
-        <div class="col-md-12">
-            <div class="search-bar">
+        <div class="col-md-12 col-xs-12 pl0 pr0">
+            <div class="search-bar col-md-5 col-xs-10">
                 <p>Powered by <b>SoundCloud</b></p>
-                <input type="text" placeholder="Search" class="col-md-6" ng-model="ctrl.q" ng-change="ctrl.search()"
+                <input type="text" placeholder="Search" class="col-md-6 form-control" ng-model="ctrl.q" ng-change="ctrl.search()"
                        uib-typeahead="obj as obj.permalink for obj in ctrl.searchResponse"
                        typeahead-template-url="customTemplate.html" typeahead-show-hint="true" typeahead-min-length="0">
-                <a class="ml15" href="" ng-if="!ctrl.showInitList" ng-click="ctrl.init()">All music</a>
-                <br>
             </div>
-            <br>
+            <div class="col-md-3" style="margin-top: 35px" >
+                <a href="" ng-if="!ctrl.showInitList" ng-click="ctrl.init()">All music</a>
+            </div>
         </div>
-
-        <br>
 
         <!-- Message when the there's a technical error -->
         <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12">
@@ -34,7 +32,7 @@
         </div>
 
         <!-- Initial songs list by all favorites -->
-        <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12">
+        <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12 mt15">
             <span class="pull-left"><b>Total {{ctrl.tracks.length}} tracks</b></span>
             <span class="pull-right">Filter <input type="text" placeholder="e.g. track, artist, plays" ng-model="search"></span>
 
@@ -71,7 +69,7 @@
         </div>
 
         <!-- The actual songs list by user -->
-        <div ng-if="ctrl.tracks.length > 0 && ctrl.artist && !ctrl.showInitList" class="col-md-12">
+        <div ng-if="ctrl.tracks.length > 0 && ctrl.artist && !ctrl.showInitList" class="col-md-12 mt15">
 
             <div class="mb10 card-sc panel-body card card-purple col-md-8" style="min-height: 132px">
                 <div class="col-md-12 mb5">
