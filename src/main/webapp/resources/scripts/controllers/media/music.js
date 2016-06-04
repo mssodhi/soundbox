@@ -79,9 +79,9 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         });
     };
 
-    ctrl.search = function () {
+    ctrl.search = function (query) {
         ctrl.searchResponse = [];
-        SC.get('/search/', {q: ctrl.q, limit: 10}).then(function (response) {
+        SC.get('/search/', {q: query, limit: 10}).then(function (response) {
             response.collection.forEach(function (collection) {
                 ctrl.searchResponse.push(collection);
             });

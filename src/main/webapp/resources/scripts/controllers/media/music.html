@@ -4,9 +4,9 @@
         <div class="col-md-12 col-xs-12 pl0 pr0">
             <div class="search-bar col-md-5 col-xs-10">
                 <p>Powered by <b>SoundCloud</b></p>
-                <input type="text" placeholder="Search" class="col-md-8 form-control" ng-model="ctrl.q" ng-change="ctrl.search()"
+                <input type="text" placeholder="Search" class="col-md-8 form-control" ng-model="query" ng-change="ctrl.search(query)"
                        uib-typeahead="obj as obj.permalink for obj in ctrl.searchResponse"
-                       typeahead-template-url="customTemplate.html" typeahead-show-hint="true" typeahead-min-length="0">
+                       typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
             </div>
             <div class="col-md-3" style="margin-top: 35px" >
                 <a href="" ng-if="!ctrl.showInitList" ng-click="ctrl.init()">All music</a>
