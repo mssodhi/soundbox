@@ -10,19 +10,19 @@
         <th ng-if="ctrl.artist" ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>
     </tr>
     </thead>
-    <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
-    <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
+    <tbody ng-repeat="song in ctrl.tracks | filter: search track by song.id" title="{{song.title}}">
+    <tr class="button" ng-class="ctrl.isPlaying(song)" ng-click="ctrl.select(song)">
         <td>{{$index+1}}</td>
         <td>
-            <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
-            <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
-            <a>{{track.title | limitTo: 40}}<span ng-if="track.title.length > 40">... </span></a>
+            <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">
+            <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
+            <a>{{song.title | limitTo: 40}}<span ng-if="song.title.length > 40">... </span></a>
         </td>
-        <td ng-if="ctrl.showInitList" style="vertical-align: middle"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a></td>
-        <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-        <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
-        <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
-        <td ng-if="ctrl.artist" style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
+        <td ng-if="ctrl.showInitList" style="vertical-align: middle"><a ng-href="{{song.user.permalink_url}}" target="_blank">{{song.user.username}}</a></td>
+        <td style="vertical-align: middle">{{song.playback_count | number}}</td>
+        <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{song.favoritings_count | number}}</td>
+        <td style="vertical-align: middle">{{ctrl.milliToTime(song.duration)}}</td>
+        <td ng-if="ctrl.artist" style="vertical-align: middle">{{ctrl.getDate(song.created_at)}}</td>
     </tr>
     </tbody>
 </table>
