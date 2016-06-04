@@ -35,37 +35,7 @@
         <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12 mt15">
             <span class="pull-left"><b>Total {{ctrl.tracks.length}} tracks</b></span>
             <span class="pull-right">Filter <input type="text" placeholder="e.g. track, artist, plays" ng-model="search"></span>
-
-            <table class="col-md-12 table mt15">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('artist')" class="button">Artist <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('duration')" class="button">Duration <i class="fa fa-sort"></i></th>
-                    <!--<th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>-->
-                </tr>
-                </thead>
-                <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
-                <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
-                    <td>{{$index+1}}</td>
-                    <td>
-                        <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
-                        <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
-                        <a>{{track.title | limitTo: 40}}<span ng-if="track.title.length > 40">... </span></a>
-                    </td>
-                    <td style="vertical-align: middle"><a ng-href="{{track.user.permalink_url}}" target="_blank">{{track.user.username}}</a></td>
-                    <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-                    <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
-                    <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
-                    <!--<td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>-->
-                </tr>
-
-                </tbody>
-            </table>
-
+            <div ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
         </div>
 
         <!-- The actual songs list by user -->
@@ -107,33 +77,7 @@
 
             <span class="pull-right">Filter <input type="text" placeholder="e.g. track, plays, etc." ng-model="search"></span>
 
-            <table class="col-md-12 mt15 table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('plays')" class="button">Plays <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('favorites')" class="button">Favorites <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('duration')" class="button">Duration <i class="fa fa-sort"></i></th>
-                    <th ng-click="ctrl.sort('date')" class="button">Date <i class="fa fa-sort"></i></th>
-                </tr>
-                </thead>
-                <tbody ng-repeat="track in ctrl.tracks | filter: search" title="{{track.title}}">
-                <tr class="button" ng-class="ctrl.isPlaying(track)" ng-click="ctrl.select(track)">
-                    <td>{{$index+1}}</td>
-                    <td>
-                        <img ng-if="track.artwork_url !== null" class="track-image" ng-src="{{track.artwork_url}}">
-                        <img ng-if="track.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
-                        <a>{{track.title | limitTo: 50}}<span ng-if="track.title.length > 50">... </span></a>
-                    </td>
-                    <td style="vertical-align: middle">{{track.playback_count | number}}</td>
-                    <td style="vertical-align: middle"><span class="fa fa-heart"></span> {{track.favoritings_count | number}}</td>
-                    <td style="vertical-align: middle">{{ctrl.milliToTime(track.duration)}}</td>
-                    <td style="vertical-align: middle">{{ctrl.getDate(track.created_at)}}</td>
-                </tr>
-
-                </tbody>
-            </table>
+            <div ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
         </div>
 
     </div>
@@ -160,17 +104,14 @@
 </div>
 
 <script type="text/ng-template" id="customTemplate.html">
-
     <a ng-if="match.model.kind === 'user'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
         <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
         <span>{{match.model.permalink | limitTo: 50}}</span>
         <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
-
     <a ng-if="match.model.kind === 'track'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
         <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
         <span>{{match.model.title | limitTo: 50}}, by {{match.model.user.permalink | limitTo: 25}}</span>
         <i class="pull-right fa fa-music custom-orange pt15"></i>
     </a>
-
 </script>
