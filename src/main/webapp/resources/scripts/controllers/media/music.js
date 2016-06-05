@@ -16,7 +16,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
             });
         });
         ctrl.tracks = [];
-        ctrl.searchResponse = [];
         ctrl.favorites = [];
         ctrl.showInitList = true;
         ctrl.q = '';
