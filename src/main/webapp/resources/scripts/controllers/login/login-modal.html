@@ -1,0 +1,50 @@
+<div class="col-md-12 pt10" ng-init="ctrl.init()" style="background-color: white">
+    <!-- Login Form -->
+    <div ng-if="ctrl.showLoginForm">
+        <form>
+            <span class="pull-left">Email: </span>
+            <input type="text" ng-model="ctrl.email" class="form-control">
+            <span class="pull-left">Password: </span>
+            <input type="password" ng-model="ctrl.password" class="form-control" ng-enter="ctrl.login()">
+        </form>
+
+        <span ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="pb5 text-center col-md-12"><i class="fa fa-exclamation-circle"></i> Invalid email or password</span>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email || !ctrl.password"
+                ng-click="ctrl.login()">Sign in
+        </button>
+
+        <br>
+        <p class="small">Don't have an account?<a href="" ng-click="ctrl.switchForm('register')"> Register
+            here</a>
+        </p>
+    </div>
+
+    <!-- Register Form -->
+    <div ng-if="ctrl.showRegisterForm">
+
+        <form class="form-register">
+            <span class="pull-left">Name: </span>
+            <input type="text" ng-model="ctrl.name" class="form-control">
+            <span class="pull-left">Email: </span>
+            <input type="text" ng-model="ctrl.email" class="form-control">
+            <span class="pull-left">Password: </span>
+            <input type="password" ng-model="ctrl.password" class="form-control">
+            <span class="pull-left">Re-enter Password: </span>
+            <input type="password" ng-model="ctrl.repeatedPassword" class="form-control" ng-enter="register()">
+        </form>
+
+        <div class="text-center pb5 col-md-12">
+            <span ng-if="ctrl.emailTaken"><i class="fa fa-exclamation-circle"></i> This email is already taken.</span>
+            <span ng-if="ctrl.passwordNotSame"><i class="fa fa-exclamation-circle"></i> The passwords don't match.</span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.isValid()"
+                type="submit"
+                ng-click="ctrl.register()">Register!
+        </button>
+
+        <br>
+        <p class="small">Already have an account?<a href="" ng-click="ctrl.switchForm('login')"> Sign in </a></p>
+    </div>
+</div>
