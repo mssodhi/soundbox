@@ -37,6 +37,7 @@
         <div class="text-center pb5 col-md-12">
             <span ng-if="ctrl.emailTaken"><i class="fa fa-exclamation-circle"></i> This email is already taken.</span>
             <span ng-if="ctrl.passwordNotSame"><i class="fa fa-exclamation-circle"></i> The passwords don't match.</span>
+            <span ng-if="ctrl.verificationEmailSent"><i class="fa fa-exclamation-circle"></i> A verification email has been sent to your email.</span>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.isValid()"

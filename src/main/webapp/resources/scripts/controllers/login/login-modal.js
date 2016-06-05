@@ -9,7 +9,6 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     ctrl.init = function () {
         ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
-        ctrl.user = {};
     };
 
     ctrl.switchForm = function (form) {
@@ -34,13 +33,15 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     
     ctrl.register = function(){
         ctrl.passwordNotSame = false;
+        ctrl.emailTaken = false;
+        ctrl.verificationEmailSent = false;
         if(ctrl.password === ctrl.repeatedPassword){
             var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
             UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
                 if(response.taken !== 'true'){
                     UserService.addUser(user).$promise.then(function(response){
                         if(response){
-                            ctrl.goToLanding();
+                            ctrl.verificationEmailSent = true;
                         }else{
                             $location.path('/deny');
                         }
