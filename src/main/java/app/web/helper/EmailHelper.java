@@ -60,7 +60,7 @@ public class EmailHelper {
             }
 
             message.setSubject(subject);
-            message.setText(body);
+            message.setText(body, "UTF-8", "html");
             Transport transport = session.getTransport("smtp");
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());

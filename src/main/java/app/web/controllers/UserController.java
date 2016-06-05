@@ -1,9 +1,12 @@
 package app.web.controllers;
 
 import app.web.domain.Settings;
+import app.web.domain.TempUser;
 import app.web.domain.User;
+import app.web.helper.EmailHelper;
 import app.web.services.FavoritesService;
 import app.web.services.SettingsService;
+import app.web.services.TempUserService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,12 @@ public class UserController {
     @Autowired
     FavoritesService favoritesService;
 
+    @Autowired
+    TempUserService tempUserService;
+
+    @Autowired
+    EmailHelper emailHelper;
+
     @RequestMapping(value = "checkAvailability/{email:.+}", method = RequestMethod.GET)
     public String checkAvailability (@PathVariable String email) {
 
@@ -34,12 +43,25 @@ public class UserController {
     }
 
     @RequestMapping(value = "addUser", method = RequestMethod.PUT)
-    public String addUser (@RequestBody User user) {
+    public String addUser (@RequestBody TempUser tempUser) {
+//
+//        user = userService.save(user);
+//        userService.setCurrentUser(user.getEmail());
+//        return userService.toSimpleJson(user);
 
-        user = userService.save(user);
-        userService.setCurrentUser(user.getEmail());
-        return userService.toSimpleJson(user);
+        tempUser = tempUserService.save(tempUser);
+        String[] recipients = {tempUser.getEmail()};
+        String url = "http://localhost:8080/soundbox/api/user/verify/" + tempUser.getSecret();
+        String messageBody = "<a href="+ url +">Verify Account</a>";
+        emailHelper.sendFromGMail(recipients, "SoundBox Account Verification", messageBody);
 
+        return tempUserService.toSimpleJson(tempUser);
+
+    }
+
+    @RequestMapping(value = "verify/{secret}", method = RequestMethod.GET)
+    public void verifyAccount(@PathVariable String secret){
+        System.out.println(secret);
     }
 
     @RequestMapping(value = "updateLocation", method = RequestMethod.POST)
