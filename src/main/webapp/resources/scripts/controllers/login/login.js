@@ -12,11 +12,16 @@ angular.module('app').controller('LoginCtrl', function (UserService, $location, 
         ctrl.showLoginForm = true;
         ctrl.showRegisterForm = false;
         ctrl.emailTaken = false;
+        ctrl.password = null;
     };
 
     ctrl.showLogin = function () {
         ctrl.showForms = true;
     };
+
+    ctrl.isValid = function () {
+       return ctrl.name && ctrl.email && ctrl.password !== null && (ctrl.password === ctrl.repeatedPassword);
+    } ;
 
     ctrl.register = function(){
         ctrl.passwordNotSame = false;

@@ -1850,6 +1850,14 @@ and (-webkit-min-device-pixel-ratio: 2){
         margin-left: 0 !important;
         width: 100% !important;
     }
+
+    .footer{
+        position: fixed !important;
+        bottom: 0 !important;
+    }
+    .main-nav{
+        position: fixed; !important;
+    }
 }
 
 /* for ipad only */
