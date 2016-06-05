@@ -40,6 +40,7 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
             UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
                 if(response.taken !== 'true'){
                     UserService.addUser(user).$promise.then(function(response){
+                        console.log(response);
                         if(response){
                             ctrl.verificationEmailSent = true;
                         }else{

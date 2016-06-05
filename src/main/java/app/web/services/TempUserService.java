@@ -11,5 +11,7 @@ public interface TempUserService extends BaseService<TempUser, Integer> {
 
     TempUser getUserByCode(String code);
 
+    TempUser getByEmail(String email);
+
     void deleteTempUser(String email);
 }

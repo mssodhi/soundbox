@@ -35,6 +35,11 @@ public class TempUserServiceImpl extends BaseServiceImpl<TempUser,Integer> imple
     }
 
     @Override
+    public TempUser getByEmail(String email){
+        return repository.getByEmail(email);
+    }
+
+    @Override
     public String toSimpleJson(TempUser user) {
         try {
             StringWriter sw = new StringWriter();

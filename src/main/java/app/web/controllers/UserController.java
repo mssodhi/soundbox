@@ -34,7 +34,8 @@ public class UserController {
     public String checkAvailability (@PathVariable String email) {
 
         User user = userService.findByEmail(email);
-        if(user != null){
+        TempUser tempUser = tempUserService.getByEmail(email);
+        if(user != null || tempUser != null){
             return "{\"taken\":\"true\"}";
         }else{
             return "{\"taken\":\"false\"}";
@@ -51,7 +52,7 @@ public class UserController {
         String messageBody = "<a href="+ url +">Verify Account</a>";
         emailHelper.sendFromGMail(recipients, "SoundBox Account Verification", messageBody);
 
-        return tempUserService.toSimpleJson(tempUser);
+        return "{\"code\":\"1\"}";
 
     }
 
