@@ -1,12 +1,14 @@
 package app.web.domain;
 
+import app.web.domain.Base.AuditableEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
-public class User{
+public class User extends AuditableEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
