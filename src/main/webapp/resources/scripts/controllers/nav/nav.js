@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', function ($interval, UserService, $location, MusicService, CredentialsService, hotkeys, $document, $window) {
+angular.module('app').controller('NavCtrl', function ($interval, $route, UserService, $location, MusicService, CredentialsService, hotkeys, $document, $window) {
     var ctrl = this;
 
     CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
@@ -34,8 +34,12 @@ angular.module('app').controller('NavCtrl', function ($interval, UserService, $l
 
     ctrl.runLoop = function () {
 
-        ctrl.inApp = !($location.path() == '/login');
-
+        if($location.path() === '/login' || $location.path().includes('/verify')){
+            ctrl.inApp = false;
+        }else{
+            ctrl.inApp = true;
+        }
+        
         if (!ctrl.inApp) {
             ctrl.currentUser = null;
             // invalidate the player on signout

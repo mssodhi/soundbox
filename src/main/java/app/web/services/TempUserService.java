@@ -8,4 +8,8 @@ public interface TempUserService extends BaseService<TempUser, Integer> {
     TempUser save(TempUser user);
 
     String toSimpleJson(TempUser user);
+
+    TempUser getUserByCode(String code);
+
+    void deleteTempUser(String email);
 }

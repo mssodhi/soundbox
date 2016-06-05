@@ -44,14 +44,10 @@ public class UserController {
 
     @RequestMapping(value = "addUser", method = RequestMethod.PUT)
     public String addUser (@RequestBody TempUser tempUser) {
-//
-//        user = userService.save(user);
-//        userService.setCurrentUser(user.getEmail());
-//        return userService.toSimpleJson(user);
 
         tempUser = tempUserService.save(tempUser);
         String[] recipients = {tempUser.getEmail()};
-        String url = "http://localhost:8080/soundbox/api/user/verify/" + tempUser.getSecret();
+        String url = "http://localhost:8080/soundbox/#/verify/" + tempUser.getSecret();
         String messageBody = "<a href="+ url +">Verify Account</a>";
         emailHelper.sendFromGMail(recipients, "SoundBox Account Verification", messageBody);
 
@@ -60,8 +56,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "verify/{secret}", method = RequestMethod.GET)
-    public void verifyAccount(@PathVariable String secret){
-        System.out.println(secret);
+    public String verifyAccount(@PathVariable String secret){
+        TempUser tempUser = tempUserService.getUserByCode(secret);
+        if(tempUser != null){
+            if(userService.findByEmail(tempUser.getEmail()) == null){
+                User user = new User();
+                user.setEmail(tempUser.getEmail());
+                user.setName(tempUser.getName());
+                user.setPassword(tempUser.getPassword());
+                user = userService.save(user);
+                userService.setCurrentUser(user.getEmail());
+                tempUserService.deleteTempUser(tempUser.getEmail());
+                return userService.toSimpleJson(user);
+            }else{
+                System.out.println("User already exists. Verify method." + tempUser.getEmail());
+                return null;
+            }
+        }else{
+            return null;
+        }
+
     }
 
     @RequestMapping(value = "updateLocation", method = RequestMethod.POST)

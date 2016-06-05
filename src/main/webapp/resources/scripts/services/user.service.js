@@ -10,7 +10,8 @@ angular.module('app').factory('UserService', function ($resource) {
         addSettings: {method: 'POST', url: 'api/user/addSettings'},
         login: {method: 'PUT', url: 'api/user/login/:email'},
         logout: {method: 'GET', url: 'api/user/logout'},
-        getCurrentUser: {method: 'GET', url: 'api/user/getCurrent'}
+        getCurrentUser: {method: 'GET', url: 'api/user/getCurrent'},
+        verifyUser: {method: 'GET', url: 'api/user/verify/:secret'}
 
     });
 });

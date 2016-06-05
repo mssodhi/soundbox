@@ -18,6 +18,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'cf
                         return UserService.getCurrentUser().$promise;
                     }
                 }
+            }).when('/verify/:code', {
+                templateUrl: 'resources/scripts/controllers/verify/verify.html',
+                controller: 'VerifyCtrl',
+                controllerAs: 'ctrl'
             })
             .when('/deny',
             {

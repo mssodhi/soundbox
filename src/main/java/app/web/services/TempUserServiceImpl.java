@@ -25,6 +25,16 @@ public class TempUserServiceImpl extends BaseServiceImpl<TempUser,Integer> imple
     }
 
     @Override
+    public TempUser getUserByCode(String code){
+        return repository.getUserByCode(code);
+    }
+
+    @Override
+    public void deleteTempUser(String email){
+        repository.deleteUserByEmail(email);
+    }
+
+    @Override
     public String toSimpleJson(TempUser user) {
         try {
             StringWriter sw = new StringWriter();
