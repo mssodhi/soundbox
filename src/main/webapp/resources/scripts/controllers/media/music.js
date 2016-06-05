@@ -80,16 +80,9 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.search = function (query) {
-        if(query.length > 0){
-            ctrl.searchResponse = [];
-            SC.get('/search/', {q: query, limit: 10}).then(function (response) {
-                response.collection.forEach(function (collection) {
-                    ctrl.searchResponse.push(collection);
-                });
-            });
-        }else{
-            ctrl.searchResponse = [];
-        }
+        return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
+            return response.collection;
+        });
     };
 
     ctrl.selectFromTypeahead = function (obj) {
