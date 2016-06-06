@@ -1,11 +1,11 @@
 <div class="container-fluid col-md-12">
     <div ng-init="ctrl.init()" class="col-md-9">
 
-        <div class="col-md-12 col-xs-12 pl0 pr0">
+        <div class="col-md-12 col-xs-12 pl0 pr0 pt0">
             <div class="search-bar col-md-5 col-xs-10">
                 <p>Powered by <b>SoundCloud</b></p>
                 <div class="form-group has-feedback">
-                    <input type="text" placeholder="Search" class="col-md-8 form-control" ng-model="ctrl.q"
+                    <input type="text" placeholder="Search" class="col-md-8 col-xs-12 form-control" ng-model="ctrl.q"
                            uib-typeahead="obj as obj.permalink for obj in ctrl.search($viewValue)"
                            typeahead-on-select="ctrl.selectFromTypeahead($item)"
                            typeahead-loading="loading"
@@ -38,15 +38,18 @@
 
         <!-- Initial songs list by all favorites -->
         <div ng-if="ctrl.tracks.length > 0 && ctrl.showInitList" class="col-md-12 mt15">
-            <span class="pull-left"><b>Total {{ctrl.tracks.length}} tracks</b></span>
-            <span class="pull-right">Filter <input type="text" placeholder="e.g. track, artist, plays" ng-model="search"></span>
+
+            <span class="pull-left col-xs-12 col-md-4"><b>Total {{ctrl.tracks.length}} tracks</b></span>
+
+            <span class="pull-right col-xs-12 col-md-3">Filter <input type="text" placeholder="e.g. track, artist, plays" ng-model="search" class="pull-right col-md-10"></span>
+
             <div ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
         </div>
 
         <!-- The actual songs list by user -->
         <div ng-if="ctrl.tracks.length > 0 && ctrl.artist && !ctrl.showInitList" class="col-md-12 mt15">
 
-            <div class="mb10 card-sc panel-body card card-purple col-md-8" style="min-height: 132px">
+            <div class="mb10 card-sc panel-body card card-purple col-md-8 col-xs-12" style="min-height: 132px">
                 <div class="col-md-12 mb5">
                     <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink}}</a></span>
                     <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span><br>
@@ -57,7 +60,7 @@
                     <img ng-if="ctrl.artist.artwork_url === null" height="100px" width="100px" src="resources/images/noImage.jpg">
                 </div>
 
-                <div class="col-md-10 ml15">
+                <div class="col-md-10 ml15 hidden-xs">
                     <!--<hr>-->
                     <div class="col-md-4 text-center" style="vertical-align: middle">
                         <h5>{{ctrl.artist.followers_count | number}}</h5>
@@ -73,10 +76,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-10 ml15 text-center">
-                    <div class="col-md-12">
-                        <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink_url}}</a>
-                    </div>
+                <div class="col-md-10 col-xs-12 ml15 text-center">
+                    <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink_url}}</a>
                 </div>
             </div>
 

@@ -1857,6 +1857,10 @@ and (-webkit-min-device-pixel-ratio: 2){
     }
     .main-nav{
         position: fixed; !important;
+        height: 138px !important;
+    }
+    .container-fluid{
+        margin-top: 130px !important;
     }
 }
 
