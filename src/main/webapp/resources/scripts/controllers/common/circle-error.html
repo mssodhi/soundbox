@@ -5,7 +5,7 @@
         padding-top: 40px;
     }
 
-    p {
+    .message {
         font-family: monospace;
         font-size: 30px;
         font-weight: normal;
@@ -24,8 +24,8 @@
         <i class="fa faa-flash faa-slow animated fa-exclamation-circle fa-5x" style="color: orangered; font-size: 200px"></i>
     </div>
 
-    <p>{{ctrl.message}}</p>
+    <p class="message">{{ctrl.message}}</p>
 
-    <p style="font-size: 20px">You can login or register for an account <a href ng-click="ctrl.goToLogin()">here</a></p>
+    <p class="message" style="font-size: 20px">You can login or register for an account <a href ng-click="ctrl.goToLogin()">here</a></span>
 </div>
 

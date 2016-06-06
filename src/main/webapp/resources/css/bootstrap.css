@@ -1862,6 +1862,14 @@ and (-webkit-min-device-pixel-ratio: 2){
     .container-fluid{
         margin-top: 130px !important;
     }
+
+    .track-image{
+        height: 45px !important;
+        width: 45px !important;
+    }
+    .card-sc{
+        margin-top: 10px;
+    }
 }
 
 /* for ipad only */
@@ -1892,6 +1900,34 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     }
 }
 
+.spin {
+    animation: spin 2s;
+    -webkit-animation: spin 2s;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+}
+
+.spinning {
+    animation: spin 2s infinite linear !important;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
 
 .login-page{
     margin: -30px 0 0 0;

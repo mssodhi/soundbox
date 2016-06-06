@@ -13,7 +13,7 @@ angular.module('app').controller('VideoCtrl', function (CredentialsService, prof
         });
     };
 
-    ctrl.search = function () {
+    ctrl.search = function (query) {
 
         ctrl.videosList = [];
         ctrl.showList = false;
@@ -23,7 +23,7 @@ angular.module('app').controller('VideoCtrl', function (CredentialsService, prof
                     type: 'video',
                     maxResults: '30',
                     part: 'id,snippet',
-                    q: ctrl.q
+                    q: query
                 }
             })
             .success( function (data) {
@@ -48,6 +48,7 @@ angular.module('app').controller('VideoCtrl', function (CredentialsService, prof
     };
 
     ctrl.getPopular = function() {
+        ctrl.query = '';
         $http.get('https://www.googleapis.com/youtube/v3/videos?chart=mostPopular',{
             params: {
                 key: key,

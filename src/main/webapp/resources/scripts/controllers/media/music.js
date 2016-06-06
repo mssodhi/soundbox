@@ -8,15 +8,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     var sb_plays = true;
 
     ctrl.init = function () {
-        CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
-            SC.initialize({
-                client_id: response.id,
-                secret_token: response.secret,
-                redirect_uri: 'http://localhost:8080/test/#/'
-            });
-        });
-        ctrl.tracks = [];
-        ctrl.favorites = [];
         ctrl.showInitList = true;
         ctrl.q = '';
         ctrl.getFavorites();

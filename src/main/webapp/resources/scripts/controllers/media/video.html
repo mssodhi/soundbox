@@ -1,12 +1,14 @@
 <div class="container-fluid col-md-12">
     <div ng-init="ctrl.init()" class="col-md-12">
 
-        <div class="col-md-12">
-            <div class="search-bar">
+        <div class="col-md-9 col-xs-12 pl0">
+            <div class="search-bar col-md-5 col-xs-12 pl0 pr0">
                 <p>Powered by <b>YouTube</b></p>
-                <input type="text" class="col-md-3" ng-model="ctrl.q" ng-change="ctrl.search()"
+                <input type="text" placeholder="Search YouTube content"
+                       class="col-md-3 form-control mb10" ng-model="ctrl.query" ng-change="ctrl.search(ctrl.query)"
                        ng-model-options="{debounce: 250}">
-                <a class="ml15" href="" ng-if="!ctrl.isPopular" ng-click="ctrl.getPopular()">Popular on YouTube</a>
+                <i ng-if="!ctrl.isPopular" style="pointer-events: all; padding-top: 40px"
+                   ng-click="ctrl.getPopular()"  class="fa fa-refresh form-control-feedback"></i>
                 <br>
             </div>
             <br>
