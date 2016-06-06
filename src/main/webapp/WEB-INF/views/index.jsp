@@ -43,6 +43,7 @@
 <script src="resources/scripts/controllers/landing/landing.js"></script>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
+<script src="resources/scripts/controllers/verify/circle-check-modal.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>
