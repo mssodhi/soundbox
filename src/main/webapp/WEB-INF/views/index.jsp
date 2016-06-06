@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-social.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/faa-animations.css">
     <link rel="stylesheet" type="text/css" href="resources/css/font-awesome.min.css">
     <link rel="shortcut icon" href="resources/images/mainpic.jpeg">
     <title>SoundBox</title>

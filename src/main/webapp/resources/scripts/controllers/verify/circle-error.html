@@ -1,0 +1,31 @@
+<style>
+    .error-circle {
+        width: 200px;
+        margin: auto;
+        padding-top: 40px;
+    }
+
+    p {
+        font-family: monospace;
+        font-size: 30px;
+        font-weight: normal;
+        text-align: center;
+        animation: text .5s linear .4s;
+        -webkit-animation: text .4s linear .3s;
+    }
+
+    .center{
+        padding-left: 18px;
+    }
+
+</style>
+<div>
+    <div class="error-circle center">
+        <i class="fa faa-flash faa-slow animated fa-exclamation-circle fa-5x" style="color: orangered; font-size: 200px"></i>
+    </div>
+
+    <p>Sorry, the link has either expired or is no longer valid. We are unable to verify your account.</p>
+
+    <p style="font-size: 20px">You can login or register for an account <a href ng-click="ctrl.goToLogin()">here</a></p>
+</div>
+
