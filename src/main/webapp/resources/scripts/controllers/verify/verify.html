@@ -1,5 +1,7 @@
 <div ng-if="ctrl.couldNotVerify">
+    <div circle-error message="{{ctrl.errorMessage}}"></div>
+</div>
 
-
-
+<div ng-if="ctrl.verifySuccess">
+    <div circle-check message="{{ctrl.successMessage}}"></div>
 </div>

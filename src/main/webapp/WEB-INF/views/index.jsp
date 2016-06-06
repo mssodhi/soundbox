@@ -35,22 +35,34 @@
 
 <%-- Sandbox --%>
 <script src="resources/scripts/app.js"></script>
+
+<%-- Services --%>
 <script src="resources/scripts/services/permission.js"></script>
 <script src="resources/scripts/services/user.service.js"></script>
 <script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/music-service.js"></script>
 <script src="resources/scripts/services/favorites.service.js"></script>
+<%-- Services --%>
+
+<%-- Directive --%>
 <script src="resources/scripts/directives/ng-enter.js"></script>
+<script src="resources/scripts/directives/circle-check.js"></script>
+<script src="resources/scripts/directives/circle-error.js"></script>
 <script src="resources/scripts/directives/music-player.js"></script>
-<script src="resources/scripts/controllers/landing/landing.js"></script>
+<%-- Directive --%>
+
+<%-- Controllers --%>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
+<script src="resources/scripts/controllers/landing/landing.js"></script>
 <script src="resources/scripts/controllers/music-player/music-player.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
-<script src="resources/scripts/controllers/verify/circle-check-modal.js"></script>
+<script src="resources/scripts/controllers/common/common-modal.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>
 <script src="resources/scripts/controllers/media/music.js"></script>
 <script src="resources/scripts/controllers/media/video.js"></script>
 <script src="resources/scripts/controllers/profile/profile.js"></script>
+<%-- Controllers --%>
+
 <%-- Sandbox --%>

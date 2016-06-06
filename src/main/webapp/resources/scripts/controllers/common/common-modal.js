@@ -2,10 +2,11 @@
 // It is not the same as the $uibModal service used above.
 'use strict';
 
-angular.module('app').controller('CommonModalCtrl', function ($uibModalInstance, $location) {
+angular.module('app').controller('CommonModalCtrl', function ($location, $uibModalInstance, message) {
     var ctrl = this;
+    ctrl.message = message;
     
-    ctrl.initSuccess = function () {
+    ctrl.initCheckCircle = function () {
         setTimeout(function () {
             ctrl.close();
             $location.path('/');
