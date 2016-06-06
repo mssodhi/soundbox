@@ -100,6 +100,12 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'cf
             });
     });
 
-angular.module('app').run(function ($window, $location) {
-
+angular.module('app').run(function ($window, $location, CredentialsService) {
+    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
+        SC.initialize({
+            client_id: response.id,
+            secret_token: response.secret,
+            redirect_uri: 'http://localhost:8080/test/#/'
+        });
+    });
 });

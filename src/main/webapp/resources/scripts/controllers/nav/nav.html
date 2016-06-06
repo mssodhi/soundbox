@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="col-md-2 pull-right main-nav-side" ng-init="ctrl.init()">
+    <div class="col-md-2 pull-right main-nav-side">
         <div id="social-nav" class="btn-group pull-right" role="group">
             <a href="https://www.linkedin.com/in/sodhim" class="btn btn-linkedin hidden-sm hidden-xs">LinkedIn</a>
             <a href="https://github.com/mssodhi/" class="btn btn-github hidden-sm hidden-xs">GitHub</a>
@@ -22,6 +22,8 @@
     </div>
     <br>
 
-    <div ng-if="ctrl.player && ctrl.inApp" ng-include="'resources/scripts/controllers/nav/music-bar-footer.html'"></div>
+    <div ng-if="ctrl.inApp">
+        <div music-player></div>
+    </div>
 
 </div>

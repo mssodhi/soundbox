@@ -41,8 +41,10 @@
 <script src="resources/scripts/services/music-service.js"></script>
 <script src="resources/scripts/services/favorites.service.js"></script>
 <script src="resources/scripts/directives/ng-enter.js"></script>
+<script src="resources/scripts/directives/music-player.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
+<script src="resources/scripts/controllers/music-player/music-player.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
 <script src="resources/scripts/controllers/verify/circle-check-modal.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>

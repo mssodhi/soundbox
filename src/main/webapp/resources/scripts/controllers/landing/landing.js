@@ -17,7 +17,6 @@ angular.module('app').controller('LandingCtrl', function ($location, profile, Fa
             for(var i = 0; i < response.length; i++){
                 SC.get('/users/' + response[i].artist_id).then(function(response){
                     ctrl.favorites.push(response);
-                    //console.log(response);
                 });
             }
         })
