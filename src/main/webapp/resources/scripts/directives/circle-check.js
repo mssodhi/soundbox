@@ -3,7 +3,7 @@
 angular.module('app').directive('circleCheck', function($uibModal) {
     return function (scope, element, attr) {
         var message = attr.message;
-        if(message.length === 0){
+        if(!message || message.length === 0){
             message = 'Success!';
         }
 

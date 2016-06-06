@@ -65,6 +65,6 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     
     ctrl.goToLanding = function () {
         $uibModalInstance.close();
-        $location.path('/');
+        ctrl.loggedIn = true;
     };
 });

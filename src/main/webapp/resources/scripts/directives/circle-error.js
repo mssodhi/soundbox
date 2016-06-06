@@ -3,7 +3,7 @@
 angular.module('app').directive('circleError', function($uibModal) {
     return function (scope, element, attr) {
         var message = attr.message;
-        if(message.length === 0){
+        if(!message || message.length === 0){
             message = 'Sorry, We seem to have a problem. Try refreshing the page or clicking the link below.';
         }
         

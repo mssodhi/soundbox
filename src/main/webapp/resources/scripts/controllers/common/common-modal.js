@@ -10,7 +10,7 @@ angular.module('app').controller('CommonModalCtrl', function ($location, $uibMod
         setTimeout(function () {
             ctrl.close();
             $location.path('/');
-        }, 3000);
+        }, 2000);
     };
 
     ctrl.goToLogin = function () {

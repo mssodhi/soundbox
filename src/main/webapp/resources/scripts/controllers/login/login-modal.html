@@ -14,6 +14,7 @@
                 ng-click="ctrl.login()">Sign in
         </button>
 
+        <div ng-if="ctrl.loggedIn" circle-check></div>
         <br>
         <p class="small">Don't have an account?<a href="" ng-click="ctrl.switchForm('register')"> Register
             here</a>
