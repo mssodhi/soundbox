@@ -1,62 +1,46 @@
 package app.web.domain.Base;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
 
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public abstract class AuditableEntity <T extends Serializable> extends BaseObject<Id> {
+public abstract class AuditableEntity {
 
-    private static final long serialVersionUID = 1L;
-
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    @Column(name = "created_date", nullable = false, length = 50, updatable = false)
-    @JsonProperty
-    private DateTime createdDate = DateTime.now();
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private Date created_date;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    @Column(name = "last_modified_date", nullable = false,  updatable = true)
-    @JsonProperty
-    private DateTime lastModifiedDate = DateTime.now();
+    @Column(name = "last_modified_date", nullable = false)
+    private Date last_modified_date;
 
-//    @CreatedBy
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = false)
-//    @JsonSerialize(using = PersonSimpleSerializer.class)
-//    private Person createdBy;
-//
-//    @LastModifiedBy
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "last_modified_by", referencedColumnName = "id", nullable = false)
-//    @JsonSerialize(using = PersonSimpleSerializer.class)
-//    private Person lastModifiedBy;
+    @PrePersist
+    protected void onCreate() {
+        last_modified_date = created_date = new Date();
+    }
 
-    // Properties
-    public abstract T getId();
+    @PreUpdate
+    protected void onUpdate() {
+        last_modified_date = new Date();
+    }
 
-    public DateTime getCreatedDate() { return createdDate; }
+    public Date getCreated_date() {
+        return created_date;
+    }
 
-    public DateTime getLastModifiedDate() { return lastModifiedDate; }
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
 
-//    public Person getCreatedBy() { return createdBy; }
+    public Date getLast_modified_date() {
+        return last_modified_date;
+    }
 
-//    public Person getLastModifiedBy() { return lastModifiedBy; }
-
-    public void setCreatedDate(DateTime createdDate) { this.createdDate = createdDate; }
-
-    public void setLastModifiedDate(DateTime lastModifiedDate) { this.lastModifiedDate = lastModifiedDate; }
-
-//    public void setCreatedBy(Person createdBy) { this.createdBy = createdBy; }
-
-//    public void setLastModifiedBy(Person lastModifiedBy) { this.lastModifiedBy = lastModifiedBy; }
-
+    public void setLast_modified_date(Date last_modified_date) {
+        this.last_modified_date = last_modified_date;
+    }
 }

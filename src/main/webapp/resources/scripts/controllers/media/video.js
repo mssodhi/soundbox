@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', '$http', '$sce', function (CredentialsService, profile, $http, $sce) {
+angular.module('app').controller('VideoCtrl', function (CredentialsService, profile, $http, $sce) {
     var ctrl = this;
     ctrl.currentUser = profile;
     var key;
@@ -13,7 +13,7 @@ angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', 
         });
     };
 
-    ctrl.search = function () {
+    ctrl.search = function (query) {
 
         ctrl.videosList = [];
         ctrl.showList = false;
@@ -23,7 +23,7 @@ angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', 
                     type: 'video',
                     maxResults: '30',
                     part: 'id,snippet',
-                    q: ctrl.q
+                    q: query
                 }
             })
             .success( function (data) {
@@ -48,6 +48,7 @@ angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', 
     };
 
     ctrl.getPopular = function() {
+        ctrl.query = '';
         $http.get('https://www.googleapis.com/youtube/v3/videos?chart=mostPopular',{
             params: {
                 key: key,
@@ -63,4 +64,4 @@ angular.module('app').controller('VideoCtrl', ['CredentialsService', 'profile', 
     }
 
 
-}]);
+});

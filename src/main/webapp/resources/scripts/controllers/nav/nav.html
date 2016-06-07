@@ -1,80 +1,29 @@
 <div ng-controller='NavCtrl as ctrl'>
 
-    <div class="sidemenu" ng-if="ctrl.inApp">
-
-        <a class="col-xs-12" ng-href="#/" style="background-color: #0b97c4">
-            <h1 class="text-center custom-font"><p style="color: white">SoundBox</p></h1>
+    <div class="main-nav custom-font" ng-if="ctrl.inApp">
+        <a class="col-xs-12 col-sm-4 col-lg-2" ng-href="#/" style="background-color: #0b97c4">
+            <h1 class="text-center"><p class="custom-white">{{ctrl.getNavBrandName()}}</p></h1>
         </a>
 
-        <img ng-src="resources/images/pic.jpg" class="sidemenu-image"/>
-
-        <h3 class="text-center custom-font">Welcome {{ctrl.currentUser.name}}</h3>
-
-        <div id="menu-items" class="text-center menu-items">
-            <a ng-href="#/music">
-                <div class="cell" ng-class="ctrl.isActive('/music')">
-                    <p><span class="fa fa-headphones fa-2x"> </span> Music</p>
-                </div>
-            </a>
-
-            <a ng-href="#/videos">
-                <div class="cell" ng-class="ctrl.isActive('/videos')">
-                    <p><span class="fa fa-tv fa-2x"></span> Videos</p>
-                </div>
-            </a>
-
-            <a ng-href="#/profile">
-                <div class="cell" ng-class="ctrl.isActive('/profile')">
-                    <p><span class="fa fa-user fa-2x"></span> Profile</p>
-                </div>
-            </a>
-
-            <a ng-href="#/hot-n-new">
-                <div class="cell" ng-class="ctrl.isActive('/hot-n-new')">
-                    <p><span class="fa fa-fire fa-2x"></span> Hot n New!</p>
-                </div>
-            </a>
+        <div class="nav-items">
+            <a class="nav-item custom-white" ng-href="#/music"><i class="fa fa-headphones"></i> <span class="hidden-sm hidden-xs">Music</span></a>
+            <a class="nav-item custom-orange" ng-href="#/videos"><i class="fa fa-tv"></i> <span class="hidden-sm hidden-xs">Videos</span></a>
+            <a class="nav-item custom-green" ng-href="#/profile"><i class="fa fa-user"></i> <span class="hidden-sm hidden-xs">Profile</span></a>
+            <a class="nav-item custom-blue" ng-href="#/hot-n-new"><i class="fa fa-fire"></i> <span class="hidden-sm hidden-xs">Hot n New!</span></a>
         </div>
-
-        <div class="col-xs-12 text-center pb15">
-            <br>
-            <span class="glyphicon glyphicon-apple"> Created on a MacBook Pro</span>
-        </div>
-
     </div>
 
-    <div class="col-xs-11 pull-right" ng-init="ctrl.init()">
+    <div class="col-md-2 pull-right main-nav-side">
         <div id="social-nav" class="btn-group pull-right" role="group">
-            <a href="https://www.linkedin.com/in/sodhim" class="btn btn-linkedin">LinkedIn</a>
-            <a href="https://github.com/mssodhi/" class="btn btn-github">GitHub</a>
+            <a href="https://www.linkedin.com/in/sodhim" class="btn btn-linkedin hidden-sm hidden-xs">LinkedIn</a>
+            <a href="https://github.com/mssodhi/" class="btn btn-github hidden-sm hidden-xs">GitHub</a>
             <a ng-click="ctrl.signOut()" ng-if="ctrl.inApp" class="btn btn-danger">Logout</a>
         </div>
     </div>
     <br>
 
-    <div class="footer" ng-if="ctrl.player">
-
-        <img class="pull-left" ng-src="{{ctrl.track.artwork_url}}">
-
-        <div class="col-md-3">
-            <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="ctrl.track.title">{{ctrl.track.title | limitTo: 40}}<span ng-if="ctrl.track.title.length > 40">... </span></a></h4>
-            <h6><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank" style="color: white">{{ctrl.track.user.username}}</a></h6>
-
-            <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
-        </div>
-
-        <div class="col-md-5 mt15 text-center">
-
-            <span class="fa fa-3x fa-backward button pr15 rewind-btn" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()"></span>
-            <span class="fa fa-3x fa-play button play-btn" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()"></span>
-            <span class="fa fa-3x fa-pause button pause-btn" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()"></span>
-            <span class="fa fa-3x fa-forward button next-btn pl15" ng-click="ctrl.next()"></span>
-
-            <div id="progress-bar" class="button music-bar-background ml15 mr15 mt15">
-                <div class="music-bar" ng-style="ctrl.myStyle"></div>
-            </div>
-        </div>
-
+    <div ng-if="ctrl.inApp">
+        <div music-player></div>
     </div>
 
 </div>

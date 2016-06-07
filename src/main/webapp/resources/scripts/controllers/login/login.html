@@ -10,67 +10,8 @@
                 <span>Premium quality music without the price</span>
             </div>
 
-            <a ng-click="ctrl.showLogin()" id="loginBtn" class="btn btn-pill">Login </a>
+            <a ng-click="ctrl.openModal()" id="loginBtn" class="btn btn-pill">Login </a>
         </div>
-
-
-        <div ng-if="ctrl.showForms" class="text-center">
-
-            <div class="panel login-form">
-                <div class="panel-body">
-
-                    <!-- Login Form -->
-                    <div ng-if="ctrl.showLoginForm">
-
-                        <form>
-                            <span class="pull-left">Email: </span>
-                            <input type="text" ng-model="ctrl.email" class="form-control">
-                            <span class="pull-left">Password: </span>
-                            <input type="password" ng-model="ctrl.password" class="form-control" ng-enter="ctrl.login()">
-                        </form>
-
-                        <span ng-if="ctrl.noUserFound && !ctrl.showRegisterForm" class="pb5"><i class="fa fa-exclamation-circle"></i> Invalid email or password</span>
-
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="!ctrl.email || !ctrl.password"
-                                ng-click="ctrl.login()">Sign in
-                        </button>
-
-                        <br>
-                        <p class="small">Don't have an account?<a href="" ng-click="ctrl.showRegisterForm = true; ctrl.showLoginForm = false"> Register
-                            here</a>
-                        </p>
-                    </div>
-
-                    <!-- Register Form -->
-                    <div ng-if="ctrl.showRegisterForm">
-
-                        <form class="form-register">
-                            <span class="pull-left">Name: </span>
-                            <input type="text" ng-model="ctrl.name" class="form-control">
-                            <span class="pull-left">Email: </span>
-                            <input type="text" ng-model="ctrl.email" ng-enter="ctrl.register()" class="form-control">
-                            <span class="pull-left">Password: </span>
-                            <input type="password" ng-model="ctrl.password" class="form-control">
-                            <span class="pull-left">Re-enter Password: </span>
-                            <input type="password" ng-model="ctrl.repeatedPassword" class="form-control" ng-enter="ctrl.register()">
-                        </form>
-
-                        <span ng-if="ctrl.emailTaken" class="pb5"><i class="fa fa-exclamation-circle"></i> This email is already taken.</span>
-                        <span ng-if="ctrl.passwordNotSame" class="pb5"><i class="fa fa-exclamation-circle"></i> The passwords don't match.</span>
-
-                        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.name || !ctrl.email || !ctrl.password"
-                                type="submit"
-                                ng-click="ctrl.register()">Register!
-                        </button>
-
-                        <br>
-                        <p class="small">Already have an account?<a href="" ng-click="ctrl.showRegisterForm = false; ctrl.showLoginForm = true"> Sign in </a></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div class="page-two text-center custom-font" hidden>
@@ -87,7 +28,6 @@
     </div>
 
     <div class="page-three" hidden>
-
 
     </div>
 

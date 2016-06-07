@@ -4,13 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-social.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/faa-animations.css">
     <link rel="stylesheet" type="text/css" href="resources/css/font-awesome.min.css">
     <link rel="shortcut icon" href="resources/images/mainpic.jpeg">
     <title>SoundBox</title>
 </head>
 <body ng-app="app">
 <div ng-include="'resources/scripts/controllers/nav/nav.html'"></div>
-<main ng-view></main>
+<main ng-view class="container-fluid"></main>
 
 </body>
 <%--<script src="http://connect.facebook.net/en_US/all.js"></script>--%>
@@ -25,25 +26,43 @@
 <%-- Angular injects --%>
 
 <%-- Third part injects --%>
-<script src="resources/js/sc-sdk-3.0.0.js"></script>
+<script src="resources/js/sc-sdk-3.1.1.js"></script>
 <script src="resources/js/lodash.min.js"></script>
 <script src="resources/js/moment.min.js"></script>
-<script src="resources/js/ui-bootstrap-1.2.5.min.js"></script>
+<script src="resources/js/ui-bootstrap-1.3.3.min.js"></script>
+<script src="resources/js/hotkeys.min.js"></script>
 <%-- Third Party injects --%>
 
 <%-- Sandbox --%>
 <script src="resources/scripts/app.js"></script>
+
+<%-- Services --%>
 <script src="resources/scripts/services/permission.js"></script>
 <script src="resources/scripts/services/user.service.js"></script>
 <script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/music-service.js"></script>
 <script src="resources/scripts/services/favorites.service.js"></script>
+<%-- Services --%>
+
+<%-- Directive --%>
 <script src="resources/scripts/directives/ng-enter.js"></script>
-<script src="resources/scripts/controllers/landing/landing.js"></script>
+<script src="resources/scripts/directives/circle-check.js"></script>
+<script src="resources/scripts/directives/circle-error.js"></script>
+<script src="resources/scripts/directives/music-player.js"></script>
+<%-- Directive --%>
+
+<%-- Controllers --%>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
+<script src="resources/scripts/controllers/landing/landing.js"></script>
+<script src="resources/scripts/controllers/music-player/music-player.js"></script>
+<script src="resources/scripts/controllers/verify/verify.js"></script>
+<script src="resources/scripts/controllers/common/common-modal.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
+<script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>
 <script src="resources/scripts/controllers/media/music.js"></script>
 <script src="resources/scripts/controllers/media/video.js"></script>
 <script src="resources/scripts/controllers/profile/profile.js"></script>
+<%-- Controllers --%>
+
 <%-- Sandbox --%>

@@ -1,6 +1,7 @@
 package app.web.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Settings {
     private String user_email;
 
     @OneToOne(mappedBy = "settings", orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonProperty
+    @JsonIgnore
     private User user;
 
     public Integer getId() {

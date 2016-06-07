@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
+angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'cfp.hotkeys'])
     .config(function ($routeProvider, $httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -18,6 +18,10 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
+            }).when('/verify/:code', {
+                templateUrl: 'resources/scripts/controllers/verify/verify.html',
+                controller: 'VerifyCtrl',
+                controllerAs: 'ctrl'
             })
             .when('/deny',
             {
@@ -96,6 +100,12 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
             });
     });
 
-angular.module('app').run(function ($window, $location) {
-
+angular.module('app').run(function ($window, $location, CredentialsService) {
+    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
+        SC.initialize({
+            client_id: response.id,
+            secret_token: response.secret,
+            redirect_uri: 'http://localhost:8080/test/#/'
+        });
+    });
 });

@@ -1,30 +1,20 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'FavoritesService', 'profile', 'MusicService', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
-    ctrl.tracks = [];
-    ctrl.artists = [];
-    ctrl.favorites = [];
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
 
     ctrl.init = function () {
-        CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
-            SC.initialize({
-                client_id: response.id,
-                secret_token: response.secret,
-                redirect_uri: 'http://localhost:8080/test/#/'
-            });
-        });
         ctrl.showInitList = true;
-        ctrl.showArtists = false;
+        ctrl.q = '';
         ctrl.getFavorites();
     };
 
     ctrl.getFavorites = function(){
-        FavoritesService.getFavorites({email: ctrl.currentUser.email}).$promise.then(function (response) {
+        FavoritesService.getFavorites({}).$promise.then(function (response) {
             ctrl.favorites = [];
             ctrl.tracks = [];
             for(var i = 0; i < response.length; i++){
@@ -69,18 +59,34 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
 
     ctrl.setArtist = function (artist) {
         ctrl.artist = artist;
-        ctrl.showArtists = false;
         ctrl.showInitList = false;
         ctrl.getTracks();
     };
-
-    ctrl.getArtist = function () {
-        ctrl.showArtists = true;
-        ctrl.artist = null;
-        ctrl.tracks = null;
-        SC.get('/users/', {q: ctrl.search, limit: 500}).then(function (response) {
-            ctrl.artists = response;
+    
+    ctrl.getSpecificArtist = function (id) {
+        SC.get('/users/' + id).then(function(response){
+            ctrl.setArtist(response);
         });
+    };
+
+    ctrl.search = function (query) {
+        return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
+            return response.collection;
+        });
+    };
+
+    ctrl.selectFromTypeahead = function (obj) {
+        if(obj.kind === 'user'){
+            ctrl.getSpecificArtist(obj.id);
+        }
+        if(obj.kind === 'track'){
+            ctrl.getSpecificTrack(obj);
+        }
+    };
+
+    ctrl.getSpecificTrack = function (track) {
+        ctrl.getSpecificArtist(track.user.id);
+        ctrl.select(track);
     };
 
     ctrl.select = function (track) {
@@ -91,18 +97,30 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
     };
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({email: ctrl.currentUser.email}, artist.id).$promise.then(function(){
-            ctrl.getFavorites();
+        ctrl.favorites = [];
+        FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
+            FavoritesService.getFavorites({}).$promise.then(function (response) {
+               response.forEach(function (artist) {
+                   SC.get('/users/' + artist.artist_id).then(function(response){
+                       ctrl.favorites.push(response);
+                   });
+               })
+            });
         });
     };
 
     ctrl.removeFavorite = function(artist){
-        FavoritesService.removeFavorites({email: ctrl.currentUser.email}, artist.id).$promise.then(function(){
-            ctrl.artist = null;
-            ctrl.init();
+        ctrl.favorites = [];
+        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
+            FavoritesService.getFavorites({}).$promise.then(function (response) {
+                response.forEach(function (artist) {
+                    SC.get('/users/' + artist.artist_id).then(function(response){
+                        ctrl.favorites.push(response);
+                    });
+                })
+            });
         });
     };
-
 
     // Util methods
 
@@ -179,4 +197,4 @@ angular.module('app').controller('MusicCtrl', ['$http', 'CredentialsService', 'F
         }
     };
 
-}]);
+});

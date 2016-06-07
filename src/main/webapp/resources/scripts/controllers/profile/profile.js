@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ProfileCtrl', ['profile', 'UserService', function (profile, UserService) {
+angular.module('app').controller('ProfileCtrl', function (profile, UserService) {
     var ctrl = this;
 
     ctrl.currentUser = profile;
@@ -16,22 +16,28 @@ angular.module('app').controller('ProfileCtrl', ['profile', 'UserService', funct
         if(ctrl.currentUser.settings.id){
             settings = {id: ctrl.currentUser.settings.id, notifications: ctrl.currentUser.settings.notifications};
 
-            UserService.updateSettings({email: ctrl.currentUser.email}, settings).$promise.then(function(response){
+            UserService.updateSettings({}, settings).$promise.then(function(response){
                 ctrl.currentUser = response;
             });
 
         }else{
             settings = {notifications: ctrl.currentUser.settings.notifications};
 
-            UserService.addSettings({email: ctrl.currentUser.email}, settings).$promise.then(function(response){
+            UserService.addSettings({}, settings).$promise.then(function(response){
+                // console.log(response);
                 ctrl.currentUser = response;
             });
         }
 
     };
 
+    ctrl.resetPassword = function () {
+
+        // console.log(ctrl.currentPass + ctrl.reset1 + ctrl.reset2);
+    };
+
     ctrl.saveLocation = function () {
-        UserService.updateLocation({email: ctrl.currentUser.email}, ctrl.currentUser.location).$promise.then(function(response){
+        UserService.updateLocation({}, ctrl.currentUser.location).$promise.then(function(response){
             ctrl.currentUser = response;
             ctrl.adjustProgress();
         })
@@ -60,4 +66,4 @@ angular.module('app').controller('ProfileCtrl', ['profile', 'UserService', funct
             ctrl.showProfile = false;
         }
     };
-}]);
+});

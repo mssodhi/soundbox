@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
-@Table(name = "user")
-public class User extends AuditableEntity implements Serializable{
+public class TempUser extends AuditableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,18 +23,13 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private String email;
 
-    @Column(name = "location", length = 50, nullable = true)
-    @JsonProperty
-    private  String location;
-
     @Column(name = "password", length = 50, nullable = false)
     @JsonProperty
     private  String password;
 
-    @OneToOne
-    @JoinColumn(foreignKey =  @ForeignKey(name ="FK_User_Settings"), name = "settings_id", referencedColumnName = "id")
+    @Column(name = "secret", length = 50, nullable = false)
     @JsonProperty
-    private Settings settings;
+    private  String secret = UUID.randomUUID().toString();
 
     public Integer getId() {
         return id;
@@ -42,14 +37,6 @@ public class User extends AuditableEntity implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getName() {
@@ -60,20 +47,12 @@ public class User extends AuditableEntity implements Serializable{
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -82,5 +61,13 @@ public class User extends AuditableEntity implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }

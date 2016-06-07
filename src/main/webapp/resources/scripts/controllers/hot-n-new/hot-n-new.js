@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('Hot-n-New-Ctrl', ['$location', 'profile', 'FavoritesService', function ($location, profile, FavoritesService) {
+angular.module('app').controller('Hot-n-New-Ctrl', function ($location, profile, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -10,4 +10,4 @@ angular.module('app').controller('Hot-n-New-Ctrl', ['$location', 'profile', 'Fav
 
     
 
-}]);
+});
