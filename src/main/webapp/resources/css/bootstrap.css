@@ -1858,7 +1858,7 @@ and (-webkit-min-device-pixel-ratio: 2){
     .music-player{
         position: fixed !important;
         bottom: 0 !important;
-        height: 175px !important;
+        height: 190px !important;
     }
     .main-nav{
         position: fixed; !important;
@@ -1878,6 +1878,12 @@ and (-webkit-min-device-pixel-ratio: 2){
     }
     .card-sc{
         margin-top: 10px;
+    }
+
+    .music-player-info{
+        background-color: coral !important;
+        height: 100px !important;
+        width: 73.3% !important;
     }
 }
 
@@ -7080,12 +7086,6 @@ button.list-group-item-danger.active:focus {
     min-height: 250px;
 }
 
-.music-player{
-    background-color: #e14747;
-    position: fixed;
-    bottom: 0;
-}
-
 .button{
     -ms-touch-action: manipulation;
     touch-action: manipulation;
@@ -7333,9 +7333,9 @@ tr.button:hover{
     width: 100%;
     height: 100px;
     z-index: 1;
-    -webkit-animation: stretch 750ms ease-out;
-    -moz-animation: stretch 750ms ease-out;
-    -o-animation: stretch 750ms ease-out;
+    -webkit-animation: stretch 500ms ease-out;
+    -moz-animation: stretch 500ms ease-out;
+    -o-animation: stretch 500ms ease-out;
 }
 
 .panel-footer {

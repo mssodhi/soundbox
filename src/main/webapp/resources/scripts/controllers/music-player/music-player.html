@@ -1,9 +1,9 @@
 <div ng-init="ctrl.init()">
     <div class="music-player" ng-if="ctrl.player">
 
-        <img class="pull-left hidden-xs" ng-src="{{ctrl.track.artwork_url}}">
+        <img class="pull-left" ng-src="{{ctrl.track.artwork_url}}">
 
-        <div class="col-sm-3 col-xs-12">
+        <div class="col-sm-3 col-xs-8 music-player-info">
             <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="ctrl.track.title">{{ctrl.track.title | limitTo: 30}}<span ng-if="ctrl.track.title.length > 40">... </span></a></h4>
             <h6><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank" style="color: white">{{ctrl.track.user.username}}</a></h6>
             <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
