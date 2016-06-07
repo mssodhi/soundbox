@@ -11,7 +11,7 @@
 </head>
 <body ng-app="app">
 <div ng-include="'resources/scripts/controllers/nav/nav.html'"></div>
-<main ng-view></main>
+<main ng-view class="container-fluid"></main>
 
 </body>
 <%--<script src="http://connect.facebook.net/en_US/all.js"></script>--%>
