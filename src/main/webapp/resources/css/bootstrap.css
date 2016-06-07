@@ -1870,6 +1870,7 @@ and (-webkit-min-device-pixel-ratio: 2){
     }
     .container-fluid{
         margin-top: 110px !important;
+        margin-bottom: 100px !important;
     }
 
     .track-image{
