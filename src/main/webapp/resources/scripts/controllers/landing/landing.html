@@ -1,66 +1,68 @@
-<div id="cards" ng-init="ctrl.init()" class="col-md-12 pl0">
+<div class="container-fluid">
+    <div id="cards" ng-init="ctrl.init()" class="col-md-12 pl0">
 
-    <div class="col-md-3" ng-repeat="artist in ctrl.favorites | limitTo: 4">
-        <div class="col-md-12 card card-blue">
-            <div class="panel-body text-center">
-                <span class="label label-info">{{artist.track_count}}</span> track(s)
-                <p class="mb0 mt5">{{artist.username}}</p>
+        <div class="col-md-3" ng-repeat="artist in ctrl.favorites | limitTo: 4">
+            <div class="col-md-12 card card-blue">
+                <div class="panel-body text-center">
+                    <span class="label label-info">{{artist.track_count}}</span> track(s)
+                    <p class="mb0 mt5">{{artist.username}}</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-3 button" ng-click="ctrl.goToMusic()" ng-if="ctrl.favorites.length < 4">
-        <div class="col-md-12 card card-purple">
-            <div class="panel-body text-center">
-                <div class="mb0 mt5">Listen to your favorite artists <br>Add them to your favorites!</div>
+        <div class="col-md-3 button" ng-click="ctrl.goToMusic()" ng-if="ctrl.favorites.length < 4">
+            <div class="col-md-12 card card-purple">
+                <div class="panel-body text-center">
+                    <div class="mb0 mt5">Listen to your favorite artists <br>Add them to your favorites!</div>
+                </div>
             </div>
         </div>
+
     </div>
 
-</div>
 
+    <div id="big-cars" class="col-md-12 pl0">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <h4 class="semibold">Pending Review</h4>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="col-md-2"><a href ng-click="ctrl.hit()">RUA 1</a></div>
+                        <div class="col-md-10">Submitted by Doe, Joan</div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2"><a ng-href="#/landing">RUA 3</a></div>
+                        <div class="col-md-10">Submitted by Nunez, Ron</div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2"><a ng-href="#/landing">RUA 6</a></div>
+                        <div class="col-md-10">Submitted by mdith, Adam</div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="semibold text-muted mb0 mt5"><a ng-href="#/landing"> more... </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div id="big-cars" class="col-md-12 pl0">
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-body text-center">
-                <h4 class="semibold">Pending Review</h4>
-                <hr>
-                <div class="col-md-12">
-                    <div class="col-md-2"><a href ng-click="ctrl.hit()">RUA 1</a></div>
-                    <div class="col-md-10">Submitted by Doe, Joan</div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-2"><a ng-href="#/landing">RUA 3</a></div>
-                    <div class="col-md-10">Submitted by Nunez, Ron</div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-2"><a ng-href="#/landing">RUA 6</a></div>
-                    <div class="col-md-10">Submitted by mdith, Adam</div>
-                </div>
-                <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <h4 class="semibold">Inventory</h4>
+                    <hr>
+                    <h6>Available</h6>
+                    <p class="semibold text-muted mb0 mt5"> At-217 (10 mCi) </p>
+                    <p class="semibold text-muted mb0 mt5"> Pu-240 (100 g)  </p>
+                    <p class="semibold text-muted mb0 mt5"><a ng-href="#/landing"> more... </a></p>
+                    <hr>
+                    <h6>In Use</h6>
+                    <p class="semibold text-muted mb0 mt5"> At-217 (5 mCi) </p>
+                    <p class="semibold text-muted mb0 mt5"> H-3 (4 μl)  </p>
                     <p class="semibold text-muted mb0 mt5"><a ng-href="#/landing"> more... </a></p>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-body text-center">
-                <h4 class="semibold">Inventory</h4>
-                <hr>
-                <h6>Available</h6>
-                <p class="semibold text-muted mb0 mt5"> At-217 (10 mCi) </p>
-                <p class="semibold text-muted mb0 mt5"> Pu-240 (100 g)  </p>
-                <p class="semibold text-muted mb0 mt5"><a ng-href="#/landing"> more... </a></p>
-                <hr>
-                <h6>In Use</h6>
-                <p class="semibold text-muted mb0 mt5"> At-217 (5 mCi) </p>
-                <p class="semibold text-muted mb0 mt5"> H-3 (4 μl)  </p>
-                <p class="semibold text-muted mb0 mt5"><a ng-href="#/landing"> more... </a></p>
-            </div>
-        </div>
     </div>
-
 </div>
