@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService, hotkeys, $document, $window) {
+angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService, hotkeys) {
     var ctrl = this;
 
     ctrl.init = function () {
@@ -98,15 +98,11 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
     });
 
     ctrl.noScroll = function () {
-        $document.on('scroll', function() {
-            if(ctrl.xBefore !== null && ctrl.yBefore !== null){
-                $window.scrollTo(ctrl.xBefore, ctrl.yBefore);
-                $window.setTimeout(function () {
-                    ctrl.xBefore = null;
-                    ctrl.yBefore = null;
-                }, 250);
+        document.documentElement.addEventListener('keypress', function (e) {
+            if ( ( e.keycode || e.which ) == 32) {
+                e.preventDefault();
             }
-        });
+        }, false);
     }
 
 });
