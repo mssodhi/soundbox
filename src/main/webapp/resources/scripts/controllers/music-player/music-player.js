@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService, hotkeys) {
+angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService) {
     var ctrl = this;
 
     ctrl.init = function () {
         $interval(runLoop, 250);
+        ctrl.keyEvents();
     };
     
     var runLoop = function () {
@@ -61,48 +62,32 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
             MusicService.setPlayer(player, track);
         });
     };
-
-    hotkeys.add({
-        combo: 'space',
-        description: 'Play/Pause',
-        callback: function(event, hotkey) {
-            ctrl.xBefore = window.pageXOffset;
-            ctrl.yBefore = window.pageYOffset;
-            if(ctrl.player){
-                if(ctrl.isPlaying){
-                    ctrl.pause();
-                }else{
-                    ctrl.play();
-                }
-                ctrl.noScroll();
+    
+    ctrl.keyEvents = function () {
+        document.onkeydown = function(e) {
+            switch (e.keyCode) {
+                case 32:
+                    if(ctrl.player){
+                        if(ctrl.isPlaying){
+                            ctrl.pause();
+                        }else{
+                            ctrl.play();
+                        }
+                        e.preventDefault();
+                    }
+                    break;
+                case 37:
+                    if(ctrl.player){
+                        ctrl.getPrevious();
+                    }
+                    break;
+                case 39:
+                    if(ctrl.player){
+                        ctrl.next();
+                    }
+                    break;
             }
-        }
-    });
-    hotkeys.add({
-        combo: 'left',
-        description: 'Previous',
-        callback: function(event, hotkey) {
-            if(ctrl.player){
-                ctrl.getPrevious();
-            }
-        }
-    });
-    hotkeys.add({
-        combo: 'right',
-        description: 'Next',
-        callback: function(event, hotkey) {
-            if(ctrl.player){
-                ctrl.next();
-            }
-        }
-    });
-
-    ctrl.noScroll = function () {
-        document.documentElement.addEventListener('keypress', function (e) {
-            if ( ( e.keycode || e.which ) == 32) {
-                e.preventDefault();
-            }
-        }, false);
+        };
     }
 
 });

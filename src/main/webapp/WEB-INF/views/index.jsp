@@ -30,7 +30,6 @@
 <script src="resources/js/lodash.min.js"></script>
 <script src="resources/js/moment.min.js"></script>
 <script src="resources/js/ui-bootstrap-1.3.3.min.js"></script>
-<script src="resources/js/hotkeys.min.js"></script>
 <%-- Third Party injects --%>
 
 <%-- Sandbox --%>
