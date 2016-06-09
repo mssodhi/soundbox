@@ -5,7 +5,6 @@ import app.web.domain.User;
 import app.web.helper.EmailHelper;
 import app.web.services.FavoritesService;
 import app.web.services.UserService;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,15 +60,15 @@ public class FavoritesController {
 
     @RequestMapping(value = "testing", method = RequestMethod.PUT)
     public String testing() throws UnsupportedEncodingException {
-        User currentUser = userService.getCurrentUser();
-//        String recipient = userService.getCurrentUser().getEmail();
-
-        String recipient = "manu_47555@live.com";
-        String[] to = { recipient }; // list of recipient email addresses
-        String subject = "Welcome to SoundBox " + currentUser.getName();
-        String body = "This is an automated e-mail for " + currentUser.getName() + ". It was sent on " + new DateTime().toDateTime().toLocalDateTime();
-
-        emailHelper.sendFromGMail(to, subject, body);
+//        User currentUser = userService.getCurrentUser();
+////        String recipient = userService.getCurrentUser().getEmail();
+//
+//        String recipient = "manu_47555@live.com";
+//        String[] to = { recipient }; // list of recipient email addresses
+//        String subject = "Welcome to SoundBox " + currentUser.getName();
+//        String body = "This is an automated e-mail for " + currentUser.getName() + ". It was sent on " + new DateTime().toDateTime().toLocalDateTime();
+//
+//        emailHelper.sendFromGMail(to, subject, body);
         return "{\"id\":\"null\"}";
     }
 

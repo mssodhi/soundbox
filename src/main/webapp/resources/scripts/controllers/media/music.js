@@ -13,6 +13,45 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         ctrl.getFavorites();
     };
 
+    ctrl.search = function (query) {
+        return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
+            return response.collection;
+        });
+    };
+
+    ctrl.selectFromTypeahead = function (obj) {
+        if(obj.kind === 'user'){
+            ctrl.getSpecificArtist(obj.id);
+        }
+        if(obj.kind === 'track'){
+            ctrl.getSpecificTrack(obj);
+        }
+    };
+    
+    ctrl.getSpecificArtist = function (id) {
+        SC.get('/users/' + id).then(function(response){
+            ctrl.setArtist(response);
+        });
+    };
+
+    ctrl.getSpecificTrack = function (track) {
+        ctrl.getSpecificArtist(track.user.id);
+        ctrl.select(track);
+    };
+
+    ctrl.setArtist = function (artist) {
+        ctrl.artist = artist;
+        ctrl.showInitList = false;
+        ctrl.getTracks();
+    };
+
+    ctrl.select = function (track) {
+        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
+            MusicService.setPlayer(player, track);
+            MusicService.setList(ctrl.tracks);
+        });
+    };
+
     ctrl.getFavorites = function(){
         FavoritesService.getFavorites({}).$promise.then(function (response) {
             ctrl.favorites = [];
@@ -35,12 +74,12 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         SC.get('/tracks', {user_id: ctrl.artist.permalink, limit: 500}).then(function (response) {
             if(response.length === 0){
                 $http.get('http://api.soundcloud.com/tracks', {
-                        params: {
-                            client_id: '0f7c969c815f51078c1de513f666ecdb',
-                            q: ctrl.artist.permalink
-                        }
-                    }).success( function (data) {
-                        ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
+                    params: {
+                        client_id: '0f7c969c815f51078c1de513f666ecdb',
+                        q: ctrl.artist.permalink
+                    }
+                }).success( function (data) {
+                    ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
                 });
             }else{
                 ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
@@ -48,77 +87,16 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         });
     };
 
-    ctrl.isFavorite = function (artist) {
-        for(var i = 0; i < ctrl.favorites.length; i++){
-            if(ctrl.favorites[i].id == artist.id){
-                return true;
-            }
-        }
-        return false;
-    };
-
-    ctrl.setArtist = function (artist) {
-        ctrl.artist = artist;
-        ctrl.showInitList = false;
-        ctrl.getTracks();
-    };
-    
-    ctrl.getSpecificArtist = function (id) {
-        SC.get('/users/' + id).then(function(response){
-            ctrl.setArtist(response);
-        });
-    };
-
-    ctrl.search = function (query) {
-        return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
-            return response.collection;
-        });
-    };
-
-    ctrl.selectFromTypeahead = function (obj) {
-        if(obj.kind === 'user'){
-            ctrl.getSpecificArtist(obj.id);
-        }
-        if(obj.kind === 'track'){
-            ctrl.getSpecificTrack(obj);
-        }
-    };
-
-    ctrl.getSpecificTrack = function (track) {
-        ctrl.getSpecificArtist(track.user.id);
-        ctrl.select(track);
-    };
-
-    ctrl.select = function (track) {
-        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
-            MusicService.setPlayer(player, track);
-            MusicService.setList(ctrl.tracks);
-        });
-    };
-
     ctrl.addFavorite = function(artist){
-        ctrl.favorites = [];
         FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
-            FavoritesService.getFavorites({}).$promise.then(function (response) {
-               response.forEach(function (artist) {
-                   SC.get('/users/' + artist.artist_id).then(function(response){
-                       ctrl.favorites.push(response);
-                   });
-               })
-            });
+            ctrl.favorites.push(artist);
         });
     };
 
     ctrl.removeFavorite = function(artist){
-        ctrl.favorites = [];
         FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
-            FavoritesService.getFavorites({}).$promise.then(function (response) {
-                response.forEach(function (artist) {
-                    SC.get('/users/' + artist.artist_id).then(function(response){
-                        ctrl.favorites.push(response);
-                    });
-                })
-            });
+            var index = ctrl.favorites.indexOf(artist);
+            ctrl.favorites.splice(index, 1);
         });
     };
 
@@ -132,6 +110,15 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
             }
         }
 
+    };
+
+    ctrl.isFavorite = function (artist) {
+        for(var i = 0; i < ctrl.favorites.length; i++){
+            if(ctrl.favorites[i].id == artist.id){
+                return true;
+            }
+        }
+        return false;
     };
 
     ctrl.milliToTime = function (milli) {
