@@ -33,29 +33,35 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     };
     
     ctrl.register = function(){
-        ctrl.passwordNotSame = false;
-        ctrl.emailTaken = false;
-        ctrl.verificationEmailSent = false;
-        if(ctrl.password === ctrl.repeatedPassword){
-            ctrl.password = MD5(ctrl.password);
-            ctrl.repeatedPassword = MD5(ctrl.password);
-            var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
-            UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
-                if(response.taken !== 'true'){
-                    UserService.addUser(user).$promise.then(function(response){
-                        if(response){
-                            ctrl.verificationEmailSent = true;
-                        }else{
-                            $location.path('/deny');
-                        }
-                    });
-                }else{
-                    ctrl.emailTaken = true;
-                }
-            });
+        ctrl.emailNotValid = false;
+        if(ctrl.emailValidator(ctrl.email)){
+            ctrl.passwordNotSame = false;
+            ctrl.emailTaken = false;
+            ctrl.verificationEmailSent = false;
+            if(ctrl.password === ctrl.repeatedPassword){
+                ctrl.password = MD5(ctrl.password);
+                ctrl.repeatedPassword = MD5(ctrl.password);
+                var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
+                UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
+                    if(response.taken !== 'true'){
+                        UserService.addUser(user).$promise.then(function(response){
+                            if(response){
+                                ctrl.verificationEmailSent = true;
+                            }else{
+                                $location.path('/deny');
+                            }
+                        });
+                    }else{
+                        ctrl.emailTaken = true;
+                    }
+                });
+            }else{
+                ctrl.passwordNotSame = true;
+            }
         }else{
-            ctrl.passwordNotSame = true;
+            ctrl.emailNotValid = true;
         }
+        
     };
     
     ctrl.isValid = function () {
@@ -70,4 +76,9 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
         $uibModalInstance.close();
         ctrl.loggedIn = true;
     };
+
+    ctrl.emailValidator = function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 });
