@@ -105,7 +105,7 @@ angular.module('app').run(function ($window, $location, CredentialsService) {
         SC.initialize({
             client_id: response.id,
             secret_token: response.secret,
-            redirect_uri: 'http://localhost:8080/test/#/'
+            redirect_uri: 'http://localhost:8080/soundbox/#/'
         });
     });
 });

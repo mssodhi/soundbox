@@ -57,11 +57,11 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
             ctrl.favorites = [];
             ctrl.tracks = [];
             for(var i = 0; i < response.length; i++){
-                SC.get('/users/' + response[i].artist_id).then(function(response){
-                    ctrl.favorites.push(response);
-                    SC.get('/tracks', {user_id: response.id, limit: 500}).then(function (response) {
-                        for(var i = 0; i < response.length; i++){
-                            ctrl.tracks.push(response[i]);
+                SC.get('/users/' + response[i].artist_id).then(function(artist){
+                    ctrl.favorites.push(artist);
+                    SC.get('/tracks', {user_id: artist.id, limit: 500}).then(function (tracks) {
+                        for(var i = 0; i < tracks.length; i++){
+                            ctrl.tracks.push(tracks[i]);
                         }
                         ctrl.tracks = _.shuffle(ctrl.tracks);
                     });

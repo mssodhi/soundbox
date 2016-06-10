@@ -22,6 +22,7 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     
     ctrl.login = function(){
         ctrl.noUserFound = false;
+        ctrl.password = MD5(ctrl.password);
         UserService.login({email: ctrl.email}, ctrl.password).$promise.then(function (response) {
             if(response.id){
                 ctrl.goToLanding();
@@ -36,6 +37,8 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
         ctrl.emailTaken = false;
         ctrl.verificationEmailSent = false;
         if(ctrl.password === ctrl.repeatedPassword){
+            ctrl.password = MD5(ctrl.password);
+            ctrl.repeatedPassword = MD5(ctrl.password);
             var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
             UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
                 if(response.taken !== 'true'){
