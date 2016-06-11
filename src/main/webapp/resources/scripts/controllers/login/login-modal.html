@@ -1,4 +1,10 @@
 <div class="col-md-12 pt10" ng-init="ctrl.init()" style="background-color: white">
+
+    <div class="col-md-12 col-xs-12 mb15 mt15">
+        <a href="" ng-click="ctrl.switchForm('login')"><span style="font-size: large">Login</span></a>
+        <a href="" ng-click="ctrl.switchForm('register')"><span style="font-size: large; padding-left: 40px">Sign up</span></a>
+    </div>
+
     <!-- Login Form -->
     <div ng-if="ctrl.showLoginForm">
         <form>
@@ -16,9 +22,7 @@
 
         <div ng-if="ctrl.loggedIn" circle-check></div>
         <br>
-        <p class="small">Don't have an account?<a href="" ng-click="ctrl.switchForm('register')"> Register
-            here</a>
-        </p>
+
     </div>
 
     <!-- Register Form -->
@@ -48,6 +52,5 @@
         </button>
 
         <br>
-        <p class="small">Already have an account?<a href="" ng-click="ctrl.switchForm('login')"> Sign in </a></p>
     </div>
 </div>

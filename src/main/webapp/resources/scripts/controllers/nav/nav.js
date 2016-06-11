@@ -23,9 +23,8 @@ angular.module('app').controller('NavCtrl', function ($scope, UserService, $loca
 
     ctrl.signOut = function () {
         UserService.logout().$promise.then(function () {
-            // invalidate the player on signout
-            MusicService.setPlayer(null, null);
             $location.path('/login');
+            MusicService.setPlayer(null, null);
         });
     };
 
