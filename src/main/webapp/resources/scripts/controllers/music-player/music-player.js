@@ -67,7 +67,7 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
         document.onkeydown = function(e) {
             switch (e.keyCode) {
                 case 32:
-                    if(ctrl.player){
+                    if(ctrl.player && e.target === document.body){
                         if(ctrl.isPlaying){
                             ctrl.pause();
                         }else{
