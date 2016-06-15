@@ -3,3 +3,15 @@ INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('
 INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('root', '36960179', 1 )
 INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('root', '44513723', 1 )
 INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('root', '8145658', 1 )
+
+
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Playlist 1', 0, 1 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Summer Playlist', 0, 1 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('3', 'Smooth Jazz', 1, 1 )
+
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (1, 41, 1 )
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (2, 21, 1 )
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (3, 23, 1 )
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (4, 23, 2 )
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (5, 33, 2 )
+INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (6, 12, 2 )

@@ -5,7 +5,7 @@ angular.module('app').controller('LandingCtrl', function ($location, profile, Fa
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
-        //ctrl.hit();
+        ctrl.hit();
         ctrl.getFavorites();
 
     };
