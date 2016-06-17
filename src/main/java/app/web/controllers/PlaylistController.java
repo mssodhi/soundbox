@@ -1,11 +1,14 @@
 package app.web.controllers;
 
 import app.web.domain.Playlist;
+import app.web.domain.PlaylistSong;
 import app.web.domain.User;
 import app.web.services.PlaylistService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/playlist/")
@@ -36,5 +39,19 @@ public class PlaylistController {
     @RequestMapping(value = "removePlaylist", method = RequestMethod.POST)
     public Object removePlaylist(@RequestBody Playlist playlist) {
         return playlistService.deletePlaylist(playlist);
+    }
+
+    @RequestMapping(value = "addSong/{songId}", method = RequestMethod.POST)
+    public Object addSongToPlaylist(@PathVariable String songId, @RequestBody Playlist playlist) {
+
+        PlaylistSong song = new PlaylistSong();
+        song.setTrack_id(songId);
+        song.setPlaylist(playlist);
+        playlistService.savePlayListSong(song);
+
+        Set<PlaylistSong> songSet = playlist.getSongs();
+        songSet.add(song);
+        playlist.setSongs(songSet);
+        return playlistService.save(playlist);
     }
 }

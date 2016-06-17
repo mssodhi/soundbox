@@ -5,9 +5,8 @@ INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('
 INSERT INTO soundbox.favorites ( `user_email`, `artist_id`, `user_id`) VALUES ('root', '8145658', 1 )
 
 
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Playlist 1', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Summer Playlist', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('3', 'Smooth Jazz', 1, 1 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Workout', 0, 1 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Jazz', 0, 1 )
 
 INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (1, 41, 1 )
 INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (2, 21, 1 )

@@ -51,6 +51,7 @@
 <script src="resources/scripts/directives/circle-error.js"></script>
 <script src="resources/scripts/directives/music-player.js"></script>
 <script src="resources/scripts/directives/draggable.js"></script>
+<script src="resources/scripts/directives/ng-right-click.js"></script>
 <%-- Directive --%>
 
 <%-- Controllers --%>

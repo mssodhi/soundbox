@@ -11,18 +11,28 @@
     </tr>
     </thead>
     <tbody ng-repeat="song in ctrl.tracks | filter: search track by song.id" title="{{song.title}}">
-    <tr class="button" ng-class="ctrl.isPlaying(song)" ng-click="ctrl.select(song)">
-        <td class="hidden-xs">{{$index+1}}</td>
-        <td>
+    <tr ng-class="ctrl.isPlaying(song)" class="button" ng-right-click="ctrl.toggleDropdown(song)">
+        <td ng-click="ctrl.select(song)"class="hidden-xs">{{$index+1}}</td>
+        <td ng-click="ctrl.select(song)">
             <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">
             <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
             <a>{{song.title | limitTo: 40}}<span ng-if="song.title.length > 40">... </span></a>
         </td>
-        <td ng-if="ctrl.showInitList" style="vertical-align: middle"><a ng-href="{{song.user.permalink_url}}" target="_blank">{{song.user.username}}</a></td>
-        <td style="vertical-align: middle" class="hidden-xs">{{song.playback_count | number}}</td>
-        <td style="vertical-align: middle" class="hidden-xs"><span class="fa fa-heart"></span> {{song.favoritings_count | number}}</td>
-        <td style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
-        <td ng-if="ctrl.artist" style="vertical-align: middle" class="hidden-xs">{{ctrl.getDate(song.created_at)}}</td>
+        <td ng-click="ctrl.select(song)" ng-if="ctrl.showInitList" style="vertical-align: middle"><a ng-href="{{song.user.permalink_url}}" target="_blank">{{song.user.username}}</a></td>
+        <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{song.playback_count | number}}</td>
+        <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs"><span class="fa fa-heart"></span> {{song.favoritings_count | number}}</td>
+        <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
+        <td ng-click="ctrl.select(song)" ng-if="ctrl.artist" style="vertical-align: middle" class="hidden-xs">{{ctrl.getDate(song.created_at)}}</td>
+        <td>
+            <div class="pt15 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle ng-disabled="disabled">
+                <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li class="menu-item" ng-repeat="playlist in ctrl.playlists">
+                        <a href ng-click="ctrl.addSongToPlaylist(song, playlist)">{{playlist.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>

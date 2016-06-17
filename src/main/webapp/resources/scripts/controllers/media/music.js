@@ -17,6 +17,13 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         })
     };
 
+    ctrl.addSongToPlaylist = function (song, playlist) {
+        PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
+            ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
+        })        
+
+    };
+
     ctrl.createPlaylist = function () {
         var playlist = {
             name: 'Untitled',

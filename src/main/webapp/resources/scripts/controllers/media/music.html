@@ -103,7 +103,7 @@
 
         <!-- Favorites List on the side -->
 
-        <div class="card">
+        <div class="card" draggable>
             <div class="card-red panel-body">
                 <span><i class="fa fa-star-o"></i> Favorite Artists</span>
             </div>
@@ -121,8 +121,8 @@
 
         <!-- Playlist on the side -->
 
-        <div class="card">
-            <div class="card-red panel-body">
+        <div class="card" draggable>
+            <div class="card-purple panel-body">
                 <a href ng-click="ctrl.createPlaylist()"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
             </div>
             <div class="button hover-under-line" ng-repeat="playlist in ctrl.playlists"
@@ -130,12 +130,11 @@
                 <div ng-if="!playlist.isNew" class="panel-body" title="{{playlist.name}}">
                     <span> {{playlist.name}}</span>
                     <span class="pull-right">
-                        <span class="badge"> {{playlist.songs.length}} song<span
+                        <span class="badge mr5" style="background-color: coral; font-size: medium;"> {{playlist.songs.length}} song<span
                                 ng-if="playlist.songs.length !== 1">s</span></span>
                         <a class="fa fa-remove" style="padding-top: inherit"
                            ng-click="ctrl.removePlaylist(playlist)"></a>
                     </span>
-
                 </div>
                 <div ng-if="playlist.isNew" class="panel-body">
                     <input type="text" class="md-input" ng-model="playlist.name" autofocus>
