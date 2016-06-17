@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService) {
+angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, $uibModal, PlaylistService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -11,6 +11,33 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         ctrl.showInitList = true;
         ctrl.q = '';
         ctrl.getFavorites();
+
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
+        })
+    };
+
+    ctrl.createPlaylist = function () {
+        var playlist = {
+            name: 'Untitled',
+            isNew: true
+        };
+        ctrl.playlists.push(playlist);
+    };
+
+    ctrl.addPlaylist = function (playlist) {
+        PlaylistService.addPlaylist({name: playlist.name}).$promise.then(function (res) {
+            if(res.id){
+                ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
+                ctrl.playlists.push(res);
+            }
+        })
+    };
+
+    ctrl.removePlaylist = function (playlist) {
+        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
+            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
+        });
     };
 
     ctrl.search = function (query) {

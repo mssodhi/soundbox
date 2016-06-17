@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,9 +29,9 @@ public class Playlist implements Serializable {
     @JsonProperty
     private Boolean is_private;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "playlist", orphanRemoval = true)
     @JsonProperty
-    private Set<PlaylistSong> songs;
+    private Set<PlaylistSong> songs = new HashSet<>();
 
     public Integer getId() {
         return id;

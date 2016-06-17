@@ -1,5 +1,6 @@
 package app.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class PlaylistSong implements Serializable {
     private Integer id;
 
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_Playlist"), name = "playlist_id", referencedColumnName = "id")
-    @JsonProperty
+    @JsonIgnore
     @ManyToOne
     private Playlist playlist;
 

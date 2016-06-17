@@ -26,4 +26,15 @@ public class PlaylistServiceImpl extends BaseServiceImpl<Playlist,Integer> imple
     public Set<Playlist> findByUser(Integer id){
         return repository.findByUser(id);
     }
+
+    @Override
+    public Boolean deletePlaylist(Playlist playlist) {
+        try {
+            repository.delete(playlist);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

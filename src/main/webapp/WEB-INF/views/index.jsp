@@ -42,6 +42,7 @@
 <script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/music-service.js"></script>
 <script src="resources/scripts/services/favorites.service.js"></script>
+<script src="resources/scripts/services/playlist.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>
@@ -49,6 +50,7 @@
 <script src="resources/scripts/directives/circle-check.js"></script>
 <script src="resources/scripts/directives/circle-error.js"></script>
 <script src="resources/scripts/directives/music-player.js"></script>
+<script src="resources/scripts/directives/draggable.js"></script>
 <%-- Directive --%>
 
 <%-- Controllers --%>

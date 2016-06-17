@@ -12,4 +12,6 @@ public interface PlaylistService extends BaseService<Playlist, Integer> {
 
     Playlist save(Playlist playlist);
 
+    Boolean deletePlaylist(Playlist playlist);
+
 }

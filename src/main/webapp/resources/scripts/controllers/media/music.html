@@ -13,7 +13,7 @@
                            typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
                     <i ng-if="loading" class="pt10 fa fa-spinner spin spinning form-control-feedback"></i>
                     <i ng-if="!ctrl.showInitList" style="pointer-events: all"
-                       ng-click="ctrl.init()"  class="pt10 fa fa-refresh form-control-feedback"></i>
+                       ng-click="ctrl.init()" class="pt10 fa fa-refresh form-control-feedback"></i>
                 </div>
             </div>
         </div>
@@ -41,15 +41,21 @@
 
             <div class="col-md-12 pl0 pr0 pt15">
                 <!-- this div for artist card -->
-                <div ng-if="ctrl.artist && !ctrl.showInitList" class="mb10 card-sc panel-body card card-purple col-md-7 col-xs-12 pl0 pr0" style="min-height: 132px">
+                <div ng-if="ctrl.artist && !ctrl.showInitList"
+                     class="mb10 card-sc panel-body card card-purple col-md-7 col-xs-12 pl0 pr0"
+                     style="min-height: 132px">
                     <div class="col-md-12 mb5">
-                        <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink}}</a></span>
-                        <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)" ng-if="!ctrl.isFavorite(ctrl.artist)"></span><br>
+                        <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}"
+                                                                              target="_blank">{{ctrl.artist.permalink}}</a></span>
+                        <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)"
+                              ng-if="!ctrl.isFavorite(ctrl.artist)"></span><br>
                     </div>
 
                     <div class="col-md-1 mr15">
-                        <img ng-src="{{ctrl.artist.avatar_url}}" style="height: 100px; width: 100px; display: inline-block">
-                        <img ng-if="ctrl.artist.artwork_url === null" height="100px" width="100px" src="resources/images/noImage.jpg">
+                        <img ng-src="{{ctrl.artist.avatar_url}}"
+                             style="height: 100px; width: 100px; display: inline-block">
+                        <img ng-if="ctrl.artist.artwork_url === null" height="100px" width="100px"
+                             src="resources/images/noImage.jpg">
                     </div>
 
                     <div class="col-md-10 ml15 hidden-xs">
@@ -89,34 +95,69 @@
 
     </div>
 
-    <!-- Favorites List on the side -->
+    <div ng-if="ctrl.playlistModal">
+        <div playlist-modal message="{{ctrl.successMessage}}"></div>
+    </div>
+
     <div class="col-md-3">
-        <div ng-if="ctrl.favorites.length > 0">
-            <div class="card">
-                <div class="card-red panel-body">
-                    <span class="fa fa-star-o"> Favorite Artists</span>
+
+        <!-- Favorites List on the side -->
+
+        <div class="card">
+            <div class="card-red panel-body">
+                <span><i class="fa fa-star-o"></i> Favorite Artists</span>
+            </div>
+            <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites track by $index"
+                 ng-click="ctrl.setArtist(artist)">
+                <div class="panel-body" title="{{artist.full_name}}">
+                    <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
+                    <span ng-if="artist.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
+                    {{artist.permalink | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
+                    <a class="fa fa-remove pull-right" style="padding-top: inherit"
+                       ng-click="ctrl.removeFavorite(artist)"></a>
                 </div>
-                <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites track by $index"
-                     ng-click="ctrl.setArtist(artist)">
-                    <div class="panel-body" title="{{artist.full_name}}">
-                        <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                        <span ng-if="artist.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                        {{artist.permalink | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
-                        <a class="fa fa-remove pull-right" style="padding-top: inherit" ng-click="ctrl.removeFavorite(artist)"></a>
-                    </div>
+            </div>
+        </div>
+
+        <!-- Playlist on the side -->
+
+        <div class="card">
+            <div class="card-red panel-body">
+                <a href ng-click="ctrl.createPlaylist()"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
+            </div>
+            <div class="button hover-under-line" ng-repeat="playlist in ctrl.playlists"
+                 ng-click="">
+                <div ng-if="!playlist.isNew" class="panel-body" title="{{playlist.name}}">
+                    <span> {{playlist.name}}</span>
+                    <span class="pull-right">
+                        <span class="badge"> {{playlist.songs.length}} song<span
+                                ng-if="playlist.songs.length !== 1">s</span></span>
+                        <a class="fa fa-remove" style="padding-top: inherit"
+                           ng-click="ctrl.removePlaylist(playlist)"></a>
+                    </span>
+
+                </div>
+                <div ng-if="playlist.isNew" class="panel-body">
+                    <input type="text" class="md-input" ng-model="playlist.name" autofocus>
+                    <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(playlist)"><i
+                            class="fa fa-check-circle"></i> Add
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <script type="text/ng-template" id="customTemplate.html">
-    <a ng-if="match.model.kind === 'user'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
+    <a ng-if="match.model.kind === 'user'"
+       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
         <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
         <span>{{match.model.permalink | limitTo: 40}} <span ng-if="match.model.permalink.length > 40">...</span></span>
         <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
-    <a ng-if="match.model.kind === 'track'" ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
+    <a ng-if="match.model.kind === 'track'"
+       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
         <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
         <span>
             {{match.model.title | limitTo: 29}}
