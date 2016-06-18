@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, PlaylistService) {
+angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, PlaylistService, playlists) {
     var ctrl = this;
     ctrl.currentUser = profile;
+    ctrl.playlists = playlists;
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
@@ -11,9 +12,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         ctrl.showInitList = true;
         ctrl.q = '';
         ctrl.getFavorites();
-        PlaylistService.getPlaylists().$promise.then(function (response) {
-            ctrl.playlists = response;
-        })
     };
 
     ctrl.print = function (obj) {

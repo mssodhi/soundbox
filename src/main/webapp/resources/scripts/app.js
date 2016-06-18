@@ -43,6 +43,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
+                    },
+                    playlists: function (PlaylistService) {
+                        return PlaylistService.getPlaylists().$promise;
                     }
                 }
             })
