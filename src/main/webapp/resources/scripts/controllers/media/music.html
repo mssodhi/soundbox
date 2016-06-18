@@ -4,7 +4,7 @@
         <div ng-include="'resources/scripts/controllers/media/search-bar.html'"></div>
 
         <!-- Message when the there's a technical error -->
-        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12 mt15 pl0">
+        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>Unexpected error occurred fetching tracks for {{ctrl.artist.permalink}}</p>
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.artist.track_count === 0 && !ctrl.showInitList" class="col-md-12 mt15 pl0">
+        <div ng-if="ctrl.artist.track_count === 0 && !ctrl.showInitList" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>No tracks by {{ctrl.artist.permalink}}</p>
@@ -24,42 +24,25 @@
         <!-- Initial songs list by all favorites -->
         <div class="pl0">
 
-            <div class="col-md-12 pl0 pr0 pt15">
+            <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
                 <!-- this div for artist card -->
                 <div ng-if="ctrl.artist && !ctrl.showInitList"
-                     class="mb10 card-sc panel-body card card-purple col-md-7 col-xs-12 pl0 pr0"
-                     style="min-height: 132px">
-                    <div class="col-md-12 mb5">
-                        <span style="font-size: large" class="custom-font"><a ng-href="{{ctrl.artist.permalink_url}}"
-                                                                              target="_blank">{{ctrl.artist.permalink}}</a></span>
-                        <span class="fa fa-2x fa-plus-circle button" ng-click="ctrl.addFavorite(ctrl.artist)"
-                              ng-if="!ctrl.isFavorite(ctrl.artist)"></span><br>
-                    </div>
-
-                    <div class="col-md-1 mr15">
+                     class="mb10 card-sc panel-body pt0 pb0 card card-purple col-md-5 col-sm-6 col-xs-12 pl0 pr0"
+                     style="min-height: 104px">
+                    <div class="mr15 pl0 pr0">
                         <img ng-src="{{ctrl.artist.avatar_url}}"
                              style="height: 100px; width: 100px; display: inline-block">
                         <img ng-if="ctrl.artist.artwork_url === null" height="100px" width="100px"
                              src="resources/images/noImage.jpg">
-                    </div>
 
-                    <div class="col-md-10 ml15 hidden-xs">
-                        <div class="col-md-4 text-center" style="vertical-align: middle">
-                            <h5>{{ctrl.artist.followers_count | number}}</h5>
-                            <p>Followers</p>
-                        </div>
-                        <div class="col-md-4 text-center" style="vertical-align: middle">
-                            <h5>{{ctrl.artist.followings_count | number}}</h5>
-                            <p>Following</p>
-                        </div>
-                        <div class="col-md-4 text-center" style="vertical-align: middle">
-                            <h5>{{ctrl.artist.track_count | number}}</h5>
-                            <p>Tracks</p>
-                        </div>
-                    </div>
+                        <span class="custom-font pl15">
+                            <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink}}</a>
+                        </span>
 
-                    <div class="col-md-10 col-xs-12 ml15 text-center">
-                        <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink_url}}</a>
+                        <i class="fa fa-2x fa-plus-circle button"
+                           ng-click="ctrl.addFavorite(ctrl.artist)"
+                           ng-if="!ctrl.isFavorite(ctrl.artist)">
+                        </i>
                     </div>
                 </div>
 
@@ -68,10 +51,10 @@
                     <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
                 </span>
                     <!-- Filter for both pages-->
-                <span class="pull-right col-md-3 col-xs-12 pl0 pr0">
+                <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10">
                     <input placeholder="Filter by track, artist, plays"
                            ng-model="search" type="text"
-                           class="pull-right col-xs-12 form-control">
+                           class="pull-right col-xs-12 col-sm-6 form-control">
                 </span>
             </div>
 
@@ -80,9 +63,7 @@
 
     </div>
 
-    <div class="col-md-3">
-        <div ng-include="'resources/scripts/controllers/media/favorites-card.html'"></div>
-        <div ng-include="'resources/scripts/controllers/media/playlist-card.html'"></div>
-    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12" ng-include="'resources/scripts/controllers/media/favorites-card.html'"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12" ng-include="'resources/scripts/controllers/media/playlist-card.html'"></div>
 
 </div>
