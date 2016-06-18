@@ -51,7 +51,7 @@
                     <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
                 </span>
                     <!-- Filter for both pages-->
-                <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10">
+                <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
                     <input placeholder="Filter by track, artist, plays"
                            ng-model="search" type="text"
                            class="pull-right col-xs-12 col-sm-6 form-control">

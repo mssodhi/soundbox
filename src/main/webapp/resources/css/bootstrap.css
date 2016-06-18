@@ -1916,6 +1916,11 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     }
 }
 
+.side-card{
+    overflow-y: auto;
+    max-height: 500px;
+}
+
 .spin {
     animation: spin 2s;
     -webkit-animation: spin 2s;
