@@ -1,22 +1,7 @@
 <div class="container-fluid">
     <div ng-init="ctrl.init()" class="col-md-9 pt0">
 
-        <!-- Soundcloud api search-->
-        <div class="col-md-12 col-xs-12 pt0 pl0 pr0">
-            <div class="search-bar col-md-5 col-xs-12 pl0 pr0">
-                <p>Powered by <b>SoundCloud</b></p>
-                <div class="form-group has-feedback">
-                    <input type="text" placeholder="Search" class="col-md-8 col-xs-12 form-control" ng-model="ctrl.q"
-                           uib-typeahead="obj as obj.permalink for obj in ctrl.search($viewValue)"
-                           typeahead-on-select="ctrl.selectFromTypeahead($item)"
-                           typeahead-loading="loading"
-                           typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
-                    <i ng-if="loading" class="pt10 fa fa-spinner spin spinning form-control-feedback"></i>
-                    <i ng-if="!ctrl.showInitList" style="pointer-events: all"
-                       ng-click="ctrl.init()" class="pt10 fa fa-refresh form-control-feedback"></i>
-                </div>
-            </div>
-        </div>
+        <div ng-include="'resources/scripts/controllers/media/search-bar.html'"></div>
 
         <!-- Message when the there's a technical error -->
         <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12 mt15 pl0">
@@ -37,7 +22,7 @@
         </div>
 
         <!-- Initial songs list by all favorites -->
-        <div ng-if="ctrl.tracks.length > 0" class="pl0">
+        <div class="pl0">
 
             <div class="col-md-12 pl0 pr0 pt15">
                 <!-- this div for artist card -->
@@ -79,91 +64,25 @@
                 </div>
 
                 <!-- This for the total track count. Only init page -->
-            <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.showInitList">
-                <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
-            </span>
-                <!-- Filter for both pages-->
-            <span class="pull-right col-md-3 col-xs-12 pl0 pr0">
-                <input placeholder="Filter by track, artist, plays"
-                       ng-model="search" type="text"
-                       class="pull-right col-xs-12 form-control">
-            </span>
+                <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.showInitList && ctrl.tracks">
+                    <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
+                </span>
+                    <!-- Filter for both pages-->
+                <span class="pull-right col-md-3 col-xs-12 pl0 pr0">
+                    <input placeholder="Filter by track, artist, plays"
+                           ng-model="search" type="text"
+                           class="pull-right col-xs-12 form-control">
+                </span>
             </div>
 
-            <div ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
+            <div ng-if="ctrl.tracks.length > 0" ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
         </div>
 
-    </div>
-
-    <div ng-if="ctrl.playlistModal">
-        <div playlist-modal message="{{ctrl.successMessage}}"></div>
     </div>
 
     <div class="col-md-3">
-
-        <!-- Favorites List on the side -->
-
-        <div class="card" draggable>
-            <div class="card-red panel-body">
-                <span><i class="fa fa-star-o"></i> Favorite Artists</span>
-            </div>
-            <div class="button hover-under-line" ng-repeat="artist in ctrl.favorites track by $index"
-                 ng-click="ctrl.setArtist(artist)">
-                <div class="panel-body" title="{{artist.full_name}}">
-                    <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                    <span ng-if="artist.artwork_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                    {{artist.permalink | limitTo: 70}} <span ng-if="artist.full_name.length > 70"> . . . </span>
-                    <a class="fa fa-remove pull-right" style="padding-top: inherit"
-                       ng-click="ctrl.removeFavorite(artist)"></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Playlist on the side -->
-
-        <div class="card" draggable>
-            <div class="card-purple panel-body">
-                <a href ng-click="ctrl.createPlaylist()"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
-            </div>
-            <div class="button hover-under-line" ng-repeat="playlist in ctrl.playlists"
-                 ng-click="">
-                <div ng-if="!playlist.isNew" class="panel-body" title="{{playlist.name}}">
-                    <span> {{playlist.name}}</span>
-                    <span class="pull-right">
-                        <span class="badge mr5" style="background-color: coral; font-size: medium;"> {{playlist.songs.length}} song<span
-                                ng-if="playlist.songs.length !== 1">s</span></span>
-                        <a class="fa fa-remove" style="padding-top: inherit"
-                           ng-click="ctrl.removePlaylist(playlist)"></a>
-                    </span>
-                </div>
-                <div ng-if="playlist.isNew" class="panel-body">
-                    <input type="text" class="md-input" ng-model="playlist.name" autofocus>
-                    <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(playlist)"><i
-                            class="fa fa-check-circle"></i> Add
-                    </button>
-                </div>
-            </div>
-        </div>
+        <div ng-include="'resources/scripts/controllers/media/favorites-card.html'"></div>
+        <div ng-include="'resources/scripts/controllers/media/playlist-card.html'"></div>
     </div>
 
 </div>
-
-<script type="text/ng-template" id="customTemplate.html">
-    <a ng-if="match.model.kind === 'user'"
-       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
-        <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
-        <span>{{match.model.permalink | limitTo: 40}} <span ng-if="match.model.permalink.length > 40">...</span></span>
-        <i class="pull-right fa fa-user custom-green pt15"></i>
-    </a>
-    <a ng-if="match.model.kind === 'track'"
-       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
-        <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
-        <span>
-            {{match.model.title | limitTo: 29}}
-            <span ng-if="match.model.title.length > 29">...</span> -
-            {{match.model.user.permalink | limitTo: 10}}
-            <span ng-if="match.model.user.permalink.length > 10">...</span>
-        </span>
-        <i class="pull-right fa fa-music custom-orange pt15"></i>
-    </a>
-</script>

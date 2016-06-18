@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, $uibModal, PlaylistService) {
+angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, PlaylistService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -11,40 +11,13 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         ctrl.showInitList = true;
         ctrl.q = '';
         ctrl.getFavorites();
-
         PlaylistService.getPlaylists().$promise.then(function (response) {
             ctrl.playlists = response;
         })
     };
 
-    ctrl.addSongToPlaylist = function (song, playlist) {
-        PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
-            ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
-        })        
-
-    };
-
-    ctrl.createPlaylist = function () {
-        var playlist = {
-            name: 'Untitled',
-            isNew: true
-        };
-        ctrl.playlists.push(playlist);
-    };
-
-    ctrl.addPlaylist = function (playlist) {
-        PlaylistService.addPlaylist({name: playlist.name}).$promise.then(function (res) {
-            if(res.id){
-                ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
-                ctrl.playlists.push(res);
-            }
-        })
-    };
-
-    ctrl.removePlaylist = function (playlist) {
-        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
-            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
-        });
+    ctrl.print = function (obj) {
+        console.log(obj);
     };
 
     ctrl.search = function (query) {
@@ -113,7 +86,11 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
                         q: ctrl.artist.permalink
                     }
                 }).success( function (data) {
-                    ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
+                    if(data.length === 0){
+                        ctrl.tracks = [];
+                    }else{
+                        ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
+                    }
                 });
             }else{
                 ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
@@ -131,6 +108,61 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
             var index = ctrl.favorites.indexOf(artist);
             ctrl.favorites.splice(index, 1);
+        });
+    };
+
+    ctrl.showPlaylist = function (playlist) {
+        ctrl.artist = null;
+        ctrl.showInitList = false;
+
+        ctrl.tracks = [];
+        for(var i = 0; i < playlist.songs.length; i++){
+            $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[i].track_id, {
+                params: {
+                    client_id: '0f7c969c815f51078c1de513f666ecdb'
+                }
+            }).success( function (data) {
+                ctrl.tracks.push(data);
+            });
+        }
+    };
+
+    ctrl.addSongToPlaylist = function (song, playlist) {
+        var duplicate = null;
+        for(var i = 0; i < playlist.songs.length; i++){
+            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
+                duplicate = true;
+                break;
+            }
+        }
+        if(!duplicate){
+            PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
+                ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
+            })
+        }
+
+    };
+
+    ctrl.createPlaylist = function () {
+        var playlist = {
+            name: 'Untitled',
+            isNew: true
+        };
+        ctrl.playlists.push(playlist);
+    };
+
+    ctrl.addPlaylist = function (playlist) {
+        PlaylistService.addPlaylist({name: playlist.name}).$promise.then(function (res) {
+            if(res.id){
+                ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
+                ctrl.playlists.push(res);
+            }
+        })
+    };
+
+    ctrl.removePlaylist = function (playlist) {
+        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
+            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
         });
     };
 
