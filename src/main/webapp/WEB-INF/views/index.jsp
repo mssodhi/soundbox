@@ -60,6 +60,7 @@
 <script src="resources/scripts/controllers/music-player/music-player.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
 <script src="resources/scripts/controllers/common/common-modal.js"></script>
+<script src="resources/scripts/controllers/common/search/search-bar.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>

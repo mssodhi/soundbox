@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', function ($http, CredentialsService, FavoritesService, profile, MusicService, PlaylistService, playlists) {
+angular.module('app').controller('MusicCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites) {
+
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.playlists = playlists;
@@ -9,70 +10,18 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     var sb_plays = true;
 
     ctrl.init = function () {
-        ctrl.showInitList = true;
+
+        SC.get('/users/' + $routeParams.permalink).then(function(response){
+            ctrl.artist = response;
+            ctrl.getTracks();
+        });
+
         ctrl.q = '';
         ctrl.getFavorites();
     };
 
     ctrl.print = function (obj) {
         console.log(obj);
-    };
-
-    ctrl.search = function (query) {
-        return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
-            return response.collection;
-        });
-    };
-
-    ctrl.selectFromTypeahead = function (obj) {
-        if(obj.kind === 'user'){
-            ctrl.getSpecificArtist(obj.id);
-        }
-        if(obj.kind === 'track'){
-            ctrl.getSpecificTrack(obj);
-        }
-    };
-    
-    ctrl.getSpecificArtist = function (id) {
-        SC.get('/users/' + id).then(function(response){
-            ctrl.setArtist(response);
-        });
-    };
-
-    ctrl.getSpecificTrack = function (track) {
-        ctrl.getSpecificArtist(track.user.id);
-        ctrl.select(track);
-    };
-
-    ctrl.setArtist = function (artist) {
-        ctrl.artist = artist;
-        ctrl.showInitList = false;
-        ctrl.getTracks();
-    };
-
-    ctrl.select = function (track) {
-        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
-            MusicService.setPlayer(player, track);
-            MusicService.setList(ctrl.tracks);
-        });
-    };
-
-    ctrl.getFavorites = function(){
-        FavoritesService.getFavorites({}).$promise.then(function (response) {
-            ctrl.favorites = [];
-            ctrl.tracks = [];
-            for(var i = 0; i < response.length; i++){
-                SC.get('/users/' + response[i].artist_id).then(function(artist){
-                    ctrl.favorites.push(artist);
-                    SC.get('/tracks', {user_id: artist.id, limit: 500}).then(function (tracks) {
-                        for(var i = 0; i < tracks.length; i++){
-                            ctrl.tracks.push(tracks[i]);
-                        }
-                        ctrl.tracks = _.shuffle(ctrl.tracks);
-                    });
-                });
-            }
-        })
     };
 
     ctrl.getTracks = function () {
@@ -96,6 +45,26 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         });
     };
 
+    ctrl.select = function (track) {
+        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
+            MusicService.setPlayer(player, track);
+            MusicService.setList(ctrl.tracks);
+        });
+    };
+
+    /* ********************************************************** */
+    /*                   Favorites List functions                 */
+    /* ********************************************************** */
+
+    ctrl.getFavorites = function(){
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        }
+    };
+
     ctrl.addFavorite = function(artist){
         FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
             ctrl.favorites.push(artist);
@@ -109,37 +78,14 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
         });
     };
 
-    ctrl.showPlaylist = function (playlist) {
-        ctrl.artist = null;
-        ctrl.showInitList = false;
-
-        ctrl.tracks = [];
-        for(var i = 0; i < playlist.songs.length; i++){
-            $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[i].track_id, {
-                params: {
-                    client_id: '0f7c969c815f51078c1de513f666ecdb'
-                }
-            }).success( function (data) {
-                ctrl.tracks.push(data);
-            });
-        }
+    ctrl.goToArtist = function (artist) {
+        $location.path('/music/' + artist.permalink);
     };
 
-    ctrl.addSongToPlaylist = function (song, playlist) {
-        var duplicate = null;
-        for(var i = 0; i < playlist.songs.length; i++){
-            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
-                duplicate = true;
-                break;
-            }
-        }
-        if(!duplicate){
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
-                ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
-            })
-        }
 
-    };
+    /* ********************************************************** */
+    /*                   Playlist functions                       */
+    /* ********************************************************** */
 
     ctrl.createPlaylist = function () {
         var playlist = {
@@ -159,12 +105,46 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
     };
 
     ctrl.removePlaylist = function (playlist) {
-        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
+        PlaylistService.removePlaylist(playlist).$promise.then(function () {
             ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
         });
     };
 
-    // Util methods
+    ctrl.addSongToPlaylist = function (song, playlist) {
+        var duplicate = null;
+        for(var i = 0; i < playlist.songs.length; i++){
+            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
+                duplicate = true;
+                break;
+            }
+        }
+        if(!duplicate){
+            PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
+                ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
+            })
+        }
+
+    };
+
+    ctrl.showPlaylist = function (playlist) {
+        // ctrl.artist = null;
+        //
+        // ctrl.tracks = [];
+        // for(var i = 0; i < playlist.songs.length; i++){
+        //     $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[i].track_id, {
+        //         params: {
+        //             client_id: '0f7c969c815f51078c1de513f666ecdb'
+        //         }
+        //     }).success( function (data) {
+        //         ctrl.tracks.push(data);
+        //     });
+        // }
+    };
+
+
+    /* ********************************************************** */
+    /*                   Util functions                       */
+    /* ********************************************************** */
 
     ctrl.isPlaying = function (track) {
         var playing = MusicService.getTrack();
@@ -173,7 +153,6 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
                 return 'track-is-playing';
             }
         }
-
     };
 
     ctrl.isFavorite = function (artist) {
@@ -247,5 +226,4 @@ angular.module('app').controller('MusicCtrl', function ($http, CredentialsServic
                 break;
         }
     };
-
 });

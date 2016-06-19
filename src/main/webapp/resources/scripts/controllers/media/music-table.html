@@ -10,7 +10,7 @@
         <th ng-if="ctrl.artist" ng-click="ctrl.sort('date')" class="button hidden-xs">Date <i class="fa fa-sort"></i></th>
     </tr>
     </thead>
-    <tbody ng-repeat="song in ctrl.tracks | filter: search track by song.id" title="{{song.title}}">
+    <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery track by song.id" title="{{song.title}}">
     <tr ng-class="ctrl.isPlaying(song)" class="button" ng-right-click="ctrl.print(song)">
         <td ng-click="ctrl.select(song)"class="hidden-xs">{{$index+1}}</td>
         <td ng-click="ctrl.select(song)">

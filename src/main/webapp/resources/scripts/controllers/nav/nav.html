@@ -1,25 +1,24 @@
 <div ng-controller='NavCtrl as ctrl'>
 
-    <div class="main-nav custom-font" ng-if="ctrl.inApp">
-        <a class="col-xs-12 col-sm-4 col-lg-2" ng-href="#/" style="background-color: #0b97c4">
+    <div class="main-nav pl0 pr0 custom-font" ng-if="ctrl.inApp">
+        <a class="col-md-2 col-xs-12 col-sm-5" ng-href="#/" style="background-color: #0b97c4">
             <h1 class="text-center"><p class="custom-white">{{ctrl.getNavBrandName()}}</p></h1>
         </a>
 
-        <div class="nav-items">
-            <a class="nav-item custom-white" ng-href="#/music"><i class="fa fa-headphones"></i> <span class="hidden-sm hidden-xs">Music</span></a>
-            <a class="nav-item custom-orange" ng-href="#/videos"><i class="fa fa-tv"></i> <span class="hidden-sm hidden-xs">Videos</span></a>
-            <a class="nav-item custom-green" ng-href="#/profile"><i class="fa fa-user"></i> <span class="hidden-sm hidden-xs">Profile</span></a>
+        <div class="nav-items col-md-10 col-xs-12 col-sm-7 pl0 pr0 ml0">
+            <div class="col-md-3">
+                <a class="nav-item custom-orange" ng-href="#/videos"><i class="fa fa-tv"></i> <span class="hidden-sm hidden-xs">Videos</span></a>
+            </div>
+            <div class="col-md-3 pull-left">
+                <a class="nav-item custom-green" ng-href="#/profile"><i class="fa fa-user"></i> <span class="hidden-sm hidden-xs">Profile</span></a>
+            </div>
+            <div class="col-md-8 col-sm-4 pull-right">
+                <a class="nav-item custom-royalBlue pull-right" href ng-click="ctrl.signOut()"><i class="fa fa-sign-out"></i> <span class="hidden-sm hidden-xs">Logout</span></a>
+            </div>
             <!--<a class="nav-item custom-blue" ng-href="#/hot-n-new"><i class="fa fa-fire"></i> <span class="hidden-sm hidden-xs">Hot n New!</span></a>-->
         </div>
     </div>
 
-    <div class="col-md-2 pull-right main-nav-side">
-        <div id="social-nav" class="btn-group pull-right" role="group">
-            <a href="https://www.linkedin.com/in/sodhim" class="btn btn-linkedin hidden-sm hidden-xs">LinkedIn</a>
-            <a href="https://github.com/mssodhi/" class="btn btn-github hidden-sm hidden-xs">GitHub</a>
-            <a ng-click="ctrl.signOut()" ng-if="ctrl.inApp" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
     <br>
 
     <div ng-if="ctrl.inApp">

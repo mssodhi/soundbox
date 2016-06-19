@@ -16,6 +16,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function (UserService) {
                         return UserService.getCurrentUser().$promise;
+                    },
+                    playlists: function (PlaylistService) {
+                        return PlaylistService.getPlaylists().$promise;
                     }
                 }
             }).when('/verify/:code', {
@@ -33,7 +36,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             })
-            .when('/music', {
+            .when('/music/:permalink', {
                 templateUrl: 'resources/scripts/controllers/media/music.html',
                 controller: 'MusicCtrl',
                 controllerAs: 'ctrl',
@@ -46,6 +49,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     playlists: function (PlaylistService) {
                         return PlaylistService.getPlaylists().$promise;
+                    },
+                    favorites: function (FavoritesService) {
+                        return FavoritesService.getFavorites({}).$promise;
                     }
                 }
             })

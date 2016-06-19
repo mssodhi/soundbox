@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <div ng-init="ctrl.init()" class="col-md-9 pt0">
 
-        <div ng-include="'resources/scripts/controllers/media/search-bar.html'"></div>
+        <div ng-include="'resources/scripts/controllers/common/search/search-bar.html'"></div>
 
         <!-- Message when the there's a technical error -->
-        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count && !ctrl.showInitList" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>Unexpected error occurred fetching tracks for {{ctrl.artist.permalink}}</p>
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.artist.track_count === 0 && !ctrl.showInitList" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+        <div ng-if="ctrl.artist.track_count === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>No tracks by {{ctrl.artist.permalink}}</p>
@@ -23,10 +23,9 @@
 
         <!-- Initial songs list by all favorites -->
         <div class="pl0">
-
             <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
                 <!-- this div for artist card -->
-                <div ng-if="ctrl.artist && !ctrl.showInitList"
+                <div ng-if="ctrl.artist"
                      class="mb10 card-sc panel-body pt0 pb0 card card-purple col-md-5 col-sm-6 col-xs-12 pl0 pr0"
                      style="min-height: 104px">
                     <div class="mr15 pl0 pr0">
@@ -47,13 +46,13 @@
                 </div>
 
                 <!-- This for the total track count. Only init page -->
-                <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.showInitList && ctrl.tracks">
-                    <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
-                </span>
+                <!--<span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.showInitList && ctrl.tracks">-->
+                    <!--<b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>-->
+                <!--</span>-->
                     <!-- Filter for both pages-->
                 <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
-                    <input placeholder="Filter by track, artist, plays"
-                           ng-model="search" type="text"
+                    <input placeholder="Filter by track name"
+                           ng-model="ctrl.searchQuery" type="text"
                            class="pull-right col-xs-12 col-sm-6 form-control">
                 </span>
             </div>
@@ -63,7 +62,9 @@
 
     </div>
 
-    <div class="col-md-3 col-sm-6 col-xs-12" ng-include="'resources/scripts/controllers/media/favorites-card.html'"></div>
-    <div class="col-md-3 col-sm-6 col-xs-12" ng-include="'resources/scripts/controllers/media/playlist-card.html'"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div ng-include="'resources/scripts/controllers/common/favorites-card.html'"></div>
+        <div ng-include="'resources/scripts/controllers/common/playlist-card.html'"></div>
+    </div>
 
 </div>
