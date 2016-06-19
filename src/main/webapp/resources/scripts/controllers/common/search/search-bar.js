@@ -11,7 +11,7 @@ angular.module('app').controller('SearchBarCtrl', function ($location, MusicServ
 
     ctrl.selectFromTypeahead = function (obj) {
         if(obj.kind === 'user'){
-            $location.path('/music/'+ obj.permalink);
+            $location.path('/artist/'+ obj.permalink);
         }
         if(obj.kind === 'track'){
             ctrl.getSpecificTrack(obj);
@@ -19,7 +19,7 @@ angular.module('app').controller('SearchBarCtrl', function ($location, MusicServ
     };
 
     ctrl.getSpecificTrack = function (track) {
-        $location.path('/music/'+ track.user.permalink);
+        $location.path('/artist/'+ track.user.permalink);
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
             MusicService.setPlayer(player, track);
             MusicService.setList(ctrl.tracks);

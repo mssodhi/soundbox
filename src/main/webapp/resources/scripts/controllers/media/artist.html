@@ -21,6 +21,15 @@
             </div>
         </div>
 
+        <!-- Message when artist not found -->
+        <div ng-if="ctrl.artistNotFound" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+            <div class="card card-red">
+                <div class="panel-body">
+                    <p>No artist found</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Initial songs list by all favorites -->
         <div class="pl0">
             <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
@@ -45,10 +54,6 @@
                     </div>
                 </div>
 
-                <!-- This for the total track count. Only init page -->
-                <!--<span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.showInitList && ctrl.tracks">-->
-                    <!--<b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>-->
-                <!--</span>-->
                     <!-- Filter for both pages-->
                 <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
                     <input placeholder="Filter by track name"
@@ -57,7 +62,7 @@
                 </span>
             </div>
 
-            <div ng-if="ctrl.tracks.length > 0" ng-include="'resources/scripts/controllers/media/music-table.html'"></div>
+            <div ng-if="ctrl.tracks.length > 0" ng-include="'resources/scripts/controllers/common/music-table.html'"></div>
         </div>
 
     </div>

@@ -33,6 +33,11 @@ public class PlaylistServiceImpl extends BaseServiceImpl<Playlist,Integer> imple
     }
 
     @Override
+    public Playlist findById(Integer id){
+        return repository.findById(id);
+    }
+
+    @Override
     public Boolean deletePlaylist(Playlist playlist) {
         try {
             repository.delete(playlist);

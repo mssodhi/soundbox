@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('MusicCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites) {
+angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -10,27 +10,39 @@ angular.module('app').controller('MusicCtrl', function ($http, $location, $route
     var sb_plays = true;
 
     ctrl.init = function () {
-
+        ctrl.artistNotFound = false;
+        
+        // get tracks by user
         SC.get('/users/' + $routeParams.permalink).then(function(response){
             ctrl.artist = response;
-            ctrl.getTracks();
+            ctrl.getTracks(response);
+        }).catch(function (error) {
+            if(error.status === 404){
+                ctrl.artistNotFound = true;
+            }
         });
 
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        }
+
         ctrl.q = '';
-        ctrl.getFavorites();
     };
 
     ctrl.print = function (obj) {
         console.log(obj);
     };
 
-    ctrl.getTracks = function () {
-        SC.get('/tracks', {user_id: ctrl.artist.permalink, limit: 500}).then(function (response) {
+    ctrl.getTracks = function (artist) {
+        SC.get('/tracks', {user_id: artist.permalink, limit: 500}).then(function (response) {
             if(response.length === 0){
                 $http.get('http://api.soundcloud.com/tracks', {
                     params: {
                         client_id: '0f7c969c815f51078c1de513f666ecdb',
-                        q: ctrl.artist.permalink
+                        q: artist.permalink
                     }
                 }).success( function (data) {
                     if(data.length === 0){
@@ -56,15 +68,6 @@ angular.module('app').controller('MusicCtrl', function ($http, $location, $route
     /*                   Favorites List functions                 */
     /* ********************************************************** */
 
-    ctrl.getFavorites = function(){
-        ctrl.favorites = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        }
-    };
-
     ctrl.addFavorite = function(artist){
         FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
             ctrl.favorites.push(artist);
@@ -79,9 +82,8 @@ angular.module('app').controller('MusicCtrl', function ($http, $location, $route
     };
 
     ctrl.goToArtist = function (artist) {
-        $location.path('/music/' + artist.permalink);
+        $location.path('/artist/' + artist.permalink);
     };
-
 
     /* ********************************************************** */
     /*                   Playlist functions                       */
@@ -127,23 +129,11 @@ angular.module('app').controller('MusicCtrl', function ($http, $location, $route
     };
 
     ctrl.showPlaylist = function (playlist) {
-        // ctrl.artist = null;
-        //
-        // ctrl.tracks = [];
-        // for(var i = 0; i < playlist.songs.length; i++){
-        //     $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[i].track_id, {
-        //         params: {
-        //             client_id: '0f7c969c815f51078c1de513f666ecdb'
-        //         }
-        //     }).success( function (data) {
-        //         ctrl.tracks.push(data);
-        //     });
-        // }
+        $location.path('playlist/' + playlist.id);
     };
 
-
     /* ********************************************************** */
-    /*                   Util functions                       */
+    /*                   Util functions                           */
     /* ********************************************************** */
 
     ctrl.isPlaying = function (track) {

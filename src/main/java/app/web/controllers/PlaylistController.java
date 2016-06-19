@@ -26,6 +26,11 @@ public class PlaylistController {
         return playlistService.findByUser(currentUser.getId());
     }
 
+    @RequestMapping(value = "getPlaylistById/{id}", method = RequestMethod.GET)
+    public Object getPlaylistById (@PathVariable Integer id) {
+        return playlistService.findById(id);
+    }
+
     @RequestMapping(value = "addPlaylist/{name}", method = RequestMethod.GET)
     public Object addPlaylist(@PathVariable String name) {
         User currentUser = userService.getCurrentUser();

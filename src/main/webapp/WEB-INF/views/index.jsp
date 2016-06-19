@@ -64,7 +64,8 @@
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>
-<script src="resources/scripts/controllers/media/music.js"></script>
+<script src="resources/scripts/controllers/media/artist.js"></script>
+<script src="resources/scripts/controllers/media/playlist.js"></script>
 <script src="resources/scripts/controllers/media/video.js"></script>
 <script src="resources/scripts/controllers/profile/profile.js"></script>
 <%-- Controllers --%>

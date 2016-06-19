@@ -1,21 +1,43 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites) {
+angular.module('app').controller('PlaylistCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites, playlist) {
+
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.playlists = playlists;
+    ctrl.playlist = playlist;
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
 
     ctrl.init = function () {
-        ctrl.showInitList = true;
-        ctrl.q = '';
-        ctrl.getFavorites();
-    };
 
-    ctrl.print = function (obj) {
-        console.log(obj);
+        ctrl.playlistNotFound = false;
+        ctrl.tracks = [];
+
+        if(playlist.id){
+            for(var j = 0; j < playlist.songs.length; j++){
+                $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[j].track_id, {
+                    params: {
+                        client_id: '0f7c969c815f51078c1de513f666ecdb'
+                    }
+                }).success( function (data) {
+                    ctrl.tracks.push(data);
+                });
+            }
+        }else{
+            ctrl.playlistNotFound = true;
+            ctrl.playlist = null;
+        }
+
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        }
+
+        ctrl.q = '';
     };
 
     ctrl.select = function (track) {
@@ -28,27 +50,6 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     /* ********************************************************** */
     /*                   Favorites List functions                 */
     /* ********************************************************** */
-    
-    ctrl.goToArtist = function (artist) {
-        $location.path('/artist/'+ artist.permalink);
-    };
-
-    ctrl.getFavorites = function(){
-        ctrl.favorites = [];
-        ctrl.tracks = [];
-
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: 500}).then(function (tracks) {
-                for(var i = 0; i < tracks.length; i++){
-                    ctrl.tracks.push(tracks[i]);
-                }
-                ctrl.tracks = _.shuffle(ctrl.tracks);
-            });
-        }
-    };
 
     ctrl.removeFavorite = function(artist){
         FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
@@ -56,7 +57,11 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
             ctrl.favorites.splice(index, 1);
         });
     };
-    
+
+    ctrl.goToArtist = function (artist) {
+        $location.path('/artist/' + artist.permalink);
+    };
+
     /* ********************************************************** */
     /*                   Playlist functions                       */
     /* ********************************************************** */
@@ -79,7 +84,7 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     };
 
     ctrl.removePlaylist = function (playlist) {
-        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
+        PlaylistService.removePlaylist(playlist).$promise.then(function () {
             ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
         });
     };
@@ -115,7 +120,6 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
                 return 'track-is-playing';
             }
         }
-
     };
 
     ctrl.milliToTime = function (milli) {
@@ -180,5 +184,4 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
                 break;
         }
     };
-
 });

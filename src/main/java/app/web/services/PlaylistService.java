@@ -17,4 +17,6 @@ public interface PlaylistService extends BaseService<Playlist, Integer> {
 
     PlaylistSong savePlayListSong(PlaylistSong playlistSong);
 
+    Playlist findById(Integer id);
+
 }

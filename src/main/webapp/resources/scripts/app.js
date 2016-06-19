@@ -19,14 +19,16 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     playlists: function (PlaylistService) {
                         return PlaylistService.getPlaylists().$promise;
+                    },
+                    favorites: function (FavoritesService) {
+                        return FavoritesService.getFavorites({}).$promise;
                     }
                 }
             }).when('/verify/:code', {
                 templateUrl: 'resources/scripts/controllers/verify/verify.html',
                 controller: 'VerifyCtrl',
                 controllerAs: 'ctrl'
-            })
-            .when('/deny',
+            }).when('/deny',
             {
                 templateUrl: 'resources/scripts/controllers/deny/deny.html',
                 caseInsensitiveMatch: true,
@@ -35,10 +37,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return PermissionService.permissionCheck();
                     }
                 }
-            })
-            .when('/music/:permalink', {
-                templateUrl: 'resources/scripts/controllers/media/music.html',
-                controller: 'MusicCtrl',
+            }).when('/artist/:permalink', {
+                templateUrl: 'resources/scripts/controllers/media/artist.html',
+                controller: 'ArtistCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
@@ -54,8 +55,28 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return FavoritesService.getFavorites({}).$promise;
                     }
                 }
-            })
-            .when('/videos', {
+            }).when('/playlist/:id', {
+                templateUrl: 'resources/scripts/controllers/media/playlist.html',
+                controller: 'PlaylistCtrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
+                    },
+                    playlists: function (PlaylistService) {
+                        return PlaylistService.getPlaylists().$promise;
+                    },
+                    favorites: function (FavoritesService) {
+                        return FavoritesService.getFavorites({}).$promise;
+                    },
+                    playlist: function (PlaylistService, $route) {
+                        return PlaylistService.getPlaylistById({id: $route.current.params.id}).$promise;
+                    }
+                }
+            }).when('/videos', {
                 templateUrl: 'resources/scripts/controllers/media/video.html',
                 controller: 'VideoCtrl',
                 controllerAs: 'ctrl',
@@ -67,8 +88,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
-            })
-            .when('/profile', {
+            }).when('/profile', {
                 templateUrl: 'resources/scripts/controllers/profile/profile.html',
                 controller: 'ProfileCtrl',
                 controllerAs: 'ctrl',
@@ -80,8 +100,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
-            })
-            .when('/hot-n-new', {
+            }).when('/hot-n-new', {
                 templateUrl: 'resources/scripts/controllers/hot-n-new/hot-n-new.html',
                 controller: 'Hot-n-New-Ctrl',
                 controllerAs: 'ctrl',
@@ -93,8 +112,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
-            })
-            .when('/login', {
+            }).when('/login', {
                 templateUrl: 'resources/scripts/controllers/login/login.html',
                 controller: 'LoginCtrl',
                 controllerAs: 'ctrl',
@@ -103,8 +121,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
-            })
-            .otherwise({
+            }).otherwise({
                 redirectTo: '/deny'
             });
     });
