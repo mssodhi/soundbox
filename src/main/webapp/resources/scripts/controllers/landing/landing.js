@@ -36,12 +36,20 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     ctrl.getFavorites = function(){
         ctrl.favorites = [];
         ctrl.tracks = [];
+        var limit = 0;
+        if(favorites.length < 10){
+            limit = 20
+        }else if(favorites.length > 50){
+            limit = 10;
+        }else{
+            limit = 15;
+        }
 
         for(var i = 0; i < favorites.length; i++){
             SC.get('/users/' + favorites[i].artist_id).then(function(artist){
                 ctrl.favorites.push(artist);
             });
-            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: 500}).then(function (tracks) {
+            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
                 for(var i = 0; i < tracks.length; i++){
                     ctrl.tracks.push(tracks[i]);
                 }
@@ -61,21 +69,14 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
-    ctrl.createPlaylist = function () {
-        var playlist = {
-            name: 'Untitled',
-            isNew: true
-        };
-        ctrl.playlists.push(playlist);
-    };
-
-    ctrl.addPlaylist = function (playlist) {
-        PlaylistService.addPlaylist({name: playlist.name}).$promise.then(function (res) {
+    ctrl.addPlaylist = function (name) {
+        PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
             if(res.id){
-                ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
                 ctrl.playlists.push(res);
             }
-        })
+            name = undefined;
+        });
+
     };
 
     ctrl.removePlaylist = function (playlist) {

@@ -97,13 +97,14 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
         ctrl.playlists.push(playlist);
     };
 
-    ctrl.addPlaylist = function (playlist) {
-        PlaylistService.addPlaylist({name: playlist.name}).$promise.then(function (res) {
+    ctrl.addPlaylist = function (name) {
+        PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
             if(res.id){
-                ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
                 ctrl.playlists.push(res);
             }
-        })
+            name = undefined;
+        });
+
     };
 
     ctrl.removePlaylist = function (playlist) {

@@ -1,27 +1,25 @@
-<div class="card side-card" draggable>
+<div class="card side-card panel-default" draggable>
     <div class="card-purple panel-body">
-        <a href ng-click="ctrl.createPlaylist()"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
+        <a href ng-click="ctrl.showPlaylistForm = true;"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
+    </div>
+    <div ng-if="ctrl.showPlaylistForm" class="panel-body">
+        <input type="text" class="md-input" ng-model="name" ng-enter="ctrl.addPlaylist(name)" autofocus>
+        <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false;"><i
+                class="fa fa-check-circle"></i> Add
+        </button>
     </div>
     <div class="button" ng-right-click="ctrl.print(playlist)" ng-repeat="playlist in ctrl.playlists">
         <div ng-if="!playlist.isNew" class="panel-body" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)"
              ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
-
             <span class="col-xs-8 pr0 pl0"> {{playlist.name}}</span>
             <span class="pull-right col-xs-4 pl0 pr0">
                 <span class="badge mr5"
                       style="background-color: coral; font-size: medium;"> {{playlist.songs.length}} song<span ng-if="playlist.songs.length !== 1">s</span>
                 </span>
-                <a ng-if="playlist.showOptions" class="fa fa-trash-o pl15" style="padding-top: inherit"
+                <a ng-if="playlist.showOptions" class="fa fa-trash-o pl15" style="padding-top: inheritr"
                    ng-click="ctrl.removePlaylist(playlist)"></a>
             </span>
 
-        </div>
-
-        <div ng-if="playlist.isNew" class="panel-body">
-            <input type="text" class="md-input" ng-model="playlist.name" ng-enter="ctrl.addPlaylist(playlist)" autofocus>
-            <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(playlist)"><i
-                    class="fa fa-check-circle"></i> Add
-            </button>
         </div>
     </div>
 </div>
