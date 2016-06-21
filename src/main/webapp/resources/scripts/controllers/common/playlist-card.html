@@ -2,7 +2,7 @@
     <div class="card-purple panel-body">
         <a href ng-click="ctrl.createPlaylist()"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
     </div>
-    <div class="button hover-under-line" ng-right-click="ctrl.print(playlist)" ng-repeat="playlist in ctrl.playlists">
+    <div class="button" ng-right-click="ctrl.print(playlist)" ng-repeat="playlist in ctrl.playlists">
         <div ng-if="!playlist.isNew" class="panel-body" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)"
              ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
 

@@ -7169,7 +7169,7 @@ button.list-group-item-danger.active:focus {
 }
 
 tr.button:hover{
-    border-bottom: 4px solid cornflowerblue;
+    background-color: lightgray;
 }
 
 .track-is-playing {
