@@ -11,19 +11,17 @@
             </div>
 
             <a ng-click="ctrl.openModal()" id="loginBtn" class="btn btn-pill">Login </a>
+
         </div>
     </div>
 
     <div class="page-two text-center custom-font" hidden>
-
-        <div class="col-md-4 custom-royalBlue">
-            <h1>Tools</h1>
-        </div>
-        <div class="col-md-4 custom-blue">
-            <h1>Tips</h1>
-        </div>
-        <div class="col-md-4 custom-purple">
-            <h1>Popular</h1>
+        <div style="height: 305px">
+            <uib-carousel active="ctrl.active" interval="ctrl.myInterval">
+                <uib-slide ng-repeat="slide in ctrl.slides track by slide.id" index="slide.id">
+                    <div ng-include="slide.url"></div>
+                </uib-slide>
+            </uib-carousel>
         </div>
     </div>
 
