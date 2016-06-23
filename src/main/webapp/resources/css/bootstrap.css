@@ -1918,7 +1918,7 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
 .side-card{
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 455px;
 }
 
 .spin {

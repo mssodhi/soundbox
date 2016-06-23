@@ -17,9 +17,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     profile: function (UserService) {
                         return UserService.getCurrentUser().$promise;
                     },
-                    playlists: function (PlaylistService) {
-                        return PlaylistService.getPlaylists().$promise;
-                    },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
                     }
@@ -48,9 +45,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
                     },
-                    playlists: function (PlaylistService) {
-                        return PlaylistService.getPlaylists().$promise;
-                    },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
                     }
@@ -65,9 +59,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
-                    },
-                    playlists: function (PlaylistService) {
-                        return PlaylistService.getPlaylists().$promise;
                     },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;

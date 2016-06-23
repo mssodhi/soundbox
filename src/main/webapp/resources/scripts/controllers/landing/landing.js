@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, playlists, favorites) {
+angular.module('app').controller('LandingCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, favorites, $interval) {
     var ctrl = this;
     ctrl.currentUser = profile;
-    ctrl.playlists = playlists;
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
@@ -12,6 +11,8 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
         ctrl.showInitList = true;
         ctrl.q = '';
         ctrl.getFavorites();
+        getPlaylists();
+        $interval(getPlaylists, 2000);
     };
 
     ctrl.print = function (obj) {
@@ -64,31 +65,17 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
             ctrl.favorites.splice(index, 1);
         });
     };
-    
+
     /* ********************************************************** */
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
-    ctrl.focus = function (e) {
-        e.target.focus();
-    };
-
-    ctrl.addPlaylist = function (name) {
-        PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
-            if(res.id){
-                ctrl.playlists.push(res);
-            }
-            name = undefined;
-        });
-
-    };
-
-    ctrl.removePlaylist = function (playlist) {
-        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
-            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
-        });
-    };
-
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
+        })
+    }
+    
     ctrl.addSongToPlaylist = function (song, playlist) {
         var duplicate = null;
         for(var i = 0; i < playlist.songs.length; i++){
@@ -97,16 +84,9 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
                 break;
             }
         }
-        if(!duplicate){
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
-                ctrl.playlists[ctrl.playlists.indexOf(playlist)] = response;
-            })
+        if(!duplicate) {
+            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
         }
-
-    };
-
-    ctrl.showPlaylist = function (playlist) {
-        $location.path('playlist/' + playlist.id);
     };
 
     /* ********************************************************** */
