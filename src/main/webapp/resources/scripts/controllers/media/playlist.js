@@ -51,6 +51,10 @@ angular.module('app').controller('PlaylistCtrl', function ($http, $location, Fav
     /*                   Favorites List functions                 */
     /* ********************************************************** */
 
+    ctrl.focus = function (e) {
+        e.target.focus();
+    };
+    
     ctrl.removeFavorite = function(artist){
         FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
             var index = ctrl.favorites.indexOf(artist);

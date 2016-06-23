@@ -89,6 +89,10 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
+    ctrl.focus = function (e) {
+        e.target.focus();
+    };
+    
     ctrl.createPlaylist = function () {
         var playlist = {
             name: 'Untitled',

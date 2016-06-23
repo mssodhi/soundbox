@@ -52,6 +52,7 @@
 <script src="resources/scripts/directives/music-player.js"></script>
 <script src="resources/scripts/directives/draggable.js"></script>
 <script src="resources/scripts/directives/ng-right-click.js"></script>
+<script src="resources/scripts/directives/auto-focus.js"></script>
 <%-- Directive --%>
 
 <%-- Controllers --%>

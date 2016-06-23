@@ -69,6 +69,10 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
+    ctrl.focus = function (e) {
+        e.target.focus();
+    };
+
     ctrl.addPlaylist = function (name) {
         PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
             if(res.id){
