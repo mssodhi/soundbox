@@ -6,7 +6,15 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
-
+    var limit = 0;
+    if(favorites.length < 10){
+        limit = 20
+    }else if(favorites.length > 50){
+        limit = 10;
+    }else{
+        limit = 15;
+    }
+    
     ctrl.init = function () {
         ctrl.showInitList = true;
         ctrl.q = '';
@@ -32,15 +40,6 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     
     ctrl.getFavorites = function(){
         ctrl.tracks = [];
-        var limit = 0;
-        if(favorites.length < 10){
-            limit = 20
-        }else if(favorites.length > 50){
-            limit = 10;
-        }else{
-            limit = 15;
-        }
-
         for(var i = 0; i < favorites.length; i++){
             SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
                 for(var i = 0; i < tracks.length; i++){
