@@ -30,12 +30,7 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     /*                   Favorites List functions                 */
     /* ********************************************************** */
     
-    ctrl.goToArtist = function (artist) {
-        $location.path('/artist/'+ artist.permalink);
-    };
-
     ctrl.getFavorites = function(){
-        ctrl.favorites = [];
         ctrl.tracks = [];
         var limit = 0;
         if(favorites.length < 10){
@@ -47,9 +42,6 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
         }
 
         for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
             SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
                 for(var i = 0; i < tracks.length; i++){
                     ctrl.tracks.push(tracks[i]);
@@ -57,13 +49,6 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
                 ctrl.tracks = _.shuffle(ctrl.tracks);
             });
         }
-    };
-
-    ctrl.removeFavorite = function(artist){
-        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
-            var index = ctrl.favorites.indexOf(artist);
-            ctrl.favorites.splice(index, 1);
-        });
     };
 
     /* ********************************************************** */

@@ -76,17 +76,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
         });
     };
 
-    ctrl.removeFavorite = function(artist){
-        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
-            var index = ctrl.favorites.indexOf(artist);
-            ctrl.favorites.splice(index, 1);
-        });
-    };
-
-    ctrl.goToArtist = function (artist) {
-        $location.path('/artist/' + artist.permalink);
-    };
-
     /* ********************************************************** */
     /*                   Playlist functions                       */
     /* ********************************************************** */
