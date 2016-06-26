@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery track by song.id" title="{{song.title}}">
-    <tr ng-class="ctrl.isPlaying(song)" class="button" ng-right-click="ctrl.print(song)">
+    <tr ng-class="ctrl.isPlaying(song)" class="button">
         <td ng-click="ctrl.select(song)"class="hidden-xs">{{$index+1}}</td>
         <td ng-click="ctrl.select(song)">
             <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">

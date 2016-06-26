@@ -11,8 +11,6 @@ public interface FavoritesService extends BaseService<Favorites, Integer> {
 
     List<Favorites> getByEmail(String email);
 
-    String toSimpleJson(Favorites id);
-
     String toSimpleJson(List<Favorites> favoritesList);
 
     Favorites findByEmailAndArtist(String email, String artist);

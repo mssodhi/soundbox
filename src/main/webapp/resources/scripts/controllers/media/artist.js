@@ -1,36 +1,48 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, favorites, profile, MusicService, PlaylistService) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
-    ctrl.favorites = []
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
 
     ctrl.init = function () {
+        ctrl.q = '';
+        validateArtist();
+        getPlaylists();
+        getFavorites();
+    };
+
+    function validateArtist () {
         ctrl.artistNotFound = false;
-        
         // get tracks by user
         SC.get('/users/' + $routeParams.permalink).then(function(response){
             ctrl.artist = response;
-            ctrl.getTracks(response);
+            getTracks(response);
         }).catch(function (error) {
             if(error.status === 404){
                 ctrl.artistNotFound = true;
             }
         });
+    }
 
-        ctrl.q = '';
-        
-        getPlaylists();
-    };
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
+        });
+    }
 
-    ctrl.print = function (obj) {
-        console.log(obj);
-    };
+    function getFavorites() {
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        }
+    }
 
-    ctrl.getTracks = function (artist) {
+    function getTracks (artist) {
         SC.get('/tracks', {user_id: artist.permalink, limit: 500}).then(function (response) {
             if(response.length === 0){
                 $http.get('http://api.soundcloud.com/tracks', {
@@ -49,7 +61,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
                 ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
             }
         });
-    };
+    }
 
     ctrl.select = function (track) {
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
@@ -63,21 +75,17 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
     /* ********************************************************** */
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({}, artist.id);
+        FavoritesService.addFavorite({}, artist.id).$promise.then(function (response) {
+            SC.get('/users/' + response.artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        });
     };
 
     /* ********************************************************** */
     /*                   Playlist functions                       */
     /* ********************************************************** */
-
-    function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
-            ctrl.playlists = response;
-        });
-        FavoritesService.getFavorites().$promise.then(function (response) {
-            ctrl.favorites = response;
-        })
-    }
+    
     
     ctrl.addSongToPlaylist = function (song, playlist) {
         var duplicate = null;
@@ -107,12 +115,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
     };
 
     ctrl.isFavorite = function (artist) {
-        for(var i = 0; i < ctrl.favorites.length; i++){
-            if(ctrl.favorites[i].artist_id == artist.id){
-                return true;
-            }
-        }
-        return false;
+        return _.some(ctrl.favorites, {id: artist.id});
     };
 
     ctrl.milliToTime = function (milli) {

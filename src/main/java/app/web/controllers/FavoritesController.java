@@ -35,7 +35,7 @@ public class FavoritesController {
     }
 
     @RequestMapping(value = "addFavorite", method = RequestMethod.PUT)
-    public String addFavorite(@RequestBody String artist_id){
+    public Object addFavorite(@RequestBody String artist_id){
 
         User currentUser = userService.getCurrentUser();
 
@@ -45,7 +45,7 @@ public class FavoritesController {
             favorites.setUser(currentUser);
             favorites.setUser_email(currentUser.getEmail());
             favorites.setArtist_id(artist_id);
-            return favoritesService.toSimpleJson(favoritesService.save(favorites));
+            return favoritesService.save(favorites);
         }else{
             return null;
         }

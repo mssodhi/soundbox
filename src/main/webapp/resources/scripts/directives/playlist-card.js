@@ -12,7 +12,7 @@ angular.module('app').component('playlistCard', {
 angular.module('app').controller('PlaylistCardCtrl', function (PlaylistService, $location) {
 
     var ctrl = this;
-
+    
     ctrl.focus = function (e) {
         e.target.focus();
     };

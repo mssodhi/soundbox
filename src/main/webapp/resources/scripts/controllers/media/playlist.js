@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('PlaylistCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, favorites, playlist) {
+angular.module('app').controller('PlaylistCtrl', function ($http, $location, profile, MusicService, PlaylistService, favorites, playlist) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -10,10 +10,15 @@ angular.module('app').controller('PlaylistCtrl', function ($http, $location, Fav
     var sb_plays = true;
 
     ctrl.init = function () {
+        ctrl.q = '';
+        validateAndGetTracks();
+        getPlaylists();
+        getFavorites();
+    };
 
+    function validateAndGetTracks() {
         ctrl.playlistNotFound = false;
         ctrl.tracks = [];
-
         if(playlist.id){
             for(var j = 0; j < playlist.songs.length; j++){
                 $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[j].track_id, {
@@ -28,18 +33,22 @@ angular.module('app').controller('PlaylistCtrl', function ($http, $location, Fav
             ctrl.playlistNotFound = true;
             ctrl.playlist = null;
         }
+    }
 
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
+        });
+    }
+
+    function getFavorites() {
         ctrl.favorites = [];
         for(var i = 0; i < favorites.length; i++){
             SC.get('/users/' + favorites[i].artist_id).then(function(artist){
                 ctrl.favorites.push(artist);
             });
         }
-
-        ctrl.q = '';
-
-        getPlaylists();
-    };
+    }
 
     ctrl.select = function (track) {
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
@@ -52,12 +61,6 @@ angular.module('app').controller('PlaylistCtrl', function ($http, $location, Fav
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
-    function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
-            ctrl.playlists = response;
-        })
-    }
-    
     ctrl.addSongToPlaylist = function (song, playlist) {
         var duplicate = null;
         for(var i = 0; i < playlist.songs.length; i++){

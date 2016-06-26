@@ -1,31 +1,49 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function ($http, $location, FavoritesService, profile, MusicService, PlaylistService, favorites) {
+angular.module('app').controller('LandingCtrl', function ($http, $location, profile, MusicService, PlaylistService, favorites) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
-    var limit = 0;
-    if(favorites.length < 10){
-        limit = 20
-    }else if(favorites.length > 50){
-        limit = 10;
-    }else{
-        limit = 15;
-    }
-    
+    var limit = null;
     ctrl.init = function () {
         ctrl.showInitList = true;
         ctrl.q = '';
-        ctrl.getFavorites();
+
+        if(favorites.length < 10){
+            limit = 20
+        }else if(favorites.length > 50){
+            limit = 10;
+        }else{
+            limit = 15;
+        }
+        
         getPlaylists();
-        // $interval(getPlaylists, 2000);
+        getFavorites();
     };
 
-    ctrl.print = function (obj) {
-        console.log(obj);
-    };
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
+        });
+    }
+
+    function getFavorites() {
+        ctrl.tracks = [];
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
+                for(var i = 0; i < tracks.length; i++){
+                    ctrl.tracks.push(tracks[i]);
+                }
+                ctrl.tracks = _.shuffle(ctrl.tracks);
+            });
+        }
+    }
 
     ctrl.select = function (track) {
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
@@ -35,31 +53,9 @@ angular.module('app').controller('LandingCtrl', function ($http, $location, Favo
     };
 
     /* ********************************************************** */
-    /*                   Favorites List functions                 */
-    /* ********************************************************** */
-    
-    ctrl.getFavorites = function(){
-        ctrl.tracks = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
-                for(var i = 0; i < tracks.length; i++){
-                    ctrl.tracks.push(tracks[i]);
-                }
-                ctrl.tracks = _.shuffle(ctrl.tracks);
-            });
-        }
-    };
-
-    /* ********************************************************** */
     /*                   Playlist functions                       */
     /* ********************************************************** */
 
-    function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
-            ctrl.playlists = response;
-        })
-    }
-    
     ctrl.addSongToPlaylist = function (song, playlist) {
         var duplicate = null;
         for(var i = 0; i < playlist.songs.length; i++){

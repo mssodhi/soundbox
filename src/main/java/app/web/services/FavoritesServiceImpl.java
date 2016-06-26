@@ -31,26 +31,6 @@ public class FavoritesServiceImpl extends BaseServiceImpl<Favorites, Integer> im
     }
 
     @Override
-    public String toSimpleJson(Favorites favorites) {
-        try {
-            StringWriter sw = new StringWriter();
-
-            JsonFactory factory = new JsonFactory();
-            JsonGenerator json = factory.createGenerator(sw);
-
-            json.writeStartObject();
-            json.writeNumberField("id", favorites.getId());
-
-            json.writeEndObject();
-            json.close();
-
-            return sw.toString();
-        } catch (Exception e) {
-            throw new DataBindingException(e);
-        }
-    }
-
-    @Override
     public String toSimpleJson(List<Favorites> favoritesList) {
 
         try {
