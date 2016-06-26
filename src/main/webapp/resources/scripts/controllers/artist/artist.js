@@ -74,11 +74,8 @@ angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, Fa
     /* ********************************************************** */
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({}, artist.id).$promise.then(function (response) {
-            SC.get('/users/' + response.artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        });
+        FavoritesService.addFavorite({}, artist.id);
+        ctrl.favorites.push(artist);
     };
 
     /* ********************************************************** */
