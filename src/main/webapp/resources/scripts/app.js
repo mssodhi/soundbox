@@ -35,7 +35,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             }).when('/artist/:permalink', {
-                templateUrl: 'resources/scripts/controllers/media/artist.html',
+                templateUrl: 'resources/scripts/controllers/artist/artist.html',
                 controller: 'ArtistCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
@@ -50,7 +50,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             }).when('/playlist/:id', {
-                templateUrl: 'resources/scripts/controllers/media/playlist.html',
+                templateUrl: 'resources/scripts/controllers/playlist/playlist.html',
                 controller: 'PlaylistCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
@@ -68,7 +68,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     }
                 }
             }).when('/videos', {
-                templateUrl: 'resources/scripts/controllers/media/video.html',
+                templateUrl: 'resources/scripts/controllers/video/video.html',
                 controller: 'VideoCtrl',
                 controllerAs: 'ctrl',
                 resolve: {

@@ -34,7 +34,7 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     
     ctrl.register = function(){
         ctrl.emailNotValid = false;
-        if(ctrl.emailValidator(ctrl.email)){
+        if(validateEmail(ctrl.email)){
             ctrl.passwordNotSame = false;
             ctrl.emailTaken = false;
             ctrl.verificationEmailSent = false;
@@ -77,7 +77,7 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
         ctrl.loggedIn = true;
     };
 
-    ctrl.emailValidator = function validateEmail(email) {
+    function validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
