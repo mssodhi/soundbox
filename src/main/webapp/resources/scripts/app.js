@@ -25,8 +25,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 templateUrl: 'resources/scripts/controllers/verify/verify.html',
                 controller: 'VerifyCtrl',
                 controllerAs: 'ctrl'
-            }).when('/deny',
-            {
+            }).when('/deny', {
                 templateUrl: 'resources/scripts/controllers/deny/deny.html',
                 caseInsensitiveMatch: true,
                 resolve: {
@@ -82,18 +81,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
             }).when('/profile', {
                 templateUrl: 'resources/scripts/controllers/profile/profile.html',
                 controller: 'ProfileCtrl',
-                controllerAs: 'ctrl',
-                resolve: {
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck();
-                    },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
-                    }
-                }
-            }).when('/hot-n-new', {
-                templateUrl: 'resources/scripts/controllers/hot-n-new/hot-n-new.html',
-                controller: 'Hot-n-New-Ctrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){

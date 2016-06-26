@@ -162,14 +162,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
                     ctrl.tracks = _.sortBy(ctrl.tracks, 'duration');
                 }
                 break;
-            case 'favorites':
-                sb_count = !sb_count;
-                if(sb_count){
-                    ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count').reverse();
-                }else{
-                    ctrl.tracks = _.sortBy(ctrl.tracks, 'favoritings_count');
-                }
-                break;
             case 'artist':
                 sb_artist = !sb_artist;
                 if(sb_artist){

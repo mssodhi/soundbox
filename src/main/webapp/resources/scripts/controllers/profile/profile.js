@@ -7,7 +7,6 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
 
     ctrl.init = function () {
         ctrl.switchCards('profile');
-        ctrl.adjustProgress();
     };
 
     ctrl.updateSettings = function () {
@@ -42,20 +41,7 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
             ctrl.adjustProgress();
         })
     };
-
-    ctrl.adjustProgress = function() {
-
-        if(ctrl.currentUser.location){
-            ctrl.myStyle = {'width':'100%'};
-            ctrl.progress = '100%';
-            ctrl.myClass = 'progress-bar-complete';
-        }else{
-            ctrl.myStyle = {'width':'60%'};
-            ctrl.progress = '60%';
-            ctrl.myClass = 'progress-bar-incomplete';
-        }
-    };
-
+    
     ctrl.switchCards = function(card){
         if(card == 'profile'){
             ctrl.showProfile = true;

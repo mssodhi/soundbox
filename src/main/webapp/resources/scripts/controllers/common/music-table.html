@@ -3,10 +3,10 @@
         <tr>
             <th class="hidden-xs">#</th>
             <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
-            <th ng-if="ctrl.showInitList" ng-click="ctrl.sort('artist')" class="button">Artist <i class="fa fa-sort"></i></th>
+            <th ng-click="ctrl.sort('artist')" class="button" ng-if="ctrl.showInitList">Artist <i class="fa fa-sort"></i></th>
             <th ng-click="ctrl.sort('plays')" class="button hidden-xs">Plays <i class="fa fa-sort"></i></th>
             <th ng-click="ctrl.sort('duration')" class="button hidden-xs">Duration <i class="fa fa-sort"></i></th>
-            <th ng-if="ctrl.artist" ng-click="ctrl.sort('date')" class="button hidden-xs">Date <i class="fa fa-sort"></i></th>
+            <th ng-click="ctrl.sort('date')" class="button hidden-xs" ng-if="ctrl.artist">Date <i class="fa fa-sort"></i></th>
         </tr>
     </thead>
 
