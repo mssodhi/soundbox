@@ -1,16 +1,13 @@
-<!-- Soundcloud api search-->
-<div ng-controller="SearchBarCtrl as ctrl">
-    <div class="col-md-12 col-xs-12 pt0 pl0 pr0">
-        <div class="search-bar col-md-5 col-xs-12 pl0 pr0">
-            <p>Powered by <b>SoundCloud</b></p>
-            <div class="form-group has-feedback">
-                <input type="text" placeholder="Search" class="col-md-8 col-xs-12 form-control" ng-model="ctrl.q"
-                       uib-typeahead="obj as obj.permalink for obj in ctrl.search($viewValue)"
-                       typeahead-on-select="ctrl.selectFromTypeahead($item)"
-                       typeahead-loading="loading"
-                       typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
-                <i ng-if="loading" class="pt10 fa fa-spinner spin spinning form-control-feedback"></i>
-            </div>
+<div class="col-md-12 col-xs-12 pt0 pl0 pr0">
+    <div class="search-bar col-md-5 col-xs-12 pl0 pr0">
+        <p>Powered by <b>SoundCloud</b></p>
+        <div class="form-group has-feedback">
+            <input type="text" placeholder="Search" class="col-md-8 col-xs-12 form-control" ng-model="ctrl.q"
+                   uib-typeahead="obj as obj.permalink for obj in ctrl.search($viewValue)"
+                   typeahead-on-select="ctrl.selectFromTypeahead($item)"
+                   typeahead-loading="loading"
+                   typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
+            <i ng-if="loading" class="pt10 fa fa-spinner spin spinning form-control-feedback"></i>
         </div>
     </div>
 </div>

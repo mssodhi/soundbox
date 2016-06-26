@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app').component("favoritesCard", {
-    templateUrl: 'resources/scripts/controllers/common/favorites/favorites-card.html',
+    templateUrl: 'resources/scripts/components/favorites/favorites-card.html',
     controller: 'FavoritesCardCtrl',
     controllerAs: 'ctrl',
     bindings: {

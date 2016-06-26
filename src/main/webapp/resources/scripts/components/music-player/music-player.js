@@ -1,11 +1,9 @@
 'use strict';
 
-angular.module('app').directive('musicPlayer', function() {
-    return{
-        templateUrl: 'resources/scripts/controllers/common/music-player/music-player.html',
-        controller: 'MusicPlayerCtrl',
-        controllerAs: 'ctrl'
-    };
+angular.module('app').component('musicPlayer', {
+    templateUrl: 'resources/scripts/components/music-player/music-player.html',
+    controller: 'MusicPlayerCtrl',
+    controllerAs: 'ctrl'
 });
 
 angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService) {
