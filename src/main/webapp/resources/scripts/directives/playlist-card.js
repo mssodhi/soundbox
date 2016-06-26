@@ -1,7 +1,13 @@
 'use strict';
 
+angular.module('app').directive('playlistCard', function() {
+    return {
+        templateUrl: 'resources/scripts/controllers/common/playlist/playlist-card.html'
+    };
+});
+
 angular.module('app').controller('PlaylistCardCtrl', function (PlaylistService, $location) {
-    
+
     var ctrl = this;
     PlaylistService.getPlaylists().$promise.then(function (response) {
         ctrl.playlists = response;

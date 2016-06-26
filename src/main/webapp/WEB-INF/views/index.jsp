@@ -47,23 +47,23 @@
 
 <%-- Directive --%>
 <script src="resources/scripts/directives/ng-enter.js"></script>
-<script src="resources/scripts/directives/circle-check.js"></script>
-<script src="resources/scripts/directives/circle-error.js"></script>
-<script src="resources/scripts/directives/music-player.js"></script>
 <script src="resources/scripts/directives/draggable.js"></script>
 <script src="resources/scripts/directives/ng-right-click.js"></script>
 <script src="resources/scripts/directives/auto-focus.js"></script>
+
+<script src="resources/scripts/directives/music-player.js"></script>
+<script src="resources/scripts/directives/favorites-card.js"></script>
+<script src="resources/scripts/directives/playlist-card.js"></script>
+<script src="resources/scripts/directives/circle-check.js"></script>
+<script src="resources/scripts/directives/circle-error.js"></script>
 <%-- Directive --%>
 
 <%-- Controllers --%>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>
-<script src="resources/scripts/controllers/music-player/music-player.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
 <script src="resources/scripts/controllers/common/common-modal.js"></script>
 <script src="resources/scripts/controllers/common/search/search-bar.js"></script>
-<script src="resources/scripts/controllers/common/playlist/playlist-card.js"></script>
-<script src="resources/scripts/controllers/common/favorites/favorites-card.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/hot-n-new/hot-n-new.js"></script>

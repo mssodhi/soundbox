@@ -3,32 +3,23 @@
 
         <div ng-include="'resources/scripts/controllers/common/search/search-bar.html'"></div>
 
-        <!-- Initial songs list by all favorites -->
         <div class="pl0">
-
             <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
-
-                <!-- This for the total track count. Only init page -->
                 <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks">
                     <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
                 </span>
-
-                <!-- Filter for both pages-->
                 <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
                     <input placeholder="Filter by track, artist, plays"
                            ng-model="ctrl.searchQuery" type="text"
                            class="pull-right col-xs-12 col-sm-6 form-control">
                 </span>
             </div>
-
             <div ng-if="ctrl.tracks.length > 0" ng-include="'resources/scripts/controllers/common/music-table.html'"></div>
         </div>
-
     </div>
 
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div ng-include="'resources/scripts/controllers/common/favorites/favorites-card.html'"></div>
-        <div ng-include="'resources/scripts/controllers/common/playlist/playlist-card.html'"></div>
+        <favorites-card favorites=""></favorites-card>
+        <playlist-card playlists=""></playlist-card>
     </div>
-
 </div>

@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, $interval, favorites) {
+angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, $interval) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
-
+    ctrl.favorites = []
     var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
     var sb_plays = true;
 
@@ -20,13 +20,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
                 ctrl.artistNotFound = true;
             }
         });
-
-        ctrl.favorites = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        }
 
         ctrl.q = '';
         
@@ -71,9 +64,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
     /* ********************************************************** */
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({}, artist.id).$promise.then(function(){
-            ctrl.favorites.push(artist);
-        });
+        FavoritesService.addFavorite({}, artist.id);
     };
 
     /* ********************************************************** */
@@ -83,6 +74,9 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
     function getPlaylists() {
         PlaylistService.getPlaylists().$promise.then(function (response) {
             ctrl.playlists = response;
+        });
+        FavoritesService.getFavorites().$promise.then(function (response) {
+            ctrl.favorites = response;
         })
     }
     
@@ -115,7 +109,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
 
     ctrl.isFavorite = function (artist) {
         for(var i = 0; i < ctrl.favorites.length; i++){
-            if(ctrl.favorites[i].id == artist.id){
+            if(ctrl.favorites[i].artist_id == artist.id){
                 return true;
             }
         }
