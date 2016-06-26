@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService, $interval) {
+angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, profile, MusicService, PlaylistService) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -24,7 +24,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $location, $rout
         ctrl.q = '';
         
         getPlaylists();
-        $interval(getPlaylists, 2000);
     };
 
     ctrl.print = function (obj) {

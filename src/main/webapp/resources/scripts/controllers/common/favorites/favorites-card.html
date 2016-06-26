@@ -1,16 +1,14 @@
-<div ng-controller="FavoritesCardCtrl as ctrl" ng-init="ctrl.init()">
-    <div class="card side-card" draggable>
-        <div class="card-red panel-body">
-            <span><i class="fa fa-star-o"></i> Favorite Artists</span>
-        </div>
-        <div class="button" ng-click="ctrl.goToArtist(artist)" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false" ng-repeat="artist in ctrl.favorites track by artist.id">
-            <div class="panel-body" title="{{artist.full_name}}">
-                <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
-                <a ng-if="artist.showOptions" class="fa fa-trash-o pull-right" style="padding-top: inherit"
-                   ng-click="ctrl.removeFavorite(artist)"></a>
-            </div>
+<div class="card side-card" draggable ng-init="ctrl.init()">
+    <div class="card-red panel-body">
+        <span><i class="fa fa-star-o"></i> Favorite Artists</span>
+    </div>
+    <div class="button" ng-click="ctrl.goToArtist(artist)" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false" ng-repeat="artist in ctrl.favorites track by artist.id">
+        <div class="panel-body" title="{{artist.full_name}}">
+            <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
+            <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
+            {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
+            <a ng-if="artist.showOptions" class="fa fa-trash-o pull-right" style="padding-top: inherit"
+               ng-click="ctrl.removeFavorite(artist)"></a>
         </div>
     </div>
 </div>

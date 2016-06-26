@@ -1,34 +1,32 @@
-<div ng-controller="PlaylistCardCtrl as ctrl">
-    <div class="card side-card panel-default" draggable>
-        <div class="card-purple panel-body">
-            <a href ng-click="ctrl.showPlaylistForm = true;"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
-        </div>
-        <div ng-if="ctrl.showPlaylistForm" class="panel-body">
-            <input type="text" class="md-input" ng-click="ctrl.focus($event)" ng-model="name" ng-enter="ctrl.addPlaylist(name)"
-                   auto-focus autofocus="true">
-            <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false;"><i
-                    class="fa fa-check-circle"></i> Add
-            </button>
-        </div>
-        <div ng-if="!playlist.isNew" class="button" ng-right-click="ctrl.print(playlist)" ng-repeat="playlist in ctrl.playlists track by playlist.id"
-             ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
-            <div class="panel-body col-md-10" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
-                <span class="badge" style="background-color: coral; font-size: small"> {{playlist.name}}</span>
-                <!--<span class="pull-right col-xs-4 pl0 pr0">-->
-                    <!--<span class="badge mr5"-->
-                          <!--style="background-color: coral; font-size: medium;"> {{playlist.songs.length}} song<span ng-if="playlist.songs.length !== 1">s</span>-->
-                    <!--</span>-->
+<div class="card side-card panel-default" draggable>
+    <div class="card-purple panel-body">
+        <a href ng-click="ctrl.showPlaylistForm = true;"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
+    </div>
+    <div ng-if="ctrl.showPlaylistForm" class="panel-body">
+        <input type="text" class="md-input" ng-click="ctrl.focus($event)" ng-model="name" ng-enter="ctrl.addPlaylist(name)"
+               auto-focus autofocus="true">
+        <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false;"><i
+                class="fa fa-check-circle"></i> Add
+        </button>
+    </div>
+    <div ng-if="!playlist.isNew" class="button" ng-right-click="ctrl.print(playlist)" ng-repeat="playlist in ctrl.list track by playlist.id"
+         ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
+        <div class="panel-body col-md-10" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
+            <span class="badge" style="background-color: coral; font-size: small"> {{playlist.name}}</span>
+            <!--<span class="pull-right col-xs-4 pl0 pr0">-->
+                <!--<span class="badge mr5"-->
+                      <!--style="background-color: coral; font-size: medium;"> {{playlist.songs.length}} song<span ng-if="playlist.songs.length !== 1">s</span>-->
                 <!--</span>-->
-            </div>
-
-            <div class="col-md-2 pl0 pr0 panel-body pull-right">
-                <div ng-if="playlist.showOptions" class="button" ng-click="ctrl.removePlaylist(playlist)">
-                    <span class="pl0 pr0">
-                        <i class="fa fa-trash-o" style="padding-top: inherit"></i>
-                    </span>
-                </div>
-            </div>
-
+            <!--</span>-->
         </div>
+
+        <div class="col-md-2 pl0 pr0 panel-body pull-right">
+            <div ng-if="playlist.showOptions" class="button" ng-click="ctrl.removePlaylist(playlist)">
+                <span class="pl0 pr0">
+                    <i class="fa fa-trash-o" style="padding-top: inherit"></i>
+                </span>
+            </div>
+        </div>
+
     </div>
 </div>

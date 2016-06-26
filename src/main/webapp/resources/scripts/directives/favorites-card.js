@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('app').directive('favoritesCard', function() {
-    return {
-        templateUrl: 'resources/scripts/controllers/common/favorites/favorites-card.html'
-    };
+angular.module('app').component("favoritesCard", {
+    templateUrl: 'resources/scripts/controllers/common/favorites/favorites-card.html',
+    controller: 'FavoritesCardCtrl',
+    controllerAs: 'ctrl'
 });
 
 angular.module('app').controller('FavoritesCardCtrl', function (FavoritesService, $location) {
-
     var ctrl = this;
     ctrl.favorites = [];
     
@@ -18,7 +17,7 @@ angular.module('app').controller('FavoritesCardCtrl', function (FavoritesService
                     ctrl.favorites.push(artist);
                 });
             }
-        });  
+        });
     };
 
     ctrl.goToArtist = function (artist) {

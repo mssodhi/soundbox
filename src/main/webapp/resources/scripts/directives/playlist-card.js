@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('app').directive('playlistCard', function() {
-    return {
-        templateUrl: 'resources/scripts/controllers/common/playlist/playlist-card.html'
-    };
+angular.module('app').component('playlistCard', {
+    templateUrl: 'resources/scripts/controllers/common/playlist/playlist-card.html',
+    controller: 'PlaylistCardCtrl',
+    controllerAs: 'ctrl',
+    bindings: {
+        list: '='
+    }
 });
 
 angular.module('app').controller('PlaylistCardCtrl', function (PlaylistService, $location) {
 
     var ctrl = this;
-    PlaylistService.getPlaylists().$promise.then(function (response) {
-        ctrl.playlists = response;
-    });
 
     ctrl.focus = function (e) {
         e.target.focus();
@@ -20,7 +20,7 @@ angular.module('app').controller('PlaylistCardCtrl', function (PlaylistService, 
     ctrl.addPlaylist = function (name) {
         PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
             if(res.id){
-                ctrl.playlists.push(res);
+                ctrl.list.push(res);
             }
             name = undefined;
         });
@@ -28,8 +28,8 @@ angular.module('app').controller('PlaylistCardCtrl', function (PlaylistService, 
     };
 
     ctrl.removePlaylist = function (playlist) {
-        PlaylistService.removePlaylist(playlist).$promise.then(function (response) {
-            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
+        PlaylistService.removePlaylist(playlist).$promise.then(function () {
+            ctrl.list.splice(ctrl.list.indexOf(playlist), 1);
         });
     };
 
