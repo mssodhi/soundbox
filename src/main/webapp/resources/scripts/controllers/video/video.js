@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('app').controller('VideoCtrl', function (CredentialsService, profile, $http, $sce) {
+angular.module('app').controller('VideoCtrl', function (CredentialsService, $http, $sce) {
     var ctrl = this;
-    ctrl.currentUser = profile;
     var key;
     ctrl.videosList = [];
 

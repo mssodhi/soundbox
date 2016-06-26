@@ -28,7 +28,6 @@ angular.module('app').controller('SearchBarCtrl', function ($location, MusicServ
         $location.path('/artist/'+ track.user.permalink);
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
             MusicService.setPlayer(player, track);
-            MusicService.setList(ctrl.tracks);
         });
     }
 

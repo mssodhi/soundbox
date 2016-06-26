@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('app').controller('PlaylistCtrl', function ($http, $location, profile, MusicService, PlaylistService, favorites, playlist) {
+angular.module('app').controller('PlaylistCtrl', function ($http, MusicService, PlaylistService, favorites, playlist) {
 
     var ctrl = this;
-    ctrl.currentUser = profile;
     ctrl.playlist = playlist;
 
-    var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
+    var sb_date, sb_title, sb_duration, sb_artist = false;
     var sb_plays = true;
 
     ctrl.init = function () {

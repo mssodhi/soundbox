@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $location, $route, $routeParams, FavoritesService, favorites, profile, MusicService, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, FavoritesService, favorites, MusicService, PlaylistService) {
 
     var ctrl = this;
-    ctrl.currentUser = profile;
-    var sb_date, sb_title, sb_duration, sb_count, sb_artist = false;
+    var sb_date, sb_title, sb_duration, sb_artist = false;
     var sb_plays = true;
 
     ctrl.init = function () {

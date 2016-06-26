@@ -14,9 +14,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
                     },
-                    profile: function (UserService) {
-                        return UserService.getCurrentUser().$promise;
-                    },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
                     }
@@ -41,9 +38,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
                     },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
-                    },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
                     }
@@ -55,9 +49,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 resolve: {
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
-                    },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
                     },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
@@ -73,9 +64,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 resolve: {
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
-                    },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
                     }
                 }
             }).when('/profile', {
