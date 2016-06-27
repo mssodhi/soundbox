@@ -51,6 +51,7 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
                 return pl.id === ctrl.currentplaylist.id;
             });
             ctrl.playlists[ind].songs.length--;
+            ctrl.currentplaylist.songs.length--;
         }
     };
     
