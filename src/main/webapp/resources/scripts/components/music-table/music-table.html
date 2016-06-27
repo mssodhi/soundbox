@@ -27,6 +27,8 @@
                 <div class="pt15 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
                     <ul uib-dropdown-menu>
+                        <li ng-if="ctrl.isplaylist" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
+                        <li ng-if="ctrl.isplaylist" class="divider"></li>
                         <span class="pl15"> Add to Playlist</span>
                         <li class="divider"></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
@@ -35,7 +37,6 @@
                     </ul>
                 </div>
             </td>
-            <td ng-if="ctrl.isplaylist" style="vertical-align: middle"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i></a></td>
         </tr>
     </tbody>
 
