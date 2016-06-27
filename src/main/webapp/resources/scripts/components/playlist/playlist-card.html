@@ -2,7 +2,7 @@
     <!-- Header -->
     <div class="card-purple panel-body" ng-if="!ctrl.showSearch">
         <div class="pull-left custom-font">
-            <span class="pl15" style="font-size: 24px">Playlists</span>
+            <span class="pl10" style="font-size: 24px">Playlists</span>
         </div>
         <div class="pull-right">
             <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
@@ -30,17 +30,19 @@
     </div>
 
     <!-- List of playlists -->
-    <div class="button" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
+    <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
          ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
-        <div class="panel-body col-md-10" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
-            <span class="badge" style="background-color: coral; font-size: 15px"> {{playlist.name}}</span>
+        <div class="panel-body col-md-10 pl0 pr0" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
+            <span class="custom-font"> {{playlist.name}}</span>
         </div>
 
-        <div class="col-md-2 pl0 pr0 panel-body pull-right">
-            <div ng-if="playlist.showOptions" class="button" ng-click="ctrl.removePlaylist(playlist)">
-                <span class="pl0 pr0">
-                    <i class="fa fa-trash-o" style="padding-top: inherit"></i>
-                </span>
+        <div ng-if="playlist.showOptions">
+            <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 50px">
+                <div class="button" ng-click="ctrl.removePlaylist(playlist)">
+                    <span class="pl0 pr0">
+                        <i class="fa fa-trash-o" style="padding-top: inherit"></i>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -15,19 +15,21 @@
         </div>
     </div>
 
-    <div class="button" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
+    <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
          ng-repeat="artist in ctrl.favorites | filter: ctrl.filter track by artist.id">
-        <div class="panel-body col-md-10" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
+        <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
             <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
             <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
             {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
         </div>
 
-        <div class="col-md-2 pl0 pr0 panel-body pull-right">
-            <div ng-if="artist.showOptions" class="button" ng-click="ctrl.removeFavorite(artist)">
+        <div ng-if="artist.showOptions">
+            <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 80px">
+                <div class="button" ng-click="ctrl.removeFavorite(artist)">
                 <span class="pl0 pr0">
                     <i class="fa fa-trash-o pt15"></i>
                 </span>
+                </div>
             </div>
         </div>
     </div>
