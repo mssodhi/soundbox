@@ -59,6 +59,7 @@
 <script src="resources/scripts/components/favorites/favorites-card.js"></script>
 <script src="resources/scripts/components/playlist/playlist-card.js"></script>
 <script src="resources/scripts/components/search/search-bar.js"></script>
+<script src="resources/scripts/components/music-table/music-table.js"></script>
 <%-- Components --%>
 
 <%-- Controllers --%>

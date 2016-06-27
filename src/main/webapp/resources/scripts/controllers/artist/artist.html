@@ -62,7 +62,7 @@
                 </span>
             </div>
 
-            <div ng-if="ctrl.tracks.length > 0" ng-include="'resources/scripts/controllers/common/music-table.html'"></div>
+            <music-table ng-if="ctrl.tracks.length > 0" tracks="ctrl.tracks" showdate="true"></music-table>
         </div>
 
     </div>

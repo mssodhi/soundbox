@@ -3,10 +3,10 @@
         <tr>
             <th class="hidden-xs">#</th>
             <th ng-click="ctrl.sort('title')" class="button">Title <i class="fa fa-sort"></i></th>
-            <th ng-click="ctrl.sort('artist')" class="button" ng-if="ctrl.showInitList">Artist <i class="fa fa-sort"></i></th>
+            <th ng-click="ctrl.sort('artist')" class="button" ng-if="ctrl.showartist">Artist <i class="fa fa-sort"></i></th>
             <th ng-click="ctrl.sort('plays')" class="button hidden-xs">Plays <i class="fa fa-sort"></i></th>
             <th ng-click="ctrl.sort('duration')" class="button hidden-xs">Duration <i class="fa fa-sort"></i></th>
-            <th ng-click="ctrl.sort('date')" class="button hidden-xs" ng-if="ctrl.artist">Date <i class="fa fa-sort"></i></th>
+            <th ng-click="ctrl.sort('date')" class="button hidden-xs" ng-if="ctrl.showdate">Date <i class="fa fa-sort"></i></th>
         </tr>
     </thead>
 
@@ -19,10 +19,10 @@
                 <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
                 <a>{{song.title | limitTo: 30}}<span ng-if="song.title.length > 30">... </span></a>
             </td>
-            <td ng-click="ctrl.select(song)" ng-if="ctrl.showInitList" style="vertical-align: middle"><a ng-href="{{song.user.permalink_url}}" target="_blank">{{song.user.username}}</a></td>
+            <td ng-click="ctrl.select(song)" style="vertical-align: middle" ng-if="ctrl.showartist"><a ng-href="{{song.user.permalink_url}}" target="_blank">{{song.user.username}}</a></td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{song.playback_count | number}}</td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
-            <td ng-click="ctrl.select(song)" ng-if="ctrl.artist" style="vertical-align: middle" class="hidden-xs">{{ctrl.getDate(song.created_at)}}</td>
+            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
             <td ng-if="ctrl.playlists.length > 0">
                 <div class="pt15 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
