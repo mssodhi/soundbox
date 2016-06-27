@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (MusicService, PlaylistService, favorites) {
+angular.module('app').controller('LandingCtrl', function (PlaylistService, favorites) {
     var ctrl = this;
     
     var limit = null;
@@ -42,20 +42,4 @@ angular.module('app').controller('LandingCtrl', function (MusicService, Playlist
         }
     }
 
-    /* ********************************************************** */
-    /*                   Playlist functions                       */
-    /* ********************************************************** */
-
-    ctrl.addSongToPlaylist = function (song, playlist) {
-        var duplicate = null;
-        for(var i = 0; i < playlist.songs.length; i++){
-            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
-                duplicate = true;
-                break;
-            }
-        }
-        if(!duplicate) {
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
-        }
-    };
 });

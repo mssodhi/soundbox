@@ -7,19 +7,29 @@ angular.module('app').component("musicTable", {
     bindings: {
         tracks: '<',
         showartist: '<',
-        showdate: '<'
+        showdate: '<',
+        playlists: '='
     }
 });
 
-angular.module('app').controller('MusicTableCtrl', function (MusicService) {
+angular.module('app').controller('MusicTableCtrl', function (MusicService, PlaylistService) {
     var ctrl = this;
     
     var sb_date, sb_title, sb_duration, sb_artist = false;
     var sb_plays = true;
-    
-    /* ********************************************************** */
-    /*                   Util functions                           */
-    /* ********************************************************** */
+
+    ctrl.addSongToPlaylist = function (song, playlist) {
+        var duplicate = null;
+        for(var i = 0; i < playlist.songs.length; i++){
+            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
+                duplicate = true;
+                break;
+            }
+        }
+        if(!duplicate) {
+            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
+        }
+    };
 
     ctrl.select = function (track) {
         SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {

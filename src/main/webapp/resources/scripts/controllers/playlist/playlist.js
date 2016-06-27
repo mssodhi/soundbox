@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('PlaylistCtrl', function ($http, MusicService, PlaylistService, favorites, playlist) {
+angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistService, favorites, playlist) {
 
     var ctrl = this;
     ctrl.playlist = playlist;
@@ -45,21 +45,4 @@ angular.module('app').controller('PlaylistCtrl', function ($http, MusicService, 
         }
     }
 
-    /* ********************************************************** */
-    /*                   Playlist functions                       */
-    /* ********************************************************** */
-
-    ctrl.addSongToPlaylist = function (song, playlist) {
-        var duplicate = null;
-        for(var i = 0; i < playlist.songs.length; i++){
-            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
-                duplicate = true;
-                break;
-            }
-        }
-        if(!duplicate){
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
-        }
-
-    };
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, FavoritesService, favorites, MusicService, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, FavoritesService, favorites, PlaylistService) {
 
     var ctrl = this;
 
@@ -68,29 +68,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, Fa
         FavoritesService.addFavorite({}, artist.id);
         ctrl.favorites.push(artist);
     };
-
-    /* ********************************************************** */
-    /*                   Playlist functions                       */
-    /* ********************************************************** */
-    
-    
-    ctrl.addSongToPlaylist = function (song, playlist) {
-        var duplicate = null;
-        for(var i = 0; i < playlist.songs.length; i++){
-            if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
-                duplicate = true;
-                break;
-            }
-        }
-        if(!duplicate){
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
-        }
-
-    };
-    
-    /* ********************************************************** */
-    /*                   Util functions                           */
-    /* ********************************************************** */
 
     ctrl.isFavorite = function (artist) {
         return _.some(ctrl.favorites, {id: artist.id});
