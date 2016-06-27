@@ -32,7 +32,7 @@
                         <span class="pl15"> Add to Playlist</span>
                         <li class="divider"></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
-                            <a href ng-click="ctrl.addSongToPlaylist(song, playlist)">{{playlist.name}}</a>
+                            <a ng-if="playlist.id !== ctrl.currentplaylist.id" href ng-click="ctrl.addSongToPlaylist(song, playlist)">{{playlist.name}}</a>
                         </li>
                     </ul>
                 </div>
