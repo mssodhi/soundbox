@@ -4,7 +4,7 @@
             <span class="pl10" style="font-size: 24px">Favorite Artists</span>
         </div>
         <div class="pull-right">
-            <a ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
         </div>
     </div>
 

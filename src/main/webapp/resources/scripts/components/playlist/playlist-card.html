@@ -1,15 +1,17 @@
 <div class="card side-card panel-default">
+    <!-- Header -->
     <div class="card-purple panel-body" ng-if="!ctrl.showSearch">
         <div class="pull-left custom-font">
-            <span class="pl15" style="font-size: 24px">Playlist(s)</span>
+            <span class="pl15" style="font-size: 24px">Playlists</span>
         </div>
         <div class="pull-right">
             <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
             <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href><i class="fa fa-times-circle-o pr10" style="font-size: 25px"></i></a>
-            <a ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.list.length > 0" ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
         </div>
     </div>
 
+    <!-- Search bar -->
     <div class="card-purple panel-body" ng-if="ctrl.showSearch">
         <div class="has-feedback">
             <input class="form-control" ng-model="ctrl.playlistFiler">
@@ -17,16 +19,18 @@
         </div>
     </div>
 
+    <!-- New Playlist Form -->
     <div ng-if="ctrl.showPlaylistForm" class="panel-body">
-        <input type="text" class="md-input" ng-click="ctrl.focus($event)"
-               ng-model="name" ng-enter="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false"
-               auto-focus autofocus="true">
-
-        <button class="btn btn-primary pull-right" ng-click="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false;">
-            <i class="fa fa-check-circle"></i> Add
-        </button>
+        <div class="col-md-11 pl0">
+            <input type="text" class="form-control" ng-click="ctrl.focus($event)"
+                   ng-model="ctrl.name" ng-enter="ctrl.addPlaylist(); ctrl.showPlaylistForm = false"
+                   auto-focus autofocus="true">
+        </div>
+        <a class="fa-2x" ng-click="ctrl.addPlaylist(); ctrl.showPlaylistForm = false;" href><i class="fa fa-check-circle-o" style="padding-top: 2px"></i></a>
     </div>
-    <div ng-if="!playlist.isNew" class="button" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
+
+    <!-- List of playlists -->
+    <div class="button" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
          ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
         <div class="panel-body col-md-10" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
             <span class="badge" style="background-color: coral; font-size: 15px"> {{playlist.name}}</span>
@@ -40,7 +44,9 @@
             </div>
         </div>
     </div>
-    <div ng-if="!playlist.isNew && ctrl.list.length === 0">
+
+    <!-- Message when there are no playlists -->
+    <div ng-if="!ctrl.showPlaylistForm && ctrl.list.length === 0">
         <div class="panel-body col-md-12 text-center">
             <h4 class="custom-font"> You have no playlists</h4>
         </div>

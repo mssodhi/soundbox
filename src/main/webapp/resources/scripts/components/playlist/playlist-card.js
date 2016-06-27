@@ -12,18 +12,20 @@ angular.module('app').component('playlistCard', {
 angular.module('app').controller('PlaylistCardCtrl', function ($route, PlaylistService, $location) {
 
     var ctrl = this;
-
+    ctrl.name = '';
     ctrl.focus = function (e) {
         e.target.focus();
     };
 
-    ctrl.addPlaylist = function (name) {
-        PlaylistService.addPlaylist({name: name}).$promise.then(function (res) {
-            if(res.id){
-                ctrl.list.push(res);
-            }
-            name = undefined;
-        });
+    ctrl.addPlaylist = function () {
+        if(ctrl.name.length > 0){
+            PlaylistService.addPlaylist({name: ctrl.name}).$promise.then(function (res) {
+                if(res.id){
+                    ctrl.list.push(res);
+                }
+                ctrl.name = '';
+            });
+        }
 
     };
 
