@@ -33,12 +33,12 @@
     <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.playlists | filter: ctrl.playlistFiler track by playlist.id"
          ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
         <div class="panel-body col-md-10 pl0 pr0" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
+            <span class="badge mr5" style="font-size: 20px; display: inline-block; background-color: coral"> {{playlist.songs.length}}</span>
             <span class="custom-font"> {{playlist.name}}</span>
-            <span class="badge pull-right" style="font-size: 14px; background-color: coral"> {{playlist.songs.length}}</span>
         </div>
 
         <div ng-if="playlist.showOptions">
-            <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 50px">
+            <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 56px">
                 <div class="button" ng-click="ctrl.removePlaylist(playlist)" title="Delete playlist">
                     <span class="pl0 pr0">
                         <i class="fa fa-trash-o" style="padding-top: inherit"></i>
