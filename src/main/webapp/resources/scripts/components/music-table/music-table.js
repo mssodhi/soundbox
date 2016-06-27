@@ -5,9 +5,9 @@ angular.module('app').component("musicTable", {
     controller: 'MusicTableCtrl',
     controllerAs: 'ctrl',
     bindings: {
-        tracks: '=',
-        showartist: '=',
-        showdate: '='
+        tracks: '<',
+        showartist: '<',
+        showdate: '<'
     }
 });
 
