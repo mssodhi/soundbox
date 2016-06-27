@@ -1,7 +1,22 @@
 <div class="card side-card panel-default">
-    <div class="card-purple panel-body">
-        <a href ng-click="ctrl.showPlaylistForm = true;"><i class="fa fa-plus-circle fa-2x pr5"></i></a> Playlist(s)
+    <div class="card-purple panel-body" ng-if="!ctrl.showSearch">
+        <div class="pull-left custom-font">
+            <span class="pl15" style="font-size: 24px">Playlist(s)</span>
+        </div>
+        <div class="pull-right">
+            <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href><i class="fa fa-times-circle-o pr10" style="font-size: 25px"></i></a>
+            <a ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
+        </div>
     </div>
+
+    <div class="card-purple panel-body" ng-if="ctrl.showSearch">
+        <div class="has-feedback">
+            <input class="form-control" ng-model="ctrl.playlistFiler">
+            <i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>
+        </div>
+    </div>
+
     <div ng-if="ctrl.showPlaylistForm" class="panel-body">
         <input type="text" class="md-input" ng-click="ctrl.focus($event)"
                ng-model="name" ng-enter="ctrl.addPlaylist(name); ctrl.showPlaylistForm = false"
@@ -11,7 +26,7 @@
             <i class="fa fa-check-circle"></i> Add
         </button>
     </div>
-    <div ng-if="!playlist.isNew" class="button" ng-repeat="playlist in ctrl.list track by playlist.id"
+    <div ng-if="!playlist.isNew" class="button" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
          ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
         <div class="panel-body col-md-10" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
             <span class="badge" style="background-color: coral; font-size: 15px"> {{playlist.name}}</span>
