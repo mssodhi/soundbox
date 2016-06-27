@@ -30,7 +30,9 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
             }
         }
         if(!duplicate) {
-            PlaylistService.addSongToPlaylist({songId: song.id}, playlist);
+            PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
+                playlist.songs = response.songs;
+            });
         }
     };
 

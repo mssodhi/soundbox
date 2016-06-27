@@ -5,7 +5,7 @@ angular.module('app').component('playlistCard', {
     controller: 'PlaylistCardCtrl',
     controllerAs: 'ctrl',
     bindings: {
-        list: '='
+        playlists: '='
     }
 });
 
@@ -21,7 +21,7 @@ angular.module('app').controller('PlaylistCardCtrl', function ($route, PlaylistS
         if(ctrl.name.length > 0){
             PlaylistService.addPlaylist({name: ctrl.name}).$promise.then(function (res) {
                 if(res.id){
-                    ctrl.list.push(res);
+                    ctrl.playlists.push(res);
                 }
                 ctrl.name = '';
             });
@@ -31,7 +31,7 @@ angular.module('app').controller('PlaylistCardCtrl', function ($route, PlaylistS
 
     ctrl.removePlaylist = function (playlist) {
         PlaylistService.removePlaylist(playlist).$promise.then(function () {
-            ctrl.list.splice(ctrl.list.indexOf(playlist), 1);
+            ctrl.playlists.splice(ctrl.playlists.indexOf(playlist), 1);
         });
         // if deleting the playlist while on the playlist page
         // delete the playlist and to go landing page

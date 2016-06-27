@@ -7,7 +7,7 @@
         <div class="pull-right">
             <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href title="Add a playlist"><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
             <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href title="Cancel"><i class="fa fa-times-circle-o pr10" style="font-size: 25px"></i></a>
-            <a ng-if="ctrl.list.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.playlists.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>
         </div>
     </div>
 
@@ -30,10 +30,11 @@
     </div>
 
     <!-- List of playlists -->
-    <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.list | filter: ctrl.playlistFiler track by playlist.id"
+    <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.playlists | filter: ctrl.playlistFiler track by playlist.id"
          ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
         <div class="panel-body col-md-10 pl0 pr0" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
             <span class="custom-font"> {{playlist.name}}</span>
+            <span class="badge pull-right" style="font-size: 14px; background-color: coral"> {{playlist.songs.length}}</span>
         </div>
 
         <div ng-if="playlist.showOptions">
@@ -48,7 +49,7 @@
     </div>
 
     <!-- Message when there are no playlists -->
-    <div ng-if="!ctrl.showPlaylistForm && ctrl.list.length === 0">
+    <div ng-if="!ctrl.showPlaylistForm && ctrl.playlists.length === 0">
         <div class="panel-body col-md-12 text-center">
             <h4 class="custom-font"> You have no playlists</h4>
         </div>
