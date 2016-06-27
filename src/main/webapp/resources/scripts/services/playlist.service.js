@@ -7,7 +7,8 @@ angular.module('app').factory('PlaylistService', function ($resource) {
         addPlaylist: {method: 'GET', url: 'api/playlist/addPlaylist/:name'},
         removePlaylist: {method: 'POST', url: 'api/playlist/removePlaylist'},
         addSongToPlaylist: {method: 'POST', url: 'api/playlist/addSong/:songId'},
-        getPlaylistById: {method: 'GET', url: 'api/playlist/getPlaylistById/:id'}
+        getPlaylistById: {method: 'GET', url: 'api/playlist/getPlaylistById/:id'},
+        removeSongFromPlaylist: {method: 'POST', url: 'api/playlist/remove/song/:id/playlist'}
 
     });
 });

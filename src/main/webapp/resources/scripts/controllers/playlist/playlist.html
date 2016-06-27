@@ -13,7 +13,7 @@
         </div>
 
         <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.playlist.songs.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+        <div ng-if="ctrl.tracks.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>No tracks in {{ctrl.playlist.name}}</p>
@@ -43,7 +43,8 @@
                 </span>
             </div>
 
-            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" search="ctrl.searchQuery"
+            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists"
+                         isplaylist="true" search="ctrl.searchQuery" currentplaylist="ctrl.playlist"
                          tracks="ctrl.tracks" showartist="true" showdate="false"></music-table>
         </div>
 

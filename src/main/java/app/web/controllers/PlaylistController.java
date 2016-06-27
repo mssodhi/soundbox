@@ -46,6 +46,11 @@ public class PlaylistController {
         return playlistService.deletePlaylist(playlist);
     }
 
+    @RequestMapping(value = "remove/song/{id}/playlist", method = RequestMethod.POST)
+    public void removeSong(@PathVariable String id, @RequestBody Playlist playlist) {
+        playlistService.removeSong(id, playlist);
+    }
+
     @RequestMapping(value = "addSong/{songId}", method = RequestMethod.POST)
     public Object addSongToPlaylist(@PathVariable String songId, @RequestBody Playlist playlist) {
 

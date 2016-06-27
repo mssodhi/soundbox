@@ -19,4 +19,6 @@ public interface PlaylistService extends BaseService<Playlist, Integer> {
 
     Playlist findById(Integer id);
 
+    void removeSong(String id, Playlist playlist);
+
 }

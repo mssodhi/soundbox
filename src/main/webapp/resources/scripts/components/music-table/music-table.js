@@ -5,11 +5,13 @@ angular.module('app').component("musicTable", {
     controller: 'MusicTableCtrl',
     controllerAs: 'ctrl',
     bindings: {
-        tracks: '<',
+        tracks: '=',
         showartist: '<',
         showdate: '<',
         playlists: '=',
-        search: '='
+        search: '=',
+        isplaylist: '<',
+        currentplaylist: '='
     }
 });
 
@@ -37,6 +39,14 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
             MusicService.setPlayer(player, track);
             MusicService.setList(ctrl.tracks);
         });
+    };
+    
+    ctrl.removeSongFromPlaylist = function (song) {
+        console.log(song, ctrl.currentplaylist);
+        if(ctrl.currentplaylist){
+            PlaylistService.removeSongFromPlaylist({id: song.id}, ctrl.currentplaylist);
+            ctrl.tracks.splice(ctrl.tracks.indexOf(song), 1);
+        }
     };
     
     ctrl.isPlaying = function (track) {
