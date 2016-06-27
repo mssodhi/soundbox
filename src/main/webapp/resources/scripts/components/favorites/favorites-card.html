@@ -1,8 +1,7 @@
-<div class="card side-card" draggable>
+<div class="card side-card">
     <div class="card-red panel-body">
         <span><i class="fa fa-star-o"></i> Favorite Artists</span>
     </div>
-
 
     <div class="button" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false" ng-repeat="artist in ctrl.favorites track by artist.id">
         <div class="panel-body col-md-10" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
@@ -18,6 +17,11 @@
                 </span>
             </div>
         </div>
+    </div>
 
+    <div ng-if="ctrl.favorites.length === 0">
+        <div class="panel-body col-md-12 text-center">
+            <h4 class="custom-font"> You have no favorite artists</h4>
+        </div>
     </div>
 </div>

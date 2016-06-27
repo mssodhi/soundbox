@@ -47,8 +47,6 @@
 
 <%-- Directive --%>
 <script src="resources/scripts/directives/ng-enter.js"></script>
-<script src="resources/scripts/directives/draggable.js"></script>
-<script src="resources/scripts/directives/ng-right-click.js"></script>
 <script src="resources/scripts/directives/auto-focus.js"></script>
 <script src="resources/scripts/directives/circle-check.js"></script>
 <script src="resources/scripts/directives/circle-error.js"></script>
