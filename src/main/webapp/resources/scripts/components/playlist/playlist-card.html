@@ -5,9 +5,9 @@
             <span class="pl10" style="font-size: 24px">Playlists</span>
         </div>
         <div class="pull-right">
-            <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
-            <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href><i class="fa fa-times-circle-o pr10" style="font-size: 25px"></i></a>
-            <a ng-if="ctrl.list.length > 0" ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
+            <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href title="Add a playlist"><i class="fa fa-plus-circle pr10" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href title="Cancel"><i class="fa fa-times-circle-o pr10" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.list.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
                    ng-model="ctrl.name" ng-enter="ctrl.addPlaylist(); ctrl.showPlaylistForm = false"
                    auto-focus autofocus="true">
         </div>
-        <a class="fa-2x" ng-click="ctrl.addPlaylist(); ctrl.showPlaylistForm = false;" href><i class="fa fa-check-circle-o" style="padding-top: 2px"></i></a>
+        <a class="fa-2x" ng-click="ctrl.addPlaylist(); ctrl.showPlaylistForm = false;" href title="Confirm"><i class="fa fa-check-circle-o" style="padding-top: 2px"></i></a>
     </div>
 
     <!-- List of playlists -->
@@ -38,7 +38,7 @@
 
         <div ng-if="playlist.showOptions">
             <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 50px">
-                <div class="button" ng-click="ctrl.removePlaylist(playlist)">
+                <div class="button" ng-click="ctrl.removePlaylist(playlist)" title="Delete playlist">
                     <span class="pl0 pr0">
                         <i class="fa fa-trash-o" style="padding-top: inherit"></i>
                     </span>

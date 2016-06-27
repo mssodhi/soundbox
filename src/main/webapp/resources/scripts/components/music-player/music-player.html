@@ -5,16 +5,16 @@
         <img class="pull-left" style="width: 100px; height: 100px" ng-if="!ctrl.track.artwork_url" src="resources/images/noImage.jpg">
 
         <div class="col-sm-3 col-xs-8 music-player-info">
-            <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="{{ctrl.track.title}}">{{ctrl.track.title | limitTo: 30}}<span ng-if="ctrl.track.title.length > 40">... </span></a></h4>
+            <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="{{ctrl.track.title}}">{{ctrl.track.title | limitTo: 45}}<span ng-if="ctrl.track.title.length > 45">... </span></a></h4>
             <h6><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank" style="color: white">{{ctrl.track.user.username}}</a></h6>
             <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
         </div>
 
         <div class="col-md-5 col-sm-7 col-xs-12 mt15 text-center">
-            <span class="fa fa-3x fa-backward button pr15 rewind-btn" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()"></span>
-            <span class="fa fa-3x fa-play button play-btn" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()"></span>
-            <span class="fa fa-3x fa-pause button pause-btn" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()"></span>
-            <span class="fa fa-3x fa-forward button next-btn pl15" ng-click="ctrl.next()"></span>
+            <a class="pr15 rewind-btn custom-white" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()" href title="Previous/Rewind"><i class="fa fa-3x fa-backward"></i></a>
+            <a class="play-btn custom-white" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()" href title="Play"><i class="fa fa-3x fa-play"></i></a>
+            <a class="pause-btn custom-white" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()" href title="Pause"><i class="fa fa-3x fa-pause"></i></a>
+            <a class="pl15 next-btn custom-white" ng-click="ctrl.next()" href title="Next"><i class="fa fa-3x fa-forward"></i></a>
             <div id="progress-bar" class="button music-bar-background ml15 mr15 mt15">
                 <div class="music-bar" ng-style="ctrl.myStyle"></div>
             </div>

@@ -4,7 +4,7 @@
             <span class="pl10" style="font-size: 24px">Favorite Artists</span>
         </div>
         <div class="pull-right">
-            <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href><i class="fa fa-search" style="font-size: 25px"></i></a>
+            <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
 
         <div ng-if="artist.showOptions">
             <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 80px">
-                <div class="button" ng-click="ctrl.removeFavorite(artist)">
+                <div class="button" ng-click="ctrl.removeFavorite(artist)" title="Delete favorite">
                 <span class="pl0 pr0">
                     <i class="fa fa-trash-o pt15"></i>
                 </span>
