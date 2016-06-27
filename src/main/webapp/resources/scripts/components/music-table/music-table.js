@@ -8,7 +8,8 @@ angular.module('app').component("musicTable", {
         tracks: '<',
         showartist: '<',
         showdate: '<',
-        playlists: '='
+        playlists: '=',
+        search: '='
     }
 });
 

@@ -1,7 +1,6 @@
 <div class="container-fluid">
     <div ng-init="ctrl.init()" class="col-md-9 pt0">
 
-        <!--<div ng-include="'resources/scripts/controllers/common/search/search-bar.html'"></div>-->
         <search-bar></search-bar>
         <div class="pl0">
             <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
@@ -15,7 +14,8 @@
                 </span>
             </div>
 
-            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks" showartist="true" showdate="false"></music-table>
+            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
+                         showartist="true" showdate="false" search="ctrl.searchQuery"></music-table>
         </div>
     </div>
 
