@@ -42,7 +42,6 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
     };
     
     ctrl.removeSongFromPlaylist = function (song) {
-        console.log(song, ctrl.currentplaylist);
         if(ctrl.currentplaylist){
             PlaylistService.removeSongFromPlaylist({id: song.id}, ctrl.currentplaylist);
             ctrl.tracks.splice(ctrl.tracks.indexOf(song), 1);
