@@ -47,6 +47,10 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
         if(ctrl.currentplaylist){
             PlaylistService.removeSongFromPlaylist({id: song.id}, ctrl.currentplaylist);
             ctrl.tracks.splice(ctrl.tracks.indexOf(song), 1);
+            var ind = _.findIndex(ctrl.playlists, function (pl) {
+                return pl.id === ctrl.currentplaylist.id;
+            });
+            ctrl.playlists[ind].songs.length--;
         }
     };
     
