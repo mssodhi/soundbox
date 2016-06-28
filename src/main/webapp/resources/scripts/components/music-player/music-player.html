@@ -5,8 +5,8 @@
         <img class="pull-left" style="width: 100px; height: 100px" ng-if="!ctrl.track.artwork_url" src="resources/images/noImage.jpg">
 
         <div class="col-sm-3 col-xs-8 music-player-info">
-            <h4><a ng-href="{{ctrl.track.permalink_url}}" target="_blank" style="color: white" title="{{ctrl.track.title}}">{{ctrl.track.title | limitTo: 45}}<span ng-if="ctrl.track.title.length > 45">... </span></a></h4>
-            <h6><a ng-href="{{ctrl.track.user.permalink_url}}" target="_blank" style="color: white">{{ctrl.track.user.username}}</a></h6>
+            <h4 class="marquee"><span style="color: white" title="{{ctrl.track.title}}">{{ctrl.track.title}}</span></h4>
+            <h6><a href ng-click="ctrl.goToArtist(ctrl.track.user)" style="color: white" title="{{ctrl.track.user.permalink}}">{{ctrl.track.user.permalink}}</a></h6>
             <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
         </div>
 

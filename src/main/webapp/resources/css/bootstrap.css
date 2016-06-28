@@ -7337,6 +7337,23 @@ tr.button:hover{
     }
 }
 
+.marquee {
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee span {
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0%   { left: 100%; }
+    100% { left: -100%; }
+}
+
 .music-player {
     background-color: #0b97c4;
     color: white;

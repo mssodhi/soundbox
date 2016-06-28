@@ -6,7 +6,7 @@ angular.module('app').component('musicPlayer', {
     controllerAs: 'ctrl'
 });
 
-angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService) {
+angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicService, $location) {
     var ctrl = this;
 
     ctrl.init = function () {
@@ -35,6 +35,10 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
                 MusicService.seek(after);
             });
         }
+    };
+    
+    ctrl.goToArtist = function (artist) {
+        $location.path('artist/' + artist.permalink);
     };
 
     ctrl.play = function () {
