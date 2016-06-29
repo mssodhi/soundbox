@@ -23,7 +23,11 @@ public class PlaylistController {
     @RequestMapping(value = "getPlaylist", method = RequestMethod.GET)
     public Object getPlaylistCurrentUser () {
         User currentUser = userService.getCurrentUser();
-        return playlistService.findByUser(currentUser.getId());
+        if(currentUser != null){
+            return playlistService.findByUser(currentUser.getId());
+        }else{
+            return null;
+        }
     }
 
     @RequestMapping(value = "getPlaylistById/{id}", method = RequestMethod.GET)

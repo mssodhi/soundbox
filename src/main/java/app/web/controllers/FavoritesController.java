@@ -30,8 +30,12 @@ public class FavoritesController {
     @RequestMapping(value = "getList", method = RequestMethod.GET)
     public String getFavorites() throws Exception{
         User currentUser = userService.getCurrentUser();
-        List<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
-        return favoritesService.toSimpleJson(favorites);
+        if(currentUser != null){
+            List<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
+            return favoritesService.toSimpleJson(favorites);
+        }else{
+            return null;
+        }
     }
 
     @RequestMapping(value = "addFavorite", method = RequestMethod.PUT)

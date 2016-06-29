@@ -11,10 +11,10 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
 
     ctrl.init = function () {
         $interval(runLoop, 250);
-        ctrl.keyEvents();
+        registerKeys();
     };
 
-    var runLoop = function () {
+    function runLoop() {
         ctrl.player = MusicService.getPlayer();
         ctrl.isPlaying = MusicService.getIsPlaying();
         ctrl.track = MusicService.getTrack();
@@ -35,7 +35,7 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
                 MusicService.seek(after);
             });
         }
-    };
+    }
     
     ctrl.goToArtist = function (artist) {
         $location.path('artist/' + artist.permalink);
@@ -73,7 +73,7 @@ angular.module('app').controller('MusicPlayerCtrl', function ($interval, MusicSe
         });
     };
 
-    ctrl.keyEvents = function () {
+    function registerKeys() {
         document.onkeydown = function(e) {
             switch (e.keyCode) {
                 case 32:
