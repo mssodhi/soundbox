@@ -2,7 +2,7 @@
 // It is not the same as the $uibModal service used above.
 'use strict';
 
-angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, UserService, $location) {
+angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, LoginService, $location) {
 
     var ctrl = this;
     
@@ -23,7 +23,7 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
     ctrl.login = function(){
         ctrl.noUserFound = false;
         ctrl.password = MD5(ctrl.password);
-        UserService.login({email: ctrl.email}, ctrl.password).$promise.then(function (response) {
+        LoginService.login({email: ctrl.email}, ctrl.password).$promise.then(function (response) {
             if(response.id){
                 ctrl.goToLanding();
             }else{
@@ -42,9 +42,9 @@ angular.module('app').controller('LoginModalCtrl', function ($uibModalInstance, 
                 ctrl.password = MD5(ctrl.password);
                 ctrl.repeatedPassword = MD5(ctrl.password);
                 var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
-                UserService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
+                LoginService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
                     if(response.taken !== 'true'){
-                        UserService.addUser(user).$promise.then(function(response){
+                        LoginService.addUser(user).$promise.then(function(response){
                             if(response){
                                 ctrl.verificationEmailSent = true;
                             }else{

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', function ($scope, UserService, $location, MusicService) {
+angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService) {
     var ctrl = this;
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
@@ -22,7 +22,7 @@ angular.module('app').controller('NavCtrl', function ($scope, UserService, $loca
     };
 
     ctrl.signOut = function () {
-        UserService.logout().$promise.then(function () {
+        LoginService.logout().$promise.then(function () {
             $location.path('/login');
             MusicService.setPlayer(null, null);
         });
