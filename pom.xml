@@ -62,6 +62,13 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <!-- for jwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+
         <!-- Mail -->
         <dependency>
             <groupId>javax.mail</groupId>
