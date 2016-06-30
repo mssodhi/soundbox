@@ -65,7 +65,7 @@ public class LoginController {
                 user.setName(tempUser.getName());
                 user.setPassword(tempUser.getPassword());
                 user = userService.save(user);
-                userService.setCurrentUser(user.getEmail());
+                userService.setCurrentUser(user);
                 tempUserService.deleteTempUser(tempUser.getEmail());
                 return userService.toSimpleJson(user);
             }else{
@@ -85,7 +85,7 @@ public class LoginController {
         User user = userService.findByEmail(email);
         if(user != null){
             if(user.getPassword().equals(password)){
-                userService.setCurrentUser(user.getEmail());
+                userService.setCurrentUser(user);
                 return userService.toSimpleJson(user);
             }else{
                 return null;
@@ -98,6 +98,6 @@ public class LoginController {
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public void logout(){
-        userService.setCurrentUser("");
+        userService.setCurrentUser(null);
     }
 }

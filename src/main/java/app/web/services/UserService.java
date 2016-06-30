@@ -13,5 +13,5 @@ public interface UserService extends BaseService<User, Integer> {
 
     User getCurrentUser();
 
-    void setCurrentUser(String email);
+    void setCurrentUser(User user);
 }

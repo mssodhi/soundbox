@@ -45,8 +45,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     }
 
     @Override
-    public void setCurrentUser(String email){
-        cookieHelper.setCurrentUser(email);
+    public void setCurrentUser(User user){
+        cookieHelper.setCurrentUser(user);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package app.web.helper;
 
 
+import app.web.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +35,14 @@ public class CookieHelper {
         return userEmail;
     }
 
-    public void setCurrentUser(String email){
+    public void setCurrentUser(User user){
+        String email;
+        if(user != null){
+            email = user.getEmail();
+        }else{
+            email = "";
+        }
+
         Cookie cookie = new Cookie("sandbox_cookie", email);
         cookie.setMaxAge(1000000);
         cookie.setPath("/");
