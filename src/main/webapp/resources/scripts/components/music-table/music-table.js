@@ -37,10 +37,12 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
     };
 
     ctrl.select = function (track) {
-        SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
-            MusicService.setPlayer(player, track);
-            MusicService.setList(ctrl.tracks);
-        });
+        if(!ctrl.isPlaying(track)){
+            SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
+                MusicService.setPlayer(player, track);
+                MusicService.setList(ctrl.tracks);
+            });
+        }
     };
     
     ctrl.removeSongFromPlaylist = function (song) {
@@ -59,10 +61,9 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
         var playing = MusicService.getTrack();
         if (playing) {
             if (playing.id === track.id) {
-                return 'track-is-playing';
+                return true;
             }
         }
-
     };
 
     ctrl.milliToTime = function (milli) {

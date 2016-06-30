@@ -11,7 +11,7 @@
     </thead>
 
     <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.search track by song.id" title="{{song.title}}">
-        <tr ng-class="ctrl.isPlaying(song)" class="button">
+        <tr ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{$index+1}}</td>
             <td ng-click="ctrl.select(song)">

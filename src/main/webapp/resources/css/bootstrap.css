@@ -7172,7 +7172,7 @@ tr.button:hover{
     background-color: lightgray;
 }
 
-.track-is-playing {
+.trackplaying {
     background-color: cornsilk;
     border-bottom: 4px solid cornflowerblue;
 }

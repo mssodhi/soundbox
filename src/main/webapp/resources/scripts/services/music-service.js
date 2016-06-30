@@ -14,21 +14,10 @@ angular.module('app').factory('MusicService', function () {
             list = inpList;
         },
         setPlayer: function(pl, tr) {
-            var temp = null;
-            // if a player exists, pause and set it as temp.
-            if(player){
-                player.pause();
-                temp = player;
-            }
-
             player = pl;
             track = tr;
-
-            // compare temp with newly set player. if diff, then play new music and set playing to true.
-            if(player != temp){
-                pl.play();
-                isPlaying = true;
-            }
+            pl.play();
+            isPlaying = true;
         },
         getTrack: function() {
             return track;
