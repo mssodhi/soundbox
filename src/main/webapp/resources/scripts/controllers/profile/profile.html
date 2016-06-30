@@ -1,14 +1,13 @@
-<div class="col-md-12 container-fluid" ng-init="ctrl.init()">
-    <!--Left side stuff-->
+<div class="container-fluid" ng-init="ctrl.init()">
+
     <div class="col-md-4">
 
-        <!--all the side buttons-->
         <div class="list-group col-md-12">
-            <a ng-click="ctrl.switchCards('profile')" href="" class="list-group-item">
+            <a ng-click="ctrl.switchCards('profile')" href class="list-group-item">
                 <h5 class="list-group-item-heading">Profile</h5>
                 <p class="list-group-item-text">Manage your profile</p>
             </a>
-            <a ng-click="ctrl.switchCards('account')" href="" class="list-group-item">
+            <a ng-click="ctrl.switchCards('account')" href class="list-group-item">
                 <h5 class="list-group-item-heading">Account Settings</h5>
                 <p class="list-group-item-text">Manage your account settings</p>
             </a>
@@ -27,7 +26,7 @@
                 <div class="form-group col-md-11">
                     <label class="col-md-3"><span class="pull-right">Name</span></label>
                     <div class="col-md-9 pull-right">
-                        <input type="text" class="form-control" ng-model="ctrl.currentUser.name">
+                        <input type="text" class="form-control" ng-model="ctrl.currentUser.name" disabled>
                         <p class="help-block">Enter your real name.</p>
                     </div>
                 </div>
@@ -103,6 +102,8 @@
                         Reset
                     </button>
                 </div>
+
+                <div ng-if="ctrl.success" circle-check></div>
 
                 <button ng-if="!ctrl.showResetPassword" type="submit" class="btn btn-primary" ng-disabled="!ctrl.currentUser.settings" ng-click="ctrl.updateSettings()">Update Account
                 </button>

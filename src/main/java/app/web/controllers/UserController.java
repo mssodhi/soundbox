@@ -55,4 +55,9 @@ public class UserController {
         return userService.getCurrentUser();
     }
 
+    @RequestMapping(value = "updatePassword", method = RequestMethod.POST)
+    public String updatePassword(@RequestBody User user){
+        return userService.toSimpleJson(userService.save(user));
+    }
+
 }

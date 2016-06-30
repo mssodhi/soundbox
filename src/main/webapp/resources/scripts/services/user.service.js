@@ -5,6 +5,7 @@ angular.module('app').factory('UserService', function ($resource) {
         updateLocation: {method: 'POST', url: 'api/user/updateLocation'},
         updateSettings: {method: 'PUT', url: 'api/user/updateSettings'},
         addSettings: {method: 'POST', url: 'api/user/addSettings'},
-        getCurrentUser: {method: 'GET', url: 'api/user/getCurrent'}
+        getCurrentUser: {method: 'GET', url: 'api/user/getCurrent'},
+        updatePassword: {method: 'POST', url: 'api/user/updatePassword'}
     });
 });

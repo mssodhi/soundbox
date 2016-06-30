@@ -23,7 +23,6 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
             settings = {notifications: ctrl.currentUser.settings.notifications};
 
             UserService.addSettings({}, settings).$promise.then(function(response){
-                // console.log(response);
                 ctrl.currentUser = response;
             });
         }
@@ -31,8 +30,15 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
     };
 
     ctrl.resetPassword = function () {
-
-        // console.log(ctrl.currentPass + ctrl.reset1 + ctrl.reset2);
+        if(ctrl.currentUser.password === MD5(ctrl.currentPass)){
+            if(ctrl.reset1 === ctrl.reset2){
+                ctrl.currentUser.password = MD5(ctrl.reset1);
+                UserService.updatePassword(ctrl.currentUser).$promise.then(function (res) {
+                    ctrl.currentUser = res;
+                    ctrl.success = true;
+                })
+            }
+        }
     };
 
     ctrl.saveLocation = function () {
