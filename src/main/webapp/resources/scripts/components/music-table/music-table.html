@@ -13,7 +13,7 @@
     <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.search track by song.id" title="{{song.title}}">
         <tr ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
-            <td ng-click="ctrl.select(song)" class="hidden-xs">{{$index+1}}</td>
+            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{$index+1}}</td>
             <td ng-click="ctrl.select(song)">
                 <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">
                 <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
@@ -24,7 +24,7 @@
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
             <td ng-if="ctrl.playlists.length > 0">
-                <div class="pt15 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
+                <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
                     <ul uib-dropdown-menu>
                         <li ng-if="ctrl.isplaylist" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>

@@ -1862,14 +1862,14 @@ and (-webkit-min-device-pixel-ratio: 2){
     }
     .main-nav{
         position: fixed; !important;
-        height: auto !important;
+        height: 120px !important;
     }
     .nav-items{
         margin-top: 7px !important;
         margin-bottom: 7px !important;
     }
     .container-fluid{
-        margin-top: 110px !important;
+        margin-top: 10px !important;
         margin-bottom: 100px !important;
     }
 
@@ -1893,6 +1893,10 @@ and (-webkit-min-device-pixel-ratio: 2){
 and (min-device-width : 768px)
 and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
+    .container-fluid{
+        margin-top: 10px !important;
+        margin-bottom: 80px !important;
+    }
 
     .landing-main-text{
         padding-top: 0 !important;
@@ -7164,8 +7168,8 @@ button.list-group-item-danger.active:focus {
     border-bottom: 4px solid deepskyblue;
 }
 .track-image{
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
 }
 
 tr.button:hover{
