@@ -15,7 +15,7 @@ angular.module('app').component("musicTable", {
     }
 });
 
-angular.module('app').controller('MusicTableCtrl', function (MusicService, PlaylistService) {
+angular.module('app').controller('MusicTableCtrl', function (MusicService, PlaylistService, $location) {
     var ctrl = this;
     
     var sb_date, sb_title, sb_duration, sb_artist = false;
@@ -34,6 +34,10 @@ angular.module('app').controller('MusicTableCtrl', function (MusicService, Playl
                 playlist.songs = response.songs;
             });
         }
+    };
+    
+    ctrl.goToArtist = function (artist) {
+        $location.path('artist/' + artist.permalink);
     };
 
     ctrl.select = function (track) {
