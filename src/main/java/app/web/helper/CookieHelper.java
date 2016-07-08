@@ -2,10 +2,7 @@ package app.web.helper;
 
 
 import app.web.domain.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -62,7 +59,7 @@ public class CookieHelper {
 
         String issuer = "SYSTEM";
         String subject = "For Login";
-        long milis = TimeUnit.HOURS.toMillis(24);
+        long milis = TimeUnit.DAYS.toMillis(15);
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -93,9 +90,13 @@ public class CookieHelper {
     }
 
     private String getEmailFromToken(String token){
-        Claims claims = Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                .parseClaimsJws(token).getBody();
-        return claims.getId();
+        try{
+            Claims claims = Jwts.parser()
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
+                    .parseClaimsJws(token).getBody();
+            return claims.getId();
+        }catch (Exception e){
+            return null;
+        }
     }
 }
