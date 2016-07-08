@@ -81,6 +81,7 @@
                         <label class="col-md-3"><span class="pull-right">Current Password: </span></label>
                         <div class="col-md-9 pull-right">
                             <input type="password" class="form-control" ng-model="ctrl.currentPass">
+                            <span class="pt5 pb0 mb0" style="color: red" ng-if="ctrl.incorrectPassword"><small>Current Password is incorrect</small></span>
                         </div>
                     </div>
 

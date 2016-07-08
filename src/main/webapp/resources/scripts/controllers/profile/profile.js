@@ -30,6 +30,7 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
     };
 
     ctrl.resetPassword = function () {
+        ctrl.incorrectPassword = true;
         if(ctrl.currentUser.password === MD5(ctrl.currentPass)){
             if(ctrl.reset1 === ctrl.reset2){
                 ctrl.currentUser.password = MD5(ctrl.reset1);
@@ -38,6 +39,7 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
                     ctrl.success = true;
                 })
             }
+            ctrl.incorrectPassword = true;
         }
     };
 

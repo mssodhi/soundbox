@@ -4,13 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 @Component
 public class EmailHelper {
@@ -34,43 +35,42 @@ public class EmailHelper {
     private String auth;
 
 
-    public void sendFromGMail(String[] to, String subject, String body) {
-        Properties props = System.getProperties();
-        props.put("mail.smtp.starttls.enable", enable);
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.user", from);
-        props.put("mail.smtp.password", pass);
-        props.put("mail.smtp.port", port);
-        props.put("mail.smtp.auth", auth);
+    public void sendFromGMail(String[] recipients, String subject, String body) {
+        Set<InternetAddress> toAddress = new HashSet<>();
+        Properties properties = new Properties();
+        properties.put("mail.smtp.starttls.enable", enable);
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.user", from);
+        properties.put("mail.smtp.password", pass);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", auth);
 
-        Session session = Session.getDefaultInstance(props);
+        Session session = Session.getDefaultInstance(properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(from, pass);
+                    }
+                });
+
         MimeMessage message = new MimeMessage(session);
 
         try {
             message.setFrom(new InternetAddress(from));
-            InternetAddress[] toAddress = new InternetAddress[to.length];
 
-            // To get the array of addresses
-            for( int i = 0; i < to.length; i++ ) {
-                toAddress[i] = new InternetAddress(to[i]);
+            for(String email : recipients){
+                toAddress.add(new InternetAddress(email));
             }
 
-            for( int i = 0; i < toAddress.length; i++) {
-                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            for(InternetAddress internetAddress : toAddress){
+                message.addRecipient(Message.RecipientType.TO, internetAddress);
             }
 
             message.setSubject(subject);
             message.setText(body, "UTF-8", "html");
-            Transport transport = session.getTransport("smtp");
-            transport.connect(host, from, pass);
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
+            Transport.send(message, message.getAllRecipients());
         }
-        catch (AddressException ae) {
-            ae.printStackTrace();
-        }
-        catch (MessagingException me) {
-            me.printStackTrace();
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -24,56 +24,35 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendEmail(EmailType emailType, TempUser user) throws Exception{
 
-        switch (emailType){
-            case VERIFY:
-                sendVerify(user);
-                break;
-            case WELCOME:
-                sendWelcome(user);
+        String[] recipients = {user.getEmail()};
+        String subject = "";
+        Template template = new Template();
+
+        VelocityEngine ve = new VelocityEngine();
+        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        ve.init();
+
+        VelocityContext context = new VelocityContext();
+        context.put("user", user);
+
+        if(emailType.equals(EmailType.VERIFY)){
+            template = ve.getTemplate("email-templates/verify-email.vm");
+            subject = "SoundBox Account Verification for " + user.getName();
+
+            String url = "http://localhost:8080/soundbox/#/verify/" + user.getSecret();
+            context.put("link", url);
+        }
+        if(emailType.equals(EmailType.WELCOME)){
+            template = ve.getTemplate("email-templates/welcome-email.vm");
+            subject = "Welcome to Soundbox " + user.getName();
         }
 
-    }
-
-    private void sendVerify(TempUser user) throws Exception{
-        String[] recipients = {user.getEmail()};
-        String url = "http://localhost:8080/soundbox/#/verify/" + user.getSecret();
-        VelocityEngine ve = new VelocityEngine();
-        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        ve.init();
-        /*  next, get the Template  */
-        Template t = ve.getTemplate("email-templates/verify-email.vm");
-
-        VelocityContext context = new VelocityContext();
-        context.put("user", user);
-        context.put("link", url);
-
-        /* now render the template into a StringWriter */
+         /* now render the template into a StringWriter */
         StringWriter messageBody = new StringWriter();
-        t.merge( context, messageBody );
-
-        String subject = "SoundBox Account Verification for " + user.getName();
+        template.merge( context, messageBody );
         emailHelper.sendFromGMail(recipients, subject, messageBody.toString());
+
     }
-
-    private void sendWelcome(TempUser user) throws Exception{
-        String[] recipients = {user.getEmail()};
-        VelocityEngine ve = new VelocityEngine();
-        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        ve.init();
-        /*  next, get the Template  */
-        Template t = ve.getTemplate("email-templates/welcome-email.vm");
-
-        VelocityContext context = new VelocityContext();
-        context.put("user", user);
-        StringWriter messageBody = new StringWriter();
-        t.merge( context, messageBody );
-
-        String subject = "Welcome to Soundbox " + user.getName();
-        emailHelper.sendFromGMail(recipients, subject, messageBody.toString());
-    }
-
-
 
 }
