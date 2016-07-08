@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/favorites/")
@@ -28,11 +28,11 @@ public class FavoritesController {
     EmailHelper emailHelper;
 
     @RequestMapping(value = "getList", method = RequestMethod.GET)
-    public String getFavorites() throws Exception{
+    public Object getFavorites() throws Exception{
         User currentUser = userService.getCurrentUser();
         if(currentUser != null){
-            List<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
-            return favoritesService.toSimpleJson(favorites);
+            Set<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
+            return favoritesService.toJson(favorites);
         }else{
             return null;
         }
@@ -64,15 +64,6 @@ public class FavoritesController {
 
     @RequestMapping(value = "testing", method = RequestMethod.PUT)
     public String testing() throws UnsupportedEncodingException {
-//        User currentUser = userService.getCurrentUser();
-////        String recipient = userService.getCurrentUser().getEmail();
-//
-//        String recipient = "manu_47555@live.com";
-//        String[] to = { recipient }; // list of recipient email addresses
-//        String subject = "Welcome to SoundBox " + currentUser.getName();
-//        String body = "This is an automated e-mail for " + currentUser.getName() + ". It was sent on " + new DateTime().toDateTime().toLocalDateTime();
-//
-//        emailHelper.sendFromGMail(to, subject, body);
         return "{\"id\":\"null\"}";
     }
 

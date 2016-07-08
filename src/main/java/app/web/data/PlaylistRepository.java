@@ -1,6 +1,5 @@
 package app.web.data;
 
-import app.web.domain.Favorites;
 import app.web.domain.Playlist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -27,11 +27,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     @Override
     public User findByEmail(String email){
 
-        User user;
-
-        List<User> people = userRepository.findByEmail(email);
-        if (null != people && !people.isEmpty()) {
-            user = people.get(0);
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
             return user;
         } else {
             return null;

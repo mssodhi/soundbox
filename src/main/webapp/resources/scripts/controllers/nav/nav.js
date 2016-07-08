@@ -24,7 +24,9 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
     ctrl.signOut = function () {
         LoginService.logout().$promise.then(function () {
             $location.path('/login');
-            MusicService.setPlayer(null, null);
+            if(MusicService.getIsPlaying()){
+                MusicService.setPlayer(null, null);
+            }
         });
     };
 
