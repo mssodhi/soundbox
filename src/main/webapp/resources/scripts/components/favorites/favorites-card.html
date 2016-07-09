@@ -1,11 +1,11 @@
 <div class="card side-card">
     <div class="card-red panel-body" ng-if="!ctrl.showSearch">
         <div class="pull-left custom-font">
-            <span class="pl10" style="font-size: 24px">Favorite Artists</span>
+            <span class="pl10" style="font-size: 18px">Favorite Artists</span>
         </div>
-        <div class="pull-right">
-            <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>
-        </div>
+        <!--<div class="pull-right">-->
+            <!--<a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>-->
+        <!--</div>-->
     </div>
 
     <div class="card-purple panel-body" ng-if="ctrl.showSearch">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
-         ng-repeat="artist in ctrl.favorites | filter: ctrl.filter track by artist.id">
+         ng-repeat="artist in ctrl.favorites track by artist.id">
         <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
             <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
             <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>

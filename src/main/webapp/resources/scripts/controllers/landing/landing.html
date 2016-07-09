@@ -2,21 +2,9 @@
     <div ng-init="ctrl.init()" class="col-md-9 pt0">
 
         <search-bar></search-bar>
-        <div class="pl0">
-            <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
-                <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks">
-                    <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
-                </span>
-                <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
-                    <input placeholder="Filter by track, artist, plays"
-                           ng-model="ctrl.searchQuery" type="text"
-                           class="pull-right col-xs-12 col-sm-6 form-control">
-                </span>
-            </div>
 
-            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
-                         showartist="true" showdate="false" search="ctrl.searchQuery"></music-table>
-        </div>
+        <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
+                     showartist="true" showdate="false"></music-table>
     </div>
 
     <div class="col-md-3 col-sm-6 col-xs-12">

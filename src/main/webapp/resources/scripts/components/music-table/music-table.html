@@ -1,3 +1,14 @@
+<div class="col-md-12 col-sm-12 pl0 pr0 pt15">
+    <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks">
+        <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
+    </span>
+    <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
+        <input placeholder="search tracks"
+               ng-model="ctrl.searchQuery" type="text"
+               class="pull-right col-xs-12 col-sm-6 form-control">
+    </span>
+</div>
+
 <table class="col-md-12 table mt15 pl0 pr0">
     <thead class="custom-font">
         <tr>
@@ -10,7 +21,7 @@
         </tr>
     </thead>
 
-    <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.search track by song.id" title="{{song.title}}">
+    <tbody ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery track by song.id" title="{{song.title}}">
         <tr ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{$index+1}}</td>

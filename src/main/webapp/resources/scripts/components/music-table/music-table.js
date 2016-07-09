@@ -9,7 +9,6 @@ angular.module('app').component("musicTable", {
         showartist: '<',
         showdate: '<',
         playlists: '=',
-        search: '=',
         isplaylist: '<',
         currentplaylist: '='
     }
