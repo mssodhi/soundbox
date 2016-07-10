@@ -4,7 +4,7 @@
         <search-bar></search-bar>
 
         <!-- Message when playlist not found -->
-        <div ng-if="ctrl.playlistNotFound" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+        <div ng-if="!ctrl.currentPlaylist.id" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
                     <p>No playlist found</p>
@@ -12,32 +12,31 @@
             </div>
         </div>
 
-        <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.playlist.songs.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
-            <div class="card card-red">
-                <div class="panel-body">
-                    <p>No tracks in {{ctrl.playlist.name}}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Initial songs list by all favorites -->
-        <div class="pl0">
+        <!-- Playlist card -->
+        <div class="pl0" ng-if="ctrl.currentPlaylist.id">
             <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
-                <!-- this div for artist card -->
-                <div ng-if="ctrl.playlist"
-                     class="mb10 card-sc panel-body pt0 pb0 card card-purple col-md-5 col-sm-6 col-xs-12 pl0 pr0"
+
+                <div class="mb10 card-sc panel-body pt0 pb0 card card-purple col-md-5 col-sm-6 col-xs-12 pl0 pr0"
                      style="min-height: 104px">
                     <div class="mr15 pl0 pr0">
                         <span class="custom-font pl15">
-                            <h4>Playlist name: {{ctrl.playlist.name}}</h4>
+                            <h4>Playlist name: {{ctrl.currentPlaylist.name}}</h4>
                         </span>
                     </div>
                 </div>
             </div>
 
+            <!-- Message when the playlist doesn't have any tracks -->
+            <div ng-if="ctrl.currentPlaylist.songs.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+                <div class="card card-red">
+                    <div class="panel-body">
+                        <p>No tracks in {{ctrl.currentPlaylist.name}}</p>
+                    </div>
+                </div>
+            </div>
+
             <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists"
-                         isplaylist="true" currentplaylist="ctrl.playlist"
+                         isplaylist="true" currentplaylist="ctrl.currentPlaylist"
                          tracks="ctrl.tracks" showartist="true" showdate="false"></music-table>
         </div>
 

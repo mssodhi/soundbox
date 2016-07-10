@@ -9,7 +9,7 @@ angular.module('app').directive('circleCheck', function($uibModal) {
 
         return $uibModal.open({
             animation: true,
-            templateUrl: 'resources/scripts/controllers/common/circle-check.html',
+            templateUrl: 'resources/scripts/components/common/circle-check.html',
             controller: 'CommonModalCtrl',
             controllerAs: 'ctrl',
             size: 'sm',

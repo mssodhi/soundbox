@@ -9,7 +9,7 @@ angular.module('app').directive('circleError', function($uibModal) {
         
         return $uibModal.open({
             animation: true,
-            templateUrl: 'resources/scripts/controllers/common/circle-error.html',
+            templateUrl: 'resources/scripts/components/common/circle-error.html',
             controller: 'CommonModalCtrl',
             controllerAs: 'ctrl',
             size: 'lg',

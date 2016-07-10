@@ -23,8 +23,7 @@
     <div ng-if="ctrl.showPlaylistForm" class="panel-body">
         <div class="col-md-11 pl0">
             <input type="text" class="form-control" ng-click="ctrl.focus($event)"
-                   ng-model="ctrl.name" ng-enter="ctrl.addPlaylist(); ctrl.showPlaylistForm = false"
-                   auto-focus autofocus="true">
+                   ng-model="ctrl.name" ng-enter="ctrl.addPlaylist()" auto-focus>
         </div>
         <a class="fa-2x" ng-click="ctrl.addPlaylist(); ctrl.showPlaylistForm = false;" href title="Confirm"><i class="fa fa-check" style="padding-top: 2px"></i></a>
     </div>

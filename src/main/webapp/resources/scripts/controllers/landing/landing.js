@@ -2,11 +2,8 @@
 
 angular.module('app').controller('LandingCtrl', function (PlaylistService, favorites) {
     var ctrl = this;
-    
-    var limit = null;
+
     ctrl.init = function () {
-        ctrl.showInitList = true;
-        ctrl.q = '';
         getPlaylists();
         getFavorites();
     };
@@ -18,7 +15,7 @@ angular.module('app').controller('LandingCtrl', function (PlaylistService, favor
     }
 
     function getFavorites() {
-
+        var limit = null;
         if(favorites.length < 10){
             limit = 20
         }else if(favorites.length > 50){

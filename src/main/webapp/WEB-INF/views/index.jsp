@@ -59,15 +59,14 @@
 <script src="resources/scripts/components/playlist/playlist-card.js"></script>
 <script src="resources/scripts/components/search/search-bar.js"></script>
 <script src="resources/scripts/components/music-table/music-table.js"></script>
+<script src="resources/scripts/components/common/common-modal.js"></script>
 <%-- Components --%>
 
 <%-- Controllers --%>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>
 <script src="resources/scripts/controllers/verify/verify.js"></script>
-<script src="resources/scripts/controllers/common/common-modal.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
-<script src="resources/scripts/controllers/login/login-modal.js"></script>
 <script src="resources/scripts/controllers/artist/artist.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <script src="resources/scripts/controllers/video/video.js"></script>

@@ -3,20 +3,19 @@
 angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistService, favorites, playlist) {
 
     var ctrl = this;
-    ctrl.playlist = playlist;
+    ctrl.currentPlaylist = playlist;
+
     ctrl.init = function () {
-        ctrl.q = '';
         validateAndGetTracks();
         getPlaylists();
         getFavorites();
     };
 
     function validateAndGetTracks() {
-        ctrl.playlistNotFound = false;
         ctrl.tracks = [];
-        if(playlist.id){
-            for(var j = 0; j < playlist.songs.length; j++){
-                $http.get('http://api.soundcloud.com/tracks/' + playlist.songs[j].track_id, {
+        if(ctrl.currentPlaylist.id){
+            for(var i = 0; i < ctrl.currentPlaylist.songs.length; i++){
+                $http.get('http://api.soundcloud.com/tracks/' + ctrl.currentPlaylist.songs[i].track_id, {
                     params: {
                         client_id: '0f7c969c815f51078c1de513f666ecdb'
                     }
@@ -24,9 +23,6 @@ angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistServic
                     ctrl.tracks.push(data);
                 });
             }
-        }else{
-            ctrl.playlistNotFound = true;
-            ctrl.playlist = null;
         }
     }
 
