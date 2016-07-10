@@ -6,7 +6,7 @@
 
         <div class="col-sm-3 col-xs-8 music-player-info">
             <h4 ng-class="{marquee: ctrl.track.title.length > 35}"><span style="color: white" title="{{ctrl.track.title}}">{{ctrl.track.title}}</span></h4>
-            <h6><a href ng-click="ctrl.goToArtist(ctrl.track.user)" style="color: white" title="{{ctrl.track.user.permalink}}">{{ctrl.track.user.permalink}}</a></h6>
+            <h6><a href ng-href="#/artist/{{ctrl.track.user.permalink}}" style="color: white" title="{{ctrl.track.user.permalink}}">{{ctrl.track.user.permalink}}</a></h6>
             <span>{{ctrl.milliToTime(ctrl.player.currentTime())}} / {{ctrl.milliToTime(ctrl.track.duration)}}</span>
         </div>
 

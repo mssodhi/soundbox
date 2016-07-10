@@ -3,7 +3,7 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, $location) {
+    controller: function (MusicService, PlaylistService) {
         var ctrl = this;
 
         var sb_date, sb_title, sb_duration, sb_artist = false;
@@ -22,10 +22,6 @@ angular.module('app').component("musicTable", {
                     playlist.songs = response.songs;
                 });
             }
-        };
-
-        ctrl.goToArtist = function (artist) {
-            $location.path('artist/' + artist.permalink);
         };
 
         ctrl.select = function (track) {

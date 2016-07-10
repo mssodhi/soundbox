@@ -3,7 +3,7 @@
 angular.module('app').component('musicPlayer', {
     templateUrl: 'resources/scripts/components/music-player/music-player.html',
     controllerAs: 'ctrl',
-    controller: function ($interval, MusicService, $location) {
+    controller: function ($interval, MusicService) {
         var ctrl = this;
 
         ctrl.init = function () {
@@ -33,10 +33,6 @@ angular.module('app').component('musicPlayer', {
                 });
             }
         }
-
-        ctrl.goToArtist = function (artist) {
-            $location.path('artist/' + artist.permalink);
-        };
 
         ctrl.play = function () {
             MusicService.play();

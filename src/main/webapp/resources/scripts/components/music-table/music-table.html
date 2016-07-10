@@ -30,7 +30,7 @@
                 <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
                 <a>{{song.title | limitTo: 45}}<span ng-if="song.title.length > 45">... </span></a>
             </td>
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" ng-if="ctrl.showartist"><a href ng-click="ctrl.goToArtist(song.user)">{{song.user.username}}</a></td>
+            <td ng-click="ctrl.select(song)" style="vertical-align: middle" ng-if="ctrl.showartist"><a href ng-href="#/artist/{{song.user.permalink}}">{{song.user.username}}</a></td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{song.playback_count | number}}</td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
             <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
