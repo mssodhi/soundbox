@@ -8,12 +8,13 @@
         <!--</div>-->
     </div>
 
-    <div class="card-purple panel-body" ng-if="ctrl.showSearch">
-        <div class="has-feedback">
-            <input class="form-control" ng-model="ctrl.filter">
-            <i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>
-        </div>
-    </div>
+    <!-- Search bar -->
+    <!--<div class="card-purple panel-body" ng-if="ctrl.showSearch">-->
+        <!--<div class="has-feedback">-->
+            <!--<input class="form-control" ng-model="ctrl.filter">-->
+            <!--<i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
          ng-repeat="artist in ctrl.favorites track by artist.id">
@@ -34,6 +35,7 @@
         </div>
     </div>
 
+    <!-- Message when there are no favorites -->
     <div ng-if="ctrl.favorites.length === 0">
         <div class="panel-body col-md-12 text-center">
             <h4 class="custom-font"> You have no favorite artists</h4>
