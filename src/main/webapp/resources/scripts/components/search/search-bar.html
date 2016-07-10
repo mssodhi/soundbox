@@ -6,21 +6,19 @@
                    uib-typeahead="obj as obj.permalink for obj in ctrl.search($viewValue)"
                    typeahead-on-select="ctrl.selectFromTypeahead($item)"
                    typeahead-loading="loading"
-                   typeahead-template-url="customTemplate.html" typeahead-show-hint="true">
+                   typeahead-template-url="customTemplate.html">
             <i ng-if="loading" class="pt10 fa fa-spinner spin spinning form-control-feedback"></i>
         </div>
     </div>
 </div>
 
 <script type="text/ng-template" id="customTemplate.html">
-    <a ng-if="match.model.kind === 'user'"
-       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificArtist(match.model.id)">
+    <a ng-if="match.model.kind === 'user'">
         <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
         <span>{{match.model.permalink | limitTo: 40}} <span ng-if="match.model.permalink.length > 40">...</span></span>
         <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
-    <a ng-if="match.model.kind === 'track'"
-       ng-click="$parent.$parent.$parent.$parent.ctrl.getSpecificTrack(match.model)">
+    <a ng-if="match.model.kind === 'track'">
         <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
         <span>
             {{match.model.title | limitTo: 29}}
