@@ -14,10 +14,14 @@ angular.module('app').factory('MusicService', function () {
             list = inpList;
         },
         setPlayer: function(pl, tr) {
+            if(player){
+                player = undefined;
+            }
             player = pl;
             track = tr;
-            pl.play();
+            player.seek(0);
             isPlaying = true;
+            player.play();
         },
         getTrack: function() {
             return track;
