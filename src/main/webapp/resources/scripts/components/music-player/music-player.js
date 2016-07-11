@@ -58,7 +58,7 @@ angular.module('app').component('musicPlayer', {
         };
 
         ctrl.stream = function (track) {
-            SC.stream('/tracks/' + track.id).then(function (player) {
+            SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
                 player.seek(0);
                 player.on('finish', function () {
                     player.seek(0);
