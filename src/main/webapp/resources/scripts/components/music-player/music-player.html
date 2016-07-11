@@ -12,7 +12,7 @@
 
         <div class="col-md-5 col-sm-7 col-xs-12 mt15 text-center">
             <a class="pr15 rewind-btn custom-white" ng-dblclick="ctrl.getPrevious()" ng-click="ctrl.rewind()" href title="Previous/Rewind"><i class="fa fa-3x fa-backward"></i></a>
-            <a class="play-btn custom-white" ng-if="!ctrl.isPlaying || ctrl.progress >= 100" ng-click="ctrl.play()" href title="Play"><i class="fa fa-3x fa-play"></i></a>
+            <a class="play-btn custom-white" ng-if="!ctrl.isPlaying" ng-click="ctrl.play()" href title="Play"><i class="fa fa-3x fa-play"></i></a>
             <a class="pause-btn custom-white" ng-if="ctrl.isPlaying" ng-click="ctrl.pause()" href title="Pause"><i class="fa fa-3x fa-pause"></i></a>
             <a class="pl15 next-btn custom-white" ng-click="ctrl.next()" href title="Next"><i class="fa fa-3x fa-forward"></i></a>
             <div id="progress-bar" class="button music-bar-background ml15 mr15 mt15">

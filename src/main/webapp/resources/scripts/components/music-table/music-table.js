@@ -27,6 +27,10 @@ angular.module('app').component("musicTable", {
         ctrl.select = function (track) {
             if(!ctrl.isPlaying(track)){
                 SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
+                    player.on('finish', function () {
+                        player.seek(0);
+                        ctrl.select(MusicService.getNext());
+                    });
                     MusicService.setPlayer(player, track);
                     MusicService.setList(ctrl.tracks);
                 });
