@@ -7,8 +7,6 @@ angular.module('app').component("musicTable", {
         var ctrl = this;
         ctrl.currentPage = 1;
         ctrl.itemsPerPage = 20;
-        // ctrl.pages = ctrl.tracks.length / 20;
-        
         var sb_date, sb_title, sb_duration, sb_artist = false;
         var sb_plays = true;
 
