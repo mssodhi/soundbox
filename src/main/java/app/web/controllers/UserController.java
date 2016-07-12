@@ -20,15 +20,6 @@ public class UserController {
     @Autowired
     public SettingsService settingsService;
 
-    @RequestMapping(value = "updateLocation", method = RequestMethod.POST)
-    public String updateLocation (@RequestBody String location) {
-
-        User user = userService.getCurrentUser();
-        user.setLocation(location);
-        user = userService.save(user);
-        return userService.toSimpleJson(user);
-    }
-
     @RequestMapping(value = "updateSettings", method = RequestMethod.PUT)
     public String updateSettings (@RequestBody Settings settings) {
 
@@ -42,7 +33,6 @@ public class UserController {
     public String addSettings (@RequestBody Settings settings) {
 
         User user = userService.getCurrentUser();
-        settings.setUser_email(user.getEmail());
         settings.setUser(user);
         settings = settingsService.save(settings);
         user.setSettings(settings);

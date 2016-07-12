@@ -72,6 +72,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 };
 
                 ctrl.register = function(){
+                    ctrl.loading = true;
                     ctrl.emailNotValid = false;
                     if(validateEmail(ctrl.email)){
                         ctrl.passwordNotSame = false;
@@ -86,19 +87,23 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                                     LoginService.addUser(user).$promise.then(function(response){
                                         if(response){
                                             ctrl.verificationEmailSent = true;
+                                            ctrl.loading = false;
                                         }else{
                                             $location.path('/deny');
                                         }
                                     });
                                 }else{
                                     ctrl.emailTaken = true;
+                                    ctrl.loading = false;
                                 }
                             });
                         }else{
                             ctrl.passwordNotSame = true;
+                            ctrl.loading = false;
                         }
                     }else{
                         ctrl.emailNotValid = true;
+                        ctrl.loading = false;
                     }
 
                 };

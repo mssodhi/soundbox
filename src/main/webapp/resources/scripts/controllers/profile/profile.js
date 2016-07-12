@@ -5,30 +5,6 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
 
     ctrl.currentUser = profile;
 
-    ctrl.init = function () {
-        ctrl.switchCards('profile');
-    };
-
-    ctrl.updateSettings = function () {
-        var settings;
-
-        if(ctrl.currentUser.settings.id){
-            settings = {id: ctrl.currentUser.settings.id, notifications: ctrl.currentUser.settings.notifications};
-
-            UserService.updateSettings({}, settings).$promise.then(function(response){
-                ctrl.currentUser = response;
-            });
-
-        }else{
-            settings = {notifications: ctrl.currentUser.settings.notifications};
-
-            UserService.addSettings({}, settings).$promise.then(function(response){
-                ctrl.currentUser = response;
-            });
-        }
-
-    };
-
     ctrl.resetPassword = function () {
         ctrl.incorrectPassword = false;
         if(ctrl.currentUser.password === MD5(ctrl.currentPass)){
@@ -41,24 +17,6 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService) 
             }
         }else{
             ctrl.incorrectPassword = true;
-        }
-    };
-
-    ctrl.saveLocation = function () {
-        UserService.updateLocation({}, ctrl.currentUser.location).$promise.then(function(response){
-            ctrl.currentUser = response;
-            ctrl.adjustProgress();
-        })
-    };
-    
-    ctrl.switchCards = function(card){
-        if(card == 'profile'){
-            ctrl.showProfile = true;
-            ctrl.showAccount = false;
-        } else{
-            // else account
-            ctrl.showAccount = true;
-            ctrl.showProfile = false;
         }
     };
 });

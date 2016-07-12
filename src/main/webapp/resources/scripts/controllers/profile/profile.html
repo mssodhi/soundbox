@@ -1,13 +1,9 @@
-<div class="container-fluid" ng-init="ctrl.init()">
+<div class="container-fluid">
 
     <div class="col-md-4">
 
         <div class="list-group col-md-12">
-            <a ng-click="ctrl.switchCards('profile')" href class="list-group-item">
-                <h5 class="list-group-item-heading">Profile</h5>
-                <p class="list-group-item-text">Manage your profile</p>
-            </a>
-            <a ng-click="ctrl.switchCards('account')" href class="list-group-item">
+            <a class="list-group-item">
                 <h5 class="list-group-item-heading">Account Settings</h5>
                 <p class="list-group-item-text">Manage your account settings</p>
             </a>
@@ -15,12 +11,11 @@
     </div>
 
     <div class="col-md-6">
-
-        <div class="panel panel-default" ng-if="ctrl.showProfile">
+        <div class="panel panel-default">
             <div class="panel-body">
 
-                <h4 class="semibold">Profile</h4>
-                <p>This information appears on your public profile, search results, and beyond.</p>
+                <h4 class="semibold">Account</h4>
+                <p>These settings control your account information.</p>
                 <hr>
 
                 <div class="form-group col-md-11">
@@ -39,38 +34,6 @@
                         <p class="help-block">Enter your email.</p>
                     </div>
                 </div>
-
-                <div class="form-group col-md-11">
-                    <label class="col-md-3"><span class="pull-right">Location</span></label>
-                    <div class="col-md-9 pull-right">
-                        <input type="text" class="form-control" ng-model="ctrl.currentUser.location">
-                        <p class="help-block">Enter your location.</p>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary" ng-click="ctrl.saveLocation()"
-                        ng-disabled="!ctrl.currentUser.location">Save change
-                </button>
-            </div>
-        </div>
-
-
-        <div class="panel panel-default" ng-if="ctrl.showAccount">
-            <div class="panel-body">
-
-                <h4 class="semibold">Account</h4>
-                <p>These settings control your account information.</p>
-                <hr>
-
-                <div class="form-group col-md-11">
-                    <label class="col-md-3"><span class="pull-right">Notifications</span></label>
-                    <div class="col-md-9 pull-right">
-                        <input type="radio" ng-model="ctrl.currentUser.settings.notifications" ng-value="true"> On
-                        <br>
-                        <input type="radio" ng-model="ctrl.currentUser.settings.notifications" ng-value="false"> Off
-                    </div>
-                </div>
-
                 <div class="col-md-12 mb15 mt15">
                     <a ng-if="ctrl.showResetPassword" ng-click="ctrl.showResetPassword = false" href>Cancel</a>
                     <a ng-if="!ctrl.showResetPassword" ng-click="ctrl.showResetPassword = true" href>Reset Password</a>
@@ -106,8 +69,6 @@
 
                 <div ng-if="ctrl.success" circle-check></div>
 
-                <button ng-if="!ctrl.showResetPassword" type="submit" class="btn btn-primary" ng-disabled="!ctrl.currentUser.settings" ng-click="ctrl.updateSettings()">Update Account
-                </button>
             </div>
         </div>
     </div>

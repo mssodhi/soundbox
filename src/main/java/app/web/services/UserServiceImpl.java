@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.DataBindingException;
 import java.io.StringWriter;
-import java.util.List;
 
 @Service
 @Transactional
@@ -63,14 +62,12 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
             json.writeNumberField("id", user.getId());
             json.writeStringField("name", user.getName());
             json.writeStringField("email", user.getEmail());
-            json.writeStringField("location", user.getLocation());
 
             if(user.getSettings() != null) {
                 json.writeFieldName("settings");
                 json.writeStartObject();
                 json.writeNumberField("id", user.getSettings().getId());
                 json.writeBooleanField("notifications", user.getSettings().getNotifications());
-                json.writeStringField("user_email", user.getSettings().getUser_email());
                 json.writeEndObject();
             }
 

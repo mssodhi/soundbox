@@ -23,7 +23,7 @@ public class Favorites {
     private String user_email;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name ="FK_Person"), name = "user_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Integer getId() {

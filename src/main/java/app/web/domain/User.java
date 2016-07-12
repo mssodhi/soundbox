@@ -23,15 +23,11 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private String email;
 
-    @Column(name = "location", length = 50, nullable = true)
-    @JsonProperty
-    private  String location;
-
     @Column(name = "password", length = 50, nullable = false)
     @JsonProperty
     private  String password;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey =  @ForeignKey(name ="FK_User_Settings"), name = "settings_id", referencedColumnName = "id")
     @JsonProperty
     private Settings settings;
@@ -58,14 +54,6 @@ public class User extends AuditableEntity implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Settings getSettings() {
