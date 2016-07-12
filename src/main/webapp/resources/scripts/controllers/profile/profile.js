@@ -4,8 +4,8 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService, 
     var ctrl = this;
 
     ctrl.currentUser = profile;
-    SettingsService.getSettings().$promise.then(function (res) {
-        console.log(res);
+    SettingsService.getSettings().$promise.then(function (response) {
+        ctrl.settings = response;
     });
 
     ctrl.resetPassword = function () {
