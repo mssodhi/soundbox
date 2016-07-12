@@ -27,11 +27,6 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private  String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey =  @ForeignKey(name ="FK_User_Settings"), name = "settings_id", referencedColumnName = "id")
-    @JsonProperty
-    private Settings settings;
-
     public Integer getId() {
         return id;
     }
@@ -54,14 +49,6 @@ public class User extends AuditableEntity implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
     }
 
     public String getPassword() {

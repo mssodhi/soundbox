@@ -9,5 +9,5 @@ public interface SettingsService extends BaseService<Settings, Integer> {
 
     Settings save(Settings number);
 
-    String toSimpleJson(Settings settings);
+    Settings findByEmail(String email);
 }

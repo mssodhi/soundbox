@@ -44,6 +44,7 @@
 <script src="resources/scripts/services/favorites.service.js"></script>
 <script src="resources/scripts/services/playlist.service.js"></script>
 <script src="resources/scripts/services/login.service.js"></script>
+<script src="resources/scripts/services/settings.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>

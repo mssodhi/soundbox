@@ -63,14 +63,6 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
             json.writeStringField("name", user.getName());
             json.writeStringField("email", user.getEmail());
 
-            if(user.getSettings() != null) {
-                json.writeFieldName("settings");
-                json.writeStartObject();
-                json.writeNumberField("id", user.getSettings().getId());
-                json.writeBooleanField("notifications", user.getSettings().getNotifications());
-                json.writeEndObject();
-            }
-
             json.writeEndObject();
             json.close();
 

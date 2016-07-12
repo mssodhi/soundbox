@@ -20,7 +20,8 @@ public class Settings {
     @JsonProperty
     private Boolean notifications;
 
-    @OneToOne(mappedBy = "settings")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
     @JsonIgnore
     private User user;
 
