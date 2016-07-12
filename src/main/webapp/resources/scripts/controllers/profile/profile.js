@@ -10,16 +10,16 @@ angular.module('app').controller('ProfileCtrl', function (profile, UserService, 
 
     ctrl.resetPassword = function () {
         ctrl.incorrectPassword = false;
-        if(ctrl.currentUser.password === MD5(ctrl.currentPass)){
-            if(ctrl.reset1 === ctrl.reset2){
-                ctrl.currentUser.password = MD5(ctrl.reset1);
-                UserService.updatePassword(ctrl.currentUser).$promise.then(function (res) {
+        if(ctrl.reset1 === ctrl.reset2){
+            ctrl.currentUser.password = MD5(ctrl.reset1);
+            UserService.updatePassword({prev: MD5(ctrl.currentPass)}, ctrl.currentUser).$promise.then(function (res) {
+                if(res.id){
                     ctrl.currentUser = res;
                     ctrl.success = true;
-                })
-            }
-        }else{
-            ctrl.incorrectPassword = true;
+                }else{
+                    ctrl.incorrectPassword = true;
+                }
+            })
         }
     };
 });
