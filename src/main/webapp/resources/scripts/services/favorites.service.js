@@ -2,11 +2,8 @@
 
 angular.module('app').factory('FavoritesService', function ($resource) {
     return $resource('api/favorites/', {}, {
-
         addFavorite: {method: 'PUT', url: 'api/favorites/addFavorite'},
-        getFavorites: {method: 'GET', url: 'api/favorites/getList', isArray: true},
-        removeFavorites: {method: 'PUT', url: 'api/favorites/removeFavorite'},
-        testing: {method: 'GET', url: 'api/playlist/getPlaylist', isArray: true}
-
+        getFavorites: {method: 'GET', url: 'api/favorites/getFavorites', isArray: true},
+        removeFavorites: {method: 'PUT', url: 'api/favorites/removeFavorite'}
     });
 });

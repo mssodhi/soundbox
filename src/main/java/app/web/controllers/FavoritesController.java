@@ -27,7 +27,7 @@ public class FavoritesController {
     @Autowired
     EmailHelper emailHelper;
 
-    @RequestMapping(value = "getList", method = RequestMethod.GET)
+    @RequestMapping(value = "getFavorites", method = RequestMethod.GET)
     public Object getFavorites() throws Exception{
         User currentUser = userService.getCurrentUser();
         if(currentUser != null){
@@ -47,7 +47,6 @@ public class FavoritesController {
         if(favoritesService.findByEmailAndArtist(currentUser.getEmail(), artist_id) == null){
             Favorites favorites = new Favorites();
             favorites.setUser(currentUser);
-            favorites.setUser_email(currentUser.getEmail());
             favorites.setArtist_id(artist_id);
             return favoritesService.save(favorites);
         }else{
