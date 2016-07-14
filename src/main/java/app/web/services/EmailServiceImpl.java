@@ -9,6 +9,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired
     EmailHelper emailHelper;
+
+    @Autowired
+    private Environment env;
 
     @Override
     public void sendEmail(EmailType emailType, TempUser user) throws Exception{
@@ -40,7 +44,13 @@ public class EmailServiceImpl implements EmailService {
             template = ve.getTemplate("email-templates/verify-email.vm");
             subject = "SoundBox Account Verification for " + user.getName();
 
-            String url = "http://localhost:8080/soundbox/#/verify/" + user.getSecret();
+            String profile = env.getActiveProfiles()[0];
+            String url = "";
+            if(profile.equals("local")){
+                url = "http://localhost:8080/soundbox/#/verify/" + user.getSecret();
+            }else if(profile.equals("prod")){
+                url = "http://54.200.218.139:8080/soundbox/#/verify/" + user.getSecret();
+            }
             context.put("link", url);
         }
         if(emailType.equals(EmailType.WELCOME)){
