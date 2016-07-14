@@ -9,10 +9,11 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.StringWriter;
 
 @Service
@@ -23,7 +24,10 @@ public class EmailServiceImpl implements EmailService {
     EmailHelper emailHelper;
 
     @Autowired
-    private HttpServletRequest request;
+    private Environment environment;
+
+    @Value("${prod.url}")
+    private String prod_url;
 
     @Override
     public void sendEmail(EmailType emailType, TempUser user) throws Exception{
@@ -43,7 +47,13 @@ public class EmailServiceImpl implements EmailService {
         if(emailType.equals(EmailType.VERIFY)){
             template = ve.getTemplate("email-templates/verify-email.vm");
             subject = "SoundBox Account Verification for " + user.getName();
-            String url = request.getServerName() + ":" + request.getServerPort() + "/soundbox/#/verify/" + user.getSecret();
+            String url;
+            if(environment.getActiveProfiles()[0].equals("local") || environment.getActiveProfiles() == null){
+                url = "localhost:8080/soundbox/";
+            }else{
+                url = prod_url;
+            }
+            url = url + "/#/verify/" + user.getSecret();
             context.put("link", url);
         }
         if(emailType.equals(EmailType.WELCOME)){
