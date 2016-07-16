@@ -1,0 +1,7 @@
+<div class="container-fluid" ng-init="ctrl.init()">
+    <div class="panel col-sm-2 panel-default" ng-repeat="favorite in ctrl.favorites track by favorite.id">
+        <div class="panel-body">
+            <h4>{{favorite.id}}</h4>
+        </div>
+    </div>
+</div>

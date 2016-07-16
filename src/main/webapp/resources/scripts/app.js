@@ -78,6 +78,21 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
+            }).when('/favorites', {
+                templateUrl: 'resources/scripts/controllers/favorites/favorites.html',
+                controller: 'FavoritesCtrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
+                    },
+                    favorites: function (FavoritesService) {
+                        return FavoritesService.getFavorites({}).$promise;
+                    }
+                }
             }).when('/login', {
                 templateUrl: 'resources/scripts/controllers/login/login.html',
                 controller: 'LoginCtrl',

@@ -72,6 +72,7 @@
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <script src="resources/scripts/controllers/video/video.js"></script>
 <script src="resources/scripts/controllers/profile/profile.js"></script>
+<script src="resources/scripts/controllers/favorites/favorites.js"></script>
 <%-- Controllers --%>
 
 <%-- Sandbox --%>
