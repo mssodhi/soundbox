@@ -1,7 +1,22 @@
 <div class="container-fluid" ng-init="ctrl.init()">
-    <div class="panel col-sm-2 panel-default" ng-repeat="favorite in ctrl.favorites track by favorite.id">
-        <div class="panel-body">
-            <h4>{{favorite.id}}</h4>
+    <div class="col-xs-9">
+        <search-bar></search-bar>
+    </div>
+
+    <div class="col-xs-12 pl0 pr0">
+        <div class="col-md-3 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
+            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.goToArtist(artist)">
+                <div class="panel-body text-center">
+                    <img ng-src="{{artist.avatar_url}}">
+                    <span ng-if="artist.avatar_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
+                    <h6 class="custom-font" style="color: gray"><a ng-href="{{artist.permalink_url}}" target="_blank">
+                        {{artist.full_name | limitTo: 70}}</a><span ng-if="artist.full_name > 70"> . . . </span></h6>
+                    <h3>
+                        <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}} tracks</label>
+                        <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>
+                    </h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>

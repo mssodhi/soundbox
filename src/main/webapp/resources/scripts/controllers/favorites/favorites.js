@@ -8,6 +8,11 @@ angular.module('app').controller('FavoritesCtrl', function (profile, favorites, 
         getFavorites();
     };
 
+    ctrl.goToArtist = function (artist) {
+        // console.log(artist)
+        $location.path('/artist/'+ artist.permalink);
+    };
+
     function getFavorites() {
         ctrl.favorites = [];
         for(var i = 0; i < favorites.length; i++){
