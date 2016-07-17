@@ -3,12 +3,41 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService) {
+    controller: function (MusicService, PlaylistService, LikesService) {
         var ctrl = this;
         ctrl.currentPage = 1;
         ctrl.itemsPerPage = 20;
+        ctrl.likes = [];
         var sb_date, sb_title, sb_duration, sb_artist = false;
         var sb_plays = true;
+
+        ctrl.init = function () {
+            LikesService.get().$promise.then(function (response) {
+                ctrl.likes = response;
+            });
+        };
+
+        ctrl.likeSong = function (song) {
+            if(ctrl.isLiked(song)){
+                // unlike
+                LikesService.remove({id: song.id}).$promise.then(function () {
+                    var ind = ctrl.likes.map(function (e) {
+                        return e.song_id;
+                    }).indexOf(song.id.toString());
+                    ctrl.likes.splice(ind,1);
+                });
+            }else{
+                // like
+                if(song.genre === ''){
+                    song.genre = '---';
+                }
+                LikesService.add({id: song.id}, song.genre).$promise.then(function (response) {
+                    if(response.id){
+                        ctrl.likes.push(response);
+                    }
+                });
+            }
+        };
 
         ctrl.addSongToPlaylist = function (song, playlist) {
             var duplicate = null;
@@ -49,6 +78,10 @@ angular.module('app').component("musicTable", {
                 ctrl.playlists[ind].songs.length--;
                 ctrl.currentplaylist.songs.length--;
             }
+        };
+
+        ctrl.isLiked = function (song) {
+            return _.some(ctrl.likes, {song_id: song.id.toString()});
         };
 
         ctrl.isPlaying = function (track) {
