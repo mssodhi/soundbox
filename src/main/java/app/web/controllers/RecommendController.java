@@ -47,8 +47,6 @@ public class RecommendController {
             // now check this sorted list against SC genres and make a suggestion.
 //            System.out.println(counts);
 //            System.out.println(sortedList);
-        }else{
-            System.out.println("Likes size less than 21");
         }
         return null;
     }
