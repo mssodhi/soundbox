@@ -5,7 +5,7 @@
 
     <div class="col-xs-12 pl0 pr0">
         <div class="pl15">
-            <h3><span>Your favorite artists</h3>
+            <h3><span>Your favorite artists</span></h3>
         </div>
 
         <div class="col-xs-12" ng-if="ctrl.favorites.length === 0">
@@ -14,18 +14,23 @@
         </div>
 
         <div class="col-md-2 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
-            <div class="col-md-12 card card-red button card-sc" ng-click="ctrl.goToArtist(artist)">
-                <div class="panel-body text-center">
+            <div class="col-md-12 card pl0 pr0">
+                <div class="panel-body text-center button" ng-click="ctrl.goToArtist(artist)">
                     <img ng-src="{{artist.avatar_url}}">
                     <span ng-if="artist.avatar_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                    <h6 class="custom-font" style="color: gray">
+                    <h5>
                         <a ng-href="#/artist/{{artist.permalink}}">{{artist.permalink | limitTo: 70}}</a>
                         <span ng-if="artist.full_name > 70"> . . . </span>
-                    </h6>
-                    <h3>
+                    </h5>
+                    <h4>
                         <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}} tracks</label>
                         <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>
-                    </h3>
+                    </h4>
+                </div>
+                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deleteFavorite(artist)">
+                    <div class="col-md-12 text-center">
+                        <p>Remove</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,16 +55,21 @@
         </div>
 
         <div class="col-md-2 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
-            <div class="col-md-12 card card-blue button card-playlist" ng-click="ctrl.goToPlaylist(playlist)">
-                <div class="panel-body text-center">
-                    <h5 class="custom-font" style="color: gray">
+            <div class="col-md-12 card pl0 pr0">
+                <div class="panel-body text-center button" ng-click="ctrl.goToPlaylist(playlist)">
+                    <h4 class="custom-font" style="color: gray">
                         <a ng-href="#/playlist/{{playlist.id}}">{{playlist.name | limitTo: 70}}</a>
                         <span ng-if="playlist.name > 70"> . . . </span>
-                    </h5>
+                    </h4>
                     <h4>
                         <label class="label label-info" ng-if="playlist.songs.length > 0">{{playlist.songs.length | number}} tracks</label>
                         <label class="label label-danger" ng-if="playlist.songs.length === 0">0 tracks</label>
                     </h4>
+                </div>
+                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deletePlaylist(playlist)">
+                    <div class="col-md-12 text-center">
+                        <p>Delete</p>
+                    </div>
                 </div>
             </div>
         </div>

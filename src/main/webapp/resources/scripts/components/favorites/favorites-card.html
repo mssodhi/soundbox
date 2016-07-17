@@ -21,7 +21,7 @@
              ng-repeat="artist in ctrl.favorites | limitTo: 5 track by artist.id">
             <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
                 <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
+                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="50px" width="50px" src="resources/images/noImage.jpg"></span>
                 {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
             </div>
 
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div ng-if="ctrl.favorites.length > 5" class="side-card-footer col-xs-12 button" ng-click="ctrl.goToBrowse()">
+    <div ng-if="ctrl.favorites.length > 5" class="card-footer show-more col-xs-12 button" ng-click="ctrl.goToBrowse()">
         <div class="col-md-12 text-center">
             <p> Show more</p>
         </div>
