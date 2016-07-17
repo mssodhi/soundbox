@@ -57,15 +57,15 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return PlaylistService.getPlaylistById({id: $route.current.params.id}).$promise;
                     }
                 }
-            }).when('/videos', {
-                templateUrl: 'resources/scripts/controllers/video/video.html',
-                controller: 'VideoCtrl',
-                controllerAs: 'ctrl',
-                resolve: {
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck();
-                    }
-                }
+            // }).when('/videos', {
+            //     templateUrl: 'resources/scripts/controllers/video/video.html',
+            //     controller: 'VideoCtrl',
+            //     controllerAs: 'ctrl',
+            //     resolve: {
+            //         permissions: function(PermissionService){
+            //             return PermissionService.permissionCheck();
+            //         }
+            //     }
             }).when('/profile', {
                 templateUrl: 'resources/scripts/controllers/profile/profile.html',
                 controller: 'ProfileCtrl',
