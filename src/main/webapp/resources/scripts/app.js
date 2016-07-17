@@ -66,9 +66,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
             //             return PermissionService.permissionCheck();
             //         }
             //     }
-            }).when('/profile', {
-                templateUrl: 'resources/scripts/controllers/profile/profile.html',
-                controller: 'ProfileCtrl',
+            }).when('/settings', {
+                templateUrl: 'resources/scripts/controllers/settings/settings.html',
+                controller: 'SettingsCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){

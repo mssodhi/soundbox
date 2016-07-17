@@ -71,7 +71,7 @@
 <script src="resources/scripts/controllers/artist/artist.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <%--<script src="resources/scripts/controllers/video/video.js"></script>--%>
-<script src="resources/scripts/controllers/profile/profile.js"></script>
+<script src="resources/scripts/controllers/settings/settings.js"></script>
 <script src="resources/scripts/controllers/browse/browse.js"></script>
 <%-- Controllers --%>
 
