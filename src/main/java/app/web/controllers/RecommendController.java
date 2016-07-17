@@ -1,8 +1,10 @@
 package app.web.controllers;
 
 
+import app.web.domain.Genres;
 import app.web.domain.Likes;
 import app.web.domain.User;
+import app.web.services.GenresService;
 import app.web.services.LikesService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class RecommendController {
 
     @Autowired
     private LikesService likesService;
+
+    @Autowired
+    private GenresService genresService;
 
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public Object get () {
@@ -45,8 +50,25 @@ public class RecommendController {
             List<String> sortedList = new ArrayList<>(sortByComparator(counts).keySet());
 
             // now check this sorted list against SC genres and make a suggestion.
+            Set<Genres> genres = genresService.getAll();
+            List<String> gen_strings = new LinkedList<>();
+            for(Genres genre: genres){
+                gen_strings.add(genre.getName().toLowerCase());
+            }
+
 //            System.out.println(counts);
 //            System.out.println(sortedList);
+//            System.out.println(gen_strings);
+            Set<String> recommendation = new HashSet<>();
+            for(String user_gen: sortedList){
+                for(String sc_gen: gen_strings){
+                    if(user_gen.equals(sc_gen) || user_gen.contains((sc_gen)) || sc_gen.contains(user_gen)){
+                        recommendation.add(sc_gen);
+                    }
+                }
+            }
+//            System.out.println(recommendation);
+            return recommendation;
         }
         return null;
     }
