@@ -31,6 +31,11 @@ public class RecommendController {
             // make a list of genres from user's likes
             List<String> list = likes.stream().map(Likes ::getSong_genre).collect(Collectors.toList());
 
+            // making everything lower case so the algorithm isn't case sensitive
+            for(int i = 0; i < list.size(); i++){
+                list.set(i, list.get(i).toLowerCase());
+            }
+
             // create a Map of genre string with occurrence count in the list
             Map<String, Integer> counts = list.parallelStream().
                     collect(Collectors.toConcurrentMap(
@@ -40,6 +45,7 @@ public class RecommendController {
             List<String> sortedList = new ArrayList<>(sortByComparator(counts).keySet());
 
             // now check this sorted list against SC genres and make a suggestion.
+//            System.out.println(counts);
 //            System.out.println(sortedList);
         }else{
             System.out.println("Likes size less than 21");
