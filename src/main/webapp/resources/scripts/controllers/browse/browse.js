@@ -8,7 +8,7 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
         getPlaylists();
         getFavorites();
         RecommendService.get().$promise.then(function (response) {
-            console.log(response);
+            // console.log(response);
         });
     };
 
