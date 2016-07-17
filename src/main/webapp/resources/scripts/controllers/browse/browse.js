@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('app').controller('BrowseCtrl', function (profile, favorites, $location, PlaylistService, FavoritesService) {
+angular.module('app').controller('BrowseCtrl', function (profile, favorites, $location, PlaylistService, FavoritesService, RecommendService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
         getPlaylists();
         getFavorites();
+        RecommendService.get().$promise.then(function () {
+
+        });
     };
 
     ctrl.goToArtist = function (artist) {

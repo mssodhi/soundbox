@@ -46,6 +46,7 @@
 <script src="resources/scripts/services/login.service.js"></script>
 <script src="resources/scripts/services/settings.service.js"></script>
 <script src="resources/scripts/services/likes.service.js"></script>
+<script src="resources/scripts/services/recommend.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>
