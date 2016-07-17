@@ -16,6 +16,10 @@ angular.module('app').component("favoritesCard", {
                 ctrl.favorites.splice(index, 1);
             });
         };
+
+        ctrl.goToBrowse = function () {
+            $location.path('/browse');
+        };
     },
     bindings: {
         favorites: '='

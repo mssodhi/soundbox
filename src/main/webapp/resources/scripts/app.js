@@ -78,9 +78,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return UserService.getCurrentUser().$promise;
                     }
                 }
-            }).when('/favorites', {
-                templateUrl: 'resources/scripts/controllers/favorites/favorites.html',
-                controller: 'FavoritesCtrl',
+            }).when('/browse', {
+                templateUrl: 'resources/scripts/controllers/browse/browse.html',
+                controller: 'BrowseCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){

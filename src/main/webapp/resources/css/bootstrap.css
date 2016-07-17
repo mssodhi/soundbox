@@ -1412,14 +1412,11 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-family: kepler-std,serif;
+    font-size: 15px;
     line-height: 1.42857143;
     color: #333;
-    /*background-color: slateblue;*/
     background-color: #e9eaed;
-    /*background-color: cornsilk;*/
-    /*background: url(../images/blue-gradiant.png);*/
 }
 
 input,
@@ -1920,9 +1917,30 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     }
 }
 
-.side-card{
-    overflow-y: auto;
+.table > tr > td{
+    vertical-align: middle;
+}
+
+.side-card-main{
     max-height: 460px;
+    min-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+.side-card-footer{
+    color: white;
+    max-height: 50px;
+    background-color: dodgerblue;
+    padding-left: 0;
+    padding-right: 0;
+    opacity: 0.7;
+}
+.side-card-footer p{
+    padding-top: 10px;
+    opacity: 1;
+}
+.side-card-footer:hover{
+    opacity: 1;
 }
 
 .spin {
@@ -1970,6 +1988,10 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 
 .main-nav{
+    font-family: brandon-grotesque,sans-serif;
+    font-weight: 400;
+    display: block;
+    letter-spacing: 1px;
     width: 100%;
     height: 69px;
     position: fixed;
@@ -2075,7 +2097,9 @@ html, body {
 }
 
 .custom-font {
-    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+    font-family: kepler-std,serif;
+    font-style: normal;
+    /*font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;*/
 }
 
 .custom-white {
@@ -3222,7 +3246,7 @@ th {
 .table > tfoot > tr > td {
     padding: 8px;
     line-height: 1.42857143;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #ddd;
 }
 
@@ -7104,6 +7128,10 @@ button.list-group-item-danger.active:focus {
     min-height: 250px;
 }
 
+.card-playlist{
+    min-height: 50px;
+}
+
 .button{
     -ms-touch-action: manipulation;
     touch-action: manipulation;
@@ -7371,6 +7399,10 @@ tr.button:hover{
     -webkit-animation: stretch 250ms ease-out;
     -moz-animation: stretch 250ms ease-out;
     -o-animation: stretch 250ms ease-out;
+}
+
+.music-player-info h6 a{
+    color: white;
 }
 
 .panel-footer {

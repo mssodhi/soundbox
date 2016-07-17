@@ -19,16 +19,16 @@
     <tbody ng-repeat="song in ctrl.tracks.slice(((ctrl.currentPage-1) * ctrl.itemsPerPage), ((ctrl.currentPage) * ctrl.itemsPerPage)) track by song.id" title="{{song.title}}">
         <tr ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{$index+1}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs">{{$index+1}}</td>
             <td ng-click="ctrl.select(song)">
                 <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">
                 <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
                 <a>{{song.title | limitTo: 45}}<span ng-if="song.title.length > 45">... </span></a>
             </td>
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" ng-if="ctrl.showartist"><a href ng-href="#/artist/{{song.user.permalink}}">{{song.user.username}}</a></td>
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{song.playback_count | number}}</td>
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
-            <td ng-click="ctrl.select(song)" style="vertical-align: middle" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
+            <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist"><a href ng-href="#/artist/{{song.user.permalink}}">{{song.user.username}}</a></td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.playback_count | number}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
             <td ng-if="ctrl.playlists.length > 0">
                 <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>

@@ -34,6 +34,10 @@ angular.module('app').component('playlistCard', {
             }
         };
 
+        ctrl.goToBrowse = function () {
+            $location.path('/browse');
+        };
+
         ctrl.showPlaylist = function (playlist) {
             $location.path('playlist/' + playlist.id);
         };
