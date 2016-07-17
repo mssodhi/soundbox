@@ -13,6 +13,24 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
         $location.path('artist/'+ artist.permalink);
     };
 
+    ctrl.clickSearch = function () {
+        var search = document.getElementById("search");
+        search.focus();
+    };
+
+    ctrl.addPlaylist = function () {
+        if(ctrl.name.length > 0){
+            PlaylistService.addPlaylist({name: ctrl.name}).$promise.then(function (res) {
+                if(res.id){
+                    ctrl.playlists.push(res);
+                    ctrl.showForm = false
+                }
+                ctrl.name = '';
+            });
+        }
+
+    };
+
     ctrl.goToPlaylist = function (playlist) {
         $location.path('playlist/' + playlist.id);
     };

@@ -15,22 +15,13 @@ angular.module('app').controller('LandingCtrl', function (PlaylistService, favor
     }
 
     function getFavorites() {
-        var limit = null;
-        if(favorites.length < 10){
-            limit = 20
-        }else if(favorites.length > 50){
-            limit = 10;
-        }else{
-            limit = 15;
-        }
-
         ctrl.tracks = [];
         ctrl.favorites = [];
         for(var i = 0; i < favorites.length; i++){
             SC.get('/users/' + favorites[i].artist_id).then(function(artist){
                 ctrl.favorites.push(artist);
             });
-            SC.get('/tracks', {user_id: favorites[i].artist_id, limit: limit}).then(function (tracks) {
+            SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
                 for(var i = 0; i < tracks.length; i++){
                     ctrl.tracks.push(tracks[i]);
                 }
