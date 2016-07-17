@@ -29,7 +29,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"app.web.data", "app.web"}, repositoryFactoryBeanClass = JpaRepositoryFactoryBean.class)
-@PropertySources(value = {@PropertySource(value = "classpath:/app.properties", ignoreResourceNotFound = true)})
+@PropertySources(value = {@PropertySource(value = "classpath:/app.${spring.profiles.active}.properties", ignoreResourceNotFound = true)})
 public class DataConfig {
 
     @Autowired

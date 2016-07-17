@@ -20,6 +20,9 @@ angular.module('app').factory('MusicService', function () {
             if(player.currentTime() > 0){
                 player.seek(0);
             }
+            player.on('finish', function () {
+                isPlaying = false;
+            });
             player.play();
         },
         getTrack: function() {

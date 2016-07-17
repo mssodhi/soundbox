@@ -18,7 +18,7 @@ import javax.servlet.annotation.WebListener;
 @EnableWebMvc
 @ComponentScan(basePackages = {"app.web"}, excludeFilters = @ComponentScan.Filter(value = Configuration.class, type = FilterType.ANNOTATION))
 @WebListener
-@PropertySources(value = {  @PropertySource( value = "classpath:/app.properties", ignoreResourceNotFound = true)})
+@PropertySources(value = {  @PropertySource( value = "classpath:/app.${spring.profiles.active}.properties", ignoreResourceNotFound = true)})
 public class WebConfig extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
 
 

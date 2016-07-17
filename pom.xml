@@ -257,12 +257,6 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-                <configuration>
-                    <systemProperties>
-                        <JAVA_OPTS>-Xmx1024m</JAVA_OPTS>
-                        <spring.profiles.active>local</spring.profiles.active>
-                    </systemProperties>
-                </configuration>
             </plugin>
         </plugins>
     </build>
