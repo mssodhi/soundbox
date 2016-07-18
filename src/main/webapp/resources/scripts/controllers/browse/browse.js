@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('app').controller('BrowseCtrl', function (profile, favorites, $location, PlaylistService, FavoritesService, RecommendService) {
+angular.module('app').controller('BrowseCtrl', function (recommendation, favorites, $location, PlaylistService, FavoritesService) {
     var ctrl = this;
-    ctrl.currentUser = profile;
     // ctrl.recommendations = [];
     ctrl.tracks = [];
     var limit = 10;
@@ -10,25 +9,41 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
     ctrl.init = function () {
         getPlaylists();
         getFavorites();
-        RecommendService.get().$promise.then(function (response) {
-            // ctrl.recommendations = response;
-            for(var i = 0; i < response.length; i++){
-                SC.get('/search/', {q: response[i], limit: limit}).then(function (res) {
-                    // three objs from each collection
-                    var y = 0;
-                    for(var a = 0; (a === res.collection.length || y < 3 )&& ctrl.tracks.length < limit; a++){
-                        var obj = res.collection[a];
-                        if(obj.kind === 'track'){
-                            if(!_.some(ctrl.tracks, obj)){
-                                ctrl.tracks.push(obj);
-                                y++;
-                            }
+        getRecommendations();
+    };
+
+    function getRecommendations() {
+        for(var i = 0; i < recommendation.length; i++){
+            SC.get('/search/', {q: recommendation[i], limit: limit}).then(function (res) {
+                // three objs from each collection
+                var y = 0;
+                for(var a = 0; (a === res.collection.length || y < 3 )&& ctrl.tracks.length < limit; a++){
+                    var obj = res.collection[a];
+                    if(obj.kind === 'track'){
+                        if(!_.some(ctrl.tracks, obj)){
+                            ctrl.tracks.push(obj);
+                            y++;
                         }
                     }
-                });
-            }
+                }
+            });
+        }
+    }
+
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
         });
-    };
+    }
+
+    function getFavorites() {
+        ctrl.favorites = [];
+        for(var i = 0; i < favorites.length; i++){
+            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                ctrl.favorites.push(artist);
+            });
+        }
+    }
 
     ctrl.goToArtist = function (artist) {
         $location.path('artist/'+ artist.permalink);
@@ -68,20 +83,5 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
     ctrl.goToPlaylist = function (playlist) {
         $location.path('playlist/' + playlist.id);
     };
-
-    function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
-            ctrl.playlists = response;
-        });
-    }
-
-    function getFavorites() {
-        ctrl.favorites = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        }
-    }
 
 });

@@ -86,8 +86,8 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
                     },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
+                    recommendation: function(RecommendService){
+                        return RecommendService.get().$promise;
                     },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
