@@ -18,7 +18,7 @@
         <!--</div>-->
 
         <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
-             ng-repeat="artist in ctrl.favorites | limitTo: 5 track by artist.id">
+             ng-repeat="artist in ctrl.favorites | limitTo: 4 track by artist.id">
             <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
                 <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
                 <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="50px" width="50px" src="resources/images/noImage.jpg"></span>
