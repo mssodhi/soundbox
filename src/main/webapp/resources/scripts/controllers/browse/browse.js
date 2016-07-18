@@ -14,10 +14,10 @@ angular.module('app').controller('BrowseCtrl', function (recommendation, favorit
 
     function getRecommendations() {
         for(var i = 0; i < recommendation.length; i++){
-            SC.get('/search/', {q: recommendation[i], limit: limit}).then(function (res) {
+            SC.get('/search/', {q: recommendation[i], limit: 20}).then(function (res) {
                 // three objs from each collection
                 var y = 0;
-                for(var a = 0; (a === res.collection.length || y < 3 )&& ctrl.tracks.length < limit; a++){
+                for(var a = 0; (a === res.collection.length || y < 2 )&& ctrl.tracks.length < limit; a++){
                     var obj = res.collection[a];
                     if(obj.kind === 'track'){
                         if(!_.some(ctrl.tracks, obj)){
