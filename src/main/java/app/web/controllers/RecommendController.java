@@ -51,23 +51,19 @@ public class RecommendController {
 
             // now check this sorted list against SC genres and make a suggestion.
             Set<Genres> genres = genresService.getAll();
-            List<String> gen_strings = new LinkedList<>();
-            for(Genres genre: genres){
-                gen_strings.add(genre.getName().toLowerCase());
-            }
 
-//            System.out.println(counts);
-//            System.out.println(sortedList);
-//            System.out.println(gen_strings);
             Set<String> recommendation = new HashSet<>();
             for(String user_gen: sortedList){
-                for(String sc_gen: gen_strings){
-                    if(user_gen.equals(sc_gen) || user_gen.contains((sc_gen)) || sc_gen.contains(user_gen)){
-                        recommendation.add(sc_gen);
+                for(Genres sc_gen: genres){
+                    if(recommendation.size() < 5 && !user_gen.equals("---")){
+                        recommendation.add(user_gen);
+                    }
+                    if(user_gen.equals(sc_gen.getName().toLowerCase()) || user_gen.contains((sc_gen.getName().toLowerCase())) || sc_gen.getName().toLowerCase().contains(user_gen)){
+                        if(!recommendation.contains(sc_gen.getName().toLowerCase()))
+                        recommendation.add(sc_gen.getName().toLowerCase());
                     }
                 }
             }
-//            System.out.println(recommendation);
             return recommendation;
         }
         return null;
