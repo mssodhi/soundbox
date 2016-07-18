@@ -34,12 +34,7 @@ public class RecommendController {
         Set<Likes> likes = likesService.findByUser(user.getId());
         if(likes.size() > 20){
             // make a list of genres from user's likes
-            List<String> list = likes.stream().map(Likes ::getSong_genre).collect(Collectors.toList());
-
-            // making everything lower case so the algorithm isn't case sensitive
-            for(int i = 0; i < list.size(); i++){
-                list.set(i, list.get(i).toLowerCase());
-            }
+            List<String> list = likes.stream().map(l -> l.getSong_genre().toLowerCase()).collect(Collectors.toList());
 
             // create a Map of genre string with occurrence count in the list
             Map<String, Integer> counts = list.parallelStream().
@@ -54,12 +49,11 @@ public class RecommendController {
 
             Set<String> recommendation = new HashSet<>();
             for(String user_gen: sortedList){
+                if(recommendation.size() < 5 && !user_gen.equals("---")){
+                    recommendation.add(user_gen);
+                }
                 for(Genres sc_gen: genres){
-                    if(recommendation.size() < 5 && !user_gen.equals("---")){
-                        recommendation.add(user_gen);
-                    }
-                    if(user_gen.equals(sc_gen.getName().toLowerCase()) || user_gen.contains((sc_gen.getName().toLowerCase())) || sc_gen.getName().toLowerCase().contains(user_gen)){
-                        if(!recommendation.contains(sc_gen.getName().toLowerCase()))
+                    if((user_gen.equals(sc_gen.getName().toLowerCase()) || user_gen.contains((sc_gen.getName().toLowerCase())) || sc_gen.getName().toLowerCase().contains(user_gen)) && !recommendation.contains(sc_gen.getName().toLowerCase())){
                         recommendation.add(sc_gen.getName().toLowerCase());
                     }
                 }
