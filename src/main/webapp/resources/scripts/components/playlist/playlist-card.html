@@ -1,24 +1,24 @@
 <div class="card col-xs-12 pl0 pr0">
     <div class="side-card-main">
         <!-- Header -->
-        <div class="card-purple panel-body" ng-if="!ctrl.showSearch">
-            <div class="pull-left custom-font">
+        <div class="card-purple panel-body" ng-if="!ctrl.showSearch" style="height: 68px">
+            <div class="pull-left custom-font pt5">
                 <span class="pl10" style="font-size: 18px">Playlists ({{ctrl.playlists.length}})</span>
             </div>
-            <div class="pull-right">
+            <div class="pull-right pt5">
                 <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href title="Add a playlist"><i class="fa fa-plus pr10" style="font-size: 25px"></i></a>
                 <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href title="Cancel"><i class="fa fa-times pr10" style="font-size: 25px"></i></a>
-                <!--<a ng-if="ctrl.playlists.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>-->
+                <a ng-if="ctrl.playlists.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>
             </div>
         </div>
 
         <!-- Search bar -->
-        <!--<div class="card-red panel-body" ng-if="ctrl.showSearch">-->
-        <!--<div class="has-feedback">-->
-        <!--<input class="form-control" ng-model="ctrl.playlistFiler">-->
-        <!--<i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="card-red panel-body" ng-if="ctrl.showSearch">
+            <div class="has-feedback">
+                <input class="form-control" ng-model="ctrl.playlistFiler">
+                <i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>
+            </div>
+        </div>
 
         <!-- New Playlist Form -->
         <div ng-if="ctrl.showPlaylistForm" class="panel-body">
