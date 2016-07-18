@@ -15,10 +15,10 @@ import java.util.Set;
 public class PlaylistController {
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @Autowired
-    public PlaylistService playlistService;
+    private PlaylistService playlistService;
 
     @RequestMapping(value = "getPlaylist", method = RequestMethod.GET)
     public Object getPlaylistCurrentUser () {

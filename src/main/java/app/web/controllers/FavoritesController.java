@@ -2,7 +2,6 @@ package app.web.controllers;
 
 import app.web.domain.Favorites;
 import app.web.domain.User;
-import app.web.helper.EmailHelper;
 import app.web.services.FavoritesService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,10 @@ import java.util.Set;
 public class FavoritesController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    FavoritesService favoritesService;
-
-    @Autowired
-    EmailHelper emailHelper;
+    private FavoritesService favoritesService;
 
     @RequestMapping(value = "getFavorites", method = RequestMethod.GET)
     public Object getFavorites() throws Exception{

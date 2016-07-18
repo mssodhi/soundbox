@@ -20,7 +20,7 @@ import java.io.StringWriter;
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
-    EmailHelper emailHelper;
+    private EmailHelper emailHelper;
 
     @Value("${site.url}")
     private String url;

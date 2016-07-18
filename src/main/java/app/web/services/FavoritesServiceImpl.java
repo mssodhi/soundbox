@@ -14,7 +14,7 @@ import java.util.Set;
 public class FavoritesServiceImpl extends BaseServiceImpl<Favorites, Integer> implements FavoritesService {
 
     @Autowired
-    FavoritesRepository favoritesRepository;
+    private FavoritesRepository favoritesRepository;
 
     @Override
     public Favorites save(Favorites favorites) {

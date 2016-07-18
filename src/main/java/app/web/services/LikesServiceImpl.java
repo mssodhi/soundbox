@@ -15,7 +15,7 @@ import java.util.Set;
 public class LikesServiceImpl extends BaseServiceImpl<Likes, Integer> implements LikesService{
 
     @Autowired
-    LikesRepository likesRepository;
+    private LikesRepository likesRepository;
 
     public Likes findBySongAndUser(String id, User user){
         return likesRepository.findBySongAndUser(id, user.getId());

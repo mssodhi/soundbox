@@ -3,7 +3,6 @@ package app.web.controllers;
 import app.web.domain.Enums.EmailType;
 import app.web.domain.TempUser;
 import app.web.domain.User;
-import app.web.helper.EmailHelper;
 import app.web.services.EmailService;
 import app.web.services.TempUserService;
 import app.web.services.UserService;
@@ -15,13 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    TempUserService tempUserService;
-
-    @Autowired
-    EmailHelper emailHelper;
+    private TempUserService tempUserService;
 
     @Autowired
     private EmailService emailService;

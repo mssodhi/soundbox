@@ -17,7 +17,7 @@ import java.io.StringWriter;
 public class TempUserServiceImpl extends BaseServiceImpl<TempUser,Integer> implements TempUserService {
 
     @Autowired
-    TempUserRepository repository;
+    private TempUserRepository repository;
 
     @Override
     public TempUser save(TempUser user){

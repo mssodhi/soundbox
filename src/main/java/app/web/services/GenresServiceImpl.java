@@ -14,7 +14,7 @@ import java.util.Set;
 public class GenresServiceImpl extends BaseServiceImpl<Genres, Integer> implements GenresService {
 
     @Autowired
-    GenresRepository genresRepository;
+    private GenresRepository genresRepository;
 
     @Override
     public Genres save(Genres genres) {

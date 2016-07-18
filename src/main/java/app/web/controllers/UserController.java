@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "getCurrent", method = RequestMethod.GET)
     public Object getCurrentUser(){

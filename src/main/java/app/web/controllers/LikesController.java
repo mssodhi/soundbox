@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class LikesController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    LikesService likesService;
+    private LikesService likesService;
 
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public Object get () {
