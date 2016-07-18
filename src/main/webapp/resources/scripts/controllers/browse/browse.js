@@ -5,9 +5,7 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
     ctrl.currentUser = profile;
     // ctrl.recommendations = [];
     ctrl.tracks = [];
-    var tracks_limit = 10;
-    // search response limit
-    var limit = 5;
+    var limit = 10;
 
     ctrl.init = function () {
         getPlaylists();
@@ -15,15 +13,15 @@ angular.module('app').controller('BrowseCtrl', function (profile, favorites, $lo
         RecommendService.get().$promise.then(function (response) {
             // ctrl.recommendations = response;
             for(var i = 0; i < response.length; i++){
-                SC.get('/search/', {q: response[i], limit: 10}).then(function (res) {
-                    if(res.collection.length < limit){
-                        limit = res.collection.length;
-                    }
-                    for(var a = 0; a < limit && ctrl.tracks.length < tracks_limit; a++){
+                SC.get('/search/', {q: response[i], limit: limit}).then(function (res) {
+                    // three objs from each collection
+                    var y = 0;
+                    for(var a = 0; (a === res.collection.length || y < 3 )&& ctrl.tracks.length < limit; a++){
                         var obj = res.collection[a];
                         if(obj.kind === 'track'){
                             if(!_.some(ctrl.tracks, obj)){
                                 ctrl.tracks.push(obj);
+                                y++;
                             }
                         }
                     }
