@@ -63,8 +63,7 @@ public class RecommendController {
         return null;
     }
 
-    private static Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap)
-    {
+    private static Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap) {
 
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
 
