@@ -1,5 +1,5 @@
 <div class="container-fluid" ng-init="ctrl.init()">
-    <div class="col-xs-9">
+    <div class="col-md-9">
         <search-bar></search-bar>
     </div>
 
@@ -50,7 +50,7 @@
             <span>You have no favorite artists. <a href ng-click="ctrl.clickSearch()">Search</a> artists to add them to your favorites.</span>
         </div>
 
-        <div class="col-md-2 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
+        <div class="col-md-2 col-sm-4 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
             <div class="col-xs-12 card pl0 pr0">
                 <div class="panel-body text-center button" ng-click="ctrl.goToArtist(artist)">
                     <img ng-src="{{artist.avatar_url}}">
@@ -91,7 +91,7 @@
             <a class="fa-2x" ng-click="ctrl.addPlaylist()" href title="Confirm"><i class="fa fa-check pt10"></i></a>
         </div>
 
-        <div class="col-md-2 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
+        <div class="col-md-2 col-sm-4 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
             <div class="col-xs-12 card pl0 pr0">
                 <div class="panel-body text-center button" ng-click="ctrl.goToPlaylist(playlist)">
                     <h4 class="custom-font" style="color: gray">
