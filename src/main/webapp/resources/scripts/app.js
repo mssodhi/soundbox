@@ -18,10 +18,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return FavoritesService.getFavorites({}).$promise;
                     }
                 }
-            }).when('/verify/:code', {
-                templateUrl: 'resources/scripts/controllers/verify/verify.html',
-                controller: 'VerifyCtrl',
-                controllerAs: 'ctrl'
             }).when('/deny', {
                 templateUrl: 'resources/scripts/controllers/deny/deny.html',
                 caseInsensitiveMatch: true,
@@ -57,15 +53,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return PlaylistService.getPlaylistById({id: $route.current.params.id}).$promise;
                     }
                 }
-            // }).when('/videos', {
-            //     templateUrl: 'resources/scripts/controllers/video/video.html',
-            //     controller: 'VideoCtrl',
-            //     controllerAs: 'ctrl',
-            //     resolve: {
-            //         permissions: function(PermissionService){
-            //             return PermissionService.permissionCheck();
-            //         }
-            //     }
             }).when('/settings', {
                 templateUrl: 'resources/scripts/controllers/settings/settings.html',
                 controller: 'SettingsCtrl',
