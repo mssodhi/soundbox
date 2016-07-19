@@ -37,7 +37,7 @@ public class RecommendController {
             List<String> list = likes.stream().map(l -> l.getSong_genre().toLowerCase()).collect(Collectors.toList());
 
             // create a Map of genre string with occurrence count in the list
-            Map<String, Integer> counts = list.parallelStream().
+            Map<String, Integer> counts = list.stream().
                     collect(Collectors.toConcurrentMap(
                             w -> w, w -> 1, Integer::sum));
 
