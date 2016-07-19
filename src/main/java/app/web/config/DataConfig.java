@@ -48,7 +48,9 @@ public class DataConfig {
 
     private DatabasePopulator databasePopulator() {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScript(dataScript);
+        if(environment.getActiveProfiles()[0].equals("local")){
+            populator.addScript(dataScript);
+        }
         return populator;
     }
 
