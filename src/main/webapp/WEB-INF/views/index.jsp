@@ -14,8 +14,6 @@
 <main ng-view></main>
 
 </body>
-<script src="resources/js/fb.js"></script>
-
 <%-- Angular injects --%>
 <script src="resources/js/angular.min.js"></script>
 <script src="resources/js/angular-route.min.js"></script>
@@ -26,11 +24,12 @@
 <%-- Angular injects --%>
 
 <%-- Third part injects --%>
+<script src="resources/js/fb.js"></script>
 <script src="resources/js/sc-sdk-3.1.1.js"></script>
 <script src="resources/js/lodash.min.js"></script>
 <script src="resources/js/moment.min.js"></script>
 <script src="resources/js/ui-bootstrap-1.3.3.min.js"></script>
-<script src="resources/js/MD5.js"></script>
+<%--<script src="resources/js/MD5.js"></script>--%>
 <%-- Third Party injects --%>
 
 <%-- Sandbox --%>
