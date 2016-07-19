@@ -38,7 +38,9 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                                 }
                             });
                         });
-                    } else {
+                    } else if (response.status === 'not_authorized'){
+                        console.log('User did not authorize soundbox to use their FB...');
+                    }else {
                         FB.login();
                     }
                 }
