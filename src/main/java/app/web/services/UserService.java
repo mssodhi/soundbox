@@ -9,9 +9,9 @@ public interface UserService extends BaseService<User, Integer> {
 
     User save(User number);
 
-    String toSimpleJson(User user);
-
     User getCurrentUser();
+
+    User getByFbId(String id);
 
     void setCurrentUser(User user);
 }

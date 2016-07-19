@@ -66,9 +66,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
             //             return PermissionService.permissionCheck();
             //         }
             //     }
-            }).when('/profile', {
-                templateUrl: 'resources/scripts/controllers/profile/profile.html',
-                controller: 'ProfileCtrl',
+            }).when('/settings', {
+                templateUrl: 'resources/scripts/controllers/settings/settings.html',
+                controller: 'SettingsCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     permissions: function(PermissionService){
@@ -86,8 +86,8 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     permissions: function(PermissionService){
                         return PermissionService.permissionCheck();
                     },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
+                    recommendation: function(RecommendService){
+                        return RecommendService.get().$promise;
                     },
                     favorites: function (FavoritesService) {
                         return FavoritesService.getFavorites({}).$promise;
@@ -115,4 +115,14 @@ angular.module('app').run(function ($window, $location, CredentialsService) {
             redirect_uri: 'http://localhost:8080/soundbox/#/'
         });
     });
+
+    CredentialsService.getFacebookCredentials().$promise.then(function (res) {
+        FB.init({
+            appId      : res.app_id,
+            cookie     : true,  // enable cookies to allow the server to access
+                                // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.5' // use graph api version 2.5
+        });
+    })
 });

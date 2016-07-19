@@ -14,7 +14,7 @@
 <main ng-view></main>
 
 </body>
-<%--<script src="http://connect.facebook.net/en_US/all.js"></script>--%>
+<script src="resources/js/fb.js"></script>
 
 <%-- Angular injects --%>
 <script src="resources/js/angular.min.js"></script>
@@ -45,6 +45,8 @@
 <script src="resources/scripts/services/playlist.service.js"></script>
 <script src="resources/scripts/services/login.service.js"></script>
 <script src="resources/scripts/services/settings.service.js"></script>
+<script src="resources/scripts/services/likes.service.js"></script>
+<script src="resources/scripts/services/recommend.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>
@@ -71,7 +73,7 @@
 <script src="resources/scripts/controllers/artist/artist.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <%--<script src="resources/scripts/controllers/video/video.js"></script>--%>
-<script src="resources/scripts/controllers/profile/profile.js"></script>
+<script src="resources/scripts/controllers/settings/settings.js"></script>
 <script src="resources/scripts/controllers/browse/browse.js"></script>
 <%-- Controllers --%>
 

@@ -17,10 +17,10 @@ import java.util.Set;
 public class PlaylistServiceImpl extends BaseServiceImpl<Playlist,Integer> implements PlaylistService  {
 
     @Autowired
-    PlaylistRepository repository;
+    private PlaylistRepository repository;
 
     @Autowired
-    PlaylistSongRepository playlistSongRepository;
+    private PlaylistSongRepository playlistSongRepository;
 
     @Override
     public Playlist save(Playlist playlist){

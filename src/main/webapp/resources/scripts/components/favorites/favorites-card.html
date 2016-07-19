@@ -1,27 +1,27 @@
 <div class="card col-xs-12 pl0 pr0">
     <div class="side-card-main">
-        <div class="card-red panel-body" ng-if="!ctrl.showSearch">
-            <div class="pull-left custom-font">
+        <div class="card-red panel-body" ng-if="!ctrl.showSearch" style="height: 68px">
+            <div class="pull-left custom-font pt5">
                 <span class="pl10" style="font-size: 18px">Favorite Artists ({{ctrl.favorites.length}})</span>
             </div>
-            <!--<div class="pull-right">-->
-            <!--<a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>-->
-            <!--</div>-->
+            <div class="pull-right pt5">
+                <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>
+            </div>
         </div>
 
-        <!-- Search bar -->
-        <!--<div class="card-purple panel-body" ng-if="ctrl.showSearch">-->
-        <!--<div class="has-feedback">-->
-        <!--<input class="form-control" ng-model="ctrl.filter">-->
-        <!--<i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>-->
-        <!--</div>-->
-        <!--</div>-->
+         <!--Search bar -->
+        <div class="card-purple panel-body" ng-if="ctrl.showSearch">
+            <div class="has-feedback">
+                <input class="form-control" ng-model="ctrl.filter">
+                <i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>
+            </div>
+        </div>
 
         <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
-             ng-repeat="artist in ctrl.favorites | limitTo: 5 track by artist.id">
+             ng-repeat="artist in ctrl.favorites | filter: ctrl.filter | limitTo: 4 track by artist.id">
             <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
                 <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
+                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="50px" width="50px" src="resources/images/noImage.jpg"></span>
                 {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
             </div>
 
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div ng-if="ctrl.favorites.length > 5" class="side-card-footer col-xs-12 button" ng-click="ctrl.goToBrowse()">
+    <div ng-if="ctrl.favorites.length > 4" class="card-footer show-more col-xs-12 button" ng-click="ctrl.goToBrowse()">
         <div class="col-md-12 text-center">
             <p> Show more</p>
         </div>

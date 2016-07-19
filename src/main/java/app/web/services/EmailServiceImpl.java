@@ -1,7 +1,7 @@
 package app.web.services;
 
 import app.web.domain.Enums.EmailType;
-import app.web.domain.TempUser;
+import app.web.domain.User;
 import app.web.helper.EmailHelper;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -20,13 +20,13 @@ import java.io.StringWriter;
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
-    EmailHelper emailHelper;
+    private EmailHelper emailHelper;
 
     @Value("${site.url}")
     private String url;
 
     @Override
-    public void sendEmail(EmailType emailType, TempUser user) throws Exception{
+    public void sendEmail(EmailType emailType, User user) throws Exception{
 
         String[] recipients = {user.getEmail()};
         String subject = "";
@@ -40,12 +40,6 @@ public class EmailServiceImpl implements EmailService {
         VelocityContext context = new VelocityContext();
         context.put("user", user);
 
-        if(emailType.equals(EmailType.VERIFY)){
-            template = ve.getTemplate("email-templates/verify-email.vm");
-            subject = "SoundBox Account Verification for " + user.getName();
-            url = url + "/#/verify/" + user.getSecret();
-            context.put("link", url);
-        }
         if(emailType.equals(EmailType.WELCOME)){
             template = ve.getTemplate("email-templates/welcome-email.vm");
             subject = "Welcome to Soundbox " + user.getName();

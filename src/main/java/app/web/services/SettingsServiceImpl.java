@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SettingsServiceImpl extends BaseServiceImpl<Settings,Integer> implements SettingsService  {
 
     @Autowired
-    SettingsRepository settingsRepository;
+    private SettingsRepository settingsRepository;
 
     @Override
     public Settings findById(Integer id){

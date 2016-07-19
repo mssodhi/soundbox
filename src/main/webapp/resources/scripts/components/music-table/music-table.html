@@ -1,4 +1,4 @@
-<div class="col-md-12 col-sm-12 pl0 pr0 pt15">
+<div class="col-md-12 col-sm-12 pl0 pr0 pt15" ng-init="ctrl.init()">
     <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks">
         <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
     </span>
@@ -29,6 +29,16 @@
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.playback_count | number}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
+            <td ng-click="ctrl.likeSong(song)">
+                <div class="pt5" style="font-size: 25px;">
+                   <a ng-if="ctrl.isLiked(song)">
+                       <i class="fa fa-thumbs-up"></i>
+                   </a>
+                    <a ng-if="!ctrl.isLiked(song)">
+                       <i class="fa fa-thumbs-o-up" style="padding-right: 2px; color: black;"></i>
+                   </a>
+                </div>
+            </td>
             <td ng-if="ctrl.playlists.length > 0">
                 <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>

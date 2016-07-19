@@ -41,90 +41,50 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
             animation: true,
             templateUrl: 'resources/scripts/controllers/login/login-modal.html',
             controllerAs: 'ctrl',
-            controller: function ($uibModalInstance, LoginService, $location) {
+            controller: function ($uibModalInstance, LoginService, UserService) {
 
                 var ctrl = this;
 
-                ctrl.init = function () {
-                    ctrl.showLoginForm = true;
-                    ctrl.showRegisterForm = false;
-                };
-
-                ctrl.switchForm = function (form) {
-                    if(form === 'login'){
-                        ctrl.init();
-                    }else{
-                        ctrl.showRegisterForm = true;
-                        ctrl.showLoginForm = false;
-                    }
-                };
-
-                ctrl.login = function(){
-                    ctrl.noUserFound = false;
-                    ctrl.password = MD5(ctrl.password);
-                    LoginService.login({email: ctrl.email}, ctrl.password).$promise.then(function (response) {
-                        if(response.id){
-                            ctrl.goToLanding();
-                        }else{
-                            ctrl.noUserFound = true;
-                        }
-                    });
-                };
-
-                ctrl.register = function(){
-                    ctrl.loading = true;
-                    ctrl.emailNotValid = false;
-                    if(validateEmail(ctrl.email)){
-                        ctrl.passwordNotSame = false;
-                        ctrl.emailTaken = false;
-                        ctrl.verificationEmailSent = false;
-                        if(ctrl.password === ctrl.repeatedPassword){
-                            ctrl.password = MD5(ctrl.password);
-                            ctrl.repeatedPassword = MD5(ctrl.password);
-                            var user = {name: ctrl.name, email: ctrl.email, password: ctrl.password};
-                            LoginService.checkEmailAvailability({email: ctrl.email}).$promise.then(function (response) {
-                                if(response.taken !== 'true'){
-                                    LoginService.addUser(user).$promise.then(function(response){
-                                        if(response){
-                                            ctrl.verificationEmailSent = true;
-                                            ctrl.loading = false;
-                                        }else{
-                                            $location.path('/deny');
-                                        }
-                                    });
-                                }else{
-                                    ctrl.emailTaken = true;
-                                    ctrl.loading = false;
+                function statusChangeCallback(response) {
+                    if (response.status === 'connected') {
+                        // Logged into your app and Facebook.
+                        FB.api('/me?fields=name,email', function(response) {
+                            LoginService.checkUser({uid: response.id, email: response.email}, response.name).$promise.then(function (user) {
+                                if(user.id){
+                                    if(!user.pic_url){
+                                        FB.api(
+                                            '/' + response.id + '/picture',
+                                            function (response) {
+                                                if (response && !response.error) {
+                                                    UserService.setPic(response.data.url);
+                                                }
+                                            }
+                                        );
+                                    }
+                                    ctrl.goToLanding();
                                 }
                             });
-                        }else{
-                            ctrl.passwordNotSame = true;
-                            ctrl.loading = false;
-                        }
-                    }else{
-                        ctrl.emailNotValid = true;
-                        ctrl.loading = false;
+                        });
+                    } else {
+                        FB.login();
                     }
+                }
 
+                ctrl.login = function () {
+                    getStatus();
                 };
 
-                ctrl.isValid = function () {
-                    if(ctrl.password && ctrl.repeatedPassword){
-                        return ctrl.name && ctrl.email && ctrl.password.length > 0 && ctrl.repeatedPassword.length > 0;
-                    }else{
-                        return false;
-                    }
-                } ;
+                function getStatus () {
+                    FB.getLoginStatus(function(response) {
+                        statusChangeCallback(response);
+                    });
+                }
 
                 ctrl.goToLanding = function () {
                     $uibModalInstance.close();
                     ctrl.loggedIn = true;
                 };
 
-                function validateEmail(email) {
-                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    return re.test(email);
-                }
             }
         });
     };

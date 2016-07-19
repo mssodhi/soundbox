@@ -1,24 +1,24 @@
 <div class="card col-xs-12 pl0 pr0">
     <div class="side-card-main">
         <!-- Header -->
-        <div class="card-purple panel-body" ng-if="!ctrl.showSearch">
-            <div class="pull-left custom-font">
+        <div class="card-purple panel-body" ng-if="!ctrl.showSearch" style="height: 68px">
+            <div class="pull-left custom-font pt5">
                 <span class="pl10" style="font-size: 18px">Playlists ({{ctrl.playlists.length}})</span>
             </div>
-            <div class="pull-right">
+            <div class="pull-right pt5">
                 <a ng-if="!ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = true;" href title="Add a playlist"><i class="fa fa-plus pr10" style="font-size: 25px"></i></a>
                 <a ng-if="ctrl.showPlaylistForm" ng-click="ctrl.showPlaylistForm = false;" href title="Cancel"><i class="fa fa-times pr10" style="font-size: 25px"></i></a>
-                <!--<a ng-if="ctrl.playlists.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>-->
+                <a ng-if="ctrl.playlists.length > 0" ng-click="ctrl.showSearch = true" href title="Search your playlists"><i class="fa fa-search" style="font-size: 25px"></i></a>
             </div>
         </div>
 
         <!-- Search bar -->
-        <!--<div class="card-red panel-body" ng-if="ctrl.showSearch">-->
-        <!--<div class="has-feedback">-->
-        <!--<input class="form-control" ng-model="ctrl.playlistFiler">-->
-        <!--<i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="card-red panel-body" ng-if="ctrl.showSearch">
+            <div class="has-feedback">
+                <input class="form-control" ng-model="ctrl.playlistFiler">
+                <i class="pt10 fa fa-times-circle-o form-control-feedback" style="pointer-events: all" ng-click="ctrl.showSearch = false"></i>
+            </div>
+        </div>
 
         <!-- New Playlist Form -->
         <div ng-if="ctrl.showPlaylistForm" class="panel-body">
@@ -30,7 +30,7 @@
         </div>
 
         <!-- List of playlists -->
-        <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.playlists | limitTo: 5 track by playlist.id"
+        <div class="button col-md-12 pl0 pr0" ng-repeat="playlist in ctrl.playlists | limitTo: 3 track by playlist.id"
              ng-mouseleave="playlist.showOptions = false" ng-mouseover="playlist.showOptions = true">
             <div class="panel-body col-md-10 pl0 pr0" title="{{playlist.name}}" ng-click="ctrl.showPlaylist(playlist)">
                 <span class="badge mr5" style="font-size: 20px; display: inline-block; background-color: coral"> {{playlist.songs.length}}</span>
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div ng-if="ctrl.playlists.length > 5" class="side-card-footer col-xs-12 button" ng-click="ctrl.goToBrowse()">
+    <div ng-if="ctrl.playlists.length > 3" class="card-footer show-more col-xs-12 button" ng-click="ctrl.goToBrowse()">
         <div class="col-md-12 text-center">
             <p> Show more</p>
         </div>

@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('app').controller('ProfileCtrl', function (profile, UserService, SettingsService) {
+angular.module('app').controller('SettingsCtrl', function (profile, UserService, SettingsService) {
     var ctrl = this;
-
     ctrl.currentUser = profile;
-    SettingsService.getSettings().$promise.then(function (response) {
-        ctrl.settings = response;
-    });
+    ctrl.init = function () {
+        SettingsService.getSettings().$promise.then(function (response) {
+            ctrl.settings = response;
+        });
+    };
 
     ctrl.resetPassword = function () {
         ctrl.incorrectPassword = false;

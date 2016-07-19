@@ -1,9 +1,9 @@
 package app.web.services;
 
 import app.web.domain.Enums.EmailType;
-import app.web.domain.TempUser;
+import app.web.domain.User;
 
 public interface EmailService{
 
-    void sendEmail(EmailType emailType, TempUser user) throws Exception;
+    void sendEmail(EmailType emailType, User user) throws Exception;
 }

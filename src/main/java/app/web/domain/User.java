@@ -23,9 +23,13 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private String email;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "fb_id", length = 50, nullable = false)
     @JsonProperty
-    private  String password;
+    private  String fb_id;
+
+    @Column(name = "pic_url", length = 225)
+    @JsonProperty
+    private  String pic_url;
 
     public Integer getId() {
         return id;
@@ -51,11 +55,19 @@ public class User extends AuditableEntity implements Serializable{
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFb_id() {
+        return fb_id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFb_id(String fb_id) {
+        this.fb_id = fb_id;
+    }
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
 }

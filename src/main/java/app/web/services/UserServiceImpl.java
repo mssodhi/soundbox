@@ -4,13 +4,9 @@ import app.web.data.UserRepository;
 import app.web.domain.User;
 import app.web.helper.CookieHelper;
 import app.web.services.Base.BaseServiceImpl;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.StringWriter;
 
 @Service
 @Transactional
@@ -40,6 +36,11 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     }
 
     @Override
+    public User getByFbId(String id){
+        return userRepository.getByFbId(id);
+    }
+
+    @Override
     public void setCurrentUser(User user){
         cookieHelper.setCurrentUser(user);
     }
@@ -47,30 +48,6 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     @Override
     public User save(User user){
         return userRepository.save(user);
-    }
-
-    @Override
-    public String toSimpleJson(User user) {
-        try {
-            StringWriter sw = new StringWriter();
-
-            JsonFactory factory = new JsonFactory();
-            JsonGenerator json = factory.createGenerator(sw);
-
-            json.writeStartObject();
-            if(user != null){
-                json.writeNumberField("id", user.getId());
-                json.writeStringField("name", user.getName());
-                json.writeStringField("email", user.getEmail());
-            }
-
-            json.writeEndObject();
-            json.close();
-
-            return sw.toString();
-        } catch (Exception e) {
-            return null;
-        }
     }
 
 }
