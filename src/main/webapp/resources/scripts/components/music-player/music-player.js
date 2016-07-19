@@ -77,27 +77,27 @@ angular.module('app').component('musicPlayer', {
 
         function registerKeys() {
             document.onkeydown = function(e) {
-                switch (e.keyCode) {
-                    case 32:
-                        if(ctrl.player && e.target === document.body){
+                if(e.target === document.body){
+                    switch (e.keyCode) {
+                        case 32:
                             if(ctrl.isPlaying){
                                 ctrl.pause();
                             }else{
                                 ctrl.play();
                             }
                             e.preventDefault();
-                        }
-                        break;
-                    case 37:
-                        if(ctrl.player){
-                            ctrl.getPrevious();
-                        }
-                        break;
-                    case 39:
-                        if(ctrl.player){
-                            ctrl.next();
-                        }
-                        break;
+                            break;
+                        case 37:
+                            if(ctrl.player){
+                                ctrl.getPrevious();
+                            }
+                            break;
+                        case 39:
+                            if(ctrl.player){
+                                ctrl.next();
+                            }
+                            break;
+                    }
                 }
             };
         }
