@@ -68,7 +68,6 @@
 <%-- Controllers --%>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>
-<script src="resources/scripts/controllers/verify/verify.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/artist/artist.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>

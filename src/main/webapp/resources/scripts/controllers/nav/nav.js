@@ -4,7 +4,7 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
     var ctrl = this;
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
-        ctrl.inApp = !(route === '/login' || route.includes('/verify') || route === '/deny');
+        ctrl.inApp = !(route === '/login' || route === '/deny');
     });
 
     ctrl.isActive = function (location) {
