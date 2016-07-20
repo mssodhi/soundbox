@@ -3,7 +3,7 @@
 angular.module('app').component("searchBar", {
     templateUrl: 'resources/scripts/components/search/search-bar.html',
     controllerAs: 'ctrl',
-    controller: function ($location, MusicService) {
+    controller: function ($location) {
         var ctrl = this;
 
         ctrl.search = function (query) {
@@ -17,15 +17,8 @@ angular.module('app').component("searchBar", {
                 $location.path('/artist/'+ obj.permalink);
             }
             if(obj.kind === 'track'){
-                getSpecificTrack(obj);
+                $location.path('/artist/'+ obj.user.permalink);
             }
         };
-
-        function getSpecificTrack (track) {
-            $location.path('/artist/'+ track.user.permalink);
-            SC.stream('/tracks/' + track.id, {autoPlay: true}).then(function (player) {
-                MusicService.setPlayer(player, track);
-            });
-        }
     }
 });

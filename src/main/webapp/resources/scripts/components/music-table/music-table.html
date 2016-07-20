@@ -43,6 +43,7 @@
                 <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
                     <ul uib-dropdown-menu>
+                        <li class="menu-item"><a ng-click="ctrl.addToNext(song)" href> Add next </a></li>
                         <li ng-if="ctrl.isplaylist" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                             <a ng-if="playlist.id !== ctrl.currentplaylist.id" href ng-click="ctrl.addSongToPlaylist(song, playlist)">Add to {{playlist.name}}</a>

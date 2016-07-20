@@ -4,14 +4,16 @@ angular.module('app').factory('MusicService', function () {
     var player;
     var isPlaying;
     var track;
-    var list;
+    var list = [];
 
     return {
         getPlayer: function () {
             return player;
         },
         setList: function(inpList) {
-            list = inpList;
+            for(var i = 0; i < inpList.length; i++){
+                list[i] = inpList[i];
+            }
         },
         setPlayer: function(pl, tr) {
             player = pl;
@@ -24,6 +26,12 @@ angular.module('app').factory('MusicService', function () {
                 isPlaying = false;
             });
             player.play();
+        },
+        addNext: function (tr) {
+            var index = list.indexOf(tr);
+            list.splice(index, 1);
+            var curIndex = list.indexOf(track);
+            list[curIndex+1] = tr;
         },
         getTrack: function() {
             return track;

@@ -80,6 +80,10 @@ angular.module('app').component("musicTable", {
             }
         };
 
+        ctrl.addToNext = function (song) {
+            MusicService.addNext(song);
+        };
+
         ctrl.isLiked = function (song) {
             return _.some(ctrl.likes, {song_id: song.id.toString()});
         };
