@@ -6,10 +6,14 @@ angular.module('app').component('musicPlayer', {
     controller: function ($interval, MusicService) {
         var ctrl = this;
         var progressbar;
-
+        ctrl.tracks = [];
         ctrl.init = function () {
             $interval(runLoop, 250);
             registerKeys();
+        };
+
+        ctrl.getTracks = function () {
+            ctrl.tracks = MusicService.getList();
         };
 
         function runLoop() {

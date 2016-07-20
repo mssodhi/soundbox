@@ -15,6 +15,9 @@ angular.module('app').factory('MusicService', function () {
                 list[i] = inpList[i];
             }
         },
+        getList: function () {
+            return list;
+        },
         setPlayer: function(pl, tr) {
             player = pl;
             track = tr;
@@ -29,9 +32,8 @@ angular.module('app').factory('MusicService', function () {
         },
         addNext: function (tr) {
             var index = list.indexOf(tr);
-            list.splice(index, 1);
             var curIndex = list.indexOf(track);
-            list[curIndex+1] = tr;
+            list.splice(curIndex, 0, list.splice(index, 1)[0]);
         },
         getTrack: function() {
             return track;

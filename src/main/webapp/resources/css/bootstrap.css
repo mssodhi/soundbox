@@ -1921,6 +1921,10 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     vertical-align: middle;
 }
 
+.activeList{
+    color: red !important;
+}
+
 .side-card-main{
     max-height: 460px;
     min-width: 100%;
