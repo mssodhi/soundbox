@@ -26,7 +26,7 @@
     </div>
     <script id="template.html" type="text/ng-template">
         <div ng-repeat="song in ctrl.queue track by song.id">
-            <span ng-class="{activeList: song.id === ctrl.track.id}" style="color: black">{{song.title | limitTo: 25}}</span>
+            <span ng-class="{activeList: song.id === ctrl.track.id}" style="color: black">{{song.title | limitTo: 20}}</span>
         </div>
     </script>
 </div>
