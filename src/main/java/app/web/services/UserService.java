@@ -5,8 +5,6 @@ import app.web.services.Base.BaseService;
 
 public interface UserService extends BaseService<User, Integer> {
 
-    User findByEmail(String email);
-
     User save(User number);
 
     User getCurrentUser();

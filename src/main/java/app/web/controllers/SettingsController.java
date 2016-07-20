@@ -23,7 +23,7 @@ public class SettingsController {
     @RequestMapping(value = "getSettings", method = RequestMethod.GET)
     public Object getSettings () {
         User user = userService.getCurrentUser();
-        return settingsService.findByEmail(user.getEmail());
+        return settingsService.findByUser(user);
     }
 
     @RequestMapping(value = "updateSettings", method = RequestMethod.PUT)

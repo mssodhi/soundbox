@@ -28,18 +28,18 @@ public class CookieHelper {
     @Value("${jwt.io.secret}")
     private String secretKey ;
 
-    public String getEmailFromCookie(){
+    public String getValueFromCookie(){
         Cookie[] cookies = request.getCookies();
-        String email = "";
+        String value = "";
         if (cookies != null) {
             for(Cookie cookie: cookies){
                 if(cookie.getName().equalsIgnoreCase("sandbox_cookie")) {
-                    email = getEmailFromToken(cookie.getValue());
+                    value = getValueFromToken(cookie.getValue());
                     break;
                 }
             }
         }
-        return email;
+        return value;
     }
 
     public void setCurrentUser(User user){
@@ -50,11 +50,11 @@ public class CookieHelper {
     }
 
     private String createSecretToken(User user){
-        String email;
+        String fb_id;
         if(user != null){
-            email = user.getEmail();
+            fb_id = user.getFb_id();
         }else{
-            email = "";
+            fb_id = "";
         }
 
         String issuer = "SYSTEM";
@@ -72,7 +72,7 @@ public class CookieHelper {
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder().setId(email)
+        JwtBuilder builder = Jwts.builder().setId(fb_id)
                 .setIssuedAt(now)
                 .setSubject(subject)
                 .setIssuer(issuer)
@@ -89,7 +89,7 @@ public class CookieHelper {
         return builder.compact();
     }
 
-    private String getEmailFromToken(String token){
+    private String getValueFromToken(String token){
         try{
             Claims claims = Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))

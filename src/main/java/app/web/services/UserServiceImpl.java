@@ -19,20 +19,9 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
     private CookieHelper cookieHelper;
 
     @Override
-    public User findByEmail(String email){
-
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
-            return user;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
     public User getCurrentUser(){
-        String userEmail = cookieHelper.getEmailFromCookie();
-        return findByEmail(userEmail);
+        String fb_id = cookieHelper.getValueFromCookie();
+        return getByFbId(fb_id);
     }
 
     @Override

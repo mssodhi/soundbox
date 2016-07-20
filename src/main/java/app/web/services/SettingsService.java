@@ -1,6 +1,7 @@
 package app.web.services;
 
 import app.web.domain.Settings;
+import app.web.domain.User;
 import app.web.services.Base.BaseService;
 
 public interface SettingsService extends BaseService<Settings, Integer> {
@@ -9,5 +10,5 @@ public interface SettingsService extends BaseService<Settings, Integer> {
 
     Settings save(Settings number);
 
-    Settings findByEmail(String email);
+    Settings findByUser(User user);
 }

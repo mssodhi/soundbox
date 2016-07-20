@@ -2,6 +2,7 @@ package app.web.services;
 
 import app.web.data.FavoritesRepository;
 import app.web.domain.Favorites;
+import app.web.domain.User;
 import app.web.services.Base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,13 @@ public class FavoritesServiceImpl extends BaseServiceImpl<Favorites, Integer> im
     }
 
     @Override
-    public Set<Favorites> getByEmail(String email) {
-        return favoritesRepository.getByEmail(email);
+    public Set<Favorites> getByUser(User user) {
+        return favoritesRepository.getByUserFbId(user.getFb_id());
     }
 
     @Override
-    public Favorites findByEmailAndArtist(String email, String artist) {
-        return favoritesRepository.findByEmailAndArtist(email, artist);
+    public Favorites findByUserAndArtist(User user, String artist) {
+        return favoritesRepository.findByFbIdAndArtist(user.getFb_id(), artist);
     }
 
     @Override

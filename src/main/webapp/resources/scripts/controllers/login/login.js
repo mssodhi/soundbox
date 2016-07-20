@@ -21,10 +21,11 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 function statusChangeCallback(response) {
                     if (response.status === 'connected') {
                         // Logged into your app and Facebook.
-                        FB.api('/me?fields=name,email', function(response) {
-                            LoginService.checkUser({uid: response.id, email: response.email}, response.name).$promise.then(function (user) {
-                                if(user.id){
-                                    if(!user.pic_url){
+                        FB.api('/me', function (response) {
+                            // console.log(response);
+                            LoginService.checkUser({uid: response.id}, response.name).$promise.then(function (user) {
+                                if (user.id) {
+                                    if (!user.pic_url) {
                                         FB.api(
                                             '/' + response.id + '/picture',
                                             function (response) {
@@ -38,8 +39,6 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                                 }
                             });
                         });
-                    } else if (response.status === 'not_authorized'){
-                        console.log('User did not authorize soundbox to use their FB...');
                     }else {
                         FB.login();
                     }

@@ -27,7 +27,7 @@ public class FavoritesController {
     public Object getFavorites() throws Exception{
         User currentUser = userService.getCurrentUser();
         if(currentUser != null){
-            Set<Favorites> favorites = favoritesService.getByEmail(currentUser.getEmail());
+            Set<Favorites> favorites = favoritesService.getByUser(currentUser);
             return favoritesService.toJson(favorites);
         }else{
             return null;
@@ -40,7 +40,7 @@ public class FavoritesController {
         User currentUser = userService.getCurrentUser();
 
         // make sure the artist isn't already in the favorites list
-        if(favoritesService.findByEmailAndArtist(currentUser.getEmail(), artist_id) == null){
+        if(favoritesService.findByUserAndArtist(currentUser, artist_id) == null){
             Favorites favorites = new Favorites();
             favorites.setUser(currentUser);
             favorites.setArtist_id(artist_id);
@@ -53,7 +53,7 @@ public class FavoritesController {
     @RequestMapping(value = "removeFavorite", method = RequestMethod.PUT)
     public Boolean removeFavorite(@RequestBody String artist_id){
         User currentUser = userService.getCurrentUser();
-        Favorites favorites = favoritesService.findByEmailAndArtist(currentUser.getEmail(), artist_id);
+        Favorites favorites = favoritesService.findByUserAndArtist(currentUser, artist_id);
         return favoritesService.delete(favorites);
     }
 

@@ -19,11 +19,11 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private String name;
 
-    @Column(name = "email", length = 50, nullable = false, unique = true)
+    @Column(name = "email", length = 50, unique = true)
     @JsonProperty
     private String email;
 
-    @Column(name = "fb_id", length = 50, nullable = false)
+    @Column(name = "fb_id", length = 50, nullable = false, unique = true)
     @JsonProperty
     private  String fb_id;
 

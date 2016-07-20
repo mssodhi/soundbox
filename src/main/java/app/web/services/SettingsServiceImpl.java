@@ -2,6 +2,7 @@ package app.web.services;
 
 import app.web.data.SettingsRepository;
 import app.web.domain.Settings;
+import app.web.domain.User;
 import app.web.services.Base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class SettingsServiceImpl extends BaseServiceImpl<Settings,Integer> imple
     }
 
     @Override
-    public Settings findByEmail(String email){
-        return settingsRepository.findByEmail(email);
+    public Settings findByUser(User user){
+        return settingsRepository.findByFbId(user.getFb_id());
     }
 
 }
