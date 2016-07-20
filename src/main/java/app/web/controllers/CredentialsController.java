@@ -29,6 +29,9 @@ public class CredentialsController {
     @Value("${fb.app.secret}")
     private String fb_app_secret;
 
+    @Value("${fb.app.version}")
+    private String fb_app_version;
+
     @RequestMapping(value = "getFacebook", method = RequestMethod.GET)
     public String getCredentials() throws Exception {
         try {
@@ -39,6 +42,7 @@ public class CredentialsController {
             json.writeStartObject();
             json.writeStringField("app_id", fb_app_id);
             json.writeStringField("app_secret", fb_app_secret);
+            json.writeStringField("app_version", fb_app_version);
             json.writeEndObject();
             json.close();
 
