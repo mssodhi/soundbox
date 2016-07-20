@@ -1,4 +1,4 @@
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`) VALUES ('1', 'Manu Sodhi', 'mssodhi@ucdavis.edu', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '10205828170845240')
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`) VALUES ('1', 'Manu Sodhi', 'mssodhi@ucdavis.edu', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '10206685263032009')
 
 INSERT INTO soundbox.favorites (`artist_id`, `user_id`) VALUES ('22409434', 1 )
 INSERT INTO soundbox.favorites (`artist_id`, `user_id`) VALUES ('36960179', 1 )
