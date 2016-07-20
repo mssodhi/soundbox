@@ -21,11 +21,11 @@
         </div>
 
         <div class="col-md-1 pull-right">
-            <a uib-popover-template="'template.html'" ng-click="ctrl.getTracks()" class="custom-white pt15 fa fa-2x fa-list-alt" popover-trigger="click"></a>
+            <a uib-popover-template="'template.html'" ng-click="ctrl.getQueue()" class="custom-white pt15 fa fa-2x fa-list-alt" popover-trigger="click"></a>
         </div>
     </div>
     <script id="template.html" type="text/ng-template">
-        <div ng-repeat="song in ctrl.tracks track by song.id">
+        <div ng-repeat="song in ctrl.queue track by song.id">
             <span ng-class="{activeList: song.id === ctrl.track.id}" style="color: black">{{song.title | limitTo: 25}}</span>
         </div>
     </script>

@@ -12,8 +12,8 @@ angular.module('app').component('musicPlayer', {
             registerKeys();
         };
 
-        ctrl.getTracks = function () {
-            ctrl.tracks = MusicService.getQueue();
+        ctrl.getQueue = function () {
+            ctrl.queue = MusicService.getQueue();
         };
 
         function runLoop() {
