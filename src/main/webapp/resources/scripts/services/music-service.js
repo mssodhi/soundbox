@@ -18,6 +18,14 @@ angular.module('app').factory('MusicService', function () {
         getList: function () {
             return list;
         },
+        getQueue: function () {
+            var index = list.indexOf(track);
+            var retList = [];
+            for(var i = index-2; i < index+3; i++){
+                retList.push(list[i]);
+            }
+            return retList;
+        },
         setPlayer: function(pl, tr) {
             player = pl;
             track = tr;
@@ -31,9 +39,25 @@ angular.module('app').factory('MusicService', function () {
             player.play();
         },
         addNext: function (tr) {
-            var index = list.indexOf(tr);
-            var curIndex = list.indexOf(track);
-            list.splice(curIndex, 0, list.splice(index, 1)[0]);
+            var i, tmp;
+            var pos1 = list.indexOf(tr);
+            var pos2 = list.indexOf(track);
+
+            if (pos1 !== pos2 && 0 <= pos1 && pos1 <= list.length && 0 <= pos2 && pos2 <= list.length) {
+                tmp = list[pos1];
+                if (pos1 < pos2) {
+                    for (i = pos1; i < pos2; i++) {
+                        list[i] = list[i + 1];
+                    }
+                    list[pos2] = tmp;
+                }
+                else {
+                    for (i = pos1; i > pos2 + 1; i--) {
+                        list[i] = list[i - 1];
+                    }
+                    list[pos2+1] = tmp;
+                }
+            }
         },
         getTrack: function() {
             return track;

@@ -13,7 +13,7 @@ angular.module('app').component('musicPlayer', {
         };
 
         ctrl.getTracks = function () {
-            ctrl.tracks = MusicService.getList();
+            ctrl.tracks = MusicService.getQueue();
         };
 
         function runLoop() {
