@@ -73,7 +73,7 @@
                 </thead>
 
                 <tbody ng-repeat="artist in ctrl.favorites track by artist.id" title="{{artist.permalink}}">
-                <tr>
+                <tr class="button">
                     <td ng-click="ctrl.goToArtist(artist)" class="hidden-xs">{{$index+1}}</td>
                     <td ng-click="ctrl.goToArtist(artist)">
                         <img ng-if="artist.avatar_url !== null" class="track-image" ng-src="{{artist.avatar_url}}">
@@ -146,7 +146,7 @@
                 </thead>
 
                 <tbody ng-repeat="playlist in ctrl.playlists track by playlist.id" title="{{playlist.name}}">
-                <tr>
+                <tr class="button">
                     <td ng-click="ctrl.goToPlaylist(playlist)" class="hidden-xs">{{$index+1}}</td>
                     <td ng-click="ctrl.goToPlaylist(playlist)">{{playlist.name}}</td>
                     <td ng-click="ctrl.deletePlaylist(playlist)">
