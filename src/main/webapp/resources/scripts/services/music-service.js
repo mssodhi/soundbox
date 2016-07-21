@@ -41,6 +41,10 @@ angular.module('app').factory('MusicService', function () {
         addNext: function (tr) {
             var i, tmp;
             var pos1 = list.indexOf(tr);
+            if(pos1 === -1){
+                list.push(tr);
+                pos1 = list.indexOf(tr);
+            }
             var pos2 = list.indexOf(track);
 
             if (pos1 !== pos2 && 0 <= pos1 && pos1 <= list.length && 0 <= pos2 && pos2 <= list.length) {

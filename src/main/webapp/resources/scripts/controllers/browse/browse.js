@@ -4,7 +4,7 @@ angular.module('app').controller('BrowseCtrl', function (recommendation, favorit
     var ctrl = this;
     // ctrl.recommendations = [];
     ctrl.tracks = [];
-    var limit = 10;
+    var limit = 15;
 
     ctrl.init = function () {
         getPlaylists();
@@ -17,7 +17,7 @@ angular.module('app').controller('BrowseCtrl', function (recommendation, favorit
             SC.get('/search/', {q: recommendation[i], limit: 20}).then(function (res) {
                 // three objs from each collection
                 var y = 0;
-                for(var a = 0; (a === res.collection.length || y < 2 )&& ctrl.tracks.length < limit; a++){
+                for(var a = 0; (a === res.collection.length || y < 1 )&& ctrl.tracks.length < limit; a++){
                     var obj = res.collection[a];
                     if(obj.kind === 'track'){
                         if(!_.some(ctrl.tracks, obj)){
