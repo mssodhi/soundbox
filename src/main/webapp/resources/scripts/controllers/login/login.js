@@ -35,7 +35,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                                             }
                                         );
                                     }
-                                    ctrl.goToLanding();
+                                    goToLanding();
                                 }
                             });
                         });
@@ -54,10 +54,18 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                     });
                 }
 
-                ctrl.goToLanding = function () {
+                ctrl.demo = function () {
+                    LoginService.demo().$promise.then(function (res) {
+                        if(res.id){
+                            goToLanding();
+                        }
+                    });
+                };
+
+                function goToLanding() {
                     $uibModalInstance.close();
                     ctrl.loggedIn = true;
-                };
+                }
 
             }
         });
