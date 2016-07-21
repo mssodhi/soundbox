@@ -2,9 +2,10 @@
 
 angular.module('app').controller('BrowseCtrl', function (recommendation, favorites, $location, PlaylistService, FavoritesService) {
     var ctrl = this;
-    // ctrl.recommendations = [];
     ctrl.tracks = [];
     var limit = 15;
+    ctrl.artist_grid = true;
+    ctrl.pl_grid = true;
 
     ctrl.init = function () {
         getPlaylists();
