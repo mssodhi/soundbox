@@ -21,7 +21,7 @@ angular.module('app').factory('MusicService', function () {
         getQueue: function () {
             var index = list.indexOf(track);
             var retList = [];
-            for(var i = index-2; i < index+3; i++){
+            for(var i = index-1; i < index+2; i++){
                 retList.push(list[i]);
             }
             return retList;
