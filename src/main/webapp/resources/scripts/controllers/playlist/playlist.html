@@ -21,7 +21,7 @@
                     <div class="mr15 pl0 pr0">
                         <span class="custom-font pl15">
                             <h4 ng-if="!ctrl.edit">Playlist name: {{ctrl.currentPlaylist.name}} <a href ng-click="ctrl.edit = true"><i class="fa fa-pencil"></i></a></h4>
-                            <h4 ng-if="ctrl.edit">Playlist name: <input ng-model="ctrl.currentPlaylist.name" class="md-input"> <a href ng-click="ctrl.updatePlaylist(); ctrl.edit = false"><i class="fa fa-check-circle"></i></a></h4>
+                            <h4 ng-if="ctrl.edit">Playlist name: <input ng-model="ctrl.currentPlaylist.name" class="md-input" ng-enter="ctrl.updatePlaylist(); ctrl.edit = false"> <a href ng-click="ctrl.updatePlaylist(); ctrl.edit = false"><i class="fa fa-check-circle"></i></a></h4>
                         </span>
                     </div>
                 </div>
