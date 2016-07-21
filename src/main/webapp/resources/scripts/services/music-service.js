@@ -27,16 +27,23 @@ angular.module('app').factory('MusicService', function () {
             return retList;
         },
         setPlayer: function(pl, tr) {
-            player = pl;
-            track = tr;
-            isPlaying = true;
-            if(player.currentTime() > 0){
-                player.seek(0);
-            }
-            player.on('finish', function () {
+            if(pl !== undefined){
+                player = pl;
+                track = tr;
+                isPlaying = true;
+                if(player.currentTime() > 0){
+                    player.seek(0);
+                }
+                player.play();
+                player.on('finish', function () {
+                    isPlaying = false;
+                });
+            }else{
+                player.pause();
                 isPlaying = false;
-            });
-            player.play();
+                player = null;
+                list = null;
+            }
         },
         addNext: function (tr) {
             var i, tmp;
