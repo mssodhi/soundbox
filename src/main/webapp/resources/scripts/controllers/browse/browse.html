@@ -35,32 +35,32 @@
             <i class="fa fa-info-circle"></i>
             <span>You have no favorite artists. <a href ng-click="ctrl.clickSearch()">Search</a> artists to add them to your favorites.</span>
         </div>
-        
+
         <!-- Grid -->
         <div ng-if="ctrl.artist_grid">
-            <div class="col-md-2 col-sm-4 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
-                <div class="col-xs-12 card pl0 pr0">
-                    <div class="panel-body text-center button" ng-click="ctrl.goToArtist(artist)">
-                        <img ng-src="{{artist.avatar_url}}">
-                        <span ng-if="artist.avatar_url === null"><img height="100px" width="100px" src="resources/images/noImage.jpg"></span>
-                        <h5>
-                            <a ng-href="#/artist/{{artist.permalink}}">{{artist.permalink | limitTo: 70}}</a>
-                            <span ng-if="artist.full_name > 70"> . . . </span>
-                        </h5>
-                        <h4>
-                            <label class="label label-info" ng-if="artist.track_count > 0">{{artist.track_count | number}} tracks</label>
+            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
+                <div class="artist-card button" ng-click="ctrl.goToArtist(artist)">
+                    <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                    <div class="avatar">
+                        <img ng-src="{{artist.avatar_url}}" />
+                        <img ng-if="artist.artwork_url === null" src="resources/images/noImage.jpg" />
+                    </div>
+                    <div class="artist-content">
+                        <h3>{{artist.permalink}}</h3>
+                        <h4 class="pt15">
+                            <label class="label label-success" ng-if="artist.track_count > 0">{{artist.track_count | number}} tracks</label>
                             <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>
                         </h4>
                     </div>
-                    <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deleteFavorite(artist)">
-                        <div class="col-md-12 text-center">
-                            <p>Remove</p>
-                        </div>
+                </div>
+                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deleteFavorite(artist)">
+                    <div class="col-md-12 text-center">
+                        <p>Remove</p>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- Table -->
         <div class="col-md-4" ng-if="!ctrl.artist_grid && ctrl.favorites.length > 0">
             <table class="col-md-12 table mt15 pl0 pr0">

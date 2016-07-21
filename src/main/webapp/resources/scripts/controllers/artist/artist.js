@@ -3,7 +3,7 @@
 angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, FavoritesService, favorites, PlaylistService) {
 
     var ctrl = this;
-
+    ctrl.favorites = [];
     ctrl.init = function () {
         ctrl.q = '';
         validateArtist();
@@ -31,7 +31,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, Fa
     }
 
     function getFavorites() {
-        ctrl.favorites = [];
         for(var i = 0; i < favorites.length; i++){
             SC.get('/users/' + favorites[i].artist_id).then(function(artist){
                 ctrl.favorites.push(artist);
@@ -69,7 +68,18 @@ angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, Fa
         ctrl.favorites.push(artist);
     };
 
+    ctrl.removeFavorite = function (artist) {
+        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
+            var index = ctrl.favorites.indexOf(artist);
+            ctrl.favorites.splice(index, 1);
+        });
+    };
+
     ctrl.isFavorite = function (artist) {
-        return _.some(ctrl.favorites, {id: artist.id});
+        if(ctrl.favorites.length > 0){
+            return _.some(ctrl.favorites, {id: artist.id});
+        }else{
+            return false;
+        }
     };
 });

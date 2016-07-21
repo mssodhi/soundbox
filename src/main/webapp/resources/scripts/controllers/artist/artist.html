@@ -30,27 +30,23 @@
             </div>
         </div>
 
-        <!-- Initial songs list by all favorites -->
-        <div class="pl0">
-            <div class="col-md-12 col-sm-12 pl0 pr0 pt15">
-                <!-- this div for artist card -->
-                <div ng-if="ctrl.artist"
-                     class="mb10 card-sc panel-body pt0 pb0 card card-purple col-md-5 col-sm-6 col-xs-12 pl0 pr0"
-                     style="min-height: 104px">
-                    <div class="mr15 pl0 pr0">
-                        <img ng-src="{{ctrl.artist.avatar_url}}"
-                             style="height: 100px; width: 100px; display: inline-block">
-                        <img ng-if="ctrl.artist.artwork_url === null" height="100px" width="100px"
-                             src="resources/images/noImage.jpg">
-
-                        <span class="custom-font pl15">
-                            <a ng-href="{{ctrl.artist.permalink_url}}" target="_blank">{{ctrl.artist.permalink}}</a>
-                        </span>
-
-                        <i class="fa fa-2x fa-plus button"
-                           ng-click="ctrl.addFavorite(ctrl.artist)"
-                           ng-if="!ctrl.isFavorite(ctrl.artist)">
-                        </i>
+        <!-- Artist Card -->
+        <div class="pl0" ng-if="ctrl.artist">
+            <div class="col-md-5 col-xs-12 pl0 pr0 pt10">
+                <div class="artist-card">
+                    <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                    <div class="avatar">
+                        <img ng-src="{{ctrl.artist.avatar_url}}" />
+                        <img ng-if="ctrl.artist.artwork_url === null" src="resources/images/noImage.jpg" />
+                    </div>
+                    <div class="artist-content">
+                        <h3>{{ctrl.artist.permalink}}</h3>
+                        <p ng-if="!ctrl.isFavorite(ctrl.artist)">
+                            <a href ng-click="ctrl.addFavorite(ctrl.artist)" class="custom-white"><i class="fa fa-plus-circle"></i> Follow artist</a>
+                        </p>
+                        <p ng-if="ctrl.isFavorite(ctrl.artist)">
+                            <a href ng-click="ctrl.removeFavorite(ctrl.artist)" class="custom-white"><i class="fa fa-minus-circle"></i> Unfollow artist</a>
+                        </p>
                     </div>
                 </div>
             </div>
