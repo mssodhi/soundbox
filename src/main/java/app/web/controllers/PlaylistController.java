@@ -30,6 +30,11 @@ public class PlaylistController {
         }
     }
 
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    public Object update(@RequestBody Playlist playlist){
+        return playlistService.save(playlist);
+    }
+
     @RequestMapping(value = "getPlaylistById/{id}", method = RequestMethod.GET)
     public Object getPlaylistById (@PathVariable Integer id) {
         return playlistService.findById(id);

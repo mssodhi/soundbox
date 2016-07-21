@@ -4,7 +4,8 @@ angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistServic
 
     var ctrl = this;
     ctrl.currentPlaylist = playlist;
-
+    ctrl.edit = false;
+    ctrl.playlists = [];
     ctrl.init = function () {
         validateAndGetTracks();
         getPlaylists();
@@ -25,6 +26,14 @@ angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistServic
             }
         }
     }
+
+    ctrl.updatePlaylist = function () {
+        PlaylistService.updatePlaylist(ctrl.currentPlaylist).$promise.then(function (res) {
+            var ind = _.findIndex(ctrl.playlists, {id: ctrl.currentPlaylist.id});
+            ctrl.playlists[ind] = res;
+            angular.copy(res, ctrl.currentPlaylist);
+        });
+    };
 
     function getPlaylists() {
         PlaylistService.getPlaylists().$promise.then(function (response) {
