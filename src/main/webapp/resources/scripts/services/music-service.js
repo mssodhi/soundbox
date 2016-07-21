@@ -40,7 +40,7 @@ angular.module('app').factory('MusicService', function () {
         },
         addNext: function (tr) {
             var i, tmp;
-            var pos1 = list.indexOf(tr);
+            var pos1 = _.findIndex(list, {id: tr.id});
             if(pos1 === -1){
                 list.push(tr);
                 pos1 = list.indexOf(tr);
