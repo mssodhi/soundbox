@@ -98,13 +98,13 @@
             <h3><span>Your playlists</span>  <a href ng-click="ctrl.pl_grid = !ctrl.pl_grid" ng-if="ctrl.playlists.length > 0"><i ng-if="!ctrl.pl_grid" class="fa fa-th"></i> <i ng-if="ctrl.pl_grid" class="fa fa-list"></i></a></h3>
         </div>
 
-        <div class="col-xs-12" ng-if="ctrl.playlists.length === 0">
+        <div class="col-xs-12 pb10" ng-if="ctrl.playlists.length === 0">
             <i class="fa fa-info-circle"></i>
             <span>You have no playlists. <a href ng-click="ctrl.showForm = true" ng-if="!ctrl.showForm">Add</a><a href ng-click="ctrl.showForm = false" ng-if="ctrl.showForm">Cancel</a></span>
         </div>
 
         <div ng-if="ctrl.showForm">
-            <div class="col-md-2 pt10">
+            <div class="col-md-2 pt10 pb10">
                 <input type="text" class="form-control" ng-click="ctrl.focus($event)"
                        ng-model="ctrl.name" ng-enter="ctrl.addPlaylist()" auto-focus>
             </div>
@@ -113,7 +113,7 @@
 
         <!-- Grid -->
         <div ng-if="ctrl.pl_grid">
-            <div class="col-md-2 col-xs-12 col-sm-4 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
+            <div class="col-md-2 col-xs-12 col-sm-4 pt15 pb10" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                 <div class="card col-xs-12 text-center button mb0" ng-click="ctrl.goToPlaylist(playlist)" style="background-color: deepskyblue">
                     <h4 class="custom-font">
                         <a ng-href="#/playlist/{{playlist.id}}" style="color: white">{{playlist.name | limitTo: 70}}</a>
@@ -134,7 +134,7 @@
 
         <!-- Table -->
         <div class="col-md-4" ng-if="!ctrl.pl_grid && ctrl.playlists.length > 0">
-            <table class="col-md-12 table mt15 pl0 pr0">
+            <table class="col-md-12 table mt15 pl0 pr0 pb10">
                 <thead class="custom-font">
                 <tr>
                     <th class="hidden-xs">#</th>
