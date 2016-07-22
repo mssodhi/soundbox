@@ -1,21 +1,37 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService) {
+angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService, $timeout) {
     var ctrl = this;
+
+    ctrl.menuItems = [];
+    ctrl.menuItems.push(
+        {title: 'Dashboard', link: '#/'},
+        {title: 'Browse',    link: '#/browse'},
+        {title: 'Settings',  link: '#/settings'}
+    );
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
         ctrl.inApp = !(route === '/login' || route === '/deny');
     });
 
-    ctrl.isActive = function (location) {
-        if(location === $location.path()){
-            return 'active-menu-item';
-        }
+    ctrl.navTo = function (obj) {
+        console.log(obj);
+        $location.path(obj);
     };
-    
+
+    ctrl.hideSideMenu = function () {
+        $timeout(function () {
+            ctrl.showSideMenu = false;
+        }, 10);
+    };
+
+    ctrl.currentPath = function () {
+        return '#' + $location.path();
+    };
+
     ctrl.getNavBrandName = function () {
         if($location.path() !== '/'){
-            return 'SB | ' + $location.path().charAt(1).toUpperCase();
+            return 'SB | ' + $location.path().slice(1, $location.path().length).toUpperCase();
         }else{
             return 'SoundBox';
         }

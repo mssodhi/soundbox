@@ -1,28 +1,31 @@
-<div ng-controller='NavCtrl as ctrl'>
+<div ng-controller="NavCtrl as ctrl" ng-class="{'side-menu-active': ctrl.showSideMenu}">
+    <div ng-if="ctrl.inApp">
+        <div class="backdrop"></div>
+        <div class="navbar navbar-default navbar-fixed-top" style="background-color: dodgerblue">
+            <div class="navbar-header">
+                <a href ng-focus="ctrl.showSideMenu = true" ng-blur="ctrl.hideSideMenu()" class="hamburger"><span class="sr-only">left-navigation</span></a>
+                <div class="divider"></div>
+                <div class="project"><a href="#/">{{ctrl.getNavBrandName()}}</a></div>
+            </div>
 
-    <div class="main-nav pl0 pr0 custom-font col-md-12" ng-if="ctrl.inApp">
-        <a class="col-md-2 col-xs-12 col-sm-5" ng-href="#/" style="background-color: #0b97c4">
-            <h1 class="text-center"><p class="custom-white">{{ctrl.getNavBrandName()}}</p></h1>
-        </a>
-
-        <div class="nav-items col-md-10 col-xs-12 col-sm-7 pl0 pr0 ml0">
-            <div class="col-md-3">
-                <a class="nav-item custom-orange" ng-href="#/browse"><i class="fa fa-music"></i> <span class="hidden-sm hidden-xs">Browse</span></a>
-            </div>
-            <div class="col-md-3 pull-left">
-                <a class="nav-item custom-green" ng-href="#/settings"><i class="fa fa-gears"></i> <span class="hidden-sm hidden-xs">Settings</span></a>
-            </div>
-            <div class="col-md-8 col-sm-4 pull-right">
-                <a class="nav-item custom-royalBlue pull-right" href ng-click="ctrl.signOut()"><i class="fa fa-sign-out"></i> <span class="hidden-sm hidden-xs">Logout</span></a>
-            </div>
-            <!--<a class="nav-item custom-blue" ng-href="#/hot-n-new"><i class="fa fa-fire"></i> <span class="hidden-sm hidden-xs">Hot n New!</span></a>-->
+        </div>
+        <div class="sidebar">
+            <ul class="sidebar-nav">
+                <li ng-repeat="menuItem in ctrl.menuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
+                    <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link">{{menuItem.title}}</a>
+                    <div ng-if="!menuItem.link">{{menuItem.title}}</div>
+                    <ul ng-if="menuItem.children" ng-repeat="subMenuItem in menuItem.children" class="list-unstyled">
+                        <li ng-class="{'active': subMenuItem.link === ctrl.currentPath()}">
+                            <a ng-href="{{subMenuItem.link}}">{{subMenuItem.title}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href ng-click="ctrl.signOut()">Logout</a></li>
+            </ul>
         </div>
     </div>
-
-    <br>
 
     <div ng-if="ctrl.inApp">
         <music-player></music-player>
     </div>
-
 </div>

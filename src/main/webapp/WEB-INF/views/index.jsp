@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-social.css">
     <link rel="stylesheet" type="text/css" href="resources/css/faa-animations.css">
     <link rel="stylesheet" type="text/css" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/nav.css">
     <link rel="shortcut icon" href="resources/images/mainpic.jpeg">
     <title>SoundBox</title>
 </head>
