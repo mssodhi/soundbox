@@ -113,7 +113,7 @@
 
         <!-- Grid -->
         <div ng-if="ctrl.pl_grid">
-            <div class="col-md-2 col-sm-4 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
+            <div class="col-md-2 col-xs-12 col-sm-4 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                 <div class="card col-xs-12 text-center button mb0" ng-click="ctrl.goToPlaylist(playlist)" style="background-color: deepskyblue">
                     <h4 class="custom-font">
                         <a ng-href="#/playlist/{{playlist.id}}" style="color: white">{{playlist.name | limitTo: 70}}</a>
