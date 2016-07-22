@@ -3,7 +3,7 @@
         <div class="backdrop"></div>
         <div class="navbar navbar-default navbar-fixed-top" style="background-color: dodgerblue">
             <div class="navbar-header">
-                <a href ng-focus="ctrl.showSideMenu = true" ng-blur="ctrl.hideSideMenu()" class="hamburger"><span class="sr-only">left-navigation</span></a>
+                <a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"><span class="sr-only">left-navigation</span></a>
                 <div class="divider"></div>
                 <div class="project"><a href="#/">{{ctrl.getNavBrandName()}}</a></div>
             </div>
