@@ -1955,7 +1955,6 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 .artist-card .avatar {
     position: relative;
-    margin-top: 15px;
     z-index: 1;
     padding-top: 20px;
 }

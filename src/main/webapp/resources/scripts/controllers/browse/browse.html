@@ -114,21 +114,19 @@
         <!-- Grid -->
         <div ng-if="ctrl.pl_grid">
             <div class="col-md-2 col-sm-4 pt15" ng-repeat="playlist in ctrl.playlists track by playlist.id">
-                <div class="col-xs-12 card pl0 pr0" style="background: #FEA;">
-                    <div class="text-center button" ng-click="ctrl.goToPlaylist(playlist)">
-                        <h4 class="custom-font" style="color: gray">
-                            <a ng-href="#/playlist/{{playlist.id}}" style="color: black">{{playlist.name | limitTo: 70}}</a>
-                            <span ng-if="playlist.name > 70"> . . . </span>
-                        </h4>
-                        <h4>
-                            <label class="label label-info" ng-if="playlist.songs.length > 0">{{playlist.songs.length | number}} track<span ng-if="playlist.songs.length > 1">s</span></label>
-                            <label class="label label-danger" ng-if="playlist.songs.length === 0">0 tracks</label>
-                        </h4>
-                    </div>
-                    <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deletePlaylist(playlist)">
-                        <div class="col-md-12 text-center">
-                            <p>Delete</p>
-                        </div>
+                <div class="card col-xs-12 text-center button mb0" ng-click="ctrl.goToPlaylist(playlist)" style="background-color: deepskyblue">
+                    <h4 class="custom-font">
+                        <a ng-href="#/playlist/{{playlist.id}}" style="color: white">{{playlist.name | limitTo: 70}}</a>
+                        <span ng-if="playlist.name > 70"> . . . </span>
+                    </h4>
+                    <h4 class="mb15">
+                        <label class="label" ng-if="playlist.songs.length > 0" style="background-color: midnightblue">{{playlist.songs.length | number}} track<span ng-if="playlist.songs.length > 1">s</span></label>
+                        <label class="label label-danger" ng-if="playlist.songs.length === 0">0 tracks</label>
+                    </h4>
+                </div>
+                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deletePlaylist(playlist)">
+                    <div class="col-md-12 text-center">
+                        <p>Delete</p>
                     </div>
                 </div>
             </div>
