@@ -5,10 +5,10 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
 
     ctrl.menuItems = [];
     ctrl.menuItems.push(
-        {title: 'Dashboard', link: '#/'},
+        {title: 'SoundBox', link: '#/'},
+        {title: 'Charts',    link: '#/charts'},
         {title: 'Browse',    link: '#/browse'},
-        {title: 'Settings',  link: '#/settings'},
-        {title: 'Charts',    link: '#/charts'}
+        {title: 'Settings',  link: '#/settings'}
     );
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
