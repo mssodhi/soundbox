@@ -13,8 +13,8 @@
                 <div class="artist-card button" ng-click="ctrl.select(song)">
                     <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                     <div class="avatar">
-                        <img ng-src="{{song.user.avatar_url}}" />
-                        <img ng-if="song.user.avatar_url === null" src="resources/images/noImage.jpg" />
+                        <img ng-if="song.artwork_url.length > 1" ng-src="{{song.artwork_url}}" />
+                        <img ng-if="song.artwork_url === null" src="resources/images/noImage.jpg" />
                     </div>
                     <div class="artist-content">
                         <h3>{{song.title}}</h3>
