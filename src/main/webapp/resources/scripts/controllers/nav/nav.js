@@ -32,7 +32,7 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
 
     ctrl.getNavBrandName = function () {
         if($location.path() !== '/'){
-            return 'SB | ' + $location.path().slice(1, $location.path().length).toUpperCase();
+            return 'SB | ' + $location.path().charAt(1).toUpperCase();
         }else{
             return 'SoundBox';
         }

@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicService) {
+angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicService, PlaylistService) {
     var ctrl = this;
     ctrl.tracks = [];
 
-    ctrl.grid = true;
+    ctrl.grid = false;
     ctrl.init = function () {
         getPopular();
+        getPlaylists();
     };
 
     function getPopular() {
@@ -14,6 +15,12 @@ angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicSer
             res.collection.forEach(function (song) {
                 ctrl.tracks.push(song.track);
             })
+        });
+    }
+
+    function getPlaylists() {
+        PlaylistService.getPlaylists().$promise.then(function (response) {
+            ctrl.playlists = response;
         });
     }
 
