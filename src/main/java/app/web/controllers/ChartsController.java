@@ -24,9 +24,12 @@ public class ChartsController {
     @Value("${soundcloud.client.id}")
     private String sc_client_id;
 
+    @Value("${charts.limit}")
+    private String limit;
+
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public String get() throws Exception{
-        String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=" + sc_client_id + "&limit=20&offset=0&linked_partitioning=1&app_version=1469103556";
+        String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=" + sc_client_id + "&limit=" + limit + "&offset=0&linked_partitioning=1&app_version=1469103556";
 
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
