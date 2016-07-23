@@ -1,0 +1,22 @@
+<div class="container-fluid" ng-init="ctrl.init()">
+    <div class="col-md-9">
+        <search-bar></search-bar>
+    </div>
+
+    <div class="col-xs-12 pl0 pr0">
+        <div class="pl15">
+            <h3><span>Your favorite artists</span> <a href ng-click="ctrl.artist_grid = !ctrl.artist_grid" ng-if="ctrl.favorites.length > 0"><i ng-if="!ctrl.artist_grid" class="fa fa-th"></i> <i ng-if="ctrl.artist_grid" class="fa fa-list"></i></a></h3>
+        </div>
+
+        <div ng-if="ctrl.grid">
+            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="song in ctrl.tracks track by song.track.id">
+                <div class="artist-card button">
+                    <div class="artist-content">
+                        <h3>{{song.track.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

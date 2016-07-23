@@ -47,6 +47,7 @@
 <script src="resources/scripts/services/settings.service.js"></script>
 <script src="resources/scripts/services/likes.service.js"></script>
 <script src="resources/scripts/services/recommend.service.js"></script>
+<script src="resources/scripts/services/charts.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>
@@ -73,6 +74,7 @@
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <script src="resources/scripts/controllers/settings/settings.js"></script>
 <script src="resources/scripts/controllers/browse/browse.js"></script>
+<script src="resources/scripts/controllers/charts/charts.js"></script>
 <%-- Controllers --%>
 
 <script>

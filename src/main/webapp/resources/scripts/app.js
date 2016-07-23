@@ -26,6 +26,15 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return PermissionService.permissionCheck();
                     }
                 }
+            }).when('/charts', {
+                templateUrl: 'resources/scripts/controllers/charts/charts.html',
+                controller: 'ChartsCtrl',
+                controllerAs: 'ctrl',
+                resolve:{
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    }
+                }
             }).when('/artist/:permalink', {
                 templateUrl: 'resources/scripts/controllers/artist/artist.html',
                 controller: 'ArtistCtrl',

@@ -7,7 +7,8 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
     ctrl.menuItems.push(
         {title: 'Dashboard', link: '#/'},
         {title: 'Browse',    link: '#/browse'},
-        {title: 'Settings',  link: '#/settings'}
+        {title: 'Settings',  link: '#/settings'},
+        {title: 'Charts',    link: '#/charts'}
     );
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){

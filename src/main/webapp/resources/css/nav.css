@@ -66,6 +66,12 @@
     vertical-align: top;
     height: 37px;
     width: 30px;
+    padding-top: 10px;
+    margin-right: 700px;
+}
+
+.navbar-default .navbar-right a:hover {
+    color: #f9f2f4;
 }
 
 .navbar-default .navbar-right a span {

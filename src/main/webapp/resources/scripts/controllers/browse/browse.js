@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BrowseCtrl', function (recommendation, favorites, $location, PlaylistService, FavoritesService) {
+angular.module('app').controller('BrowseCtrl', function ($http, recommendation, favorites, $location, PlaylistService, FavoritesService) {
     var ctrl = this;
     ctrl.tracks = [];
     var limit = 15;
@@ -11,6 +11,7 @@ angular.module('app').controller('BrowseCtrl', function (recommendation, favorit
         getPlaylists();
         getFavorites();
         getRecommendations();
+        getPopular();
     };
 
     function getRecommendations() {
@@ -44,6 +45,15 @@ angular.module('app').controller('BrowseCtrl', function (recommendation, favorit
                 ctrl.favorites.push(artist);
             });
         }
+    }
+
+    function getPopular() {
+        // $http.get('https://api-v2.soundcloud.com/charts?kind=trending&genre=soundcloud%3Agenres%3Acountry&client_id=0f7c969c815f51078c1de513f666ecdb').then(function (res) {
+        //     console.log(res);
+        // });
+        FavoritesService.testing().$promise.then(function (res) {
+            console.log(res);
+        });
     }
 
     ctrl.goToArtist = function (artist) {
