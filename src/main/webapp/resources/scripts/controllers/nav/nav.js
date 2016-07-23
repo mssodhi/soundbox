@@ -5,7 +5,6 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
 
     ctrl.menuItems = [];
     ctrl.menuItems.push(
-        {title: 'SoundBox', link: '#/'},
         {title: 'Charts',    link: '#/charts'},
         {title: 'Browse',    link: '#/browse'},
         {title: 'Settings',  link: '#/settings'}
