@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/faa-animations.css">
     <link rel="stylesheet" type="text/css" href="resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="resources/css/nav.css">
-    <link rel="shortcut icon" href="resources/images/mainpic.jpeg">
+    <link rel="shortcut icon" href="resources/images/sodhi_designs_logo.png">
     <title>SoundBox</title>
 </head>
 <body ng-app="app">
@@ -48,6 +48,7 @@
 <script src="resources/scripts/services/likes.service.js"></script>
 <script src="resources/scripts/services/recommend.service.js"></script>
 <script src="resources/scripts/services/charts.service.js"></script>
+<script src="resources/scripts/services/page.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>

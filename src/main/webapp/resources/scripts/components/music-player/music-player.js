@@ -3,7 +3,7 @@
 angular.module('app').component('musicPlayer', {
     templateUrl: 'resources/scripts/components/music-player/music-player.html',
     controllerAs: 'ctrl',
-    controller: function ($interval, MusicService) {
+    controller: function ($interval, MusicService, PageService) {
         var ctrl = this;
         var progressbar;
         ctrl.tracks = [];
@@ -26,6 +26,7 @@ angular.module('app').component('musicPlayer', {
                 progressbar = document.getElementById('progress-bar');
                 ctrl.progress = ((ctrl.player.currentTime()) / (ctrl.track.duration)) * 100;
                 ctrl.myStyle = {'width': ctrl.progress + '%'};
+                PageService.setTitle(ctrl.track.title);
             }
 
             if (progressbar) {
