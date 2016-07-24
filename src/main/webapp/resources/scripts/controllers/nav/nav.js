@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService, $timeout) {
+angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService, $timeout, UserService) {
     var ctrl = this;
-
+    var currentUser = {};
     ctrl.menuItems = [];
     ctrl.menuItems.push(
         {title: 'Charts',    link: '#/charts'},
@@ -12,11 +12,22 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
         ctrl.inApp = !(route === '/login' || route === '/deny');
+        if(ctrl.inApp){
+            UserService.getCurrentUser().$promise.then(function (res) {
+                ctrl.currentUser = res;
+            })
+        }
     });
 
     ctrl.hideSideMenu = function () {
         $timeout(function () {
             ctrl.showSideMenu = false;
+        }, 10);
+    };
+
+    ctrl.hideProfile = function () {
+        $timeout(function () {
+            ctrl.openProfile = false;
         }, 10);
     };
 
@@ -40,6 +51,7 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
 
     ctrl.signOut = function () {
         LoginService.logout().$promise.then(function () {
+            ctrl.currentUser = null;
             $location.path('/login');
             if(MusicService.getIsPlaying()){
                 MusicService.setPlayer();

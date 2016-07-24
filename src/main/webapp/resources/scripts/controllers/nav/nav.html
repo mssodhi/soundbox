@@ -16,20 +16,21 @@
                 <div class="project hidden-xs"><a href ng-click="ctrl.signOut()">Logout</a></div>
             </div>
 
-            <div class="navbar-right">
-                <div class="user-profile" ng-class="{'open': ctrl.openProfile}" dropdown>
-                    <a href ng-click="ctrl.openProfile = !ctrl.openProfile" tabindex="0" class="dropdown-toggle navbar-icon" dropdown-toggle>
-                        <span class="fa fa-user fa-2x"></span><span class="sr-only">profile</span>
+            <div class="navbar-right" ng-if="ctrl.currentUser.name !== 'Demo'">
+                <div class="user-profile" ng-class="{'open': ctrl.openProfile}" dropdown style="width: 40px; height: 100%; padding-top: 0; padding-left: 10px;">
+                    <a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()" tabindex="0" class="dropdown-toggle navbar-icon" dropdown-toggle>
+                        <img class="img-circle img-bordered" ng-src="{{ctrl.currentUser.pic_url}}">
+                        <span class="sr-only">profile</span>
                     </a>
                     <ul class ="dropdown-menu dropdown-menu-right">
                         <li>
                             <div class="user-details">
-                                <!--<strong class="e2e-user-name"><span ng-bind="navi.currentUser.firstName"></span> <span ng-bind="navi.currentUser.lastName"></span></strong>-->
+                                <h4>{{ctrl.currentUser.name}}</h4>
                                 <!--<div><span ng-bind="navi.currentUser.email"></span></div>-->
                             </div>
                             <div class="options">
-                                <div class="col-sm-6 right-border"><a href ng-click=""><span class="fa fa-gears"></span>Settings</a></div>
-                                <div class="col-sm-6"><a ng-click="" href><span class="fa fa-sign-out"></span>Sign Out</a></div>
+                                <div class="col-sm-6 right-border"><a href ng-href="#/settings"><span class="fa fa-gears"></span>Settings</a></div>
+                                <div class="col-sm-6"><a ng-click="ctrl.signOut()" href><span class="fa fa-sign-out"></span>Sign Out</a></div>
                             </div>
                         </li>
                     </ul>
