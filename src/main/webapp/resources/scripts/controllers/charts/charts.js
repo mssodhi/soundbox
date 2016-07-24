@@ -4,7 +4,7 @@ angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicSer
     var ctrl = this;
 
     ctrl.genres = [];
-    ctrl.grid = false;
+    ctrl.grid = true;
 
     ctrl.init = function () {
         getPlaylists();

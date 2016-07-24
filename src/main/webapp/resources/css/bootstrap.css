@@ -1866,7 +1866,6 @@ and (-webkit-min-device-pixel-ratio: 2){
         margin-bottom: 7px !important;
     }
     .container-fluid{
-        margin-top: 10px !important;
         margin-bottom: 100px !important;
     }
 
@@ -1891,7 +1890,6 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
     .container-fluid{
-        margin-top: 10px !important;
         margin-bottom: 80px !important;
     }
 
