@@ -14,15 +14,16 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
         ctrl.inApp = !(route === '/login' || route === '/deny');
     });
 
-    ctrl.navTo = function (obj) {
-        console.log(obj);
-        $location.path(obj);
-    };
-
     ctrl.hideSideMenu = function () {
         $timeout(function () {
             ctrl.showSideMenu = false;
         }, 10);
+    };
+
+    ctrl.isActive = function (location) {
+        if(location.substr(1, location.length) === $location.path()){
+            return 'active-menu-item';
+        }
     };
 
     ctrl.currentPath = function () {

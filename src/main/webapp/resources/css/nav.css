@@ -34,7 +34,7 @@
 }
 
 .navbar-default .navbar-header .brand, .navbar-default .navbar-header .project {
-    padding: 16px 10px 16px 0;
+    padding: 16px 10px 16px 10px;
     font-size: 20px;
     font-weight: 500;
     height: 57px;
@@ -43,7 +43,7 @@
 .navbar-default .navbar-header .divider {
     height: 33px;
     border-right: solid 1px #ffffff;
-    margin: 12px 10px 12px 0;
+    margin: 12px 0 12px 0;
 }
 
 .navbar-default .navbar-right {

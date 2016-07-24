@@ -7257,7 +7257,7 @@ tr.button:hover{
 }
 
 .active-menu-item{
-    border-right: 4px solid red;
+    border-bottom: 4px solid red;
 }
 .cell:hover{
     border-right: 4px solid deepskyblue;
