@@ -2,20 +2,30 @@
 
 angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicService, PlaylistService) {
     var ctrl = this;
-    ctrl.tracks = [];
 
+    ctrl.genres = [];
     ctrl.grid = false;
+
     ctrl.init = function () {
-        getPopular();
         getPlaylists();
+        getGenres();
+        ctrl.getTop('all-music');
     };
 
-    function getPopular() {
-        ChartsService.get().$promise.then(function (res) {
+    ctrl.getTop = function (genre) {
+        ChartsService.getByGenre({}, genre).$promise.then(function (res) {
+            ctrl.tracks = [];
             res.collection.forEach(function (song) {
                 ctrl.tracks.push(song.track);
             })
         });
+    };
+
+    function getGenres() {
+        ChartsService.getGenres().$promise.then(function (res) {
+            ctrl.genres = res;
+            ctrl.selectedGenre = res[0];
+        })
     }
 
     function getPlaylists() {

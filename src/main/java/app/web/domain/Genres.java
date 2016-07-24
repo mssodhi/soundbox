@@ -19,6 +19,10 @@ public class Genres {
     @JsonProperty
     private String name;
 
+    @Column(name = "value", nullable = false)
+    @JsonProperty
+    private String value;
+
     public Integer getId() {
         return id;
     }
@@ -33,5 +37,13 @@ public class Genres {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
