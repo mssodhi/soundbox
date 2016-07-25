@@ -21,7 +21,11 @@ public class LikesController {
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public Object get () {
         User user = userService.getCurrentUser();
-        return likesService.findByUser(user.getId());
+        if(user != null){
+            return likesService.findByUser(user.getId());
+        }else{
+            return null;
+        }
     }
 
     @RequestMapping(value = "add/{id}", method = RequestMethod.POST)

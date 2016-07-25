@@ -21,18 +21,22 @@ public class SettingsController {
     private UserService userService;
 
     @RequestMapping(value = "getSettings", method = RequestMethod.GET)
-    public Object getSettings () {
+    public Object getSettings() {
         User user = userService.getCurrentUser();
-        return settingsService.findByUser(user);
+        if (user != null) {
+            return settingsService.findByUser(user);
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "updateSettings", method = RequestMethod.PUT)
-    public Object updateSettings (@RequestBody Settings settings) {
+    public Object updateSettings(@RequestBody Settings settings) {
         return settingsService.save(settings);
     }
 
     @RequestMapping(value = "addSettings", method = RequestMethod.POST)
-    public Object addSettings (@RequestBody Settings settings) {
+    public Object addSettings(@RequestBody Settings settings) {
         User user = userService.getCurrentUser();
         settings.setUser(user);
         return settingsService.save(settings);
