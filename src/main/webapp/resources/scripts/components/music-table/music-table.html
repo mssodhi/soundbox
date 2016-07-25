@@ -2,6 +2,11 @@
     <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks">
         <b><i class="fa fa-exclamation-circle custom-blue"></i> {{ctrl.tracks.length}} tracks</b>
     </span>
+    <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
+        <input placeholder="Filter list"
+               ng-model="ctrl.searchQuery" type="text"
+               class="pull-right col-xs-12 col-sm-6 form-control">
+    </span>
 </div>
 
 <table class="col-md-12 table mt15 pl0 pr0">
@@ -16,8 +21,9 @@
         </tr>
     </thead>
 
-    <tbody ng-repeat="song in ctrl.tracks.slice(((ctrl.currentPage-1) * ctrl.itemsPerPage), ((ctrl.currentPage) * ctrl.itemsPerPage)) track by song.id" title="{{song.title}}">
-        <tr ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
+    <tbody>
+        <tr ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery | limitTo: ctrl.limit track by song.id" title="{{song.title}}"
+            ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{$index+1}}</td>
             <td ng-click="ctrl.select(song)">
@@ -25,7 +31,7 @@
                 <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
                 <a>{{song.title | limitTo: 45}}<span ng-if="song.title.length > 45">... </span></a>
             </td>
-            <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist"><a href ng-href="#/artist/{{song.user.permalink}}">{{song.user.username}}</a></td>
+            <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.username}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.playback_count | number}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
@@ -43,6 +49,7 @@
                 <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
                     <ul uib-dropdown-menu>
+                        <li class="menu-item"><a ng-click="ctrl.goToArtist(song.user)" href> View artist </a></li>
                         <li class="menu-item"><a ng-click="ctrl.addToNext(song)" href> Queue next </a></li>
                         <li ng-if="ctrl.isplaylist" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
@@ -52,8 +59,12 @@
                 </div>
             </td>
         </tr>
+        <tr ng-if="ctrl.tracks.length > ctrl.limit">
+            <td></td>
+            <td></td>
+            <td><a href ng-click="ctrl.limit = ctrl.limit + 50">Show more...</a></td>
+            <td></td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
-<div class="text-center col-xs-12" ng-if="ctrl.tracks.length > 20">
-    <uib-pagination total-items="ctrl.tracks.length" items-per-page="ctrl.itemsPerPage" ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()"></uib-pagination>
-</div>

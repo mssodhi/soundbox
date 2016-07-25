@@ -3,11 +3,10 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService) {
+    controller: function (MusicService, PlaylistService, LikesService, $location) {
         var ctrl = this;
-        ctrl.currentPage = 1;
-        ctrl.itemsPerPage = 20;
         ctrl.likes = [];
+        ctrl.limit = 50;
         var sb_date, sb_title, sb_duration, sb_artist = false;
         var sb_plays = true;
 
@@ -15,6 +14,10 @@ angular.module('app').component("musicTable", {
             LikesService.get().$promise.then(function (response) {
                 ctrl.likes = response;
             });
+        };
+
+        ctrl.goToArtist = function (artist) {
+            $location.path('/artist/'+artist.permalink);
         };
 
         ctrl.likeSong = function (song) {
