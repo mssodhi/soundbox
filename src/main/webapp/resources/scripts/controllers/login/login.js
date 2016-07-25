@@ -14,7 +14,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
             animation: true,
             templateUrl: 'resources/scripts/controllers/login/login-modal.html',
             controllerAs: 'ctrl',
-            controller: function ($uibModalInstance, LoginService, UserService, MusicService) {
+            controller: function ($uibModalInstance, LoginService, UserService, MusicService, $timeout) {
 
                 var ctrl = this;
 
@@ -63,9 +63,13 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 };
 
                 function goToLanding() {
-                    $uibModalInstance.close();
+                    $timeout(function () {
+                        $uibModalInstance.dismiss();
+                    }, 2000);
+                    if(MusicService.getPlayer()){
+                        MusicService.setPlayer(null);
+                    }
                     ctrl.loggedIn = true;
-                    MusicService.setPlayer(null);
                 }
 
             }
