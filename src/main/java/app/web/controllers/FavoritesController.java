@@ -62,40 +62,4 @@ public class FavoritesController {
         return "{\"id\":\"null\"}";
     }
 
-    // HTTP GET request
-//    @RequestMapping(value = "testing", method = RequestMethod.GET)
-//    public Object sendGet() throws Exception {
-
-//        String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&client_id=0f7c969c815f51078c1de513f666ecdb&limit=20&offset=0&linked_partitioning=1&app_version=1469103556";
-//
-//        HttpClient client = new DefaultHttpClient();
-//        HttpGet request = new HttpGet(url);
-//
-//        // add request header
-//        request.addHeader("User-Agent", USER_AGENT);
-//
-//        HttpResponse response = client.execute(request);
-//
-//        System.out.println("\nSending 'GET' request to URL : " + url);
-//        System.out.println("Response Code : " +
-//                response.getStatusLine().getStatusCode());
-//
-//        BufferedReader rd = new BufferedReader(
-//                new InputStreamReader(response.getEntity().getContent()));
-//
-//        String jsonText = readAll(rd);
-//        System.out.println(jsonText);
-//        return new JSONObject(jsonText).toString();
-//        return "{}";
-
-//    }
-
-//    private static String readAll(Reader rd) throws IOException {
-//        StringBuilder sb = new StringBuilder();
-//        int cp;
-//        while ((cp = rd.read()) != -1) {
-//            sb.append((char) cp);
-//        }
-//        return sb.toString();
-//    }
 }

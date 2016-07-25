@@ -4,7 +4,7 @@ import app.web.services.GenresService;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +37,7 @@ public class ChartsController {
     public String getByGenre(@RequestBody String genre) throws Exception{
         String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3A"+ genre +"&client_id=" + sc_client_id + "&limit=" + limit + "&offset=0&linked_partitioning=1&app_version=1469103556";
 
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
         request.addHeader("User-Agent", USER_AGENT);
 
