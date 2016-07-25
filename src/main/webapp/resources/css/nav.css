@@ -182,8 +182,9 @@
 .navbar-default .navbar-right img{
     height: 57px;
     width: 57px;
-    padding-top: 1px;
-    padding-right: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-right: 5px;
     right: 300px;
 }
 
