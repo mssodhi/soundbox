@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, favorites, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, PlaylistService) {
 
     var ctrl = this;
-    ctrl.favorites = [];
     ctrl.currentUser = profile;
     ctrl.init = function () {
         ctrl.q = '';
@@ -32,11 +31,14 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     }
 
     function getFavorites() {
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        }
+        ctrl.favorites = [];
+        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
+            for(var i = 0; i < favorites.length; i++){
+                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                    ctrl.favorites.push(artist);
+                });
+            }
+        });
     }
 
     function getTracks (artist) {
@@ -65,12 +67,12 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     /* ********************************************************** */
 
     ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({}, artist.id);
+        FavoritesService.addFavorite({id: ctrl.currentUser.fb_id}, artist.id);
         ctrl.favorites.push(artist);
     };
 
     ctrl.removeFavorite = function (artist) {
-        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
+        FavoritesService.removeFavorites({id: ctrl.currentUser.fb_id}, artist.id).$promise.then(function(){
             var index = ctrl.favorites.indexOf(artist);
             ctrl.favorites.splice(index, 1);
         });

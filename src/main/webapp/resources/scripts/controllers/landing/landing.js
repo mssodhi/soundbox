@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, favorites) {
+angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -18,17 +18,19 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
     function getFavorites() {
         ctrl.tracks = [];
         ctrl.favorites = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-            SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
-                for(var i = 0; i < tracks.length; i++){
-                    ctrl.tracks.push(tracks[i]);
-                }
-                ctrl.tracks = _.shuffle(ctrl.tracks);
-            });
-        }
+        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
+            for(var i = 0; i < favorites.length; i++){
+                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                    ctrl.favorites.push(artist);
+                });
+                SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
+                    for(var i = 0; i < tracks.length; i++){
+                        ctrl.tracks.push(tracks[i]);
+                    }
+                    ctrl.tracks = _.shuffle(ctrl.tracks);
+                });
+            }
+        });
     }
 
 });

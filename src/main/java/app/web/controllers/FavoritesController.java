@@ -5,10 +5,7 @@ import app.web.domain.User;
 import app.web.services.FavoritesService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Set;
@@ -23,9 +20,9 @@ public class FavoritesController {
     @Autowired
     private FavoritesService favoritesService;
 
-    @RequestMapping(value = "getFavorites", method = RequestMethod.GET)
-    public Object getFavorites() throws Exception{
-        User currentUser = userService.getCurrentUser();
+    @RequestMapping(value = "getFavorites/user/{id}", method = RequestMethod.GET)
+    public Object getFavorites(@PathVariable String id) throws Exception{
+        User currentUser = userService.getByFbId(id);
         if(currentUser != null){
             Set<Favorites> favorites = favoritesService.getByUser(currentUser);
             return favoritesService.toJson(favorites);
@@ -34,10 +31,10 @@ public class FavoritesController {
         }
     }
 
-    @RequestMapping(value = "addFavorite", method = RequestMethod.PUT)
-    public Object addFavorite(@RequestBody String artist_id){
+    @RequestMapping(value = "addFavorite/user/{id}", method = RequestMethod.PUT)
+    public Object addFavorite(@RequestBody String artist_id, @PathVariable String id){
 
-        User currentUser = userService.getCurrentUser();
+        User currentUser = userService.getByFbId(id);
 
         // make sure the artist isn't already in the favorites list
         if(favoritesService.findByUserAndArtist(currentUser, artist_id) == null){
@@ -50,9 +47,9 @@ public class FavoritesController {
         }
     }
 
-    @RequestMapping(value = "removeFavorite", method = RequestMethod.PUT)
-    public Boolean removeFavorite(@RequestBody String artist_id){
-        User currentUser = userService.getCurrentUser();
+    @RequestMapping(value = "removeFavorite/user/{id}", method = RequestMethod.PUT)
+    public Boolean removeFavorite(@RequestBody String artist_id, @PathVariable String id){
+        User currentUser = userService.getByFbId(id);
         Favorites favorites = favoritesService.findByUserAndArtist(currentUser, artist_id);
         return favoritesService.delete(favorites);
     }

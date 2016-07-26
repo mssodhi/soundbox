@@ -16,9 +16,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
-                    },
-                    favorites: function (FavoritesService) {
-                        return FavoritesService.getFavorites({}).$promise;
                     }
                 }
             }).when('/deny', {
@@ -51,9 +48,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
-                    },
-                    favorites: function (FavoritesService) {
-                        return FavoritesService.getFavorites({}).$promise;
                     }
                 }
             }).when('/playlist/:id', {
@@ -66,9 +60,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
-                    },
-                    favorites: function (FavoritesService) {
-                        return FavoritesService.getFavorites({}).$promise;
                     },
                     playlist: function (PlaylistService, $route) {
                         return PlaylistService.getPlaylistById({id: $route.current.params.id}).$promise;
@@ -96,9 +87,6 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                     },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
-                    },
-                    favorites: function (FavoritesService) {
-                        return FavoritesService.getFavorites({}).$promise;
                     }
                 }
             }).when('/login', {

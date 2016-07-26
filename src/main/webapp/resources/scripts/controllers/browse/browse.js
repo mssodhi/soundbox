@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BrowseCtrl', function ($http, profile, RecommendService, favorites, $location, PlaylistService, FavoritesService) {
+angular.module('app').controller('BrowseCtrl', function ($http, profile, RecommendService, $location, PlaylistService, FavoritesService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -44,11 +44,13 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
 
     function getFavorites() {
         ctrl.favorites = [];
-        for(var i = 0; i < favorites.length; i++){
-            SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                ctrl.favorites.push(artist);
-            });
-        }
+        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
+            for(var i = 0; i < favorites.length; i++){
+                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
+                    ctrl.favorites.push(artist);
+                });
+            }
+        });
     }
 
     ctrl.goToArtist = function (artist) {
@@ -61,7 +63,7 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
     };
 
     ctrl.deleteFavorite = function (artist) {
-        FavoritesService.removeFavorites({}, artist.id).$promise.then(function(){
+        FavoritesService.removeFavorites({id: ctrl.currentUser.fb_id}, artist.id).$promise.then(function(){
             var index = ctrl.favorites.indexOf(artist);
             ctrl.favorites.splice(index, 1);
         });
