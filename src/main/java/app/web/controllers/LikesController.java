@@ -18,9 +18,9 @@ public class LikesController {
     @Autowired
     private LikesService likesService;
 
-    @RequestMapping(value = "get", method = RequestMethod.GET)
-    public Object get () {
-        User user = userService.getCurrentUser();
+    @RequestMapping(value = "get/user/{id}", method = RequestMethod.GET)
+    public Object get (@PathVariable String id) {
+        User user = userService.getByFbId(id);
         if(user != null){
             return likesService.findByUser(user.getId());
         }else{
@@ -28,10 +28,10 @@ public class LikesController {
         }
     }
 
-    @RequestMapping(value = "add/{id}", method = RequestMethod.POST)
-    public Object add (@PathVariable String id, @RequestBody String genre) {
+    @RequestMapping(value = "add/{id}/user/{userId}", method = RequestMethod.POST)
+    public Object add (@PathVariable String id, @PathVariable String userId, @RequestBody String genre) {
 
-        User user = userService.getCurrentUser();
+        User user = userService.getByFbId(userId);
         if(likesService.findBySongAndUser(id, user) == null){
             Likes likes = new Likes();
             likes.setSong_genre(genre);
@@ -44,9 +44,9 @@ public class LikesController {
 
     }
 
-    @RequestMapping(value = "remove/{id}", method = RequestMethod.DELETE)
-    public Object remove (@PathVariable String id) {
-        User user = userService.getCurrentUser();
+    @RequestMapping(value = "remove/{id}/user/{userId}", method = RequestMethod.DELETE)
+    public Object remove (@PathVariable String id, @PathVariable String userId) {
+        User user = userService.getByFbId(userId);
         likesService.removeByIdAndUser(id, user);
         return null;
     }

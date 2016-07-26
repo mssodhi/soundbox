@@ -3,7 +3,7 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService, $location) {
+    controller: function (MusicService, PlaylistService, LikesService, $location, UserService) {
         var ctrl = this;
         ctrl.likes = [];
         ctrl.limit = 50;
@@ -11,8 +11,11 @@ angular.module('app').component("musicTable", {
         var sb_plays = true;
 
         ctrl.init = function () {
-            LikesService.get().$promise.then(function (response) {
-                ctrl.likes = response;
+            UserService.getCurrentUser().$promise.then(function (res) {
+                ctrl.currentUser = res;
+                LikesService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
+                    ctrl.likes = response;
+                });
             });
         };
 
@@ -23,7 +26,7 @@ angular.module('app').component("musicTable", {
         ctrl.likeSong = function (song) {
             if(ctrl.isLiked(song)){
                 // unlike
-                LikesService.remove({id: song.id}).$promise.then(function () {
+                LikesService.remove({id: song.id, userId: ctrl.currentUser.fb_id}).$promise.then(function () {
                     var ind = ctrl.likes.map(function (e) {
                         return e.song_id;
                     }).indexOf(song.id.toString());
@@ -34,7 +37,7 @@ angular.module('app').component("musicTable", {
                 if(song.genre === ''){
                     song.genre = '---';
                 }
-                LikesService.add({id: song.id}, song.genre).$promise.then(function (response) {
+                LikesService.add({id: song.id, userId: ctrl.currentUser.fb_id}, song.genre).$promise.then(function (response) {
                     if(response.id){
                         ctrl.likes.push(response);
                     }

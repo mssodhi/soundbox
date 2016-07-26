@@ -3,16 +3,22 @@
 angular.module('app').component('playlistCard', {
     templateUrl: 'resources/scripts/components/playlist/playlist-card.html',
     controllerAs: 'ctrl',
-    controller: function ($route, PlaylistService, $location) {
+    controller: function ($route, PlaylistService, $location, UserService) {
         var ctrl = this;
         ctrl.name = '';
         ctrl.focus = function (e) {
             e.target.focus();
         };
 
+        ctrl.init = function () {
+            UserService.getCurrentUser().$promise.then(function (res) {
+                ctrl.currentUser = res;
+            });
+        };
+
         ctrl.addPlaylist = function () {
             if(ctrl.name.length > 0){
-                PlaylistService.addPlaylist({name: ctrl.name, id: ctrl.currentuser.fb_id}).$promise.then(function (res) {
+                PlaylistService.addPlaylist({name: ctrl.name, id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
                     if(res.id){
                         ctrl.playlists.push(res);
                         ctrl.showPlaylistForm = false
@@ -44,7 +50,6 @@ angular.module('app').component('playlistCard', {
 
     },
     bindings: {
-        playlists: '=',
-        currentuser: '='
+        playlists: '='
     }
 });
