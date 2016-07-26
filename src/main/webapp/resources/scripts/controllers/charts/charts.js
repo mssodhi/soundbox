@@ -13,7 +13,7 @@ angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicSer
     };
 
     ctrl.getTop = function (genre) {
-        ChartsService.getByGenre({}, genre).$promise.then(function (res) {
+        ChartsService.getByGenre({name: genre}).$promise.then(function (res) {
             ctrl.tracks = [];
             res.collection.forEach(function (song) {
                 ctrl.tracks.push(song.track);

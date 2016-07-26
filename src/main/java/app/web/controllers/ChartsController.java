@@ -8,10 +8,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,9 +30,9 @@ public class ChartsController {
     @Autowired
     private GenresService genresService;
 
-    @RequestMapping(value = "getByGenre", method = RequestMethod.PUT)
-    public String getByGenre(@RequestBody String genre) throws Exception{
-        String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3A"+ genre +"&client_id=" + sc_client_id + "&limit=" + limit + "&offset=0&linked_partitioning=1&app_version=1469103556";
+    @RequestMapping(value = "getByGenre/{name}", method = RequestMethod.GET)
+    public String getByGenre(@PathVariable String name) throws Exception{
+        String url = "https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3A"+ name +"&client_id=" + sc_client_id + "&limit=" + limit + "&offset=0&linked_partitioning=1&app_version=1469103556";
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
