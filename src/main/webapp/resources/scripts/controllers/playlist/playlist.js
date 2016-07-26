@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistService, favorites, playlist) {
+angular.module('app').controller('PlaylistCtrl', function ($http, profile, PlaylistService, favorites, playlist) {
 
     var ctrl = this;
+    ctrl.currentUser = profile;
     ctrl.currentPlaylist = playlist;
     ctrl.edit = false;
     ctrl.playlists = [];
+
     ctrl.init = function () {
         validateAndGetTracks();
         getPlaylists();
@@ -36,7 +38,7 @@ angular.module('app').controller('PlaylistCtrl', function ($http, PlaylistServic
     };
 
     function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
+        PlaylistService.getPlaylists({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.playlists = response;
         });
     }

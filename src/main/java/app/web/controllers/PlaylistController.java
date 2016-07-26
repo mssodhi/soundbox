@@ -20,9 +20,9 @@ public class PlaylistController {
     @Autowired
     private PlaylistService playlistService;
 
-    @RequestMapping(value = "getPlaylist", method = RequestMethod.GET)
-    public Object getPlaylistCurrentUser () {
-        User currentUser = userService.getCurrentUser();
+    @RequestMapping(value = "getPlaylist/user/{id}", method = RequestMethod.GET)
+    public Object getPlaylist (@PathVariable String id) {
+        User currentUser = userService.getByFbId(id);
         if(currentUser != null){
             return playlistService.findByUser(currentUser.getId());
         }else{

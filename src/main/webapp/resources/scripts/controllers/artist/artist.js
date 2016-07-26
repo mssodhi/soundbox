@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, FavoritesService, favorites, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, favorites, PlaylistService) {
 
     var ctrl = this;
     ctrl.favorites = [];
+    ctrl.currentUser = profile;
     ctrl.init = function () {
         ctrl.q = '';
         validateArtist();
@@ -25,7 +26,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, $routeParams, Fa
     }
 
     function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
+        PlaylistService.getPlaylists({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.playlists = response;
         });
     }

@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (PlaylistService, favorites) {
+angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, favorites) {
     var ctrl = this;
+    ctrl.currentUser = profile;
 
     ctrl.init = function () {
         getPlaylists();
@@ -9,7 +10,7 @@ angular.module('app').controller('LandingCtrl', function (PlaylistService, favor
     };
 
     function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
+        PlaylistService.getPlaylists({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.playlists = response;
         });
     }

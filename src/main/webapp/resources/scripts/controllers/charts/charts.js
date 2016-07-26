@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicService, PlaylistService) {
+angular.module('app').controller('ChartsCtrl', function (profile, ChartsService, MusicService, PlaylistService) {
     var ctrl = this;
-
+    ctrl.currentUser = profile;
     ctrl.genres = [];
     ctrl.grid = true;
 
@@ -29,7 +29,7 @@ angular.module('app').controller('ChartsCtrl', function (ChartsService, MusicSer
     }
 
     function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
+        PlaylistService.getPlaylists({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.playlists = response;
         });
     }

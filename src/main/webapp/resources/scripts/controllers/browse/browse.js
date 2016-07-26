@@ -37,7 +37,7 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
     }
 
     function getPlaylists() {
-        PlaylistService.getPlaylists().$promise.then(function (response) {
+        PlaylistService.getPlaylists({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.playlists = response;
         });
     }
