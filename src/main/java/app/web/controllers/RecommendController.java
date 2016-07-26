@@ -8,6 +8,7 @@ import app.web.services.GenresService;
 import app.web.services.LikesService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +29,9 @@ public class RecommendController {
     @Autowired
     private GenresService genresService;
 
-    @RequestMapping(value = "get", method = RequestMethod.GET)
-    public Object get () {
-        User user = userService.getCurrentUser();
+    @RequestMapping(value = "get/user/{id}", method = RequestMethod.GET)
+    public Object get (@PathVariable String id) {
+        User user = userService.getByFbId(id);
         Set<Likes> likes = likesService.findByUser(user.getId());
         if(likes.size() > 20){
             // make a list of genres from user's likes

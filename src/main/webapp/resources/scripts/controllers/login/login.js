@@ -30,7 +30,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                                             '/' + response.id + '/picture',
                                             function (response) {
                                                 if (response && !response.error) {
-                                                    UserService.setPic(response.data.url);
+                                                    UserService.setPic({id: user.fb_id}, response.data.url);
                                                 }
                                             }
                                         );
