@@ -40,9 +40,9 @@ public class PlaylistController {
         return playlistService.findById(id);
     }
 
-    @RequestMapping(value = "addPlaylist/{name}", method = RequestMethod.GET)
-    public Object addPlaylist(@PathVariable String name) {
-        User currentUser = userService.getCurrentUser();
+    @RequestMapping(value = "addPlaylist/{name}/user/{id}", method = RequestMethod.GET)
+    public Object addPlaylist(@PathVariable String name, @PathVariable String id) {
+        User currentUser = userService.getByFbId(id);
         Playlist playlist = new Playlist();
         playlist.setName(name);
         playlist.setOwner(currentUser);

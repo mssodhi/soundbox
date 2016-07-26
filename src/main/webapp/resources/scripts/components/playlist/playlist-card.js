@@ -12,7 +12,7 @@ angular.module('app').component('playlistCard', {
 
         ctrl.addPlaylist = function () {
             if(ctrl.name.length > 0){
-                PlaylistService.addPlaylist({name: ctrl.name}).$promise.then(function (res) {
+                PlaylistService.addPlaylist({name: ctrl.name, id: ctrl.currentuser.fb_id}).$promise.then(function (res) {
                     if(res.id){
                         ctrl.playlists.push(res);
                         ctrl.showPlaylistForm = false
@@ -44,6 +44,7 @@ angular.module('app').component('playlistCard', {
 
     },
     bindings: {
-        playlists: '='
+        playlists: '=',
+        currentuser: '='
     }
 });

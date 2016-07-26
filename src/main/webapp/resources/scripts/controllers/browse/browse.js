@@ -75,7 +75,7 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
 
     ctrl.addPlaylist = function () {
         if(ctrl.name.length > 0){
-            PlaylistService.addPlaylist({name: ctrl.name}).$promise.then(function (res) {
+            PlaylistService.addPlaylist({name: ctrl.name, id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
                 if(res.id){
                     ctrl.playlists.push(res);
                     ctrl.showForm = false
