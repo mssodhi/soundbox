@@ -21,7 +21,7 @@
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="pl0 pr0">
         <tr ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery | limitTo: ctrl.limit track by song.id" title="{{song.title}}"
             ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
 
@@ -35,7 +35,7 @@
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.playback_count | number}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
-            <td ng-click="ctrl.likeSong(song)">
+            <td ng-click="ctrl.likeSong(song)" class="hidden-xs">
                 <div class="pt5" style="font-size: 25px;">
                    <a ng-if="ctrl.isLiked(song)">
                        <i class="fa fa-thumbs-up"></i>
@@ -46,9 +46,11 @@
                 </div>
             </td>
             <td ng-if="ctrl.playlists.length > 0">
-                <div class="pt5 fa-2x" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
+                <div class="pt5 fa-2x text-center" uib-dropdown is-open="song.status.isOpen" uib-dropdown-toggle>
                     <a class="custom-orange"><i class="fa fa-ellipsis-v"></i></a>
                     <ul uib-dropdown-menu>
+                        <li class="menu-item hidden-md hidden-sm" ng-if="!ctrl.isLiked(song)"><a ng-click="ctrl.likeSong(song)" href> Like </a></li>
+                        <li class="menu-item hidden-md hidden-sm" ng-if="ctrl.isLiked(song)"><a ng-click="ctrl.likeSong(song)" href> Unlike </a></li>
                         <li class="menu-item"><a ng-click="ctrl.goToArtist(song.user)" href> View artist </a></li>
                         <li class="menu-item"><a ng-click="ctrl.addToNext(song)" href> Queue next </a></li>
                         <li ng-if="ctrl.isplaylist" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
@@ -60,11 +62,11 @@
             </td>
         </tr>
         <tr ng-if="ctrl.tracks.length > ctrl.limit">
-            <td></td>
+            <td class="hidden-xs"></td>
             <td></td>
             <td><a href ng-click="ctrl.limit = ctrl.limit + 50">Show more...</a></td>
-            <td></td>
-            <td></td>
+            <td class="hidden-xs"></td>
+            <td class="hidden-xs"></td>
         </tr>
     </tbody>
 </table>
