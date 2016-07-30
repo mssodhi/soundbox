@@ -24,4 +24,14 @@ public class UserController {
         return userService.save(user);
     }
 
+    @RequestMapping(value = "getByFbId/{id}", method = RequestMethod.GET)
+    public Object getByFbId(@PathVariable String id){
+        User user = userService.getByFbId(id);
+        if(user != null){
+            return user;
+        }else{
+            return null;
+        }
+    }
+
 }

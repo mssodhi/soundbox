@@ -121,6 +121,18 @@
     position: fixed;
 }
 
+/* for iphone only*/
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+    .navbar-fixed-top{
+        position: relative !important;
+    }
+}
+
 .navbar-default {
     height: 57px;
 }
