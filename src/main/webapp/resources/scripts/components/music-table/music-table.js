@@ -23,7 +23,7 @@ angular.module('app').component("musicTable", {
         function registerScroll() {
             document.onscroll = function() {
                 if(document.getElementById('show-more') !== null){
-                    ctrl.limit += ctrl.limit;
+                    ctrl.limit += 50;
                 }
             }
         }
