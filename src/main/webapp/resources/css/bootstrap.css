@@ -1852,10 +1852,14 @@ and (-webkit-min-device-pixel-ratio: 2){
         width: 100% !important;
     }
 
+    .music-player img{
+        height: 60px !important;
+    }
+
     .music-player{
         position: fixed !important;
         bottom: 0 !important;
-        height: 190px !important;
+        height: 150px !important;
     }
     .main-nav{
         position: fixed; !important;
@@ -1880,8 +1884,8 @@ and (-webkit-min-device-pixel-ratio: 2){
 
     .music-player-info{
         background-color: coral !important;
-        height: 100px !important;
-        width: 73.2% !important;
+        height: 60px !important;
+        width: 84% !important;
     }
 }
 
