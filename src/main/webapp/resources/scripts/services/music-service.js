@@ -28,7 +28,8 @@ angular.module('app').factory('MusicService', function ($timeout) {
         },
         setPlayer: function(pl, tr) {
             $timeout(function () {
-                pl.controller._html5Audio.title = tr.title;
+                var audioPlayer = pl.controller._html5Audio;
+                audioPlayer.title = tr.title;
             },750);
 
             if(pl !== undefined){
