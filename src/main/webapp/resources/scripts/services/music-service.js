@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('MusicService', function () {
+angular.module('app').factory('MusicService', function ($timeout) {
     var player;
     var isPlaying;
     var track;
@@ -27,6 +27,10 @@ angular.module('app').factory('MusicService', function () {
             return retList;
         },
         setPlayer: function(pl, tr) {
+            $timeout(function () {
+                pl.controller._html5Audio.title = tr.title;
+            },750);
+
             if(pl !== undefined){
                 player = pl;
                 track = tr;
