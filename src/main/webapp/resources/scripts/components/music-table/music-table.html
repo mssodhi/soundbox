@@ -9,7 +9,30 @@
     </span>
 </div>
 
-<table class="col-md-12 table mt15 pl0 pr0">
+<div class="song-list">
+    <div class="panel pl0 pr0 col-xs-12" ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id" title="{{song.title}}"
+         ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
+        <div class="panel-body" ng-click="ctrl.select(song)">
+            <img ng-if="song.artwork_url !== null" class="" ng-src="{{song.artwork_url}}">
+            <img ng-if="song.artwork_url === null" class="" src="resources/images/noImage.jpg">
+
+            <div class="info pull-left col-md-8 col-sm-9 col-xs-12">
+                <span class="title">{{song.title}}</span>
+                <span class="artist">{{song.user.username}}</span>
+                <p>{{ctrl.milliToTime(song.duration)}}</p>
+            </div>
+        </div>
+        <!--<div class="actions pull-right col-md-3 col-xs-12 pt15">-->
+            <!--<button class="btn-primary btn pull-right">View artist</button>-->
+            <!--<a ng-click="ctrl.likeSong(song)" href>-->
+                <!--<i ng-if="ctrl.isLiked(song)" class="fa fa-thumbs-up"></i>-->
+                <!--<i ng-if="!ctrl.isLiked(song)" class="fa fa-thumbs-o-up" style="padding-right: 2px; color: black;"></i>-->
+            <!--</a>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<table class="col-md-12 table mt15 pl0 pr0" hidden>
     <thead class="custom-font">
         <tr>
             <th class="hidden-xs">#</th>
@@ -27,8 +50,7 @@
 
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{$index+1}}</td>
             <td ng-click="ctrl.select(song)">
-                <img ng-if="song.artwork_url !== null" class="track-image" ng-src="{{song.artwork_url}}">
-                <img ng-if="song.artwork_url === null" class="track-image" src="resources/images/noImage.jpg">
+
                 <a>{{song.title | limitTo: 45}}<span ng-if="song.title.length > 45">... </span></a>
             </td>
             <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.username}}</td>
@@ -61,7 +83,7 @@
                 </div>
             </td>
         </tr>
-        <tr ng-if="ctrl.tracks.length > ctrl.limit" id="show-more">
+        <tr ng-if="ctrl.tracks.length > ctrl.limit" id="show-more111">
             <td class="hidden-xs"></td>
             <td></td>
             <td><a href ng-click="ctrl.limit = ctrl.limit + 50">Show more...</a></td>

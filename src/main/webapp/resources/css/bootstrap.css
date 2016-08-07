@@ -1826,6 +1826,14 @@ and (max-device-width : 667px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2){
 
+    .song-list .panel .panel-body div{
+        width: 210px;
+    }
+
+    .song-list .panel .panel-body .info .title{
+        font-size: medium !important;
+    }
+
     .landing-main-text{
         padding-top: 10px !important;
     }
@@ -1976,6 +1984,36 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 
 /* Artist page card css end */
+
+.song-list .panel-body{
+    padding: 10px;
+}
+
+.song-list .panel .panel-body img{
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+}
+
+.song-list .panel .panel-body .info .title{
+    margin-top: 5px;
+    display: inline-block;
+    font-size: large;
+}
+
+.song-list .panel .panel-body .info .artist{
+    display: block;
+    font-size: small;
+    color: gray;
+}
+
+.song-list .panel .panel-body p{
+    display: block;
+    font-size: small;
+    color: black;
+}
+
 
 .side-card-main{
     max-height: 460px;
