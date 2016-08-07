@@ -1819,6 +1819,13 @@ a.bg-danger:focus {
     border-bottom: transparent;
 }
 
+td img{
+    height: 40px;
+    width: 40px;
+}
+.table > thead > tr > th {
+    border-bottom: none !important;
+}
 /* for iphone only*/
 @media only screen
 and (min-device-width : 375px)
