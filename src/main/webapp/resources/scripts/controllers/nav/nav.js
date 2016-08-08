@@ -41,14 +41,6 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
         return '#' + $location.path();
     };
 
-    ctrl.getNavBrandName = function () {
-        if($location.path() !== '/'){
-            return 'SB | ' + $location.path().charAt(1).toUpperCase();
-        }else{
-            return 'SoundBox';
-        }
-    };
-
     ctrl.signOut = function () {
         LoginService.logout().$promise.then(function () {
             ctrl.currentUser = null;

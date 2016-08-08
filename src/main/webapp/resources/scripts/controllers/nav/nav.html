@@ -1,18 +1,12 @@
 <div ng-controller="NavCtrl as ctrl" ng-class="{'side-menu-active': ctrl.showSideMenu}">
     <div ng-if="ctrl.inApp">
-        <div class="backdrop"></div>
-        <div class="navbar navbar-default navbar-fixed-top" style="background-color: dodgerblue">
+        <div class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
-                <a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"><span class="sr-only">left-navigation</span></a>
-                <div class="divider"></div>
-                <div class="project" ng-class="ctrl.isActive('#/')"><a href="#/">{{ctrl.getNavBrandName()}}</a></div>
-                <div class="divider"></div>
-                <div class="project" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>
-                <div class="divider"></div>
-                <div class="project" ng-class="ctrl.isActive('#/browse')"><a href="#/browse">Browse</a></div>
-                <div class="divider hidden-xs"></div>
+                <div class="side-toggle"><a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a></div>
+                <div class="project hidden-xs" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>
+                <div class="project hidden-xs" ng-class="ctrl.isActive('#/browse')"><a href="#/browse">Browse</a></div>
+                <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
                 <div class="project hidden-xs" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings">Settings</a></div>
-                <div class="divider hidden-xs"></div>
                 <div class="project hidden-xs"><a href ng-click="ctrl.signOut()">Logout</a></div>
             </div>
 
