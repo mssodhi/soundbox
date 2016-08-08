@@ -2,7 +2,6 @@
 
 angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService, $timeout, UserService) {
     var ctrl = this;
-    var currentUser = {};
     ctrl.menuItems = [];
     ctrl.menuItems.push(
         {title: 'Charts',    link: '#/charts'},
@@ -18,6 +17,10 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
             })
         }
     });
+
+    ctrl.isScrolled = function () {
+        return window.scrollY > 0;
+    };
 
     ctrl.hideSideMenu = function () {
         $timeout(function () {

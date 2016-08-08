@@ -1,6 +1,6 @@
 <div ng-controller="NavCtrl as ctrl" ng-class="{'side-menu-active': ctrl.showSideMenu}">
     <div ng-if="ctrl.inApp">
-        <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar navbar-default navbar-fixed-top" ng-class="{'navbar-shadow': ctrl.isScrolled()}">
             <div class="navbar-header">
                 <div class="side-toggle"><a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a></div>
                 <div class="project hidden-xs" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>

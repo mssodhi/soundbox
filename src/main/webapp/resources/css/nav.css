@@ -113,8 +113,11 @@
 
 .navbar {
     margin-bottom: 0;
-    /*border-bottom: 1px solid gainsboro !important;*/
     background-color: #e9eaed;
+}
+
+.navbar-shadow{
+    box-shadow: 0 -3px 13px -2px black;
 }
 
 .navbar-header{
