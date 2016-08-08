@@ -164,6 +164,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
         position: relative !important;
     }
 
+    .navbar-shadow{
+        box-shadow: none !important;
+    }
+
     .navbar{
         border-bottom: 1px solid gainsboro !important;
     }
