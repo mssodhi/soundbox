@@ -113,7 +113,7 @@
 
 .navbar {
     margin-bottom: 0;
-    background-color: #e9eaed;
+    background-color: #1f7bb6;
 }
 
 .navbar-shadow{
@@ -125,9 +125,6 @@
     float: none !important;
 }
 
-.navbar-header .side-toggle{
-    display: none !important;
-}
 
 /* header navigation */
 .navbar-fixed-top {
@@ -136,21 +133,26 @@
 }
 
 .project a{
-    color: darkgoldenrod;
+    color: #FFFFFF;
     font-weight: lighter;
+}
+
+.app:hover, .project:hover{
+    /*color: gainsboro;*/
+    background-color: #238acc;
 }
 
 .navbar-default .navbar-header .app{
     color: royalblue;
     font-weight: 500;
-    padding: 20px 10px 16px 10px;
+    padding: 13px 10px 16px 10px;
     font-family: fantasy;
     font-size: 30px;
     height: 57px;
 }
 
 .app a{
-    color: #0b97c4;
+    color: whitesmoke;
 }
 
 /* for iphone only*/
@@ -179,20 +181,12 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .navbar-header .app{
         padding-left: 0 !important;
     }
-
-    .navbar-header .side-toggle{
-        display: inherit !important;
-    }
 }
 
 /* for ipad only */
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px)  {
-
-    .navbar-header .side-toggle{
-        display: none !important;
-    }
 
     .navbar-default .navbar-header .brand, .navbar-default .navbar-header .project {
         font-size: 22px !important;
@@ -230,24 +224,28 @@ and (max-device-width : 1024px)  {
 }
 
 .navbar-default .navbar-header .hamburger {
-    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0IDI0IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGcgaWQ9IkhlYWRlciI+CiAgICA8Zz4KICAgICAgICA8cmVjdCB4PSItNjE4IiB5PSItMjIzMiIgZmlsbD0ibm9uZSIgd2lkdGg9IjE0MDAiIGhlaWdodD0iMzYwMCIvPgogICAgPC9nPgo8L2c+CjxnIGlkPSJMYWJlbCI+CjwvZz4KPGcgaWQ9Ikljb24iPgogICAgPGc+CiAgICAgICAgPHJlY3QgZmlsbD0ibm9uZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CiAgICAgICAgPHBhdGggZD0iTTMsMThoMTh2LTJIM1YxOHogTTMsMTNoMTh2LTJIM1YxM3ogTTMsNnYyaDE4VjZIM3oiIHN0eWxlPSJmaWxsOiNmM2YzZjM7Ii8+CiAgICA8L2c+CjwvZz4KPGcgaWQ9IkdyaWQiIGRpc3BsYXk9Im5vbmUiPgogICAgPGcgZGlzcGxheT0iaW5saW5lIj4KICAgIDwvZz4KPC9nPgo8L3N2Zz4=) no-repeat center center deepskyblue;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0IDI0IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGcgaWQ9IkhlYWRlciI+CiAgICA8Zz4KICAgICAgICA8cmVjdCB4PSItNjE4IiB5PSItMjIzMiIgZmlsbD0ibm9uZSIgd2lkdGg9IjE0MDAiIGhlaWdodD0iMzYwMCIvPgogICAgPC9nPgo8L2c+CjxnIGlkPSJMYWJlbCI+CjwvZz4KPGcgaWQ9Ikljb24iPgogICAgPGc+CiAgICAgICAgPHJlY3QgZmlsbD0ibm9uZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CiAgICAgICAgPHBhdGggZD0iTTMsMThoMTh2LTJIM1YxOHogTTMsMTNoMTh2LTJIM1YxM3ogTTMsNnYyaDE4VjZIM3oiIHN0eWxlPSJmaWxsOiNmM2YzZjM7Ii8+CiAgICA8L2c+CjwvZz4KPGcgaWQ9IkdyaWQiIGRpc3BsYXk9Im5vbmUiPgogICAgPGcgZGlzcGxheT0iaW5saW5lIj4KICAgIDwvZz4KPC9nPgo8L3N2Zz4=) no-repeat center center;
     width: 45px;
     height: 57px;
     display: inline-block;
     float: left;
 }
 
+.navbar-default .navbar-header .hamburger:hover {
+    background-color: #238acc;
+}
+
 .navbar-default .navbar-header .brand, .navbar-default .navbar-header .project {
-    padding: 20px 10px 16px 10px;
+    padding: 13px 10px 16px 10px;
     font-size: 30px;
     font-family: fantasy;
     height: 57px;
 }
 
 .navbar-default .navbar-header .divider {
-    height: 33px;
+    height: 57px;
     border-right: solid 1px #ffffff;
-    margin: 12px 0 12px 0;
+    margin: 0;
 }
 
 .navbar-default .navbar-right {

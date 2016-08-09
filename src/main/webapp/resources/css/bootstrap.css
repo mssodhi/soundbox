@@ -7284,7 +7284,8 @@ tr.button:hover{
 }
 
 .active-menu-item{
-    border-bottom: 1px solid red;
+    /*border-bottom: 1px solid red;*/
+    /*background-color: #238acc;*/
 }
 .cell:hover{
     border-right: 4px solid deepskyblue;

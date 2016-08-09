@@ -2,10 +2,14 @@
     <div ng-if="ctrl.inApp">
         <div class="navbar navbar-default navbar-fixed-top" ng-class="{'navbar-shadow': ctrl.isScrolled()}">
             <div class="navbar-header">
-                <div class="side-toggle"><a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a></div>
+                <div class="side-toggle pull-left">
+                    <a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a>
+                    <!--<div class="divider"></div>-->
+                    <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
+                    <!--<div class="divider"></div>-->
+                </div>
                 <div class="project hidden-xs" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>
                 <div class="project hidden-xs" ng-class="ctrl.isActive('#/browse')"><a href="#/browse">Browse</a></div>
-                <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
                 <div class="project hidden-xs" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings">Settings</a></div>
                 <div class="project hidden-xs"><a href ng-click="ctrl.signOut()">Logout</a></div>
             </div>
