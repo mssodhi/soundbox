@@ -56,14 +56,15 @@
                 </div>
             </div>
 
-            <div class="panel-body" ng-if="ctrl.showMusic" ng-init="ctrl.getMusic()">
+            <div class="panel-body" ng-if="ctrl.showMusic" ng-init="ctrl.getUserSongs()">
                 <h4 class="semibold">Music</h4>
                 <p>Manage your music uploads</p>
                 <hr>
 
                 <div class="form-group col-md-11">
-                    <div ng-repeat="music in ctrl.currentUser.music track by music.id">
-                        <p>{{music.name}}</p>
+                    <div ng-repeat="song in ctrl.currentUser.songs track by song.id">
+                        <p>{{song.name}}</p>
+                        <audio ng-src="{{song.url}}" controls="true" autoplay="true"></audio>
                     </div>
                 </div>
             </div>

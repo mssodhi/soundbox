@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SettingsCtrl', function (profile, UserService, SettingsService, Upload) {
+angular.module('app').controller('SettingsCtrl', function (profile, UserService, SettingsService, Upload, SongService, $sce) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.files = [];
@@ -12,10 +12,16 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
         });
     };
 
-    ctrl.getMusic = function () {
+    ctrl.getUserSongs = function () {
         UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
-            console.log(response);
-            ctrl.currentUser.music = response;
+            ctrl.currentUser.songs = response;
+            response.forEach(function (song) {
+                SongService.getSong({id: song.id}).$promise.then(function (res) {
+                    var int8Array = new Uint8Array(res.content);
+                    var blob = new Blob([int8Array], {type: "audio/mp3"});
+                    song.url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
+                })
+            })
         });
     };
 
