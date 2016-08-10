@@ -4,22 +4,22 @@
             <div class="navbar-header">
                 <div class="side-toggle pull-left">
                     <a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a>
-                    <!--<div class="divider"></div>-->
                     <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
-                    <!--<div class="divider"></div>-->
                 </div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/browse')"><a href="#/browse">Browse</a></div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings">Settings</a></div>
-                <div class="project hidden-xs"><a href ng-click="ctrl.signOut()">Logout</a></div>
+                <div class="menu-items col-md-10 pl0">
+                    <div class="project pull-left" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts"> <i class="fa fa-bar-chart-o"></i> Charts</a></div>
+                    <div class="project pull-left" ng-class="ctrl.isActive('#/browse')"><a href="#/browse"> <i class="fa fa-list-alt"></i> Browse</a></div>
+                    <div class="project pull-left" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings"> <i class="fa fa-gears"></i> Settings</a></div>
+                    <div class="project pull-right"><a href ng-click="ctrl.signOut()"> <i class="fa fa-sign-out"></i> Logout</a></div>
+                </div>
             </div>
 
             <div class="navbar-right" ng-if="ctrl.currentUser.name !== 'Demo'">
-                <div class="user-profile pull-right col-xs-12 pl0 pr0" ng-class="{'open': ctrl.openProfile}">
+                <div class="user-profile pull-right pl0 pr0" ng-class="{'open': ctrl.openProfile}">
                     <img class="img-circle img-bordered" ng-src="{{ctrl.currentUser.pic_url}}">
-                    <a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">
-                        <span class="pull-right hidden-xs">{{ctrl.currentUser.name}}</span>
-                    </a>
+                    <!--<a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">-->
+                        <!--<span class="pull-right hidden-xs">{{ctrl.currentUser.name}}</span>-->
+                    <!--</a>-->
                     <!--<ul class ="dropdown-menu dropdown-menu-right">-->
                         <!--<li>-->
                             <!--<div class="options">-->

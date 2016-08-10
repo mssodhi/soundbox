@@ -141,6 +141,9 @@
     background-color: #238acc;
 }
 
+.menu-items a i {
+    font-size: smaller;
+}
 
 .navbar-default .navbar-header .app{
     color: royalblue;
@@ -161,6 +164,10 @@ and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
+
+    .menu-items{
+        display: none !important;
+    }
 
     .navbar-default .navbar-header .hamburger:hover, .app:hover, .project:hover{
         background-color: transparent !important;
@@ -198,6 +205,7 @@ and (max-device-width : 1024px)  {
 
     .navbar-default .navbar-header .brand, .navbar-default .navbar-header .project {
         font-size: 22px !important;
+        padding: 17px 10px 16px 10px !important;
     }
     .navbar-header{
         float: left !important;
@@ -205,10 +213,11 @@ and (max-device-width : 1024px)  {
 
     .navbar-header .app{
         font-size: 22px !important;
+        padding: 17px 10px 16px 10px !important;
     }
 
     .navbar-right{
-        width: 22% !important;
+        /*width: 22% !important;*/
     }
 
 
@@ -217,6 +226,9 @@ and (max-device-width : 1024px)  {
     height: 57px;
 }
 
+.menu-items{
+    float: left;
+}
 .navbar-default a {
     /*color: #ffffff;*/
 }
@@ -227,8 +239,6 @@ and (max-device-width : 1024px)  {
 
 .navbar-default .navbar-header div {
     display: inline-block;
-    vertical-align: top;
-    text-align: center;
 }
 
 .navbar-default .navbar-header .hamburger {
@@ -263,7 +273,7 @@ and (max-device-width : 1024px)  {
     right: 15px;
     top: 0;
     height: 57px;
-    width: 10.5%;
+    /*width: 10.5%;*/
 }
 
 .navbar-default .navbar-right > div {

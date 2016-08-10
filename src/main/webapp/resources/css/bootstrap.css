@@ -1934,9 +1934,6 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     .page-one{
         height: 1034px !important;
     }
-    .navbar-right{
-        width: 20% !important;
-    }
 }
 
 .table > tr > td{
