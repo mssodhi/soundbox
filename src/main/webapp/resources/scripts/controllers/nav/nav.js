@@ -4,9 +4,9 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
     var ctrl = this;
     ctrl.menuItems = [];
     ctrl.menuItems.push(
-        {title: 'Charts',    link: '#/charts'},
-        {title: 'Browse',    link: '#/browse'},
-        {title: 'Settings',  link: '#/settings'}
+        {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
+        {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
+        {title: 'Settings',  link: '#/settings', icon: 'fa fa-gears'}
     );
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){

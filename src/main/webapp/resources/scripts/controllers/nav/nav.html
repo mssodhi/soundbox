@@ -34,7 +34,7 @@
         <div class="sidebar">
             <ul class="sidebar-nav">
                 <li ng-repeat="menuItem in ctrl.menuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
-                    <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link">{{menuItem.title}}</a>
+                    <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link"> <i ng-class="'{{menuItem.icon}} pr10'"> </i> {{menuItem.title}}</a>
                     <div ng-if="!menuItem.link">{{menuItem.title}}</div>
                     <ul ng-if="menuItem.children" ng-repeat="subMenuItem in menuItem.children" class="list-unstyled">
                         <li ng-class="{'active': subMenuItem.link === ctrl.currentPath()}">
@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href ng-click="ctrl.signOut()">Logout</a></li>
+                <li><a href ng-click="ctrl.signOut()"> <i class="fa fa-sign-out pr10"> </i> Logout</a></li>
             </ul>
         </div>
     </div>

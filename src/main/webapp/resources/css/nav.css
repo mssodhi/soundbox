@@ -580,7 +580,7 @@ and (max-device-width : 1024px)  {
     height: 100%;
     overflow-y: auto;
     z-index: 998;
-    background: #FAFAFA;
+    background: #1d212a;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 2px 4px 8px rgba(0, 0, 0, 0.14);
     white-space: nowrap;
     cursor: pointer;
@@ -604,12 +604,13 @@ and (max-device-width : 1024px)  {
     text-decoration: none;
     font-size: 15px;
     padding-left: 15px;
-    color: #000000;
+    color: whitesmoke;
 }
 
 .sidebar .sidebar-nav > li a:hover {
     text-decoration: none;
     background-color: #E0E0E0;
+    color: black;
 }
 
 .sidebar .sidebar-nav > li a:focus {
