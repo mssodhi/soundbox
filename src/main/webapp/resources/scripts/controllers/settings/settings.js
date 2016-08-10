@@ -12,11 +12,18 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
         });
     };
 
+    ctrl.getMusic = function () {
+        UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
+            console.log(response);
+            ctrl.currentUser.music = response;
+        });
+    };
+
     ctrl.printFiles = function () {
         ctrl.files.forEach(function (currentFile) {
             Upload.upload({
                 method: 'POST',
-                url: 'api/upload/save/user/' + ctrl.currentUser.fb_id,
+                url: 'api/song/save/user/' + ctrl.currentUser.fb_id,
                 data: {
                     file: currentFile
                 }

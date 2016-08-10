@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 
 @Entity
-@Table(name = "uploads")
-public class Uploads {
+@Table(name = "song")
+public class Song {
 
     @Id
     @Column(name = "id")
@@ -17,18 +17,14 @@ public class Uploads {
     @JsonProperty
     private Integer id;
 
-    @Column(name = "fileName", length = 255, nullable = false)
+    @Column(name = "name", length = 255, nullable = false)
     @JsonProperty
-    private String fileName;
-
-    @JsonProperty
-    @Column(name = "content_type", length = 100, nullable = false)
-    private String contentType;
+    private String name;
 
     @Lob
     @JsonIgnore
     @NotNull
-    private Blob content;
+    private Blob blob;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
@@ -43,34 +39,26 @@ public class Uploads {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
+    public Blob getBlob() {
+        return blob;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setBlob(Blob blob) {
+        this.blob = blob;
     }
 
-    public Blob getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
-    public void setContent(Blob content) {
-        this.content = content;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Transient
     @JsonProperty(value = "_size")
     public Long getSize() throws Exception {
-        return content != null ? content.length() : 0;
+        return blob != null ? blob.length() : 0;
     }
 
     public User getUser() {

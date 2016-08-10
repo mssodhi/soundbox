@@ -1,6 +1,7 @@
 package app.web.controllers;
 
 import app.web.domain.User;
+import app.web.services.SongService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SongService songService;
 
     @RequestMapping(value = "getCurrent", method = RequestMethod.GET)
     public Object getCurrentUser(){
@@ -32,6 +36,12 @@ public class UserController {
         }else{
             return null;
         }
+    }
+
+    @RequestMapping(value = "getMusicByUser/{id}", method = RequestMethod.GET)
+    public Object getMusicByUser(@PathVariable String id){
+        User user = userService.getByFbId(id);
+        return songService.getMusicByUser(user);
     }
 
 }

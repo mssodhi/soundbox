@@ -56,16 +56,14 @@
                 </div>
             </div>
 
-            <div class="panel-body" ng-if="ctrl.showMusic">
+            <div class="panel-body" ng-if="ctrl.showMusic" ng-init="ctrl.getMusic()">
                 <h4 class="semibold">Music</h4>
                 <p>Manage your music uploads</p>
                 <hr>
 
                 <div class="form-group col-md-11">
-                    <label class="col-md-3"><span class="pull-right">Name</span></label>
-                    <div class="col-md-9 pull-right">
-                        <input type="text" class="form-control" ng-model="ctrl.currentUser.name" disabled>
-                        <p class="help-block">Enter your real name.</p>
+                    <div ng-repeat="music in ctrl.currentUser.music track by music.id">
+                        <p>{{music.name}}</p>
                     </div>
                 </div>
             </div>
