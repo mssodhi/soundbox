@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SettingsCtrl', function (profile, UserService, SettingsService, Upload, SongService, $sce) {
+angular.module('app').controller('SettingsCtrl', function (profile, UserService, SettingsService, Upload, SongService, $sce, MusicService) {
     var ctrl = this;
     ctrl.currentUser = profile;
     ctrl.files = [];
@@ -23,6 +23,26 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
                 })
             })
         });
+    };
+
+    ctrl.select = function (song) {
+        SongService.getSong({id: song.id}).$promise.then(function (res) {
+            var int8Array = new Uint8Array(res.content);
+            var blob = new Blob([int8Array], {type: "audio/mp3"});
+            var player = document.createElement("AUDIO");
+
+            player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
+            player.title = song.name;
+            var track = {
+                duration: '5:00',
+                title: song.name,
+                user: {
+                    permalink: 'testing'
+                }
+            };
+
+            MusicService.setOwnPlayer(player, track);
+        })
     };
 
     ctrl.printFiles = function () {

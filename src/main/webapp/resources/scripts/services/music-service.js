@@ -26,24 +26,52 @@ angular.module('app').factory('MusicService', function ($timeout) {
             }
             return retList;
         },
+        setOwnPlayer: function (pl, tr) {
+            if(pl !== undefined){
+                player = pl;
+                track = tr;
+                isPlaying = true;
+                if(player.currentTime > 0){
+                    player.currentTime = 0;
+                }
+                player.play();
+                console.log(player);
+                player.addEventListener("timeupdate", function () {
+                    if(player.currentTime === player.duration){
+                        player.pause();
+                        isPlaying = false;
+                    }
+                })
+            }else{
+                player.pause();
+                isPlaying = false;
+                player = null;
+                list = null;
+            }
+        },
         setPlayer: function(pl, tr) {
             $timeout(function () {
                 var audioPlayer = pl.controller._html5Audio;
                 audioPlayer.title = tr.title;
                 audioPlayer.autoplay = true;
-            },750);
-
+                player = audioPlayer;
+            },500);
+            pl.play();
             if(pl !== undefined){
-                player = pl;
+                // player = pl;
                 track = tr;
                 isPlaying = true;
-                if(player.currentTime() > 0){
-                    player.seek(0);
+                if(player.currentTime > 0){
+                    player.currentTime = 0;
                 }
                 player.play();
-                player.on('finish', function () {
-                    isPlaying = false;
-                });
+                console.log(player);
+                player.addEventListener("timeupdate", function () {
+                    if(player.currentTime === player.duration){
+                        player.pause();
+                        isPlaying = false;
+                    }
+                })
             }else{
                 player.pause();
                 isPlaying = false;
@@ -99,7 +127,7 @@ angular.module('app').factory('MusicService', function ($timeout) {
 
         },
         seek: function(t){
-            player.seek(t);
+            player.currentTime = t;
         },
         getNext: function() {
             var indexOfCurrent = list.indexOf(track);

@@ -64,7 +64,8 @@
                 <div class="form-group col-md-11">
                     <div ng-repeat="song in ctrl.currentUser.songs track by song.id">
                         <p>{{song.name}}</p>
-                        <audio ng-src="{{song.url}}" controls="true" autoplay="true"></audio>
+                        <a href ng-click="ctrl.select(song)">play</a>
+                        <!--<audio ng-src="{{song.url}}" controls="true" autoplay="true"></audio>-->
                     </div>
                 </div>
             </div>

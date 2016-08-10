@@ -24,7 +24,7 @@ angular.module('app').component('musicPlayer', {
             if (ctrl.player) {
                 ctrl.isPlaying = MusicService.getIsPlaying();
                 progressbar = document.getElementById('progress-bar');
-                ctrl.progress = ((ctrl.player.currentTime()) / (ctrl.track.duration)) * 100;
+                ctrl.progress = ((ctrl.player.currentTime) / (ctrl.player.duration)) * 100;
                 ctrl.myStyle = {'width': ctrl.progress + '%'};
                 PageService.setTitle(ctrl.track.title);
             }
@@ -57,6 +57,7 @@ angular.module('app').component('musicPlayer', {
         };
 
         ctrl.milliToTime = function (milli) {
+            milli *= 1000;
             var minutes = Math.floor(milli / 60000);
             var seconds = ((milli % 60000) / 1000).toFixed(0);
             return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
@@ -75,7 +76,7 @@ angular.module('app').component('musicPlayer', {
 
         function registerProgressBar() {
             progressbar.addEventListener('click', function (e) {
-                var after = ctrl.track.duration * e.offsetX / this.offsetWidth;
+                var after = ctrl.player.duration * e.offsetX / this.offsetWidth;
                 MusicService.seek(after);
             });
         }
