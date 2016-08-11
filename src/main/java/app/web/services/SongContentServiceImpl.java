@@ -1,6 +1,8 @@
 package app.web.services;
 
 import app.web.data.SongContentRepository;
+import app.web.data.SongRepository;
+import app.web.domain.Song;
 import app.web.domain.SongContent;
 import app.web.services.Base.BaseServiceImpl;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -18,6 +20,9 @@ public class SongContentServiceImpl extends BaseServiceImpl<SongContent,Integer>
     @Autowired
     private SongContentRepository repository;
 
+    @Autowired
+    private SongRepository songRepository;
+
     @Override
     public SongContent findById(Integer id){
         return repository.findOne(id);
@@ -32,7 +37,10 @@ public class SongContentServiceImpl extends BaseServiceImpl<SongContent,Integer>
     public Object getSong(Integer id) throws Exception{
 
         SongContent songContent = findById(id);
-
+        Song song = songContent.getSong();
+        song.setPlays(song.getPlays() + 1);
+        songRepository.save(song);
+        
         StringWriter sw = new StringWriter();
 
         JsonFactory factory = new JsonFactory();

@@ -3,17 +3,17 @@
 
         <search-bar></search-bar>
 
-        <div class="col-xs-12 pt15 pl0" ng-if="ctrl.tracks.length === 0">
-            <i class="fa fa-info-circle"></i>
-            <span>No Tracks. Add Favorite artists</span>
-        </div>
+        <!--<div class="col-xs-12 pt15 pl0" ng-if="ctrl.tracks.length === 0">-->
+            <!--<i class="fa fa-info-circle"></i>-->
+            <!--<span>No Tracks. Add Favorite artists</span>-->
+        <!--</div>-->
 
         <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
                      showartist="true" showdate="false"></music-table>
     </div>
 
-    <div class="col-md-3 col-sm-12 col-xs-12">
-        <favorites-card favorites="ctrl.favorites"></favorites-card>
-        <playlist-card playlists="ctrl.playlists"></playlist-card>
-    </div>
+    <!--<div class="col-md-3 col-sm-12 col-xs-12">-->
+        <!--<favorites-card favorites="ctrl.favorites"></favorites-card>-->
+        <!--<playlist-card playlists="ctrl.playlists"></playlist-card>-->
+    <!--</div>-->
 </div>

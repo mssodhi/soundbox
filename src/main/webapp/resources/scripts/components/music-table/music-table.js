@@ -3,7 +3,7 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService, $location, UserService) {
+    controller: function (MusicService, PlaylistService, LikesService, $location, UserService, SongService, $sce) {
         var ctrl = this;
         ctrl.likes = [];
         ctrl.limit = 50;
@@ -70,18 +70,37 @@ angular.module('app').component("musicTable", {
             }
         };
 
-        ctrl.select = function (track) {
-            if(!ctrl.isPlaying(track)){
-                SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
-                    player.seek(0);
-                    player.on('finish', function () {
-                        player.seek(0);
-                        ctrl.select(MusicService.getNext());
-                    });
-                    MusicService.setPlayer(player, track);
-                    MusicService.setList(ctrl.tracks);
-                });
-            }
+        ctrl.select = function (song) {
+            // if(!ctrl.isPlaying(track)){
+            //     SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
+            //         player.seek(0);
+            //         player.on('finish', function () {
+            //             player.seek(0);
+            //             ctrl.select(MusicService.getNext());
+            //         });
+            //         MusicService.setPlayer(player, track);
+            //         MusicService.setList(ctrl.tracks);
+            //     });
+            // }
+
+            SongService.getSong({id: song.id}).$promise.then(function (res) {
+                var int8Array = new Uint8Array(res.content);
+                var blob = new Blob([int8Array], {type: "audio/mp3"});
+                var player = document.createElement("AUDIO");
+
+                player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
+                player.title = song.name;
+                var track = {
+                    duration: '5:00',
+                    title: song.title,
+                    user: {
+                        permalink: song.user.name
+                    }
+                };
+
+                MusicService.setOwnPlayer(player, track);
+            })
+
         };
 
         ctrl.removeSongFromPlaylist = function (song) {

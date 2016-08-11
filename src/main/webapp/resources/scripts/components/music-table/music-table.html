@@ -54,9 +54,9 @@
                 <img ng-if="song.artwork_url === null" class="" src="resources/images/noImage.jpg">
                 <a>{{song.title | limitTo: 45}}<span ng-if="song.title.length > 45">... </span></a>
             </td>
-            <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.username}}</td>
-            <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.playback_count | number}}</td>
-            <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
+            <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.name}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.plays}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.duration}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
             <td ng-click="ctrl.likeSong(song)" class="hidden-xs">
                 <div class="pt5" style="font-size: 25px;">

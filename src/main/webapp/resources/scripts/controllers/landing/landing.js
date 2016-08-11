@@ -1,12 +1,22 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FavoritesService) {
+angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FavoritesService, UserService, $sce) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
-        getPlaylists();
-        getFavorites();
+        UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
+            console.log(response);
+            ctrl.tracks = response;
+            ctrl.tracks.forEach(function (tr) {
+                var int8Array = new Uint8Array(tr.artwork.artwork);
+                var blob = new Blob([int8Array], {type: "image/jpeg"});
+                tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
+            })
+        });
+
+        // getPlaylists();
+        // getFavorites();
     };
 
     function getPlaylists() {
