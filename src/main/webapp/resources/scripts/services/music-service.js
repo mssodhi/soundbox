@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('MusicService', function ($timeout) {
+angular.module('app').factory('MusicService', function ($timeout, SongService, $sce) {
     var player;
     var isPlaying;
     var track;
@@ -15,9 +15,6 @@ angular.module('app').factory('MusicService', function ($timeout) {
                 list[i] = inpList[i];
             }
         },
-        getList: function () {
-            return list;
-        },
         getQueue: function () {
             var index = list.indexOf(track);
             var retList = [];
@@ -26,53 +23,39 @@ angular.module('app').factory('MusicService', function ($timeout) {
             }
             return retList;
         },
-        setOwnPlayer: function (pl, tr) {
+        stream: function (song) {
             if(isPlaying){
                 player.pause();
             }
-            player = pl;
-            track = tr;
-            isPlaying = true;
-            if(player.currentTime > 0){
-                player.currentTime = 0;
+            if(song !== null && song.id !== null){
+                SongService.getSongContent({id: song.id}).$promise.then(function (res) {
+                    var int8Array = new Uint8Array(res.content.blob);
+                    var blob = new Blob([int8Array], {type: "audio/mp3"});
+                    player = document.createElement("AUDIO");
+                    player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
+                    player.title = song.title;
+                    track = song;
+
+                    player.play();
+                    isPlaying = true;
+
+                    if(player.currentTime > 0){
+                        player.currentTime = 0;
+                    }
+
+                    player.addEventListener("timeupdate", function () {
+                        if(player.currentTime === player.duration){
+                            player.pause();
+                            isPlaying = false;
+                        }
+                    })
+                });
+            }else{
+                player = null;
+                track = null;
             }
-            player.play();
-            player.addEventListener("timeupdate", function () {
-                if(player.currentTime === player.duration){
-                    player.pause();
-                    isPlaying = false;
-                }
-            })
-        },
-        setPlayer: function(pl, tr) {
-            // $timeout(function () {
-            //     var audioPlayer = pl.controller._html5Audio;
-            //     audioPlayer.title = tr.title;
-            //     audioPlayer.autoplay = true;
-            //     player = audioPlayer;
-            // },500);
-            // pl.play();
-            // if(pl !== undefined){
-            //     // player = pl;
-            //     track = tr;
-            //     isPlaying = true;
-            //     if(player.currentTime > 0){
-            //         player.currentTime = 0;
-            //     }
-            //     player.play();
-            //     console.log(player);
-            //     player.addEventListener("timeupdate", function () {
-            //         if(player.currentTime === player.duration){
-            //             player.pause();
-            //             isPlaying = false;
-            //         }
-            //     })
-            // }else{
-            //     player.pause();
-            //     isPlaying = false;
-            //     player = null;
-            //     list = null;
-            // }
+
+
         },
         addNext: function (tr) {
             var i, tmp;
@@ -103,13 +86,13 @@ angular.module('app').factory('MusicService', function ($timeout) {
             return track;
         },
         play: function() {
-            if(player){
+            if(player && !isPlaying){
                 player.play();
                 isPlaying = true;
             }
         },
         pause: function() {
-            if(player){
+            if(player && isPlaying){
                 player.pause();
                 isPlaying = false;
             }
@@ -119,7 +102,6 @@ angular.module('app').factory('MusicService', function ($timeout) {
         },
         rewind: function(){
             player.currentTime = 0;
-
         },
         seek: function(t){
             player.currentTime = t;

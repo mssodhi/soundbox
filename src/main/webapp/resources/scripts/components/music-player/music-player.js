@@ -19,10 +19,10 @@ angular.module('app').component('musicPlayer', {
         function runLoop() {
             ctrl.player = MusicService.getPlayer();
             ctrl.track = MusicService.getTrack();
-
+            ctrl.isPlaying = MusicService.getIsPlaying();
             // setting the progress bar
-            if (ctrl.player) {
-                ctrl.isPlaying = MusicService.getIsPlaying();
+            if (ctrl.player && ctrl.isPlaying) {
+
                 progressbar = document.getElementById('progress-bar');
                 ctrl.progress = ((ctrl.player.currentTime) / (ctrl.player.duration)) * 100;
                 ctrl.myStyle = {'width': ctrl.progress + '%'};
@@ -63,15 +63,8 @@ angular.module('app').component('musicPlayer', {
             return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
         };
 
-        ctrl.stream = function (track) {
-            SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
-                player.seek(0);
-                player.on('finish', function () {
-                    player.seek(0);
-                    ctrl.stream(MusicService.getNext());
-                });
-                MusicService.setPlayer(player, track);
-            });
+        ctrl.stream = function (song) {
+            MusicService.stream(song);
         };
 
         function registerProgressBar() {

@@ -35,17 +35,7 @@ angular.module('app').controller('ChartsCtrl', function (profile, ChartsService,
     }
 
     ctrl.select = function (track) {
-        if(!ctrl.isPlaying(track)){
-            SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
-                player.seek(0);
-                player.on('finish', function () {
-                    player.seek(0);
-                    ctrl.select(MusicService.getNext());
-                });
-                MusicService.setPlayer(player, track);
-                MusicService.setList(ctrl.tracks);
-            });
-        }
+
     };
 
     ctrl.isPlaying = function (track) {

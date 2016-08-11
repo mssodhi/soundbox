@@ -12,4 +12,6 @@ public interface UserService extends BaseService<User, Integer> {
     User getByFbId(String id);
 
     void setCurrentUser(User user);
+
+    User findByUsername(String username);
 }

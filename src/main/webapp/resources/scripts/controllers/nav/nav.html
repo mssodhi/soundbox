@@ -14,9 +14,10 @@
                 </div>
             </div>
 
-            <div class="navbar-right" ng-if="ctrl.currentUser.name !== 'Demo'">
-                <div class="user-profile pull-right pl0 pr0" ng-class="{'open': ctrl.openProfile}">
-                    <img class="img-circle img-bordered" ng-src="{{ctrl.currentUser.pic_url}}">
+            <div class="navbar-right">
+                <div class="user-profile pull-right pl0 pr0 button" ng-class="{'open': ctrl.openProfile}" ng-click="ctrl.goToArtist(ctrl.currentUser)">
+                    <img class="img-circle img-bordered" ng-if="ctrl.currentUser.pic_url" ng-src="{{ctrl.currentUser.pic_url}}">
+                    <img class="img-circle img-bordered" ng-if="!ctrl.currentUser.pic_url" src="resources/images/noImage.jpg">
                     <!--<a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">-->
                         <!--<span class="pull-right hidden-xs">{{ctrl.currentUser.name}}</span>-->
                     <!--</a>-->

@@ -6,16 +6,8 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
 
     ctrl.init = function () {
         UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
-            console.log(response);
+            // console.log(response);
             ctrl.tracks = response;
-            ctrl.tracks.forEach(function (tr) {
-                tr.artwork_url = null;
-                if(tr.artwork){
-                    var int8Array = new Uint8Array(tr.artwork.blob);
-                    var blob = new Blob([int8Array], {type: "image/jpeg"});
-                    tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
-                }
-            })
         });
 
         // getPlaylists();

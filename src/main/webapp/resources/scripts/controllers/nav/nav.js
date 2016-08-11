@@ -40,6 +40,10 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
         }
     };
 
+    ctrl.goToArtist = function (artist) {
+        $location.path('/artist/'+artist.username);
+    };
+
     ctrl.currentPath = function () {
         return '#' + $location.path();
     };
@@ -49,7 +53,8 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
             ctrl.currentUser = null;
             $location.path('/login');
             if(MusicService.getIsPlaying()){
-                MusicService.setPlayer();
+                MusicService.stream(null);
+                MusicService.pause();
             }
         });
     };

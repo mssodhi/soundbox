@@ -3,12 +3,23 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService, $location, UserService, SongService, $sce) {
+    controller: function (MusicService, PlaylistService, LikesService, $location, UserService, $scope, $sce) {
         var ctrl = this;
         ctrl.likes = [];
         ctrl.limit = 50;
         var sb_date, sb_title, sb_duration, sb_artist = false;
         var sb_plays = true;
+
+        $scope.$watchCollection('ctrl.tracks', function () {
+            ctrl.tracks.forEach(function (tr) {
+                tr.artwork_url = null;
+                if(tr.artwork){
+                    var int8Array = new Uint8Array(tr.artwork.blob);
+                    var blob = new Blob([int8Array], {type: "image/jpeg"});
+                    tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
+                }
+            });
+        });
 
         ctrl.init = function () {
             UserService.getCurrentUser().$promise.then(function (res) {
@@ -30,7 +41,7 @@ angular.module('app').component("musicTable", {
         }
 
         ctrl.goToArtist = function (artist) {
-            $location.path('/artist/'+artist.permalink);
+            $location.path('/artist/'+artist.username);
         };
 
         ctrl.likeSong = function (song) {
@@ -72,29 +83,11 @@ angular.module('app').component("musicTable", {
 
         ctrl.select = function (song) {
             if(song.user.permalink){
-                // if(!ctrl.isPlaying(song)){
-                //     SC.stream('/tracks/' + song.id, {autoPlay: false}).then(function (player) {
-                //         player.seek(0);
-                //         player.on('finish', function () {
-                //             player.seek(0);
-                //             ctrl.select(MusicService.getNext());
-                //         });
-                //         MusicService.setPlayer(player, song);
-                //         MusicService.setList(ctrl.tracks);
-                //     });
-                // }
+
             } else {
-                SongService.getSongContent({id: song.id}).$promise.then(function (res) {
-                    var int8Array = new Uint8Array(res.content.blob);
-                    var blob = new Blob([int8Array], {type: "audio/mp3"});
-                    var player = document.createElement("AUDIO");
-
-                    player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
-                    player.title = song.name;
-                    MusicService.setOwnPlayer(player, song);
-                })
+                MusicService.stream(song);
+                MusicService.setList(ctrl.tracks);
             }
-
 
         };
 

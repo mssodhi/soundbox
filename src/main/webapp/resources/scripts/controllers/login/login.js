@@ -67,7 +67,8 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                         $uibModalInstance.dismiss();
                     }, 2000);
                     if(MusicService.getPlayer()){
-                        MusicService.setPlayer(null);
+                        MusicService.stream(null);
+                        MusicService.pause();
                     }
                     ctrl.loggedIn = true;
                 }

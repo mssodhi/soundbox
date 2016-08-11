@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, PlaylistService) {
+angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, PlaylistService, UserService) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -12,16 +12,14 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     };
 
     function validateArtist () {
-        ctrl.artistNotFound = false;
-        // get tracks by user
-        SC.get('/users/' + $routeParams.permalink).then(function(response){
-            ctrl.artist = response;
-            getTracks(response);
-        }).catch(function (error) {
-            if(error.status === 404){
-                ctrl.artistNotFound = true;
+        ctrl.artistNotFound = true;
+        UserService.getArtist({username: $routeParams.permalink}).$promise.then(function (artist) {
+            if(artist.id){
+                ctrl.artist = artist;
+                ctrl.artistNotFound = false;
+                getTracks(artist);
             }
-        });
+        })
     }
 
     function getPlaylists() {
@@ -42,24 +40,10 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     }
 
     function getTracks (artist) {
-        SC.get('/tracks', {user_id: artist.permalink, limit: 500}).then(function (response) {
-            if(response.length === 0){
-                $http.get('http://api.soundcloud.com/tracks', {
-                    params: {
-                        client_id: '0f7c969c815f51078c1de513f666ecdb',
-                        q: artist.permalink
-                    }
-                }).success( function (data) {
-                    if(data.length === 0){
-                        ctrl.tracks = [];
-                    }else{
-                        ctrl.tracks = _.sortBy(data, 'playback_count').reverse();
-                    }
-                });
-            }else{
-                ctrl.tracks = _.sortBy(response, 'playback_count').reverse();
-            }
-        });
+        UserService.getMusicByUser({id: artist.fb_id}).$promise.then(function (tracks) {
+            console.log(tracks);
+            ctrl.tracks = tracks;
+        })
     }
 
     /* ********************************************************** */

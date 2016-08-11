@@ -3,20 +3,11 @@
 
         <search-bar></search-bar>
 
-        <!-- Message when the there's a technical error -->
-        <div ng-if="ctrl.tracks.length < ctrl.artist.track_count" class="col-md-12 col-xs-12 mt15 pl0 pr0">
-            <div class="card card-red">
-                <div class="panel-body">
-                    <p>Unexpected error occurred fetching tracks for {{ctrl.artist.permalink}}</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.artist.track_count === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
+        <div ng-if="ctrl.tracks.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
                 <div class="panel-body">
-                    <p>No tracks by {{ctrl.artist.permalink}}</p>
+                    <p>No tracks by {{ctrl.artist.username}}</p>
                 </div>
             </div>
         </div>
@@ -36,11 +27,11 @@
                 <div class="artist-card">
                     <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                     <div class="avatar">
-                        <img ng-src="{{ctrl.artist.avatar_url}}" />
-                        <img ng-if="ctrl.artist.artwork_url === null" src="resources/images/noImage.jpg" />
+                        <img ng-if="ctrl.artist.pic_url !== null" ng-src="{{ctrl.artist.pic_url}}" />
+                        <img ng-if="ctrl.artist.pic_url === null" src="resources/images/noImage.jpg" />
                     </div>
                     <div class="artist-content">
-                        <h3>{{ctrl.artist.permalink}}</h3>
+                        <h3>{{ctrl.artist.username}}</h3>
                         <p ng-if="!ctrl.isFavorite(ctrl.artist)">
                             <a href ng-click="ctrl.addFavorite(ctrl.artist)" class="custom-white"><i class="fa fa-plus-circle"></i> Follow artist</a>
                         </p>

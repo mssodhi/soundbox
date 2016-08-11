@@ -26,6 +26,11 @@ public class UserController {
         return userService.save(user);
     }
 
+    @RequestMapping(value = "getArtist/{username}", method = RequestMethod.GET)
+    public Object update(@PathVariable String username){
+        return userService.findByUsername(username);
+    }
+
     @RequestMapping(value = "pic/user/{id}", method = RequestMethod.POST)
     public Object setPic(@RequestBody String url, @PathVariable String id){
         User user = userService.getByFbId(id);
