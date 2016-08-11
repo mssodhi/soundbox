@@ -2,7 +2,7 @@
     <search-bar></search-bar>
 
     <div ng-if="ctrl.currentUser.tracks.length > 0">
-        <dashboard></dashboard>
+        <dashboard favorites="ctrl.favorites"></dashboard>
     </div>
 
     <div ng-if="ctrl.currentUser.tracks.length === 0" class="col-md-9 pt0">

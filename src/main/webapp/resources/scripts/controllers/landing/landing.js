@@ -27,12 +27,12 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
                 SC.get('/users/' + favorites[i].artist_id).then(function(artist){
                     ctrl.favorites.push(artist);
                 });
-                SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
-                    for(var i = 0; i < tracks.length; i++){
-                        ctrl.tracks.push(tracks[i]);
-                    }
-                    ctrl.tracks = _.shuffle(ctrl.tracks);
-                });
+                // SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
+                //     for(var i = 0; i < tracks.length; i++){
+                //         ctrl.tracks.push(tracks[i]);
+                //     }
+                //     ctrl.tracks = _.shuffle(ctrl.tracks);
+                // });
             }
         });
     }

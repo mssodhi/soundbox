@@ -12,5 +12,6 @@ angular.module('app').component("dashboard", {
         };
     },
     bindings: {
+        favorites: '='
     }
 });

@@ -1,5 +1,5 @@
-<div class="col-xs-12 pl0 pr0">
-    <h3>Welcome to SoundBox dashboard</h3>
+<div class="col-xs-12 pl0 pr0" ng-init="ctrl.init()">
+    <h3 class="pl15">{{ctrl.currentUser.username}}'s Dashboard</h3>
 
     <div class="col-md-3">
         <div class="col-md-12 card card-blue">
@@ -53,6 +53,16 @@
                 <span class="title">Most played</span>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-3 pull-right">
+        <!--<div class="col-md-12 card card-pink">-->
+            <!--<div class="panel-body text-center">-->
+                <!--<span class="value">Habits ft. Abhi Dijon</span>-->
+                <!--<span class="title">Most played</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <favorites-card favorites="ctrl.favorites"></favorites-card>
     </div>
 
 

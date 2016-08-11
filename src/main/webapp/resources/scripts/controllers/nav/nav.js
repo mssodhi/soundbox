@@ -2,20 +2,22 @@
 
 angular.module('app').controller('NavCtrl', function ($scope, LoginService, $location, MusicService, $timeout, UserService) {
     var ctrl = this;
-    ctrl.menuItems = [];
-    ctrl.menuItems.push(
-        {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
-        {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
-        {title: 'Settings',  link: '#/settings', icon: 'fa fa-gears'}
-    );
 
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
         ctrl.inApp = !(route === '/login' || route === '/deny');
         if(ctrl.inApp){
+            ctrl.menuItems = [];
             UserService.getCurrentUser().$promise.then(function (res) {
                 ctrl.currentUser = res;
-            })
+                ctrl.menuItems.push(
+                    {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
+                    {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
+                    {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
+                    {title: 'Settings',  link: '#/settings', icon: 'fa fa-gears'}
+                );
+            });
         }
+
     });
 
     ctrl.isScrolled = function () {
