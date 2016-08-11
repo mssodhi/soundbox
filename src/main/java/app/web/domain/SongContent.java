@@ -1,7 +1,9 @@
 package app.web.domain;
 
+import app.web.domain.Serializable.BlobSer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.sql.Blob;
@@ -23,6 +25,7 @@ public class SongContent {
 
     @Column(name = "content")
     @Lob
+    @JsonSerialize(using = BlobSer.class)
     private Blob content;
 
     public Integer getId() {

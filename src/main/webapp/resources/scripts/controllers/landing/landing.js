@@ -9,9 +9,12 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
             console.log(response);
             ctrl.tracks = response;
             ctrl.tracks.forEach(function (tr) {
-                var int8Array = new Uint8Array(tr.artwork.artwork);
-                var blob = new Blob([int8Array], {type: "image/jpeg"});
-                tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
+                tr.artwork_url = null;
+                if(tr.artwork){
+                    var int8Array = new Uint8Array(tr.artwork.blob);
+                    var blob = new Blob([int8Array], {type: "image/jpeg"});
+                    tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
+                }
             })
         });
 

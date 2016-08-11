@@ -1,5 +1,6 @@
 package app.web.services;
 
+import app.web.domain.Song;
 import app.web.domain.SongContent;
 import app.web.services.Base.BaseService;
 
@@ -9,5 +10,7 @@ public interface SongContentService extends BaseService<SongContent, Integer> {
 
     SongContent findById(Integer id);
 
-    Object getSong(Integer id) throws Exception;
+    SongContent findBySong(Song song);
+
+    Object getSongContentBySong(Integer id) throws Exception;
 }

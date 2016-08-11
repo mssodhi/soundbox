@@ -10,7 +10,7 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
         ctrl.files.forEach(function (file) {
             var song = {
                 title: file.name,
-                duration: ctrl.secToMin(file.$ngfDuration),
+                duration: file.$ngfDuration * 1000,
                 file: file
             };
             ctrl.songs.push(song);
@@ -56,16 +56,17 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
             SongService.save({id: ctrl.currentUser.fb_id}, song).$promise.then(function (res) {
                 if(res.id){
 
-                    Upload.upload({
-                        method: 'POST',
-                        url: 'api/song/image/song/' + res.id,
-                        data: {
-                            file: song.pic
-                        }
-                    }).success(function() {
-                        song.success = true;
-                    });
-
+                    if(song.pic){
+                        Upload.upload({
+                            method: 'POST',
+                            url: 'api/song/image/song/' + res.id,
+                            data: {
+                                file: song.pic
+                            }
+                        }).success(function() {
+                            song.success = true;
+                        });
+                    }
 
                     Upload.upload({
                         method: 'POST',
@@ -87,9 +88,9 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
 
     };
 
-    ctrl.secToMin = function (time) {
-        var minutes = "0" + Math.floor(time / 60);
-        var seconds = "0" + (time - minutes * 60);
-        return minutes.substr(-2) + ":" + seconds.substr(-2);
-    }
+    ctrl.milliToTime = function (milli) {
+        var minutes = Math.floor(milli / 60000);
+        var seconds = ((milli % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    };
 });

@@ -71,35 +71,37 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.select = function (song) {
-            // if(!ctrl.isPlaying(track)){
-            //     SC.stream('/tracks/' + track.id, {autoPlay: false}).then(function (player) {
-            //         player.seek(0);
-            //         player.on('finish', function () {
-            //             player.seek(0);
-            //             ctrl.select(MusicService.getNext());
-            //         });
-            //         MusicService.setPlayer(player, track);
-            //         MusicService.setList(ctrl.tracks);
-            //     });
-            // }
+            if(song.user.permalink){
+                if(!ctrl.isPlaying(song)){
+                    SC.stream('/tracks/' + song.id, {autoPlay: false}).then(function (player) {
+                        player.seek(0);
+                        player.on('finish', function () {
+                            player.seek(0);
+                            ctrl.select(MusicService.getNext());
+                        });
+                        MusicService.setPlayer(player, song);
+                        MusicService.setList(ctrl.tracks);
+                    });
+                }
+            } else {
+                SongService.getSongContent({id: song.id}).$promise.then(function (res) {
+                    var int8Array = new Uint8Array(res.content.blob);
+                    var blob = new Blob([int8Array], {type: "audio/mp3"});
+                    var player = document.createElement("AUDIO");
 
-            SongService.getSong({id: song.id}).$promise.then(function (res) {
-                var int8Array = new Uint8Array(res.content);
-                var blob = new Blob([int8Array], {type: "audio/mp3"});
-                var player = document.createElement("AUDIO");
+                    player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
+                    player.title = song.name;
+                    var track = {
+                        duration: '5:00',
+                        title: song.title,
+                        user: {
+                            permalink: song.user.name
+                        }
+                    };
+                    MusicService.setOwnPlayer(player, track);
+                })
+            }
 
-                player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
-                player.title = song.name;
-                var track = {
-                    duration: '5:00',
-                    title: song.title,
-                    user: {
-                        permalink: song.user.name
-                    }
-                };
-
-                MusicService.setOwnPlayer(player, track);
-            })
 
         };
 

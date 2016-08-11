@@ -19,7 +19,7 @@ public class BlobSer extends JsonSerializer<Blob> {
 
         try{
             json.writeStartObject();
-            json.writeFieldName("artwork");
+            json.writeFieldName("blob");
             String haxString = convertToHexString(blob);
             json.writeStartArray();
             for (int i= 0; i < haxString.length() - 1; i += 2) {

@@ -50,8 +50,8 @@ public class SongController {
         return songService.save(song);
     }
 
-    @RequestMapping(value = "getSong/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "getSongContent/song/{id}", method = RequestMethod.GET)
     public Object getSong(@PathVariable Integer id) throws Exception {
-        return songContentService.getSong(id);
+        return songContentService.getSongContentBySong(id);
     }
 }
