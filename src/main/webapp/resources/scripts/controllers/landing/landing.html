@@ -1,13 +1,11 @@
-<div class="container-fluid">
-    <div ng-init="ctrl.init()" class="col-md-9 pt0">
+<div class="container-fluid col-xs-12" ng-init="ctrl.init()">
+    <search-bar></search-bar>
 
-        <search-bar></search-bar>
+    <div ng-if="ctrl.currentUser.tracks.length > 0">
+        <dashboard></dashboard>
+    </div>
 
-        <!--<div class="col-xs-12 pt15 pl0" ng-if="ctrl.tracks.length === 0">-->
-            <!--<i class="fa fa-info-circle"></i>-->
-            <!--<span>No Tracks. Add Favorite artists</span>-->
-        <!--</div>-->
-
+    <div ng-if="ctrl.currentUser.tracks.length === 0" class="col-md-9 pt0">
         <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
                      showartist="true" showdate="false"></music-table>
     </div>

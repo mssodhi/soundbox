@@ -6,12 +6,11 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
 
     ctrl.init = function () {
         UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
-            // console.log(response);
-            ctrl.tracks = response;
+            ctrl.currentUser.tracks = response;
         });
 
-        // getPlaylists();
-        // getFavorites();
+        getPlaylists();
+        getFavorites();
     };
 
     function getPlaylists() {

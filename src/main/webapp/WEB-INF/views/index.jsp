@@ -67,6 +67,7 @@
 <script src="resources/scripts/components/search/search-bar.js"></script>
 <script src="resources/scripts/components/music-table/music-table.js"></script>
 <script src="resources/scripts/components/common/common-modal.js"></script>
+<script src="resources/scripts/components/dashboard/dashboard.js"></script>
 <%-- Components --%>
 
 <%-- Controllers --%>
