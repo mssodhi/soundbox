@@ -35,8 +35,7 @@ public class BlobSer extends JsonSerializer<Blob> {
     }
 
     private String convertToHexString(java.sql.Blob blob) throws Exception {
-        int blobLength = (int) blob.length();
-        byte[] bytes = blob.getBytes(1, blobLength);
+        byte[] bytes = blob.getBytes(1, (int) blob.length());
         return DatatypeConverter.printHexBinary(bytes);
     }
 }

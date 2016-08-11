@@ -7477,6 +7477,11 @@ tr.button:hover{
     color: white;
 }
 
+.music-player img{
+    height: 100px !important;
+    width: 100px !important;
+}
+
 .panel-footer {
     padding: 10px 15px;
     background-color: #f5f5f5;

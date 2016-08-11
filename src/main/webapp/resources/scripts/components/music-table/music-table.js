@@ -72,17 +72,17 @@ angular.module('app').component("musicTable", {
 
         ctrl.select = function (song) {
             if(song.user.permalink){
-                if(!ctrl.isPlaying(song)){
-                    SC.stream('/tracks/' + song.id, {autoPlay: false}).then(function (player) {
-                        player.seek(0);
-                        player.on('finish', function () {
-                            player.seek(0);
-                            ctrl.select(MusicService.getNext());
-                        });
-                        MusicService.setPlayer(player, song);
-                        MusicService.setList(ctrl.tracks);
-                    });
-                }
+                // if(!ctrl.isPlaying(song)){
+                //     SC.stream('/tracks/' + song.id, {autoPlay: false}).then(function (player) {
+                //         player.seek(0);
+                //         player.on('finish', function () {
+                //             player.seek(0);
+                //             ctrl.select(MusicService.getNext());
+                //         });
+                //         MusicService.setPlayer(player, song);
+                //         MusicService.setList(ctrl.tracks);
+                //     });
+                // }
             } else {
                 SongService.getSongContent({id: song.id}).$promise.then(function (res) {
                     var int8Array = new Uint8Array(res.content.blob);
@@ -91,14 +91,7 @@ angular.module('app').component("musicTable", {
 
                     player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
                     player.title = song.name;
-                    var track = {
-                        duration: '5:00',
-                        title: song.title,
-                        user: {
-                            permalink: song.user.name
-                        }
-                    };
-                    MusicService.setOwnPlayer(player, track);
+                    MusicService.setOwnPlayer(player, song);
                 })
             }
 

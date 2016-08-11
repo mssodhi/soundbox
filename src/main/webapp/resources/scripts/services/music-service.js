@@ -27,57 +27,52 @@ angular.module('app').factory('MusicService', function ($timeout) {
             return retList;
         },
         setOwnPlayer: function (pl, tr) {
-            if(pl !== undefined){
-                player = pl;
-                track = tr;
-                isPlaying = true;
-                if(player.currentTime > 0){
-                    player.currentTime = 0;
-                }
-                player.play();
-                console.log(player);
-                player.addEventListener("timeupdate", function () {
-                    if(player.currentTime === player.duration){
-                        player.pause();
-                        isPlaying = false;
-                    }
-                })
-            }else{
+            if(isPlaying){
                 player.pause();
-                isPlaying = false;
-                player = null;
-                list = null;
             }
+            player = pl;
+            track = tr;
+            isPlaying = true;
+            if(player.currentTime > 0){
+                player.currentTime = 0;
+            }
+            player.play();
+            player.addEventListener("timeupdate", function () {
+                if(player.currentTime === player.duration){
+                    player.pause();
+                    isPlaying = false;
+                }
+            })
         },
         setPlayer: function(pl, tr) {
-            $timeout(function () {
-                var audioPlayer = pl.controller._html5Audio;
-                audioPlayer.title = tr.title;
-                audioPlayer.autoplay = true;
-                player = audioPlayer;
-            },500);
-            pl.play();
-            if(pl !== undefined){
-                // player = pl;
-                track = tr;
-                isPlaying = true;
-                if(player.currentTime > 0){
-                    player.currentTime = 0;
-                }
-                player.play();
-                console.log(player);
-                player.addEventListener("timeupdate", function () {
-                    if(player.currentTime === player.duration){
-                        player.pause();
-                        isPlaying = false;
-                    }
-                })
-            }else{
-                player.pause();
-                isPlaying = false;
-                player = null;
-                list = null;
-            }
+            // $timeout(function () {
+            //     var audioPlayer = pl.controller._html5Audio;
+            //     audioPlayer.title = tr.title;
+            //     audioPlayer.autoplay = true;
+            //     player = audioPlayer;
+            // },500);
+            // pl.play();
+            // if(pl !== undefined){
+            //     // player = pl;
+            //     track = tr;
+            //     isPlaying = true;
+            //     if(player.currentTime > 0){
+            //         player.currentTime = 0;
+            //     }
+            //     player.play();
+            //     console.log(player);
+            //     player.addEventListener("timeupdate", function () {
+            //         if(player.currentTime === player.duration){
+            //             player.pause();
+            //             isPlaying = false;
+            //         }
+            //     })
+            // }else{
+            //     player.pause();
+            //     isPlaying = false;
+            //     player = null;
+            //     list = null;
+            // }
         },
         addNext: function (tr) {
             var i, tmp;
@@ -123,7 +118,7 @@ angular.module('app').factory('MusicService', function ($timeout) {
             return isPlaying;
         },
         rewind: function(){
-            player.seek(0);
+            player.currentTime = 0;
 
         },
         seek: function(t){
