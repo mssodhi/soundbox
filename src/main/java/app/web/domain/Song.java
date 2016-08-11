@@ -15,7 +15,7 @@ public class Song {
     @JsonProperty
     private Integer id;
 
-    @Column(name = "name", length = 255, nullable = false)
+    @Column(name = "name", nullable = false)
     @JsonProperty
     private String name;
 

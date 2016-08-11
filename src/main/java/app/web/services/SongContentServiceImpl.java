@@ -1,7 +1,7 @@
 package app.web.services;
 
-import app.web.data.SongblobRepository;
-import app.web.domain.Songblob;
+import app.web.data.SongContentRepository;
+import app.web.domain.SongContent;
 import app.web.services.Base.BaseServiceImpl;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -13,25 +13,25 @@ import java.io.StringWriter;
 import java.sql.Blob;
 
 @Service
-public class SongblobServiceImpl extends BaseServiceImpl<Songblob,Integer> implements SongblobService{
+public class SongContentServiceImpl extends BaseServiceImpl<SongContent,Integer> implements SongContentService {
 
     @Autowired
-    private SongblobRepository repository;
+    private SongContentRepository repository;
 
     @Override
-    public Songblob findById(Integer id){
+    public SongContent findById(Integer id){
         return repository.findOne(id);
     }
 
     @Override
-    public Songblob save(Songblob songblob){
-        return repository.save(songblob);
+    public SongContent save(SongContent songContent){
+        return repository.save(songContent);
     }
 
     @Override
     public Object getSong(Integer id) throws Exception{
 
-        Songblob songblob = findById(id);
+        SongContent songContent = findById(id);
 
         StringWriter sw = new StringWriter();
 
@@ -39,13 +39,12 @@ public class SongblobServiceImpl extends BaseServiceImpl<Songblob,Integer> imple
         JsonGenerator json = factory.createGenerator(sw);
 
         json.writeStartObject();
-        json.writeNumberField("id", songblob.getId());
-        json.writeNumberField("song_id", songblob.getSong().getId());
+        json.writeNumberField("id", songContent.getId());
+        json.writeNumberField("song_id", songContent.getSong().getId());
         json.writeFieldName("content");
-        String haxString = convertToHexString(songblob.getBlob());
+        String haxString = convertToHexString(songContent.getContent());
         json.writeStartArray();
         for (int i= 0; i < haxString.length() - 1; i += 2) {
-            // convert into 8-bit unsigned integers
             json.writeNumber(Integer.valueOf(haxString.substring(i, i + 2), 16));
         }
         json.writeEndArray();
