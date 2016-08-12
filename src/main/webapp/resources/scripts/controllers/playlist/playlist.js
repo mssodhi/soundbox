@@ -11,8 +11,8 @@ angular.module('app').controller('PlaylistCtrl', function ($http, profile, Playl
     ctrl.init = function () {
         console.log(playlist);
         validateAndGetTracks();
-        // getPlaylists();
-        // getFavorites();
+        getPlaylists();
+        getFavorites();
     };
 
     function validateAndGetTracks() {

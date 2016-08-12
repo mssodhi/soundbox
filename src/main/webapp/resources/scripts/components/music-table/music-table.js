@@ -68,15 +68,15 @@ angular.module('app').component("musicTable", {
 
         ctrl.addSongToPlaylist = function (song, playlist) {
             var duplicate = null;
-            for(var i = 0; i < playlist.songs.length; i++){
-                if(parseInt(playlist.songs[i].track_id) === parseInt(song.id)){
+            for(var i = 0; i < playlist.playlistSongs.length; i++){
+                if(parseInt(playlist.playlistSongs[i].song.id) === parseInt(song.id)){
                     duplicate = true;
                     break;
                 }
             }
             if(!duplicate) {
                 PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
-                    playlist.songs = response.songs;
+                    playlist.playlistSongs = response.playlistSongs;
                 });
             }
         };
@@ -98,8 +98,8 @@ angular.module('app').component("musicTable", {
                 var ind = _.findIndex(ctrl.playlists, function (pl) {
                     return pl.id === ctrl.currentplaylist.id;
                 });
-                ctrl.playlists[ind].songs.length--;
-                ctrl.currentplaylist.songs.length--;
+                ctrl.playlists[ind].playlistSongs.length--;
+                ctrl.currentplaylist.playlistSongs.length--;
             }
         };
 
