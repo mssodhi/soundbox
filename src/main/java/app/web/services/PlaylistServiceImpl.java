@@ -28,6 +28,11 @@ public class PlaylistServiceImpl extends BaseServiceImpl<Playlist,Integer> imple
     }
 
     @Override
+    public Set<Playlist> searchByName(String name){
+        return repository.searchByName(name);
+    }
+
+    @Override
     public Set<Playlist> findByUser(Integer id){
         return repository.findByUser(id);
     }

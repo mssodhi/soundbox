@@ -14,11 +14,19 @@
 
 <script type="text/ng-template" id="customTemplate.html">
     <a href ng-if="match.model.objectType === 'USER'">
+        <span style="padding-top: 19px" class="pr10">
+            <label class="label label-primary"> User </label>
+        </span>
+
         <img ng-src="{{match.model.user.pic_url}}" width="50" height="50">
         <span>{{match.model.user.username | limitTo: 40}} <span ng-if="match.model.user.username.length > 40">...</span></span>
-        <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
-    <a ng-if="match.model.objectType === 'SONG'">
+
+    <a ng-if="match.model.objectType === 'SONG'" href>
+        <span style="padding-top: 19px" class="pr10">
+            <label class="label label-warning"> Song </label>
+        </span>
+
         <img ng-src="{{match.model.song.artwork_url}}" width="50" height="50">
         <span>
             {{match.model.song.title | limitTo: 29}}
@@ -26,6 +34,18 @@
             {{match.model.song.user.username | limitTo: 10}}
             <span ng-if="match.model.song.user.username.length > 10">...</span>
         </span>
-        <i class="pull-right fa fa-music custom-orange pt15"></i>
+    </a>
+
+    <a ng-if="match.model.objectType === 'PLAYLIST'" href>
+        <span class="pt5 pr10">
+            <label class="label label-success"> Playlist </label>
+        </span>
+
+        <span>
+            {{match.model.playlist.name | limitTo: 29}}
+            <span ng-if="match.model.playlist.name.length > 29">...</span> -
+            {{match.model.playlist.owner.username | limitTo: 10}}
+            <span ng-if="match.model.playlist.owner.username.length > 10">...</span>
+        </span>
     </a>
 </script>

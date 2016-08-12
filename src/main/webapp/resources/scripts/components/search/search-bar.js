@@ -14,11 +14,18 @@ angular.module('app').component("searchBar", {
         };
 
         ctrl.selectFromTypeahead = function (obj) {
-            if(obj.objectType === 'USER'){
-                $location.path('/artist/'+ obj.user.username);
-            }
-            if(obj.objectType === 'SONG'){
-                $location.path('/artist/'+ obj.song.user.username);
+            switch (obj.objectType){
+                case 'USER':
+                    $location.path('/artist/'+ obj.user.username);
+                    break;
+                case 'SONG':
+                    $location.path('/artist/'+ obj.song.user.username);
+                    break;
+                case 'PLAYLIST':
+                    $location.path('/artist/'+ obj.playlist.owner.username);
+                    break;
+                default:
+                    break;
             }
         };
     }

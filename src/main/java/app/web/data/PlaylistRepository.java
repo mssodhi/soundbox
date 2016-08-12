@@ -14,4 +14,7 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Integer> {
     @Query("select p from Playlist p where p.id = ?1")
     Playlist findById(Integer id);
 
+    @Query("select p from Playlist p where lower(p.name) like %?1%")
+    Set<Playlist> searchByName(String name);
+
 }

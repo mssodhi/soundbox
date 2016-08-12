@@ -23,8 +23,10 @@ INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('6', '4179
 
 INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Summer 2K16', 0, 1 )
 INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Canyon Lake 2K16', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('3', 'Workout', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('4', 'MUUSiC', 0, 1 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('3', 'Workout', 0, 4 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('5', 'MUUSiC', 0, 2 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('6', 'Hard summer', 0, 2 )
+INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('7', 'yahoo', 0, 4 )
 
 INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (1, 171440547, 1 )
 INSERT INTO soundbox.playlistsong ( `id`, `track_id`, `playlist_id`) VALUES (2, 239663611, 1 )

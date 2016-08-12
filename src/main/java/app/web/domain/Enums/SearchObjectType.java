@@ -4,7 +4,8 @@ package app.web.domain.Enums;
 public enum SearchObjectType {
 
     SONG("Song"),
-    USER("User");
+    USER("User"),
+    PLAYLIST("Playlist");
 
     private final String typeDescription;
 

@@ -21,4 +21,6 @@ public interface PlaylistService extends BaseService<Playlist, Integer> {
 
     void removeSong(String id, Playlist playlist);
 
+    Set<Playlist> searchByName(String name);
+
 }
