@@ -22,7 +22,7 @@ angular.module('app').component("searchBar", {
                     $location.path('/artist/'+ obj.song.user.username);
                     break;
                 case 'PLAYLIST':
-                    $location.path('/artist/'+ obj.playlist.owner.username);
+                    $location.path('/playlist/'+ obj.playlist.id);
                     break;
                 default:
                     break;
