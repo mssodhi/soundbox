@@ -1,5 +1,6 @@
 package app.web.helper;
 
+import app.web.domain.Song;
 import app.web.domain.User;
 import app.web.services.SongService;
 import app.web.services.UserService;
@@ -19,5 +20,9 @@ public class SearchHelper {
 
     public Set<User> searchUsers(String query){
         return userService.seachByName(query);
+    }
+
+    public Set<Song> searchSongs(String query){
+        return songService.searchByName(query);
     }
 }

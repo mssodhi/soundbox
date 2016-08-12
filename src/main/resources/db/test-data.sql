@@ -5,6 +5,14 @@ INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_
 INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('6', 'Tyga', 'f', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1205', 'Tyga')
 INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('1', 'Demo', 'a', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209', 'Demo')
 
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('First', '3:42', 32, 2, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('Second', '3:42', 32, 2, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('Third', '3:42', 32, 1, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('firthirsec', '3:42', 32, 4, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('all alone', '3:42', 32, 1, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('jpa', '3:42', 32, 5, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`) VALUES ('Gone by', '3:42', 32, 6, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+
 INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('1', '22409434', 1 )
 INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('2', '36960179', 1 )
 INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('3', '44513723', 1 )

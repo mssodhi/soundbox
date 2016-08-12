@@ -26,6 +26,11 @@ public class SongServiceImpl extends BaseServiceImpl<Song,Integer> implements So
     }
 
     @Override
+    public Set<Song> searchByName(String name){
+        return repository.searchByName(name);
+    }
+
+    @Override
     public Set<Song> getMusicByUser(User user){
         Set<Song> songs = repository.getByUser(user.getFb_id());
         if(songs.size() > 0){

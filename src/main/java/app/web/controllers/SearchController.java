@@ -3,6 +3,7 @@ package app.web.controllers;
 
 import app.web.domain.DTO.SearchDto;
 import app.web.domain.Enums.SearchObjectType;
+import app.web.domain.Song;
 import app.web.domain.User;
 import app.web.helper.SearchHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,20 @@ public class SearchController {
     @RequestMapping(value = "query/{q}", method = RequestMethod.GET)
     public Object search(@PathVariable String q){
         Set<User> userSet = searchHelper.searchUsers(q);
+        Set<Song> songSet = searchHelper.searchSongs(q);
+
         Set<SearchDto> searchDtoSet = new HashSet<>();
 
         for(User user : userSet){
             SearchDto searchDto = new SearchDto();
             searchDto.setUser(user);
             searchDto.setObjectType(SearchObjectType.USER);
+            searchDtoSet.add(searchDto);
+        }
+        for(Song song : songSet){
+            SearchDto searchDto = new SearchDto();
+            searchDto.setObjectType(SearchObjectType.SONG);
+            searchDto.setSong(song);
             searchDtoSet.add(searchDto);
         }
 
