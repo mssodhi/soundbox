@@ -54,7 +54,7 @@ public class PlaylistServiceImpl extends BaseServiceImpl<Playlist,Integer> imple
     }
 
     @Override
-    public void removeSong(String id, Playlist playlist){
+    public void removeSong(Integer id, Playlist playlist){
         playlistSongRepository.delete(playlistSongRepository.findBySongAndPlaylist(id, playlist.getId()));
     };
 

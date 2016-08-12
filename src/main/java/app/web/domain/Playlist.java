@@ -31,7 +31,7 @@ public class Playlist implements Serializable {
 
     @OneToMany(mappedBy = "playlist", orphanRemoval = true)
     @JsonProperty
-    private Set<PlaylistSong> songs = new HashSet<>();
+    private Set<PlaylistSong> playlistSongs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -65,11 +65,11 @@ public class Playlist implements Serializable {
         this.is_private = is_private;
     }
 
-    public Set<PlaylistSong> getSongs() {
-        return songs;
+    public Set<PlaylistSong> getPlaylistSongs() {
+        return playlistSongs;
     }
 
-    public void setSongs(Set<PlaylistSong> songs) {
-        this.songs = songs;
+    public void setPlaylistSongs(Set<PlaylistSong> playlistSongs) {
+        this.playlistSongs = playlistSongs;
     }
 }

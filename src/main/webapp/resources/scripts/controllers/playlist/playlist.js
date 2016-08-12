@@ -9,22 +9,18 @@ angular.module('app').controller('PlaylistCtrl', function ($http, profile, Playl
     ctrl.playlists = [];
 
     ctrl.init = function () {
+        console.log(playlist);
         validateAndGetTracks();
-        getPlaylists();
-        getFavorites();
+        // getPlaylists();
+        // getFavorites();
     };
 
     function validateAndGetTracks() {
         ctrl.tracks = [];
         if(ctrl.currentPlaylist.id){
-            for(var i = 0; i < ctrl.currentPlaylist.songs.length; i++){
-                $http.get('http://api.soundcloud.com/tracks/' + ctrl.currentPlaylist.songs[i].track_id, {
-                    params: {
-                        client_id: '0f7c969c815f51078c1de513f666ecdb'
-                    }
-                }).success( function (data) {
-                    ctrl.tracks.push(data);
-                });
+            for(var i = 0; i < ctrl.currentPlaylist.playlistSongs.length; i++){
+                var song = ctrl.currentPlaylist.playlistSongs[i].song;
+                ctrl.tracks.push(song);
             }
         }
     }

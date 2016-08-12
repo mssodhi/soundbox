@@ -21,9 +21,10 @@ public class PlaylistSong implements Serializable {
     @ManyToOne
     private Playlist playlist;
 
-    @Column(name = "track_id", nullable = false)
+    @OneToOne
+    @JoinColumn(foreignKey = @ForeignKey(name ="FK_Song"), name = "song_id", referencedColumnName = "id")
     @JsonProperty
-    private String track_id;
+    private Song song;
 
     public Integer getId() {
         return id;
@@ -41,11 +42,11 @@ public class PlaylistSong implements Serializable {
         this.playlist = playlist;
     }
 
-    public String getTrack_id() {
-        return track_id;
+    public Song getSong() {
+        return song;
     }
 
-    public void setTrack_id(String track_id) {
-        this.track_id = track_id;
+    public void setSong(Song song) {
+        this.song = song;
     }
 }
