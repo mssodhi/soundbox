@@ -44,16 +44,15 @@ public class LikesController {
         Likes like = likesService.findBySongAndUser(song, user);
 
         if(like != null){
-            likesService.removeLike(like);
             song.setLikes(song.getLikes() - 1);
             songService.save(song);
-            return null;
+            return likesService.removeLike(like);
         }else{
+            song.setLikes(song.getLikes() + 1);
+            songService.save(song);
             Likes likes = new Likes();
             likes.setSong(song);
             likes.setUser(user);
-            song.setLikes(song.getLikes() + 1);
-            songService.save(song);
             likes.setUser(user);
             return likesService.save(likes);
         }
