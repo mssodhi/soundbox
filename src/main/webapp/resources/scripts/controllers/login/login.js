@@ -4,7 +4,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
     var ctrl = this;
 
     ctrl.init = function () {
-        if(profile.id != null){
+        if (profile.username && profile.id != null) {
             $location.path('/');
         }
     };
@@ -19,44 +19,73 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 var ctrl = this;
 
                 function statusChangeCallback(response) {
-                    if (response.status === 'connected') {
-                        // Logged into your app and Facebook.
-                        FB.api('/me', function (response) {
-                            // console.log(response);
-                            LoginService.checkUser({uid: response.id}, response.name).$promise.then(function (user) {
-                                if (user.id) {
-                                    if (!user.pic_url) {
-                                        FB.api(
-                                            '/' + response.id + '/picture',
-                                            function (response) {
-                                                if (response && !response.error) {
-                                                    UserService.setPic({id: user.fb_id}, response.data.url);
-                                                }
-                                            }
-                                        );
-                                    }
-                                    goToLanding();
-                                }
-                            });
+                    if (response.authResponse) {
+                        loginUser();
+                    } else {
+                        FB.login(function (response) {
+                            if (response.authResponse) {
+                                loginUser();
+                            }
                         });
-                    }else {
-                        FB.login();
                     }
                 }
+
+                function loginUser() {
+                    FB.api('/me', function (response) {
+                        LoginService.checkUser({uid: response.id}, response.name).$promise.then(function (user) {
+                            if (user.id && !user.pic_url) {
+                                FB.api('/' + response.id + '/picture',
+                                    function (response) {
+                                        if (response && !response.error) {
+                                            UserService.setPic({id: user.fb_id}, response.data.url);
+                                        }
+                                    }
+                                );
+                            }
+                            if (!user.username) {
+                                ctrl.user = user;
+                                ctrl.showLoginForm = true;
+                            } else {
+                                goToLanding();
+                            }
+                        });
+                    });
+                }
+
+                ctrl.checkUserName = function () {
+                    if (ctrl.user.username.length > 0) {
+                        ctrl.usernameTaken = false;
+                        LoginService.checkUsername(ctrl.user.username).$promise.then(function (res) {
+                            console.log(res);
+                            if (res.taken === 'true') {
+                                ctrl.usernameTaken = true;
+                            }
+                        })
+                    }
+                };
+
+                ctrl.updateUser = function () {
+                    UserService.update(ctrl.user).$promise.then(function (res) {
+                        console.log(res);
+                        if (res.id) {
+                            goToLanding();
+                        }
+                    })
+                };
 
                 ctrl.login = function () {
                     getStatus();
                 };
 
-                function getStatus () {
-                    FB.getLoginStatus(function(response) {
+                function getStatus() {
+                    FB.getLoginStatus(function (response) {
                         statusChangeCallback(response);
                     });
                 }
 
                 ctrl.demo = function () {
                     LoginService.demo().$promise.then(function (res) {
-                        if(res.id){
+                        if (res.id) {
                             goToLanding();
                         }
                     });
@@ -66,7 +95,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                     $timeout(function () {
                         $uibModalInstance.dismiss();
                     }, 2000);
-                    if(MusicService.getPlayer()){
+                    if (MusicService.getPlayer()) {
                         MusicService.stream(null);
                         MusicService.pause();
                     }

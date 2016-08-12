@@ -8,5 +8,24 @@
         <button class="btn btn-lg btn-soundcloud btn-block" type="submit" ng-click="ctrl.demo()">Login for a Demo</button>
     </div>
 
+    <div ng-if="ctrl.showLoginForm" class="col-xs-12 pb10">
+        <form class="form-register">
+            <span class="pull-left">Name: </span>
+            <input type="text" ng-model="ctrl.user.name" class="form-control">
+            <span class="pull-left">Email: </span>
+            <input type="text" ng-model="ctrl.user.email" class="form-control">
+            <span class="pull-left">Username: </span>
+            <input type="text" ng-model="ctrl.user.username" ng-change="ctrl.checkUserName()" class="form-control">
+        </form>
+
+        <div class="text-center pb5 col-md-12">
+            <span ng-if="ctrl.usernameTaken"><i class="fa fa-exclamation-circle"></i> This username is already taken.</span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" ng-disabled="!ctrl.user.username || !ctrl.user.name || !ctrl.user.email || ctrl.usernameTaken"
+                type="submit"
+                ng-click="ctrl.updateUser()">Confirm!
+        </button>
+    </div>
 </div>
 <div ng-if="ctrl.loggedIn" circle-check></div>

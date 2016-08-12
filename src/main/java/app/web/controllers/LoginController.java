@@ -28,6 +28,16 @@ public class LoginController {
         }
     }
 
+    @RequestMapping(value = "checkUsername", method = RequestMethod.PUT)
+    public Object checkUsername(@RequestBody String username){
+        User user = userService.findByUsername(username);
+        if(user != null){
+            return "{\"taken\":\"true\"}";
+        } else{
+            return "{\"taken\":\"false\"}";
+        }
+    }
+
     @RequestMapping(value = "demo", method = RequestMethod.POST)
     public Object demo(){
         User user = userService.getByFbId("1209");

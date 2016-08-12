@@ -33,7 +33,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,Integer> implements Us
 
     @Override
     public User findByUsername(String username){
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username.toLowerCase());
     }
 
     @Override
