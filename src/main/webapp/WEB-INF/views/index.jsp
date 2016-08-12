@@ -51,6 +51,7 @@
 <script src="resources/scripts/services/charts.service.js"></script>
 <script src="resources/scripts/services/page.service.js"></script>
 <script src="resources/scripts/services/song.service.js"></script>
+<script src="resources/scripts/services/search.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>

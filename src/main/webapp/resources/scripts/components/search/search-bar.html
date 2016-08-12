@@ -13,18 +13,18 @@
 </div>
 
 <script type="text/ng-template" id="customTemplate.html">
-    <a ng-if="match.model.kind === 'user'">
-        <img ng-src="{{match.model.avatar_url}}" width="50" height="50">
-        <span>{{match.model.permalink | limitTo: 40}} <span ng-if="match.model.permalink.length > 40">...</span></span>
+    <a href ng-if="match.model.objectType === 'USER'">
+        <img ng-src="{{match.model.user.pic_url}}" width="50" height="50">
+        <span>{{match.model.user.username | limitTo: 40}} <span ng-if="match.model.user.username.length > 40">...</span></span>
         <i class="pull-right fa fa-user custom-green pt15"></i>
     </a>
-    <a ng-if="match.model.kind === 'track'">
-        <img ng-src="{{match.model.artwork_url}}" width="50" height="50">
+    <a ng-if="match.model.objectType === 'SONG'">
+        <img ng-src="{{match.model.song.artwork_url}}" width="50" height="50">
         <span>
-            {{match.model.title | limitTo: 29}}
-            <span ng-if="match.model.title.length > 29">...</span> -
-            {{match.model.user.permalink | limitTo: 10}}
-            <span ng-if="match.model.user.permalink.length > 10">...</span>
+            {{match.model.song.title | limitTo: 29}}
+            <span ng-if="match.model.song.title.length > 29">...</span> -
+            {{match.model.song.user.username | limitTo: 10}}
+            <span ng-if="match.model.song.user.username.length > 10">...</span>
         </span>
         <i class="pull-right fa fa-music custom-orange pt15"></i>
     </a>

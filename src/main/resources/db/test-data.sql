@@ -1,4 +1,9 @@
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`) VALUES ('1', 'Demo', '', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209')
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('2', 'Too-Short', 'b', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1201', 'Too-Short')
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('3', 'Shwayzee', 'c', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1202', 'Shwayzee')
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('4', 'Tyrone', 'd', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1203', 'Tyrone',)
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('5', 'Eminem', 'e', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1204', 'Eminem',)
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('6', 'Tyga', 'f', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1205', 'Tyga')
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`) VALUES ('1', 'Demo', 'a', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209', 'Demo')
 
 INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('1', '22409434', 1 )
 INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('2', '36960179', 1 )

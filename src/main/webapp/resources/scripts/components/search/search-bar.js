@@ -3,21 +3,22 @@
 angular.module('app').component("searchBar", {
     templateUrl: 'resources/scripts/components/search/search-bar.html',
     controllerAs: 'ctrl',
-    controller: function ($location) {
+    controller: function ($location, SearchService) {
         var ctrl = this;
 
         ctrl.search = function (query) {
-            return SC.get('/search/', {q: query, limit: 10}).then(function (response) {
-                return response.collection;
-            });
+            return SearchService.search({q: query}).$promise.then(function (response) {
+                console.log(response);
+                return response;
+            })
         };
 
         ctrl.selectFromTypeahead = function (obj) {
-            if(obj.kind === 'user'){
-                $location.path('/artist/'+ obj.permalink);
+            if(obj.objectType === 'USER'){
+                $location.path('/artist/'+ obj.user.username);
             }
-            if(obj.kind === 'track'){
-                $location.path('/artist/'+ obj.user.permalink);
+            if(obj.objectType === 'SONG'){
+                $location.path('/artist/'+ obj.song.user.username);
             }
         };
     }
