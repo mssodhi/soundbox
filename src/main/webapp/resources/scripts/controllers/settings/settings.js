@@ -18,21 +18,12 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
     });
 
     ctrl.init = function () {
-        if(ctrl.currentUser.username){
-            ctrl.showAccount = true;
-        }else{
-            ctrl.showWelcome = true;
-        }
+        ctrl.showAccount = false;
+        ctrl.showMusic = true;
+
         SettingsService.getSettings({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
             ctrl.settings = response;
         });
-    };
-
-    ctrl.updateUser = function () {
-        UserService.update(ctrl.currentUser).$promise.then(function (res) {
-            ctrl.success = true;
-            ctrl.currentUser = res;
-        })
     };
 
     ctrl.uploadFiles = function () {

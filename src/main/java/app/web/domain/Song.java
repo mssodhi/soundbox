@@ -31,6 +31,10 @@ public class Song extends AuditableEntity implements Serializable{
     @JsonProperty
     private Integer plays = 0;
 
+    @Column(name = "likes", nullable = false)
+    @JsonProperty
+    private Integer likes = 0;
+
     @Column(name = "artwork")
     @Lob
     @JsonSerialize(using = BlobSer.class)
@@ -57,14 +61,6 @@ public class Song extends AuditableEntity implements Serializable{
         this.title = title;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getDuration() {
         return duration;
     }
@@ -81,11 +77,27 @@ public class Song extends AuditableEntity implements Serializable{
         this.plays = plays;
     }
 
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
     public Blob getArtwork() {
         return artwork;
     }
 
     public void setArtwork(Blob artwork) {
         this.artwork = artwork;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
