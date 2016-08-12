@@ -1,9 +1,6 @@
 package app.web.controllers;
 
 
-import app.web.domain.Genres;
-import app.web.domain.Likes;
-import app.web.domain.User;
 import app.web.services.GenresService;
 import app.web.services.LikesService;
 import app.web.services.UserService;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/recommend/")
@@ -31,36 +27,36 @@ public class RecommendController {
 
     @RequestMapping(value = "get/user/{id}", method = RequestMethod.GET)
     public Object get (@PathVariable String id) {
-        User user = userService.getByFbId(id);
-        Set<Likes> likes = likesService.findByUser(user.getId());
-        if(likes.size() > 20){
-            // make a list of genres from user's likes
-            List<String> list = likes.stream().map(l -> l.getSong_genre().toLowerCase()).collect(Collectors.toList());
-
-            // create a Map of genre string with occurrence count in the list
-            Map<String, Integer> counts = list.stream().
-                    collect(Collectors.toConcurrentMap(
-                            w -> w, w -> 1, Integer::sum));
-
-            // put the map keys to a list
-            List<String> sortedList = new ArrayList<>(sortByComparator(counts).keySet());
-
-            // now check this sorted list against SC genres and make a suggestion.
-            Set<Genres> genres = genresService.getAll();
-
-            Set<String> recommendation = new HashSet<>();
-            for(String user_gen: sortedList){
-                if(recommendation.size() < 5 && !user_gen.equals("---")){
-                    recommendation.add(user_gen);
-                }
-                for(Genres sc_gen: genres){
-                    if((user_gen.equals(sc_gen.getName().toLowerCase()) || user_gen.contains((sc_gen.getName().toLowerCase())) || sc_gen.getName().toLowerCase().contains(user_gen)) && !recommendation.contains(sc_gen.getName().toLowerCase())){
-                        recommendation.add(sc_gen.getName().toLowerCase());
-                    }
-                }
-            }
-            return recommendation;
-        }
+//        User user = userService.getByFbId(id);
+//        Set<Likes> likes = likesService.findByUser(user.getId());
+//        if(likes.size() > 20){
+//            // make a list of genres from user's likes
+//            List<String> list = likes.stream().map(l -> l.getSong_genre().toLowerCase()).collect(Collectors.toList());
+//
+//            // create a Map of genre string with occurrence count in the list
+//            Map<String, Integer> counts = list.stream().
+//                    collect(Collectors.toConcurrentMap(
+//                            w -> w, w -> 1, Integer::sum));
+//
+//            // put the map keys to a list
+//            List<String> sortedList = new ArrayList<>(sortByComparator(counts).keySet());
+//
+//            // now check this sorted list against SC genres and make a suggestion.
+//            Set<Genres> genres = genresService.getAll();
+//
+//            Set<String> recommendation = new HashSet<>();
+//            for(String user_gen: sortedList){
+//                if(recommendation.size() < 5 && !user_gen.equals("---")){
+//                    recommendation.add(user_gen);
+//                }
+//                for(Genres sc_gen: genres){
+//                    if((user_gen.equals(sc_gen.getName().toLowerCase()) || user_gen.contains((sc_gen.getName().toLowerCase())) || sc_gen.getName().toLowerCase().contains(user_gen)) && !recommendation.contains(sc_gen.getName().toLowerCase())){
+//                        recommendation.add(sc_gen.getName().toLowerCase());
+//                    }
+//                }
+//            }
+//            return recommendation;
+//        }
         return null;
     }
 

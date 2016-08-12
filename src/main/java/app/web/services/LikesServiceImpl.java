@@ -2,6 +2,7 @@ package app.web.services;
 
 import app.web.data.LikesRepository;
 import app.web.domain.Likes;
+import app.web.domain.Song;
 import app.web.domain.User;
 import app.web.services.Base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +18,23 @@ public class LikesServiceImpl extends BaseServiceImpl<Likes, Integer> implements
     @Autowired
     private LikesRepository likesRepository;
 
-    public Likes findBySongAndUser(String id, User user){
-        return likesRepository.findBySongAndUser(id, user.getId());
+    @Override
+    public Likes findBySongAndUser(Song song, User user){
+        return likesRepository.findBySongAndUser(song.getId(), user.getId());
     }
 
+    @Override
     public Set<Likes> findByUser(Integer id){
         return likesRepository.findByUser(id);
     }
 
-    public void removeByIdAndUser(String id, User user){
-        likesRepository.removeByIdAndUser(id, user.getId());
+    @Override
+    public Boolean removeLike(Likes likes){
+        likesRepository.delete(likes);
+        return true;
     }
 
+    @Override
     public Likes save(Likes likes){
         return likesRepository.save(likes);
     }

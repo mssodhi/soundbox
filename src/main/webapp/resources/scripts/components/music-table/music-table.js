@@ -26,6 +26,7 @@ angular.module('app').component("musicTable", {
                 ctrl.currentUser = res;
                 LikesService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
                     ctrl.likes = response;
+                    console.log('Likes: ', response);
                 });
             });
             registerScroll();
@@ -45,25 +46,17 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.likeSong = function (song) {
-            if(ctrl.isLiked(song)){
-                // unlike
-                LikesService.remove({id: song.id, userId: ctrl.currentUser.fb_id}).$promise.then(function () {
+            LikesService.toggleLike({songId: song.id, userId: ctrl.currentUser.fb_id}).$promise.then(function (response) {
+                console.log(response);
+                if(ctrl.isLiked(song)){
                     var ind = ctrl.likes.map(function (e) {
                         return e.song_id;
                     }).indexOf(song.id.toString());
                     ctrl.likes.splice(ind,1);
-                });
-            }else{
-                // like
-                if(song.genre === ''){
-                    song.genre = '---';
+                }else if(response.id){
+                    ctrl.likes.push(response);
                 }
-                LikesService.add({id: song.id, userId: ctrl.currentUser.fb_id}, song.genre).$promise.then(function (response) {
-                    if(response.id){
-                        ctrl.likes.push(response);
-                    }
-                });
-            }
+            });
         };
 
         ctrl.addSongToPlaylist = function (song, playlist) {
@@ -108,7 +101,9 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.isLiked = function (song) {
-            return _.some(ctrl.likes, {song_id: song.id.toString()});
+            return _.some(ctrl.likes, function (like) {
+                return like.song.id === song.id;
+            });
         };
 
         ctrl.isPlaying = function (track) {
