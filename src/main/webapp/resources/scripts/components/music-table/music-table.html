@@ -57,7 +57,7 @@
             <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.name}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.plays}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
-            <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_at)}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_date)}}</td>
             <td ng-click="ctrl.likeSong(song)" class="hidden-xs">
                 <div class="pt5" style="font-size: 25px;">
                    <a ng-if="ctrl.isLiked(song)">

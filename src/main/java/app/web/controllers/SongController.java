@@ -25,20 +25,20 @@ public class SongController {
     @Autowired
     private SongContentService songContentService;
 
-    @RequestMapping(value = "save/song/{id}", method = RequestMethod.POST)
-    public Object save(MultipartFile file, @PathVariable Integer id) throws Exception {
+    @RequestMapping(value = "{id}/content/save", method = RequestMethod.POST)
+    public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
         SongContent songContent = new SongContent();
-        songContent.setContent(new SerialBlob(file.getBytes()));
+        songContent.setContent(new SerialBlob(musicFile.getBytes()));
         songContent.setSong(song);
         songContentService.save(songContent);
         return song;
     }
 
-    @RequestMapping(value = "image/song/{id}", method = RequestMethod.POST)
-    public void savePic(MultipartFile file, @PathVariable Integer id) throws Exception {
+    @RequestMapping(value = "{id}/image/save", method = RequestMethod.POST)
+    public void savePic(MultipartFile image, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
-        song.setArtwork(new SerialBlob(file.getBytes()));
+        song.setArtwork(new SerialBlob(image.getBytes()));
         songService.save(song);
     }
 
@@ -50,7 +50,7 @@ public class SongController {
         return songService.save(song);
     }
 
-    @RequestMapping(value = "getSongContent/song/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}/getSongContent", method = RequestMethod.GET)
     public Object getSong(@PathVariable Integer id) throws Exception {
         return songContentService.getSongContentBySong(id);
     }

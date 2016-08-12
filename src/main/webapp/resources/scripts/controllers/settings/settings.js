@@ -44,9 +44,9 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
                     if(song.pic){
                         Upload.upload({
                             method: 'POST',
-                            url: 'api/song/image/song/' + res.id,
+                            url: 'api/song/'+ res.id +'/image/save',
                             data: {
-                                file: song.pic
+                                image: song.pic
                             }
                         }).success(function() {
                             song.success = true;
@@ -56,9 +56,9 @@ angular.module('app').controller('SettingsCtrl', function (profile, UserService,
                     // upload the actual song mp3 file
                     Upload.upload({
                         method: 'POST',
-                        url: 'api/song/save/song/' + res.id,
+                        url: 'api/song/' + res.id + '/content/save',
                         data: {
-                            file: song.file
+                            musicFile: song.file
                         }
                     }).progress(function(evt) {
                         song.file.progress = Math.min(100, parseInt(100.0 *

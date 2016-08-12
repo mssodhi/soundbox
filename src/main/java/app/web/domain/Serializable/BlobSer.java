@@ -12,8 +12,6 @@ import java.sql.Blob;
 @Component
 public class BlobSer extends JsonSerializer<Blob> {
 
-    public BlobSer() {};
-
     @Override
     public void serialize(Blob blob, JsonGenerator json, SerializerProvider provider) throws IOException {
 
@@ -34,7 +32,7 @@ public class BlobSer extends JsonSerializer<Blob> {
 
     }
 
-    private String convertToHexString(java.sql.Blob blob) throws Exception {
+    private String convertToHexString(Blob blob) throws Exception {
         byte[] bytes = blob.getBytes(1, (int) blob.length());
         return DatatypeConverter.printHexBinary(bytes);
     }

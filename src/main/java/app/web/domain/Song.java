@@ -1,15 +1,17 @@
 package app.web.domain;
 
+import app.web.domain.Base.AuditableEntity;
 import app.web.domain.Serializable.BlobSer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Blob;
 
 @Entity
 @Table(name = "song")
-public class Song {
+public class Song extends AuditableEntity implements Serializable{
 
     @Id
     @Column(name = "id")
