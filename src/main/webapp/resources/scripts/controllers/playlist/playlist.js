@@ -9,7 +9,6 @@ angular.module('app').controller('PlaylistCtrl', function ($http, profile, Playl
     ctrl.playlists = [];
 
     ctrl.init = function () {
-        console.log(playlist);
         validateAndGetTracks();
         getPlaylists();
         getFavorites();

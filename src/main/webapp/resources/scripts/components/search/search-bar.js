@@ -8,7 +8,6 @@ angular.module('app').component("searchBar", {
 
         ctrl.search = function (query) {
             return SearchService.search({q: query}).$promise.then(function (response) {
-                console.log(response);
                 return response;
             })
         };

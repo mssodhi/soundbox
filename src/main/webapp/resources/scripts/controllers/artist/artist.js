@@ -41,7 +41,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
 
     function getTracks (artist) {
         UserService.getMusicByUser({id: artist.fb_id}).$promise.then(function (tracks) {
-            console.log(tracks);
             ctrl.tracks = tracks;
         })
     }

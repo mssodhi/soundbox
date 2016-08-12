@@ -56,7 +56,6 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                     if (ctrl.user.username.length > 0) {
                         ctrl.usernameTaken = false;
                         LoginService.checkUsername(ctrl.user.username).$promise.then(function (res) {
-                            console.log(res);
                             if (res.taken === 'true') {
                                 ctrl.usernameTaken = true;
                             }
@@ -66,7 +65,6 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
 
                 ctrl.updateUser = function () {
                     UserService.update(ctrl.user).$promise.then(function (res) {
-                        console.log(res);
                         if (res.id) {
                             goToLanding();
                         }

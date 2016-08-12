@@ -26,7 +26,6 @@ angular.module('app').component("musicTable", {
                 ctrl.currentUser = res;
                 LikesService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
                     ctrl.likes = response;
-                    console.log('Likes: ', response);
                 });
             });
             registerScroll();
@@ -35,7 +34,6 @@ angular.module('app').component("musicTable", {
         function registerScroll() {
             document.onscroll = function() {
                 if(document.getElementById('show-more') !== null){
-                    console.log('I see it!');
                     ctrl.limit += 50;
                 }
             }
