@@ -33,7 +33,7 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 function loginUser() {
                     FB.api('/me', function (response) {
                         LoginService.checkUser({uid: response.id}, response.name).$promise.then(function (user) {
-                            if (user.id && !user.pic_url) {
+                            if (user.id && user.pic_url === null) {
                                 FB.api('/' + response.id + '/picture',
                                     function (response) {
                                         if (response && !response.error) {
