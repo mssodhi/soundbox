@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BrowseCtrl', function ($http, profile, RecommendService, $location, PlaylistService, FavoritesService) {
+angular.module('app').controller('BrowseCtrl', function ($http, profile, RecommendService, $location, PlaylistService, FollowService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -11,7 +11,7 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
 
     ctrl.init = function () {
         getPlaylists();
-        getFavorites();
+        getFollowing();
         getRecommendations();
     };
 
@@ -42,19 +42,13 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
         });
     }
 
-    function getFavorites() {
-        ctrl.favorites = [];
-        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
-            for(var i = 0; i < favorites.length; i++){
-                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                    ctrl.favorites.push(artist);
-                });
-            }
+    function getFollowing() {
+        FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
+            ctrl.following = res;
         });
     }
-
     ctrl.goToArtist = function (artist) {
-        $location.path('artist/'+ artist.permalink);
+        $location.path('artist/'+ artist.username);
     };
 
     ctrl.clickSearch = function () {
@@ -62,10 +56,12 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
         search.focus();
     };
 
-    ctrl.deleteFavorite = function (artist) {
-        FavoritesService.removeFavorites({id: ctrl.currentUser.fb_id}, artist.id).$promise.then(function(){
-            var index = ctrl.favorites.indexOf(artist);
-            ctrl.favorites.splice(index, 1);
+    ctrl.unfollow = function(artist){
+        FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function () {
+            var index = _.findIndex(ctrl.following, function (following) {
+                return following.artist.fb_id === artist.fb_id;
+            });
+            ctrl.following.splice(index, 1);
         });
     };
 

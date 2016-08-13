@@ -28,63 +28,61 @@
 
     <div class="col-xs-12 pl0 pr0">
         <div class="pl15">
-            <h3><span>Your favorite artists</span> <a href ng-click="ctrl.artist_grid = !ctrl.artist_grid" ng-if="ctrl.favorites.length > 0"><i ng-if="!ctrl.artist_grid" class="fa fa-th"></i> <i ng-if="ctrl.artist_grid" class="fa fa-list"></i></a></h3>
+            <h3><span>Artists you are following </span> <a href ng-click="ctrl.artist_grid = !ctrl.artist_grid" ng-if="ctrl.following.length > 0"><i ng-if="!ctrl.artist_grid" class="fa fa-th"></i> <i ng-if="ctrl.artist_grid" class="fa fa-list"></i></a></h3>
         </div>
 
-        <div class="col-xs-12" ng-if="ctrl.favorites.length === 0">
+        <div class="col-xs-12" ng-if="ctrl.following.length === 0">
             <i class="fa fa-info-circle"></i>
-            <span>You have no favorite artists. <a href ng-click="ctrl.clickSearch()">Search</a> artists to add them to your favorites.</span>
+            <span>You are currently not following any artists. <a href ng-click="ctrl.clickSearch()">Search</a> artists to follow them.</span>
         </div>
 
         <!-- Grid -->
         <div ng-if="ctrl.artist_grid">
-            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="artist in ctrl.favorites track by artist.id">
+            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="obj in ctrl.following track by obj.id" ng-init="artist = obj.artist">
                 <div class="artist-card button" ng-click="ctrl.goToArtist(artist)">
                     <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                     <div class="avatar">
-                        <img ng-src="{{artist.avatar_url}}" />
-                        <img ng-if="artist.artwork_url === null" src="resources/images/noImage.jpg" />
+                        <img ng-if="artist.pic_url !== null" ng-src="{{artist.pic_url}}" />
+                        <img ng-if="artist.pic_url === null" src="resources/images/noImage.jpg" />
                     </div>
                     <div class="artist-content">
-                        <h3>{{artist.permalink}}</h3>
+                        <h3>{{artist.username}}</h3>
                         <h4 class="pt15">
-                            <label class="label label-success" ng-if="artist.track_count > 0">{{artist.track_count | number}} track<span ng-if="artist.track_count > 1">s</span></label>
-                            <label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>
+                            <!--<label class="label label-success" ng-if="artist.track_count > 0">{{artist.track_count | number}} track<span ng-if="artist.track_count > 1">s</span></label>-->
+                            <!--<label class="label label-danger" ng-if="artist.track_count === 0">{{artist.track_count}} tracks</label>-->
                         </h4>
                     </div>
                 </div>
-                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.deleteFavorite(artist)">
+                <div class="card-footer delete col-xs-12 pl0 pr0 button" ng-click="ctrl.unfollow(artist)">
                     <div class="col-md-12 text-center">
-                        <p>Remove</p>
+                        <p>Unfollow</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Table -->
-        <div class="col-md-4" ng-if="!ctrl.artist_grid && ctrl.favorites.length > 0">
+        <div class="col-md-4" ng-if="!ctrl.artist_grid && ctrl.following.length > 0">
             <table class="col-md-12 table mt15 pl0 pr0">
                 <thead class="custom-font">
                 <tr>
                     <th class="hidden-xs">#</th>
                     <th class="button">Name</th>
-                    <th class="button">Delete</th>
+                    <th class="button">Unfollow</th>
                 </tr>
                 </thead>
 
-                <tbody ng-repeat="artist in ctrl.favorites track by artist.id" title="{{artist.permalink}}">
+                <tbody ng-repeat="obj in ctrl.following track by obj.id" ng-init="artist = obj.artist" title="{{artist.username}}">
                 <tr class="button">
                     <td ng-click="ctrl.goToArtist(artist)" class="hidden-xs">{{$index+1}}</td>
                     <td ng-click="ctrl.goToArtist(artist)">
-                        <img ng-if="artist.avatar_url !== null" class="track-image" ng-src="{{artist.avatar_url}}">
-                        <img ng-if="artist.avatar_url === null" class="track-image" src="resources/images/noImage.jpg">
-                        <span>{{artist.permalink}}</span>
+                        <img ng-if="artist.pic_url !== null" class="track-image" ng-src="{{artist.pic_url}}">
+                        <img ng-if="artist.pic_url === null" class="track-image" src="resources/images/noImage.jpg">
+                        <span>{{artist.username}}</span>
                     </td>
-                    <td ng-click="ctrl.deleteFavorite(artist)">
-                        <div class="pt5" style="font-size: 25px;">
-                            <a href>
-                                <i class="fa fa-trash"></i>
-                            </a>
+                    <td ng-click="ctrl.unfollow(artist)">
+                        <div class="pt5">
+                            <a href class="label label-danger small">Unfollow</a>
                         </div>
                     </td>
                 </tr>

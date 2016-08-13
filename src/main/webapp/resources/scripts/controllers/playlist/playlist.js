@@ -40,7 +40,7 @@ angular.module('app').controller('PlaylistCtrl', function ($http, profile, Playl
 
     function getFollowing() {
         FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
-            ctrl.currentUser.following = res;
+            ctrl.following = res;
         });
     }
 

@@ -1,9 +1,6 @@
 <div class="container-fluid col-xs-12" ng-init="ctrl.init()">
 
-
-    <!--<div ng-if="ctrl.currentUser.tracks.length > 0">-->
-        <!--<dashboard favorites="ctrl.favorites"></dashboard>-->
-    <!--</div>-->
+     <!--<dashboard following="ctrl.following"></dashboard>-->
 
     <div class="col-md-9 pt0">
         <search-bar></search-bar>
@@ -12,7 +9,7 @@
     </div>
 
     <div class="col-md-3 col-sm-12 col-xs-12">
-        <following-card following="ctrl.currentUser.following"></following-card>
+        <following-card following="ctrl.following"></following-card>
         <playlist-card playlists="ctrl.playlists"></playlist-card>
     </div>
 </div>

@@ -30,7 +30,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
 
     function getFollowing() {
         FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
-            ctrl.currentUser.following = res;
+            ctrl.following = res;
         });
     }
 
@@ -48,19 +48,19 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
         console.log(artist);
         FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function (response) {
             if(response.id){
-                ctrl.currentUser.following.push(response);
+                ctrl.following.push(response);
             }else{
-                var index = _.findIndex(ctrl.currentUser.following, function (following) {
+                var index = _.findIndex(ctrl.following, function (following) {
                     return following.artist.fb_id === artist.fb_id;
                 });
-                ctrl.currentUser.following.splice(index, 1);
+                ctrl.following.splice(index, 1);
             }
         });
     };
 
-    ctrl.following = function (artist) {
-        if(ctrl.currentUser.following &&  ctrl.currentUser.following.length > 0){
-            return _.some(ctrl.currentUser.following, function (following) {
+    ctrl.isFollowing = function (artist) {
+        if(ctrl.following &&  ctrl.following.length > 0){
+            return _.some(ctrl.following, function (following) {
                 return following.artist.id === artist.id;
             });
         }else{

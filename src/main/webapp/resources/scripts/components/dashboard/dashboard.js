@@ -3,7 +3,7 @@
 angular.module('app').component("dashboard", {
     templateUrl: 'resources/scripts/components/dashboard/dashboard.html',
     controllerAs: 'ctrl',
-    controller: function (FavoritesService, $location, UserService) {
+    controller: function ($location, UserService) {
         var ctrl = this;
         ctrl.init = function () {
             UserService.getCurrentUser().$promise.then(function (res) {
@@ -12,6 +12,6 @@ angular.module('app').component("dashboard", {
         };
     },
     bindings: {
-        favorites: '='
+        following: '='
     }
 });
