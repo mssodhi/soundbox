@@ -1,17 +1,18 @@
 <div class="container-fluid col-xs-12" ng-init="ctrl.init()">
-    <search-bar></search-bar>
 
-    <div ng-if="ctrl.currentUser.tracks.length > 0">
-        <dashboard favorites="ctrl.favorites"></dashboard>
-    </div>
 
-    <div ng-if="ctrl.currentUser.tracks.length === 0" class="col-md-9 pt0">
+    <!--<div ng-if="ctrl.currentUser.tracks.length > 0">-->
+        <!--<dashboard favorites="ctrl.favorites"></dashboard>-->
+    <!--</div>-->
+
+    <div class="col-md-9 pt0">
+        <search-bar></search-bar>
         <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
                      showartist="true" showdate="false"></music-table>
     </div>
 
-    <!--<div class="col-md-3 col-sm-12 col-xs-12">-->
-        <!--<favorites-card favorites="ctrl.favorites"></favorites-card>-->
-        <!--<playlist-card playlists="ctrl.playlists"></playlist-card>-->
-    <!--</div>-->
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <following-card following="ctrl.currentUser.following"></following-card>
+        <playlist-card playlists="ctrl.playlists"></playlist-card>
+    </div>
 </div>

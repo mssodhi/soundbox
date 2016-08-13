@@ -2,10 +2,10 @@
     <div class="side-card-main">
         <div class="card-red panel-body" ng-if="!ctrl.showSearch" style="height: 68px">
             <div class="pull-left custom-font pt5">
-                <span class="pl10" style="font-size: 18px">Favorite Artists ({{ctrl.favorites.length}})</span>
+                <span class="pl10" style="font-size: 18px">Following Artists ({{ctrl.following.length}})</span>
             </div>
             <div class="pull-right pt5">
-                <a ng-if="ctrl.favorites.length > 0" ng-click="ctrl.showSearch = true" href title="Search your favorites"><i class="fa fa-search" style="font-size: 25px"></i></a>
+                <a ng-if="ctrl.following.length > 0" ng-click="ctrl.showSearch = true" href title="Search the artists you follow"><i class="fa fa-search" style="font-size: 25px"></i></a>
             </div>
         </div>
 
@@ -18,16 +18,16 @@
         </div>
 
         <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
-             ng-repeat="artist in ctrl.favorites | filter: ctrl.filter | limitTo: 4 track by artist.id">
-            <div class="panel-body col-md-10 pl0 pr0" title="{{artist.full_name}}" ng-click="ctrl.goToArtist(artist)">
-                <img ng-src="{{artist.avatar_url}}" style="height: 50px; width: 50px; display: inline-block">
-                <span ng-if="artist.artwork_url === null" ng-click="ctrl.setArtist(artist)"><img height="50px" width="50px" src="resources/images/noImage.jpg"></span>
-                {{artist.permalink | limitTo: 70}} <span ng-click="ctrl.setArtist(artist)" ng-if="artist.full_name.length > 70"> . . . </span>
+             ng-repeat="obj in ctrl.following | filter: ctrl.filter | limitTo: 4 track by obj.id">
+            <div class="panel-body col-md-10 pl0 pr0" title="{{obj.artist.username}}" ng-click="ctrl.goToArtist(obj.artist)">
+                <img ng-if="obj.artist.pic_url !== null" ng-src="{{obj.artist.pic_url}}" height="50px" width="50px" style="display: inline-block">
+                <img ng-if="obj.artist.pic_url === null" src="resources/images/noImage.jpg" height="50px" width="50px">
+                {{obj.artist.username | limitTo: 70}} <span ng-if="obj.artist.username.length > 70"> . . . </span>
             </div>
 
             <div ng-if="artist.showOptions">
                 <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 80px">
-                    <div class="button" ng-click="ctrl.removeFavorite(artist)" title="Delete favorite">
+                    <div class="button" ng-click="ctrl.unfollow(obj.artist)" title="unfollow">
                         <span class="pl0 pr0">
                             <i class="fa fa-trash-o pt15"></i>
                         </span>
@@ -36,15 +36,14 @@
             </div>
         </div>
 
-        <!-- Message when there are no favorites -->
-        <div ng-if="ctrl.favorites.length === 0">
+        <div ng-if="ctrl.following.length === 0">
             <div class="panel-body col-md-12 text-center">
-                <h4 class="custom-font"> You have no favorite artists</h4>
+                <h4 class="custom-font"> You are not following any artists</h4>
             </div>
         </div>
     </div>
 
-    <div ng-if="ctrl.favorites.length > 4" class="card-footer show-more col-xs-12 button" ng-click="ctrl.goToBrowse()">
+    <div ng-if="ctrl.following.length > 4" class="card-footer show-more col-xs-12 button" ng-click="ctrl.goToBrowse()">
         <div class="col-md-12 text-center">
             <p> Show more</p>
         </div>

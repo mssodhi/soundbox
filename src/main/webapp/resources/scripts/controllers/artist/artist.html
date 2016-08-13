@@ -32,12 +32,15 @@
                     </div>
                     <div class="artist-content">
                         <h3>{{ctrl.artist.username}}</h3>
-                        <p ng-if="!ctrl.isFavorite(ctrl.artist)">
-                            <a href ng-click="ctrl.addFavorite(ctrl.artist)" class="custom-white"><i class="fa fa-plus-circle"></i> Follow artist</a>
-                        </p>
-                        <p ng-if="ctrl.isFavorite(ctrl.artist)">
-                            <a href ng-click="ctrl.removeFavorite(ctrl.artist)" class="custom-white"><i class="fa fa-minus-circle"></i> Unfollow artist</a>
-                        </p>
+                        <a href ng-click="ctrl.toggleFollow(ctrl.artist)" class="custom-white">
+                            <span ng-if="!ctrl.following(ctrl.artist)">
+                                <i class="fa fa-plus-circle"></i> Follow artist
+                            </span>
+
+                            <span ng-if="ctrl.following(ctrl.artist)">
+                                <i class="fa fa-minus-circle"></i> Unfollow artist
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -49,7 +52,7 @@
     </div>
 
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <favorites-card favorites="ctrl.favorites"></favorites-card>
+        <following-card following="ctrl.currentUser.following"></following-card>
         <playlist-card playlists="ctrl.playlists"></playlist-card>
     </div>
 

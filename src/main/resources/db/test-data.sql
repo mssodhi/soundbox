@@ -13,12 +13,11 @@ INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_dat
 INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('jpa', 120000, 32, 5, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
 INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('Gone by', 120000, 32, 6, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
 
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('1', '22409434', 1 )
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('2', '36960179', 1 )
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('3', '44513723', 1 )
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('4', '8145658', 1 )
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('5', '117052852', 1 )
-INSERT INTO soundbox.favorites (`id`, `artist_id`, `user_id`) VALUES ('6', '41792998', 1 )
+INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('1', 2, 1 )
+INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('2', 3, 1 )
+INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('3', 4, 1 )
+INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('4', 5, 1 )
+INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('5', 6, 1 )
 
 INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Summer 2K16', 0, 1 )
 INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Canyon Lake 2K16', 0, 1 )

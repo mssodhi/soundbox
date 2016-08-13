@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "favorites")
-public class Favorites {
+@Table(name = "following")
+public class Following {
 
     @Id
     @Column(name = "id")
@@ -15,9 +15,10 @@ public class Favorites {
     @JsonProperty
     private Integer id;
 
-    @Column(name = "artist_id", nullable = true)
+    @OneToOne
+    @JoinColumn(foreignKey = @ForeignKey(name ="FK_Artist_User"), name = "artist_id", referencedColumnName = "id")
     @JsonProperty
-    private String artist_id;
+    private User artist;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
@@ -32,12 +33,12 @@ public class Favorites {
         this.id = id;
     }
 
-    public String getArtist_id() {
-        return artist_id;
+    public User getArtist() {
+        return artist;
     }
 
-    public void setArtist_id(String artist_id) {
-        this.artist_id = artist_id;
+    public void setArtist(User artist) {
+        this.artist = artist;
     }
 
     public User getUser() {

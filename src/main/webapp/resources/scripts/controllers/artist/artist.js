@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FavoritesService, PlaylistService, UserService) {
+angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FollowService, PlaylistService, UserService) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -8,7 +8,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
         ctrl.q = '';
         validateArtist();
         getPlaylists();
-        getFavorites();
+        getFollowing();
     };
 
     function validateArtist () {
@@ -28,14 +28,9 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
         });
     }
 
-    function getFavorites() {
-        ctrl.favorites = [];
-        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
-            for(var i = 0; i < favorites.length; i++){
-                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                    ctrl.favorites.push(artist);
-                });
-            }
+    function getFollowing() {
+        FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
+            ctrl.currentUser.following = res;
         });
     }
 
@@ -49,21 +44,25 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     /*                   Favorites List functions                 */
     /* ********************************************************** */
 
-    ctrl.addFavorite = function(artist){
-        FavoritesService.addFavorite({id: ctrl.currentUser.fb_id}, artist.id);
-        ctrl.favorites.push(artist);
-    };
-
-    ctrl.removeFavorite = function (artist) {
-        FavoritesService.removeFavorites({id: ctrl.currentUser.fb_id}, artist.id).$promise.then(function(){
-            var index = ctrl.favorites.indexOf(artist);
-            ctrl.favorites.splice(index, 1);
+    ctrl.toggleFollow = function(artist){
+        console.log(artist);
+        FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function (response) {
+            if(response.id){
+                ctrl.currentUser.following.push(response);
+            }else{
+                var index = _.findIndex(ctrl.currentUser.following, function (following) {
+                    return following.artist.fb_id === artist.fb_id;
+                });
+                ctrl.currentUser.following.splice(index, 1);
+            }
         });
     };
 
-    ctrl.isFavorite = function (artist) {
-        if(ctrl.favorites.length > 0){
-            return _.some(ctrl.favorites, {id: artist.id});
+    ctrl.following = function (artist) {
+        if(ctrl.currentUser.following &&  ctrl.currentUser.following.length > 0){
+            return _.some(ctrl.currentUser.following, function (following) {
+                return following.artist.id === artist.id;
+            });
         }else{
             return false;
         }

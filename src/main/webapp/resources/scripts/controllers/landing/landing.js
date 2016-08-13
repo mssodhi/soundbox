@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FavoritesService, UserService, $sce) {
+angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FollowService, UserService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
         UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
-            ctrl.currentUser.tracks = response;
+            ctrl.tracks = response;
         });
 
         getPlaylists();
-        getFavorites();
+        getFollowing();
     };
 
     function getPlaylists() {
@@ -19,21 +19,9 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
         });
     }
 
-    function getFavorites() {
-        ctrl.tracks = [];
-        ctrl.favorites = [];
-        FavoritesService.getFavorites({id: ctrl.currentUser.fb_id}).$promise.then(function (favorites) {
-            for(var i = 0; i < favorites.length; i++){
-                SC.get('/users/' + favorites[i].artist_id).then(function(artist){
-                    ctrl.favorites.push(artist);
-                });
-                // SC.get('/tracks', {user_id: favorites[i].artist_id}).then(function (tracks) {
-                //     for(var i = 0; i < tracks.length; i++){
-                //         ctrl.tracks.push(tracks[i]);
-                //     }
-                //     ctrl.tracks = _.shuffle(ctrl.tracks);
-                // });
-            }
+    function getFollowing() {
+        FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
+            ctrl.currentUser.following = res;
         });
     }
 

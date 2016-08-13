@@ -42,7 +42,7 @@
 <script src="resources/scripts/services/user.service.js"></script>
 <script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/music-service.js"></script>
-<script src="resources/scripts/services/favorites.service.js"></script>
+<script src="resources/scripts/services/follow.service.js"></script>
 <script src="resources/scripts/services/playlist.service.js"></script>
 <script src="resources/scripts/services/login.service.js"></script>
 <script src="resources/scripts/services/settings.service.js"></script>
@@ -63,7 +63,7 @@
 
 <%-- Components --%>
 <script src="resources/scripts/components/music-player/music-player.js"></script>
-<script src="resources/scripts/components/favorites/favorites-card.js"></script>
+<script src="resources/scripts/components/following-card/following-card.js"></script>
 <script src="resources/scripts/components/playlist/playlist-card.js"></script>
 <script src="resources/scripts/components/search/search-bar.js"></script>
 <script src="resources/scripts/components/music-table/music-table.js"></script>
