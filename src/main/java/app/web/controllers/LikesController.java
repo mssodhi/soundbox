@@ -51,7 +51,7 @@ public class LikesController {
             song.setLikes(song.getLikes() + 1);
             songService.save(song);
             Likes likes = new Likes();
-            likes.setSong(song);
+            likes.setSong_id(song.getId());
             likes.setUser(user);
             likes.setUser(user);
             return likesService.save(likes);

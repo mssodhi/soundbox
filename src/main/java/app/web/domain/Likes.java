@@ -15,10 +15,8 @@ public class Likes {
     @JsonProperty
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(foreignKey = @ForeignKey(name ="FK_Song"), name = "song_id", referencedColumnName = "id")
     @JsonProperty
-    private Song song;
+    private Integer song_id;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
@@ -33,12 +31,12 @@ public class Likes {
         this.id = id;
     }
 
-    public Song getSong() {
-        return song;
+    public Integer getSong_id() {
+        return song_id;
     }
 
-    public void setSong(Song song) {
-        this.song = song;
+    public void setSong_id(Integer song_id) {
+        this.song_id = song_id;
     }
 
     public User getUser() {

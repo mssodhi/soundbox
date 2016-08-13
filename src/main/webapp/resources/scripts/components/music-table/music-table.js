@@ -46,9 +46,9 @@ angular.module('app').component("musicTable", {
         ctrl.likeSong = function (song) {
             LikesService.toggleLike({songId: song.id, userId: ctrl.currentUser.fb_id}).$promise.then(function (response) {
                 if(ctrl.isLiked(song)){
-                    var ind = ctrl.likes.map(function (e) {
-                        return e.song_id;
-                    }).indexOf(song.id.toString());
+                    var ind = ctrl.likes.map(function (like) {
+                        return like.song_id;
+                    }).indexOf(song.id);
                     ctrl.likes.splice(ind,1);
                 }else if(response.id){
                     ctrl.likes.push(response);
@@ -99,7 +99,7 @@ angular.module('app').component("musicTable", {
 
         ctrl.isLiked = function (song) {
             return _.some(ctrl.likes, function (like) {
-                return like.song.id === song.id;
+                return like.song_id === song.id;
             });
         };
 
