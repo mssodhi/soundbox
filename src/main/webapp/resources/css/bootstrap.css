@@ -1944,6 +1944,14 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
     color: red !important;
 }
 
+.drop-box {
+    cursor: pointer;
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    text-align: center;
+    padding: 40px 30px;
+    font-weight: 500; }
+
 /* Artist page card css */
 
 .artist-card {

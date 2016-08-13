@@ -4,6 +4,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
 
     var ctrl = this;
     ctrl.currentUser = profile;
+
     ctrl.init = function () {
         ctrl.q = '';
         validateArtist();
@@ -45,7 +46,6 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     /* ********************************************************** */
 
     ctrl.toggleFollow = function(artist){
-        console.log(artist);
         FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function (response) {
             if(response.id){
                 ctrl.following.push(response);

@@ -32,7 +32,7 @@
                     </div>
                     <div class="artist-content">
                         <h3>{{ctrl.artist.username}}</h3>
-                        <a href ng-click="ctrl.toggleFollow(ctrl.artist)" class="custom-white">
+                        <a href ng-click="ctrl.toggleFollow(ctrl.artist)" class="custom-white" ng-if="ctrl.currentUser.fb_id !== ctrl.artist.fb_id">
                             <span ng-if="!ctrl.isFollowing(ctrl.artist)">
                                 <i class="fa fa-plus-circle"></i> Follow artist
                             </span>
@@ -44,6 +44,8 @@
                     </div>
                 </div>
             </div>
+
+            <upload-music class="col-md-5 col-xs-12 pl0 pr0 pull-right pt10" ng-if="ctrl.currentUser.fb_id === ctrl.artist.fb_id"></upload-music>
 
             <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists"
                          tracks="ctrl.tracks" showdate="true"></music-table>

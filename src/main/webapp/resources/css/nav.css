@@ -71,6 +71,7 @@
     outline: 0; }
 
 .dropdown-menu-right {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     left: auto;
     right: 0; }
 
@@ -310,7 +311,7 @@ and (max-device-width : 1024px)  {
 .navbar-default .navbar-right ul.dropdown-menu {
     border-radius: 0;
     padding: 0;
-    margin: 9px -7px 0 0;
+    margin: 11px 8px 0 0;
 }
 
 .navbar-default .navbar-right ul.dropdown-menu:after {

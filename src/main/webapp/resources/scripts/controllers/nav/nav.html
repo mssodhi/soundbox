@@ -7,28 +7,28 @@
                     <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
                 </div>
                 <div class="menu-items col-md-10 pl0">
-                    <div class="project pull-left" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts"> <i class="fa fa-bar-chart-o"></i> Charts</a></div>
-                    <div class="project pull-left" ng-class="ctrl.isActive('#/browse')"><a href="#/browse"> <i class="fa fa-list-alt"></i> Browse</a></div>
-                    <div class="project pull-left" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings"> <i class="fa fa-gears"></i> Settings</a></div>
-                    <div class="project pull-right"><a href ng-click="ctrl.signOut()"> <i class="fa fa-sign-out"></i> Logout</a></div>
+                    <div ng-repeat="menuItem in ctrl.menuItems" class="pull-left">
+                        <div class="project">
+                            <a ng-href="{{menuItem.link}}"> <i ng-class="'{{menuItem.icon}}'"> </i> {{menuItem.title}}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="navbar-right">
-                <div class="user-profile pull-right pl0 pr0 button" ng-class="{'open': ctrl.openProfile}" ng-click="ctrl.goToArtist(ctrl.currentUser)">
+                <div class="user-profile pull-right pl0 pr0 button" ng-class="{'open': ctrl.openProfile}"
+                     ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">
                     <img class="img-circle img-bordered" ng-if="ctrl.currentUser.pic_url" ng-src="{{ctrl.currentUser.pic_url}}">
                     <img class="img-circle img-bordered" ng-if="!ctrl.currentUser.pic_url" src="resources/images/noImage.jpg">
-                    <!--<a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">-->
-                        <!--<span class="pull-right hidden-xs">{{ctrl.currentUser.name}}</span>-->
-                    <!--</a>-->
-                    <!--<ul class ="dropdown-menu dropdown-menu-right">-->
-                        <!--<li>-->
-                            <!--<div class="options">-->
-                                <!--<div class="col-sm-6 right-border"><a href ng-href="#/settings"><span class="fa fa-gears"></span>Settings</a></div>-->
-                                <!--<div class="col-sm-6"><a ng-click="ctrl.signOut()" href><span class="fa fa-sign-out"></span>Sign Out</a></div>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
+                    <ul class ="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <span class="col-xs-12 pt5 pb5 hidden-xs">{{ctrl.currentUser.name}}</span>
+                            <div class="options col-xs-12 pl0 pr0">
+                                <div class="col-sm-6 right-border"><a href ng-href="#/settings"><span class="fa fa-gears"></span>Settings</a></div>
+                                <div class="col-sm-6"><a ng-click="ctrl.signOut()" href><span class="fa fa-sign-out"></span>Sign Out</a></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
