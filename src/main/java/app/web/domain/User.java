@@ -31,7 +31,7 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private String pic_url;
 
-    @Column(name = "username", length = 50, nullable = false)
+    @Column(name = "username", length = 50)
     @JsonProperty
     private String username;
 
