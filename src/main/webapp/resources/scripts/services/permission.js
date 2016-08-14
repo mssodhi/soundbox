@@ -5,7 +5,7 @@ angular.module('app').factory('PermissionService', function ($location, UserServ
     return {
         permissionCheck: function () {
             UserService.getCurrentUser().$promise.then(function (response) {
-                if(response.id !== null && response.username !== null){
+                if(response.id && response.username){
                     return true;
                 }else{
                     $location.path('/login');
