@@ -1957,7 +1957,7 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
 .artist-card {
     /*overflow: hidden;*/
-    height: 240px;
+    height: 260px;
     position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
     border-radius: 0px;

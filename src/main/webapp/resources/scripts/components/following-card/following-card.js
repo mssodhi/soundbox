@@ -18,7 +18,7 @@ angular.module('app').component("followingCard", {
         ctrl.unfollow = function(artist){
             FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function () {
                 var index = _.findIndex(ctrl.following, function (following) {
-                    return following.artist.fb_id === artist.fb_id;
+                    return following.fb_id === artist.fb_id;
                 });
                 ctrl.following.splice(index, 1);
             });

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -33,7 +34,24 @@ public class FollowingServiceImpl extends BaseServiceImpl<Following, Integer> im
     }
 
     @Override
-    public Set<Following> getFollowing(User currentUser){
-        return followingRepository.getByUser(currentUser.getFb_id());
+    public Set<User> getFollowing(User currentUser){
+        Set<Following> followingSet = followingRepository.getByUser(currentUser.getFb_id());
+        Set<User> following = new HashSet<>();
+        for(Following obj : followingSet){
+            User artist = obj.getArtist();
+            following.add(artist);
+        }
+        return following;
+    }
+
+    @Override
+    public Set<User> getFollowers(User currentUser){
+        Set<Following> followingSet = followingRepository.getFollowers(currentUser.getFb_id());
+        Set<User> followers = new HashSet<>();
+        for(Following following: followingSet){
+            User user = following.getUser();
+            followers.add(user);
+        }
+        return followers;
     }
 }

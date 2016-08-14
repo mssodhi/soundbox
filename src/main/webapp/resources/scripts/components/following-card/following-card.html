@@ -18,19 +18,18 @@
         </div>
 
         <div class="button col-md-12 pl0 pr0" ng-mouseover="artist.showOptions = true" ng-mouseleave="artist.showOptions = false"
-             ng-repeat="obj in ctrl.following | filter: ctrl.filter | limitTo: 4 track by obj.id">
-            <div class="panel-body col-md-10 pl0 pr0" title="{{obj.artist.username}}" ng-click="ctrl.goToArtist(obj.artist)">
-                <img ng-if="obj.artist.pic_url !== null" ng-src="{{obj.artist.pic_url}}" height="50px" width="50px" style="display: inline-block">
-                <img ng-if="obj.artist.pic_url === null" src="resources/images/noImage.jpg" height="50px" width="50px">
-                {{obj.artist.username | limitTo: 70}} <span ng-if="obj.artist.username.length > 70"> . . . </span>
+             ng-repeat="artist in ctrl.following | filter: ctrl.filter | limitTo: 4 track by artist.id">
+            <div class="panel-body col-md-8" title="{{artist.username}}" ng-click="ctrl.goToArtist(artist)">
+                <img ng-if="artist.pic_url !== null" ng-src="{{artist.pic_url}}" height="50px" width="50px" style="display: inline-block">
+                <img ng-if="artist.pic_url === null" src="resources/images/noImage.jpg" height="50px" width="50px">
+                {{artist.username | limitTo: 70}} <span ng-if="artist.username.length > 70"> . . . </span>
             </div>
 
             <div ng-if="artist.showOptions">
-                <div class="col-md-2 pl0 pr0 panel-body pull-right" style="min-height: 80px">
-                    <div class="button" ng-click="ctrl.unfollow(obj.artist)" title="unfollow">
-                        <span class="pl0 pr0">
-                            <i class="fa fa-trash-o pt15"></i>
-                        </span>
+                <div class="col-md-4 panel-body pull-right" style="min-height: 80px">
+                    <div class="button label label-danger small" ng-click="ctrl.unfollow(artist)" title="unfollow">
+
+                        <span class="pl0 pr0">Unfollow <i class="fa fa-trash-o pt15"></i></span>
                     </div>
                 </div>
             </div>

@@ -3,15 +3,6 @@
 
         <search-bar></search-bar>
 
-        <!-- Message when the user doesn't have any tracks -->
-        <div ng-if="ctrl.tracks.length === 0" class="col-md-12 col-xs-12 mt15 pl0 pr0">
-            <div class="card card-red">
-                <div class="panel-body">
-                    <p>No tracks by {{ctrl.artist.username}}</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Message when artist not found -->
         <div ng-if="ctrl.artistNotFound" class="col-md-12 col-xs-12 mt15 pl0 pr0">
             <div class="card card-red">
@@ -41,6 +32,12 @@
                                 <i class="fa fa-minus-circle"></i> Unfollow artist
                             </span>
                         </a>
+                        <br>
+                        <span>Tracks: {{ctrl.artist.songs_length}}</span>
+                        <br>
+                        <span>Followers: {{ctrl.artist.followers}}</span>
+                        <br>
+                        <span>Following: {{ctrl.artist.following}}</span>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 package app.web.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class Following {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_User"), name = "user_id", referencedColumnName = "id")
-    @JsonIgnore
+    @JsonProperty
     private User user;
 
     public Integer getId() {

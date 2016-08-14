@@ -13,4 +13,7 @@ public interface FollowingRepository extends JpaRepository<Following, Integer> {
 
     @Query("select f from Following f where f.user.fb_id = ?1 and f.artist.fb_id = ?2")
     Following getByUserAndArtist(String user_fb_id, String artist_fb_id);
+
+    @Query("select f from Following f where f.artist.fb_id = ?1")
+    Set<Following> getFollowers(String fb_id);
 }

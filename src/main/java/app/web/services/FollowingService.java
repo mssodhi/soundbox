@@ -14,5 +14,7 @@ public interface FollowingService extends BaseService<Following, Integer> {
 
     void unfollow(Following following);
 
-    Set<Following> getFollowing(User currentUser);
+    Set<User> getFollowing(User currentUser);
+
+    Set<User> getFollowers(User currentUser);
 }

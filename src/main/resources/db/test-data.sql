@@ -1,29 +1,4 @@
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('2', 'Too-Short', 'b', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1201', 'Too-Short', 0)
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('3', 'Shwayzee', 'c', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1202', 'Shwayzee', 0)
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('4', 'Tyrone', 'd', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1203', 'Tyrone', 0)
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('5', 'Eminem', 'e', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1204', 'Eminem', 0)
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('6', 'Tyga', 'f', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1205', 'Tyga', 0)
-INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`) VALUES ('1', 'Demo', 'a', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209', 'Demo', 0)
-
-INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('First', 120000, 32, 2, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
-INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('Second', 120000, 32, 2, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
-INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('firthirsec', 120000, 32, 4, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
-INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('jpa', 120000, 32, 5, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
-INSERT INTO soundbox.song (`title`, `duration`, `plays`, `user_id`, `created_date`, `last_modified_date`, `likes`) VALUES ('Gone by', 120000, 32, 6, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 0)
-
-INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('1', 2, 1 )
-INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('2', 3, 1 )
-INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('3', 4, 1 )
-INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('4', 5, 1 )
-INSERT INTO soundbox.following (`id`, `artist_id`, `user_id`) VALUES ('5', 6, 1 )
-
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('1', 'Summer 2K16', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('2', 'Canyon Lake 2K16', 0, 1 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('3', 'Workout', 0, 4 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('4', 'MUUSiC', 0, 2 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('5', 'Hard summer', 0, 2 )
-INSERT INTO soundbox.playlist ( `id`, `name`, `is_private`, `user_id`) VALUES ('6', 'yahoo', 0, 4 )
-
+INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`, `followers`, `following`) VALUES ('1', 'Demo', 'a', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209', 'demo', 0, 0, 0)
 
 INSERT INTO soundbox.genres (`id`, `name`, `value`) VALUES ('1', 'All', 'all-music')
 INSERT INTO soundbox.genres (`id`, `name`, `value`) VALUES ('2', 'Alternative Rock', 'alternativerock')

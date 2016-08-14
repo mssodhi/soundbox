@@ -53,12 +53,14 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     ctrl.toggleFollow = function(artist){
         FollowService.follow({id: ctrl.currentUser.fb_id}, artist.fb_id).$promise.then(function (response) {
             if(response.id){
-                ctrl.following.push(response);
+                ctrl.following.push(response.artist);
+                artist.followers += 1;
             }else{
-                var index = _.findIndex(ctrl.following, function (following) {
-                    return following.artist.fb_id === artist.fb_id;
+                var index = _.findIndex(ctrl.following, function (artist) {
+                    return artist.fb_id === artist.fb_id;
                 });
                 ctrl.following.splice(index, 1);
+                artist.followers -= 1;
             }
         });
     };
@@ -66,7 +68,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     ctrl.isFollowing = function (artist) {
         if(ctrl.following &&  ctrl.following.length > 0){
             return _.some(ctrl.following, function (following) {
-                return following.artist.id === artist.id;
+                return following.fb_id === artist.fb_id;
             });
         }else{
             return false;

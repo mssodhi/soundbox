@@ -38,7 +38,7 @@
 
         <!-- Grid -->
         <div ng-if="ctrl.artist_grid">
-            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="obj in ctrl.following track by obj.id" ng-init="artist = obj.artist">
+            <div class="col-md-2 col-sm-4 col-xs-12 pt15" ng-repeat="artist in ctrl.following track by obj.id">
                 <div class="artist-card button" ng-click="ctrl.goToArtist(artist)">
                     <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                     <div class="avatar">
@@ -72,7 +72,7 @@
                 </tr>
                 </thead>
 
-                <tbody ng-repeat="obj in ctrl.following track by obj.id" ng-init="artist = obj.artist" title="{{artist.username}}">
+                <tbody ng-repeat="artist in ctrl.following track by obj.id" title="{{artist.username}}">
                 <tr class="button">
                     <td ng-click="ctrl.goToArtist(artist)" class="hidden-xs">{{$index+1}}</td>
                     <td ng-click="ctrl.goToArtist(artist)">

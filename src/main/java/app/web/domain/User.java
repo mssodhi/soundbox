@@ -39,6 +39,14 @@ public class User extends AuditableEntity implements Serializable{
     @JsonProperty
     private Integer songs_length = 0;
 
+    @Column(name = "following", nullable = false)
+    @JsonProperty
+    private Integer following = 0;
+
+    @Column(name = "followers", nullable = false)
+    @JsonProperty
+    private Integer followers = 0;
+
     public Integer getId() {
         return id;
     }
@@ -93,5 +101,21 @@ public class User extends AuditableEntity implements Serializable{
 
     public void setSongs_length(Integer songs_length) {
         this.songs_length = songs_length;
+    }
+
+    public Integer getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Integer following) {
+        this.following = following;
+    }
+
+    public Integer getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Integer followers) {
+        this.followers = followers;
     }
 }

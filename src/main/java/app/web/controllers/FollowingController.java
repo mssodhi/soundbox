@@ -27,17 +27,31 @@ public class FollowingController {
             Following newFollow = new Following();
             newFollow.setUser(currentUser);
             newFollow.setArtist(artist);
+            currentUser.setFollowing(currentUser.getFollowing() + 1);
+            artist.setFollowers(artist.getFollowers() + 1);
+            userService.save(artist);
+            userService.save(currentUser);
             return followingService.save(newFollow);
         }else{
+            currentUser.setFollowing(currentUser.getFollowing() - 1);
+            artist.setFollowers(artist.getFollowers() - 1);
+            userService.save(artist);
+            userService.save(currentUser);
             followingService.unfollow(following);
             return null;
         }
     }
 
-    @RequestMapping(value = "get/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "getFollowing/user/{id}", method = RequestMethod.GET)
     public Object getFollowing(@PathVariable String id){
         User currentUser = userService.getByFbId(id);
         return followingService.getFollowing(currentUser);
+    }
+
+    @RequestMapping(value = "getFollowers/user/{id}", method = RequestMethod.GET)
+    public Object getFollowers(@PathVariable String id){
+        User currentUser = userService.getByFbId(id);
+        return followingService.getFollowers(currentUser);
     }
 
 }
