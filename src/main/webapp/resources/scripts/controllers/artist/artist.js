@@ -36,8 +36,13 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
     }
 
     function getTracks (artist) {
+        ctrl.loading = true;
         UserService.getMusicByUser({id: artist.fb_id}).$promise.then(function (tracks) {
             ctrl.tracks = tracks;
+            if(tracks.length !== ctrl.currentUser.songs_length){
+                ctrl.errorGettingAll = true;
+            }
+            ctrl.loading = false;
         })
     }
 

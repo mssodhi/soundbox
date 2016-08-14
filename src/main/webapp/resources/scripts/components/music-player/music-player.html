@@ -2,7 +2,7 @@
     <div class="music-player" ng-if="ctrl.player">
 
         <img class="pull-left" ng-if="ctrl.track.artwork_url" ng-src="{{ctrl.track.artwork_url}}">
-        <img class="pull-left" style="width: 100px; height: 100px" ng-if="!ctrl.track.artwork_url" src="resources/images/noImage.jpg">
+        <img class="pull-left" ng-if="!ctrl.track.artwork_url" src="resources/images/noImage.jpg">
 
         <div class="col-sm-3 col-xs-8 music-player-info">
             <h4 ng-class="{marquee: ctrl.track.title.length > 35}"><span title="{{ctrl.track.title}}">{{ctrl.track.title}}</span></h4>

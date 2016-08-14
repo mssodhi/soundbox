@@ -47,7 +47,10 @@
 
             <upload-music class="col-md-6 col-xs-12 pl0 pr0 pull-right pt10" ng-if="ctrl.currentUser.fb_id === ctrl.artist.fb_id"></upload-music>
 
-            <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists"
+            <h3 class="col-xs-12" ng-if="ctrl.loading">Loading...</h3>
+            <h3 class="col-xs-12" ng-if="ctrl.errorGettingAll">Error getting all tracks</h3>
+
+            <music-table class="col-xs-12 pl0 pr0" ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists"
                          tracks="ctrl.tracks" showdate="true"></music-table>
         </div>
 
