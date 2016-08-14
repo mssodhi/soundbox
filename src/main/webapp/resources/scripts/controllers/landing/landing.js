@@ -5,15 +5,8 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
-        ctrl.loading = true;
-        UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
-            if(response.length !== ctrl.currentUser.songs_length){
-                ctrl.errorGettingAll = true;
-            }
-            ctrl.tracks = response;
-            ctrl.loading = false;
-        });
-
+        ctrl.tracks = [];
+        getMusicByUser(ctrl.currentUser);
         getPlaylists();
         getFollowing();
     };
@@ -24,9 +17,20 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
         });
     }
 
+    function getMusicByUser(user) {
+        UserService.getMusicByUser({id: user.fb_id}).$promise.then(function (response) {
+            response.forEach(function (track) {
+                ctrl.tracks.push(track);
+            });
+        });
+    }
+
     function getFollowing() {
         FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
             ctrl.following = res;
+            ctrl.following.forEach(function (user) {
+                getMusicByUser(user);
+            })
         });
     }
 
