@@ -9,4 +9,6 @@ public interface AnalyticsService extends BaseService<Analytics, Integer> {
     Analytics save(Analytics userAnalytics);
 
     Analytics getByUser(User user);
+
+    void resetAnalytics();
 }

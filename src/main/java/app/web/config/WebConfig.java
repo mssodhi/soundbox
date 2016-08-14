@@ -2,6 +2,7 @@ package app.web.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -16,6 +17,7 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 @Configuration
+@EnableScheduling
 @EnableWebMvc
 @ComponentScan(basePackages = {"app.web"}, excludeFilters = @ComponentScan.Filter(value = Configuration.class, type = FilterType.ANNOTATION))
 @WebListener

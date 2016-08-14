@@ -3,6 +3,7 @@ package app.web.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "analytics")
@@ -29,6 +30,10 @@ public class Analytics {
     @Column(name = "plays_today", nullable = false)
     @JsonProperty
     private Integer plays_today = 0;
+
+    @Column(name = "reset_date", nullable = false)
+    @JsonProperty
+    private Date reset_date = new Date();
 
     public Integer getId() {
         return id;
@@ -68,5 +73,13 @@ public class Analytics {
 
     public void setPlays_today(Integer plays_today) {
         this.plays_today = plays_today;
+    }
+
+    public Date getReset_date() {
+        return reset_date;
+    }
+
+    public void setReset_date(Date reset_date) {
+        this.reset_date = reset_date;
     }
 }
