@@ -1,38 +1,40 @@
 <div class="col-md-12 card card-pink" ng-init="ctrl.init()">
-    <div class="panel-body text-center">
-        <span class="value">Upload music</span>
-        <span class="title"><a class="btn btn-info" ng-click="ctrl.showUploadForm()">Upload</a></span>
-        <hr class="col-xs-12 pl0 pr0">
+    <div class="panel-body">
+        <span class="value text-center">Upload music</span>
+        <span class="title text-center"><a class="btn btn-info" ng-if="!ctrl.showForm" ng-click="ctrl.showUploadForm()">Upload</a></span>
 
         <div class="col-xs-12 pl0 pr0" ng-if="ctrl.showForm">
+            <hr class="col-xs-12 pl0 pr0">
 
-            <div ngf-drop class="drop-box col-xs-12 pl0 pr0" ngf-select ng-model="files" ng-change="ctrl.addFiles(files)" ngf-multiple="true"
+            <div ng-if="ctrl.files.length === 0" ngf-drop class="drop-box col-xs-12 pl0 pr0" ngf-select ng-model="ctrl.files" ngf-multiple="true"
                  ngf-validate="{size: {min: 10, max: '20MB'}, duration: {min: '10s', max: '10m'}, pattern: '.mp3'}">
                 <span class="">Drag and drop MP3 files</span></div>
 
             <div class="pt10 col-xs-12 pl0 pr0">
                 <div class="col-xs-12 pl0 pr0 pb10" ng-repeat="song in ctrl.songs" ng-init="song.pic = null">
-                    <div ng-if="song.pic === null" ngf-drop class="drop-box pl0 pr0 pt15 pb0 col-md-3" style="height: 75px; width: 75px;" ngf-select ng-model="song.pic" ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork</div>
-                    <img ng-if="song.pic !== null" class="pl0 pr0 pull-left" ng-src="{{song.artwork_url}}" height="75px" width="75px">
-                    <div class="col-md-10 pt5 pb5" style="display: inline-block">
-                        <input type="text col-xs-12" class="form-control" ng-model="song.title">
-                    </div>
-                    <div class="col-md-9 pt5 pb5" style="display: inline-block">
-                        <span class="pull-left">{{ctrl.milliToTime(song.duration)}}</span>
+                    <div class="col-xs-10 pl0 pr0">
+                        <div ng-if="song.pic === null && !song.success" ngf-drop class="drop-box pl0 pr0 pt15 pb0 col-md-3" style="height: 75px; width: 75px;" ngf-select ng-model="song.pic" ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork</div>
+                        <img ng-if="song.pic !== null" class="pl0 pr0 pull-left" ng-src="{{song.artwork_url}}" height="75px" width="75px">
+                        <img ng-if="song.pic === null && song.success" class="pl0 pr0 pull-left" src="resources/images/noImage.jpg" height="75px" width="75px">
+                        <div class="col-md-9 pt5 pb5" style="display: inline-block">
+                            <input type="text col-xs-12" class="form-control" ng-if="!song.success" ng-model="song.title">
+                            <span class="pull-left" ng-if="song.success">{{song.title}}</span>
+                        </div>
+                        <div class="col-md-9 pt5 pb5" style="display: inline-block">
+                            <span class="pull-left">{{ctrl.milliToTime(song.duration)}}</span>
+                        </div>
                     </div>
 
-                    <div class="col-xs-12 pt10" ng-if="song.success">
-                        <span class="value" style="font-size: 1.2em">Upload successful!</span>
+                    <div class="col-xs-2 pl0 pr0 pt5">
+                        <button class="btn btn-primary" ng-if="!song.success" ng-click="ctrl.saveFile(song)">Save</button>
+                        <i class="fa fa-check-circle-o fa-2x custom-green" ng-if="song.success"></i>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
-    <div class="panel-footer col-xs-12" ng-if="ctrl.showForm && ctrl.files.length > 0">
+    <div class="panel-footer col-xs-12" ng-if="ctrl.showForm">
         <button class="btn btn-github pull-left" ng-click="ctrl.hideUploadForm()">Close</button>
-        <button class="btn btn-primary pull-right" ng-click="ctrl.uploadFiles()">Submit</button>
     </div>
 </div>

@@ -7213,6 +7213,17 @@ button.list-group-item-danger.active:focus {
     padding: 0;
 }
 
+.label-btn{
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
 .card .panel-body .value{
     font-size: 2em;
     display: block;

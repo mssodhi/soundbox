@@ -43,9 +43,11 @@ public class SongController {
     }
 
 
-    @RequestMapping(value = "save/user/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "save/user/{id}", method = RequestMethod.POST)
     public Object saveSong(@RequestBody Song song, @PathVariable String id){
         User user = userService.getByFbId(id);
+        user.setSongs_length(user.getSongs_length() + 1);
+        user = userService.save(user);
         song.setUser(user);
         return songService.save(song);
     }

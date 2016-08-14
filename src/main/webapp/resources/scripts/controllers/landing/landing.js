@@ -5,8 +5,13 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
     ctrl.currentUser = profile;
 
     ctrl.init = function () {
+        ctrl.loading = true;
         UserService.getMusicByUser({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
+            if(response.length !== ctrl.currentUser.songs_length){
+                ctrl.errorGettingAll = true;
+            }
             ctrl.tracks = response;
+            ctrl.loading = false;
         });
 
         getPlaylists();

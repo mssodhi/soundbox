@@ -4,6 +4,8 @@
 
     <div class="col-md-9 pt0">
         <search-bar></search-bar>
+        <h3 class="col-xs-12" ng-if="ctrl.loading">Loading...</h3>
+        <h3 class="col-xs-12" ng-if="ctrl.errorGettingAll">Error getting all tracks</h3>
         <music-table ng-if="ctrl.tracks.length > 0" playlists="ctrl.playlists" tracks="ctrl.tracks"
                      showartist="true" showdate="false"></music-table>
     </div>

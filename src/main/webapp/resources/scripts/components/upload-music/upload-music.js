@@ -13,12 +13,6 @@ angular.module('app').component("uploadMusic", {
             })
         };
 
-        ctrl.addFiles = function (files) {
-            files.forEach(function (file) {
-                ctrl.files.push(file);
-            });
-        };
-
         ctrl.showUploadForm = function () {
             ctrl.showForm = true;
             ctrl.files = [];
@@ -41,43 +35,44 @@ angular.module('app').component("uploadMusic", {
             })
         });
 
-        ctrl.uploadFiles = function () {
-            ctrl.songs.forEach(function (song) {
-                SongService.save({id: ctrl.currentUser.fb_id}, song).$promise.then(function (res) {
-                    if(res.id){
-
-                        // upload the song picture
-                        if(song.pic){
-                            Upload.upload({
-                                method: 'POST',
-                                url: 'api/song/'+ res.id +'/image/save',
-                                data: {
-                                    image: song.pic
-                                }
-                            }).success(function() {
-                                song.success = true;
-                            });
-                        }
-
-                        // upload the actual song mp3 file
-                        Upload.upload({
-                            method: 'POST',
-                            url: 'api/song/' + res.id + '/content/save',
-                            data: {
-                                musicFile: song.file
-                            }
-                        }).progress(function(evt) {
-                            song.file.progress = Math.min(100, parseInt(100.0 *
-                                evt.loaded / evt.total));
-                        }).success(function() {
-                            song.success = true;
-                        });
-                    }
-                })
-
-            });
-
+        ctrl.saveFile = function (song) {
+            SongService.save({id: ctrl.currentUser.fb_id}, song).$promise.then(function (res) {
+                if(res.id){
+                    uploadFile(res, song);
+                }
+            })
         };
+
+        function uploadFile(res, song) {
+            Upload.upload({
+                method: 'POST',
+                url: 'api/song/' + res.id + '/content/save',
+                data: {
+                    musicFile: song.file
+                }
+            }).progress(function(evt) {
+                song.file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+            }).success(function() {
+                if(song.pic){
+                    uploadPic(res, song);
+                }else{
+                    song.success = true;
+                }
+            });
+        }
+
+        function uploadPic(res, song) {
+            Upload.upload({
+                method: 'POST',
+                url: 'api/song/'+ res.id +'/image/save',
+                data: {
+                    image: song.pic
+                }
+            }).success(function() {
+                song.success = true;
+            });
+        }
 
         ctrl.milliToTime = function (milli) {
             var minutes = Math.floor(milli / 60000);

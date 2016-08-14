@@ -25,21 +25,27 @@
                     <label class="col-md-3"><span class="pull-right">Name</span></label>
                     <div class="col-md-9 pull-right">
                         <input type="text" class="form-control" ng-model="ctrl.currentUser.name" disabled>
-                        <p class="help-block">Enter your real name.</p>
+                        <!--<p class="help-block">Enter your real name.</p>-->
                     </div>
                 </div>
+                <div class="form-group col-md-11">
+                    <label class="col-md-3"><span class="pull-right">Username</span></label>
+                    <div class="col-md-9 pull-right">
+                        <input type="text" class="form-control" ng-model="ctrl.currentUser.username"
+                               ng-disabled="true">
+                        <!--<p class="help-block">Enter your email.</p>-->
+                    </div>
+                </div>
+
                 <div class="form-group col-md-11">
                     <label class="col-md-3"><span class="pull-right">Email</span></label>
                     <div class="col-md-9 pull-right">
                         <input type="text" class="form-control" ng-model="ctrl.currentUser.email"
                                ng-disabled="true">
-                        <p class="help-block">Enter your email.</p>
+                        <!--<p class="help-block">Enter your email.</p>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--<upload-music class="col-md-6" ng-if="ctrl.uploadMusic"></upload-music>-->
-
 </div>
