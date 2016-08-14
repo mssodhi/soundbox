@@ -1,6 +1,8 @@
 package app.web.controllers;
 
 import app.web.domain.User;
+import app.web.domain.Analytics;
+import app.web.services.AnalyticsService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AnalyticsService analyticsService;
 
     @RequestMapping(value = "checkUser/{uid}", method = RequestMethod.PUT)
     public Object checkUser(@PathVariable String uid, @RequestBody String name) throws Exception{
@@ -23,8 +28,13 @@ public class LoginController {
             newUser.setFb_id(uid);
             newUser.setName(name);
             userService.setCurrentUser(newUser);
+            newUser = userService.save(newUser);
 //            emailService.sendEmail(EmailType.WELCOME, newUser);
-            return userService.save(newUser);
+
+            Analytics analytics = new Analytics();
+            analytics.setUser(newUser);
+            analyticsService.save(analytics);
+            return newUser;
         }
     }
 

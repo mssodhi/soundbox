@@ -2232,6 +2232,10 @@ html, body {
     color: #8bc34a;
 }
 
+.custom-red {
+    color: red;
+}
+
 .custom-pink {
     color: #e91e63;
 }

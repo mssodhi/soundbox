@@ -4,35 +4,18 @@
     <div class="col-md-3">
         <div class="col-md-12 card card-red">
             <div class="panel-body text-center">
-                <span class="value">{{ctrl.currentUser.followers}}</span>
-                <span class="title">Followers</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="col-md-12 card card-purple">
-            <div class="panel-body text-center">
-                <span class="value">{{ctrl.currentUser.following}}</span>
-                <span class="title">Following</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="col-md-12 card card-pink">
-            <div class="panel-body text-center">
-                <span class="value">{{ctrl.currentUser.songs_length}}</span>
-                <span class="title">Songs</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="col-md-12 card card-pink">
-            <div class="panel-body text-center">
-                <span class="value"><i class="fa fa-arrow-circle-up custom-green"></i> 15%</span>
-                <span class="title">Profile views</span>
+                <div class="col-xs-4 pl0 pr0">
+                    <span class="value">{{ctrl.currentUser.followers}}</span>
+                    <span class="title">Followers</span>
+                </div>
+                <div class="col-xs-4 pl0 pr0">
+                    <span class="value">{{ctrl.currentUser.following}}</span>
+                    <span class="title">Following</span>
+                </div>
+                <div class="col-xs-4 pl0 pr0">
+                    <span class="value">{{ctrl.currentUser.songs_length}}</span>
+                    <span class="title">Songs</span>
+                </div>
             </div>
         </div>
     </div>
@@ -40,24 +23,51 @@
     <div class="col-md-3">
         <div class="col-md-12 card card-blue">
             <div class="panel-body text-center">
-                <span class="value">20</span>
+                <span class="value">{{ctrl.analytics.plays_today}}</span>
                 <span class="title">Plays today</span>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-3">
         <div class="col-md-12 card card-pink">
             <div class="panel-body text-center">
-                <!--<span class="value">Habits ft. Abhi Dijon</span>-->
-                <!--<span class="title">Most played</span>-->
+                <div class="col-xs-6 pl0 pr0">
+                    <span class="value">{{ctrl.analytics.daily_views_count}}</span>
+                    <span class="title">Today's profile views</span>
+                </div>
+                <div class="col-xs-6 pl0 pr0">
+                    <span class="value">{{ctrl.analytics.previous_views_count}}</span>
+                    <span class="title">Yesterday's profile views</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3 pull-right">
-        <following-card following="ctrl.following"></following-card>
+    <div class="col-md-3">
+        <div class="col-md-12 card card-pink">
+            <div class="panel-body text-center">
+                <span class="value">
+                    <i ng-if="ctrl.analytics.daily_views_count > ctrl.analytics.previous_views_count && ctrl.analytics.viewsPercentage > 0" class="fa fa-arrow-circle-up custom-green"></i>
+                    <i ng-if="ctrl.analytics.previous_views_count > ctrl.analytics.daily_views_count" class="fa fa-arrow-circle-down custom-red"></i>
+                    {{ctrl.analytics.viewsPercentage}}%</span>
+                <span class="title">Profile views</span>
+            </div>
+        </div>
     </div>
+
+    <!--<div class="col-md-6">-->
+        <!--<div class="col-md-12 card card-pink">-->
+            <!--<div class="panel-body text-center">-->
+                <!--<span class="value">Habits ft. Abhi Dijon</span>-->
+                <!--<span class="title">Most played</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-md-3 pull-right">-->
+        <!--<following-card following="ctrl.following"></following-card>-->
+    <!--</div>-->
 
 
     <!--<div class="col-md-4">-->

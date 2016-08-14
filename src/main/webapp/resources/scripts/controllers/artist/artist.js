@@ -14,7 +14,7 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
 
     function validateArtist () {
         ctrl.artistNotFound = true;
-        UserService.getArtist({username: $routeParams.permalink}).$promise.then(function (artist) {
+        UserService.getArtist({username: $routeParams.permalink, id: ctrl.currentUser.fb_id}).$promise.then(function (artist) {
             if(artist.id){
                 ctrl.artist = artist;
                 ctrl.artistNotFound = false;

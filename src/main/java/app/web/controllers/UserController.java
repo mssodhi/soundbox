@@ -1,7 +1,9 @@
 package app.web.controllers;
 
 import app.web.domain.User;
+import app.web.domain.Analytics;
 import app.web.services.SongService;
+import app.web.services.AnalyticsService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class UserController {
     @Autowired
     private SongService songService;
 
+    @Autowired
+    private AnalyticsService analyticsService;
+
     @RequestMapping(value = "getCurrent", method = RequestMethod.GET)
     public Object getCurrentUser(){
         return userService.getCurrentUser();
@@ -26,9 +31,19 @@ public class UserController {
         return userService.save(user);
     }
 
-    @RequestMapping(value = "getArtist/{username}", method = RequestMethod.GET)
-    public Object update(@PathVariable String username){
-        return userService.findByUsername(username);
+    @RequestMapping(value = "getArtist/{username}/user/{id}", method = RequestMethod.GET)
+    public Object getArtist(@PathVariable String username, @PathVariable String id){
+        User user = userService.getByFbId(id);
+        User artist = userService.findByUsername(username);
+        if(user != null && artist != null){
+            if(!user.getFb_id().equals(artist.getFb_id())){
+                Analytics analytics = analyticsService.getByUser(artist);
+                analytics.setDaily_views_count(analytics.getDaily_views_count() + 1);
+                analyticsService.save(analytics);
+            }
+            return artist;
+        }
+        return null;
     }
 
     @RequestMapping(value = "pic/user/{id}", method = RequestMethod.POST)
