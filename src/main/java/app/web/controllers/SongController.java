@@ -10,7 +10,6 @@ import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
 
 @RestController
 @RequestMapping(value = "/api/song/")
@@ -40,9 +39,8 @@ public class SongController {
     @RequestMapping(value = "{id}/content/save", method = RequestMethod.POST)
     public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
-        File file = multipartToFile(musicFile);
         String keyName = "songs/" + song.getIdentifier();
-        String url = awsHelper.put(file, keyName);
+        String url = awsHelper.put(musicFile, keyName);
         if(url.length() > 0){
             song.setSong_url(url);
             return songService.save(song);
@@ -53,9 +51,8 @@ public class SongController {
     @RequestMapping(value = "{id}/image/save", method = RequestMethod.POST)
     public void savePic(MultipartFile image, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
-        File file = multipartToFile(image);
         String keyName = "images/" + song.getIdentifier();
-        String imageUrl = awsHelper.put(file, keyName);
+        String imageUrl = awsHelper.put(image, keyName);
         if(imageUrl.length() > 0){
             song.setArtwork_url(imageUrl);
             songService.save(song);
@@ -73,11 +70,5 @@ public class SongController {
             analytics.setPlays_today(analytics.getPlays_today() + 1);
             analyticsService.save(analytics);
         }
-    }
-
-    private File multipartToFile(MultipartFile multipart) throws Exception {
-        File convFile = new File(multipart.getOriginalFilename());
-        multipart.transferTo(convFile);
-        return convFile;
     }
 }

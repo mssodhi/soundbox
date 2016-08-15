@@ -6,11 +6,13 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 
 @Component
@@ -25,12 +27,15 @@ public class AwsHelper {
     @Value("${aws.s3.secret.key}")
     private String secret_access_key;
 
-    public String put(File file, String keyName){
+    public String put(MultipartFile file, String keyName) throws Exception{
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key_id, secret_access_key);
         AmazonS3 s3client = new AmazonS3Client(awsCreds);
 
         try {
-            s3client.putObject(new PutObjectRequest(bucketName, keyName, file).withCannedAcl(CannedAccessControlList.PublicRead));
+            InputStream stream = file.getInputStream();
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, keyName, stream, new ObjectMetadata());
+            putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
+            s3client.putObject(putObjectRequest);
             URL fileUrl = s3client.getUrl(bucketName, keyName);
             return fileUrl.toString();
         } catch (AmazonServiceException ase) {
