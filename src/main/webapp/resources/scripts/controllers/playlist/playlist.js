@@ -15,12 +15,10 @@ angular.module('app').controller('PlaylistCtrl', function ($http, profile, Playl
     };
 
     function validateAndGetTracks() {
-        ctrl.tracks = [];
         if(ctrl.currentPlaylist.id){
-            for(var i = 0; i < ctrl.currentPlaylist.playlistSongs.length; i++){
-                var song = ctrl.currentPlaylist.playlistSongs[i].song;
-                ctrl.tracks.push(song);
-            }
+            ctrl.tracks = ctrl.currentPlaylist.playlistSongs.map(function (obj) {
+                return obj.song;
+            });
         }
     }
 

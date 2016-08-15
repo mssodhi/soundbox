@@ -11,9 +11,9 @@ angular.module('app').factory('MusicService', function (SongService, UserService
             return player;
         },
         setList: function(inpList) {
-            for(var i = 0; i < inpList.length; i++){
-                list[i] = inpList[i];
-            }
+            list = inpList.map(function (song) {
+                return song;
+            });
         },
         getQueue: function () {
             var index = list.indexOf(track);

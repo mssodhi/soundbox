@@ -24,15 +24,14 @@ angular.module('app').component("uploadMusic", {
         };
 
         $scope.$watchCollection('ctrl.files', function () {
-            ctrl.songs = [];
-            ctrl.files.forEach(function (file) {
+            ctrl.songs = ctrl.files.map(function (file) {
                 var song = {
                     title: file.name,
                     duration: file.$ngfDuration * 1000,
                     file: file
                 };
-                ctrl.songs.push(song);
-            })
+                return song;
+            });
         });
 
         ctrl.saveFile = function (song) {

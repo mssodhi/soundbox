@@ -14,10 +14,9 @@ angular.module('app').controller('ChartsCtrl', function (profile, ChartsService,
 
     ctrl.getTop = function (genre) {
         ChartsService.getByGenre({name: genre}).$promise.then(function (res) {
-            ctrl.tracks = [];
-            res.collection.forEach(function (song) {
-                ctrl.tracks.push(song.track);
-            })
+            ctrl.tracks = res.collection.map(function (song) {
+                return song.track;
+            });
         });
     };
 
