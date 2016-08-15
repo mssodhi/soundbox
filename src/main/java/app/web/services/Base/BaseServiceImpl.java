@@ -2,6 +2,7 @@ package app.web.services.Base;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -23,6 +24,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 
     static {
         MAPPER.registerModule(new JodaModule());
+        MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS , false);
     }
 
     @Override

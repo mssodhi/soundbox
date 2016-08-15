@@ -53,7 +53,6 @@ public class LikesController {
             Likes likes = new Likes();
             likes.setSong_id(song.getId());
             likes.setUser(user);
-            likes.setUser(user);
             return likesService.save(likes);
         }
 

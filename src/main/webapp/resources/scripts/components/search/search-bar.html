@@ -17,7 +17,8 @@
             <label class="label label-primary"> User </label>
         </span>
 
-        <img ng-src="{{match.model.user.pic_url}}" width="50" height="50">
+        <img ng-if="match.model.user.pic_url !== null" ng-src="{{match.model.user.pic_url}}" width="50" height="50">
+        <img ng-if="match.model.user.pic_url === null" src="resources/images/noImage.jpg" width="50" height="50">
         <span>{{match.model.user.username | limitTo: 40}} <span ng-if="match.model.user.username.length > 40">...</span></span>
     </a>
 
@@ -26,7 +27,8 @@
             <label class="label label-warning"> Song </label>
         </span>
 
-        <img ng-src="{{match.model.song.artwork_url}}" width="50" height="50">
+        <img ng-if="match.model.song.artwork_url !== null" ng-src="{{match.model.song.artwork_url}}" width="50" height="50">
+        <img ng-if="match.model.song.artwork_url === null" src="resources/images/noImage.jpg" width="50" height="50">
         <span>
             {{match.model.song.title | limitTo: 29}}
             <span ng-if="match.model.song.title.length > 29">...</span> -

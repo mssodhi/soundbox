@@ -36,7 +36,12 @@ angular.module('app').component("uploadMusic", {
         });
 
         ctrl.saveFile = function (song) {
-            SongService.save({id: ctrl.currentUser.fb_id}, song).$promise.then(function (res) {
+            song.showProgress = true;
+            var payload = {
+                title: song.title,
+                duration: song.file.$ngfDuration * 1000
+            };
+            SongService.save({id: ctrl.currentUser.fb_id}, payload).$promise.then(function (res) {
                 if(res.id){
                     uploadFile(res, song);
                 }
@@ -51,13 +56,14 @@ angular.module('app').component("uploadMusic", {
                     musicFile: song.file
                 }
             }).progress(function(evt) {
-                song.file.progress = Math.min(100, parseInt(100.0 *
-                    evt.loaded / evt.total));
+                song.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             }).success(function() {
                 if(song.pic){
+                    song.file.progress = 0;
                     uploadPic(res, song);
                 }else{
                     song.success = true;
+                    song.showProgress = false;
                 }
             });
         }
@@ -69,8 +75,11 @@ angular.module('app').component("uploadMusic", {
                 data: {
                     image: song.pic
                 }
+            }).progress(function (evt) {
+                song.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             }).success(function() {
                 song.success = true;
+                song.showProgress = false;
             });
         }
 

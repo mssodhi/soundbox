@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('MusicService', function ($timeout, SongService, $sce) {
+angular.module('app').factory('MusicService', function (SongService, UserService) {
     var player;
     var isPlaying;
     var track;
@@ -31,28 +31,31 @@ angular.module('app').factory('MusicService', function ($timeout, SongService, $
                 isPlaying = false;
             }
             if(song !== null && song.id !== null){
-                SongService.getSongContent({id: song.id}).$promise.then(function (res) {
-                    var int8Array = new Uint8Array(res.content.blob);
-                    var blob = new Blob([int8Array], {type: "audio/mp3"});
-                    player = document.createElement("AUDIO");
-                    player.src = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob));
-                    player.title = song.title;
-                    track = song;
-
-                    player.play();
-                    isPlaying = true;
-
-                    if(player.currentTime > 0){
-                        player.currentTime = 0;
+                UserService.getCurrentUser().$promise.then(function (res) {
+                    if(res.fb_id !== song.user.fb_id){
+                        SongService.updatePlaysCount({id: song.id}, res.fb_id);
                     }
-
-                    player.addEventListener("timeupdate", function () {
-                        if(player.currentTime === player.duration){
-                            player.pause();
-                            isPlaying = false;
-                        }
-                    })
                 });
+
+                player = document.createElement("AUDIO");
+                player.src = song.song_url;
+                player.title = song.title;
+                player.name = song.user.name;
+                track = song;
+
+                player.play();
+                isPlaying = true;
+
+                if(player.currentTime > 0){
+                    player.currentTime = 0;
+                }
+
+                player.addEventListener("timeupdate", function () {
+                    if(player.currentTime === player.duration){
+                        player.pause();
+                        isPlaying = false;
+                    }
+                })
             }else{
                 player = null;
                 track = null;

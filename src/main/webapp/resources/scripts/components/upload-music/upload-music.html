@@ -12,7 +12,7 @@
 
             <div class="pt10 col-xs-12 pl0 pr0">
                 <div class="col-xs-12 pl0 pr0 pb10" ng-repeat="song in ctrl.songs" ng-init="song.pic = null">
-                    <div class="col-xs-10 pl0 pr0">
+                    <div class="col-xs-9 pl0 pr0">
 
                         <div ng-if="song.pic === null && !song.success" ngf-drop class="drop-box pl0 pr0 pt15 pb0 col-xs-3" style="height: 75px; width: 75px;" ngf-select ng-model="song.pic" ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork</div>
                         <img ng-if="song.pic !== null" class="pl0 pr0 pull-left" ng-src="{{song.artwork_url}}" height="75px" width="75px">
@@ -28,9 +28,12 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-2 pl0 pr0 pt5">
-                        <button class="btn btn-primary" ng-if="!song.success" ng-click="ctrl.saveFile(song)">Save</button>
-                        <i class="fa fa-check-circle-o fa-2x custom-green" ng-if="song.success"></i>
+                    <div class="col-xs-3 pl0 pr0 pt5">
+                        <span ng-if="song.showProgress">
+                            <i ng-if="!song.success" class="fa fa-spinner faa-spin animated"></i><span> {{song.file.progress}} / 100 </span>
+                        </span>
+                        <i ng-if="song.success" class="fa fa-check-circle-o fa-2x custom-green"></i>
+                        <button ng-if="!song.success" class="btn btn-primary pull-right" ng-click="ctrl.saveFile(song)">Save</button>
                     </div>
                 </div>
             </div>

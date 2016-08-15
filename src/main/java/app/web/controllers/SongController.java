@@ -1,16 +1,16 @@
 package app.web.controllers;
 
+import app.web.domain.Analytics;
 import app.web.domain.Song;
-import app.web.domain.SongContent;
 import app.web.domain.User;
-import app.web.services.SongContentService;
+import app.web.helper.AwsHelper;
+import app.web.services.AnalyticsService;
 import app.web.services.SongService;
 import app.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.sql.rowset.serial.SerialBlob;
+import java.io.File;
 
 @RestController
 @RequestMapping(value = "/api/song/")
@@ -23,25 +23,10 @@ public class SongController {
     private SongService songService;
 
     @Autowired
-    private SongContentService songContentService;
+    private AwsHelper awsHelper;
 
-    @RequestMapping(value = "{id}/content/save", method = RequestMethod.POST)
-    public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
-        Song song = songService.findById(id);
-        SongContent songContent = new SongContent();
-        songContent.setContent(new SerialBlob(musicFile.getBytes()));
-        songContent.setSong(song);
-        songContentService.save(songContent);
-        return song;
-    }
-
-    @RequestMapping(value = "{id}/image/save", method = RequestMethod.POST)
-    public void savePic(MultipartFile image, @PathVariable Integer id) throws Exception {
-        Song song = songService.findById(id);
-        song.setArtwork(new SerialBlob(image.getBytes()));
-        songService.save(song);
-    }
-
+    @Autowired
+    private AnalyticsService analyticsService;
 
     @RequestMapping(value = "save/user/{id}", method = RequestMethod.POST)
     public Object saveSong(@RequestBody Song song, @PathVariable String id){
@@ -52,8 +37,47 @@ public class SongController {
         return songService.save(song);
     }
 
-    @RequestMapping(value = "{id}/getSongContent", method = RequestMethod.GET)
-    public Object getSong(@PathVariable Integer id) throws Exception {
-        return songContentService.getSongContentBySong(id);
+    @RequestMapping(value = "{id}/content/save", method = RequestMethod.POST)
+    public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
+        Song song = songService.findById(id);
+        File file = multipartToFile(musicFile);
+        String keyName = "songs/" + song.getIdentifier();
+        String url = awsHelper.put(file, keyName);
+        if(url.length() > 0){
+            song.setSong_url(url);
+            return songService.save(song);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "{id}/image/save", method = RequestMethod.POST)
+    public void savePic(MultipartFile image, @PathVariable Integer id) throws Exception {
+        Song song = songService.findById(id);
+        File file = multipartToFile(image);
+        String keyName = "images/" + song.getIdentifier();
+        String imageUrl = awsHelper.put(file, keyName);
+        if(imageUrl.length() > 0){
+            song.setArtwork_url(imageUrl);
+            songService.save(song);
+        }
+    }
+
+    @RequestMapping(value = "{id}/update", method = RequestMethod.PUT)
+    public void updatePlaysCount(@PathVariable Integer id, @RequestBody String fb_id){
+        Song song = songService.findById(id);
+        User user = userService.getByFbId(fb_id);
+        if(!user.getFb_id().equals(song.getUser().getFb_id())){
+            song.setPlays(song.getPlays() + 1);
+            songService.save(song);
+            Analytics analytics = analyticsService.getByUser(song.getUser());
+            analytics.setPlays_today(analytics.getPlays_today() + 1);
+            analyticsService.save(analytics);
+        }
+    }
+
+    private File multipartToFile(MultipartFile multipart) throws Exception {
+        File convFile = new File(multipart.getOriginalFilename());
+        multipart.transferTo(convFile);
+        return convFile;
     }
 }

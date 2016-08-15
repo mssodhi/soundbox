@@ -3,23 +3,12 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService, $location, UserService, $scope, $sce) {
+    controller: function (MusicService, PlaylistService, LikesService, $location, UserService) {
         var ctrl = this;
         ctrl.likes = [];
         ctrl.limit = 50;
         var sb_date, sb_title, sb_duration, sb_artist = false;
         var sb_plays = true;
-
-        $scope.$watchCollection('ctrl.tracks', function () {
-            ctrl.tracks.forEach(function (tr) {
-                tr.artwork_url = null;
-                if(tr.artwork){
-                    var int8Array = new Uint8Array(tr.artwork.blob);
-                    var blob = new Blob([int8Array], {type: "image/jpeg"});
-                    tr.artwork_url = $sce.trustAsResourceUrl(window.URL.createObjectURL(blob))
-                }
-            });
-        });
 
         ctrl.init = function () {
             UserService.getCurrentUser().$promise.then(function (res) {
@@ -28,16 +17,7 @@ angular.module('app').component("musicTable", {
                     ctrl.likes = response;
                 });
             });
-            registerScroll();
         };
-
-        function registerScroll() {
-            document.onscroll = function() {
-                if(document.getElementById('show-more') !== null){
-                    ctrl.limit += 50;
-                }
-            }
-        }
 
         ctrl.goToArtist = function (artist) {
             $location.path('/artist/'+artist.username);
@@ -72,13 +52,8 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.select = function (song) {
-            if(song.user.permalink){
-
-            } else {
-                MusicService.stream(song);
-                MusicService.setList(ctrl.tracks);
-            }
-
+            MusicService.stream(song);
+            MusicService.setList(ctrl.tracks);
         };
 
         ctrl.removeSongFromPlaylist = function (song) {
