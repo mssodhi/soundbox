@@ -14,14 +14,11 @@ import java.io.StringWriter;
 @RequestMapping(value = "/api/credentials/")
 public class CredentialsController {
 
-    @Value("${soundcloud.client.id}")
-    private String sc_client_id;
-
-    @Value("${soundcloud.client.secret}")
-    private String sc_client_secret;
-
-    @Value("${youtube.api.key}")
-    private String youtube_key;
+//    @Value("${soundcloud.client.id}")
+//    private String sc_client_id;
+//
+//    @Value("${soundcloud.client.secret}")
+//    private String sc_client_secret;
 
     @Value("${fb.app.id}")
     private String fb_app_id;
@@ -52,42 +49,23 @@ public class CredentialsController {
         }
     }
 
-    @RequestMapping(value = "getSoundCloud", method = RequestMethod.GET)
-    public String getSoundCloudCredentials() throws Exception {
-        try {
-            StringWriter sw = new StringWriter();
-
-            JsonFactory factory = new JsonFactory();
-            JsonGenerator json = factory.createGenerator(sw);
-            json.writeStartObject();
-            json.writeStringField("id", sc_client_id);
-            json.writeStringField("secret", sc_client_secret);
-            json.writeEndObject();
-            json.close();
-
-            return sw.toString();
-        } catch (Exception e) {
-            throw new DataBindingException(e);
-        }
-    }
-
-    @RequestMapping(value = "getYoutube", method = RequestMethod.GET)
-    public String getYoutubeCredentials() throws Exception {
-        try {
-            StringWriter sw = new StringWriter();
-
-            JsonFactory factory = new JsonFactory();
-            JsonGenerator json = factory.createGenerator(sw);
-            json.writeStartObject();
-            json.writeStringField("key", youtube_key);
-            json.writeEndObject();
-            json.close();
-
-            return sw.toString();
-        } catch (Exception e) {
-            throw new DataBindingException(e);
-        }
-    }
-
+//    @RequestMapping(value = "getSoundCloud", method = RequestMethod.GET)
+//    public String getSoundCloudCredentials() throws Exception {
+//        try {
+//            StringWriter sw = new StringWriter();
+//
+//            JsonFactory factory = new JsonFactory();
+//            JsonGenerator json = factory.createGenerator(sw);
+//            json.writeStartObject();
+//            json.writeStringField("id", sc_client_id);
+//            json.writeStringField("secret", sc_client_secret);
+//            json.writeEndObject();
+//            json.close();
+//
+//            return sw.toString();
+//        } catch (Exception e) {
+//            throw new DataBindingException(e);
+//        }
+//    }
 
 }

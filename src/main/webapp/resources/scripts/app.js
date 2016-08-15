@@ -104,13 +104,14 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'ng
     });
 
 angular.module('app').run(function ($window, $location, CredentialsService) {
-    CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
-        SC.initialize({
-            client_id: response.id,
-            secret_token: response.secret,
-            redirect_uri: 'http://localhost:8080/soundbox/#/'
-        });
-    });
+
+    // CredentialsService.getSoundCloudCredentials().$promise.then(function (response) {
+    //     SC.initialize({
+    //         client_id: response.id,
+    //         secret_token: response.secret,
+    //         redirect_uri: 'http://localhost:8080/soundbox/#/'
+    //     });
+    // });
 
     CredentialsService.getFacebookCredentials().$promise.then(function (res) {
         FB.init({

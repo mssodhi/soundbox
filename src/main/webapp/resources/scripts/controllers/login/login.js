@@ -64,11 +64,17 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 };
 
                 ctrl.updateUser = function () {
-                    UserService.update(ctrl.user).$promise.then(function (res) {
-                        if (res.id) {
-                            goToLanding();
-                        }
-                    })
+                    if(ctrl.isValid()){
+                        UserService.update(ctrl.user).$promise.then(function (res) {
+                            if (res.id) {
+                                goToLanding();
+                            }
+                        })
+                    }
+                };
+
+                ctrl.isValid = function () {
+                    return ctrl.user.username && ctrl.user.name && !ctrl.usernameTaken && ctrl.user.email;
                 };
 
                 ctrl.login = function () {

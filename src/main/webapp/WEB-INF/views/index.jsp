@@ -26,62 +26,62 @@
 
 <%-- Third part injects --%>
 <script src="resources/js/fb.js"></script>
-<script src="resources/js/sc-sdk-3.1.1.js"></script>
 <script src="resources/js/lodash.min.js"></script>
 <script src="resources/js/moment.min.js"></script>
 <script src="resources/js/ui-bootstrap-1.3.3.min.js"></script>
 <script src="resources/js/ng-file-upload.min.js"></script>
+<%--<script src="resources/js/sc-sdk-3.1.1.js"></script>--%>
 <%--<script src="resources/js/MD5.js"></script>--%>
 <%-- Third Party injects --%>
 
-<%-- Sandbox --%>
+<%-- SoundBox --%>
 <script src="resources/scripts/app.js"></script>
 
 <%-- Services --%>
-<script src="resources/scripts/services/permission.js"></script>
-<script src="resources/scripts/services/user.service.js"></script>
-<script src="resources/scripts/services/credentials.service.js"></script>
-<script src="resources/scripts/services/music-service.js"></script>
-<script src="resources/scripts/services/follow.service.js"></script>
-<script src="resources/scripts/services/playlist.service.js"></script>
-<script src="resources/scripts/services/login.service.js"></script>
-<script src="resources/scripts/services/settings.service.js"></script>
-<script src="resources/scripts/services/likes.service.js"></script>
-<script src="resources/scripts/services/recommend.service.js"></script>
-<script src="resources/scripts/services/charts.service.js"></script>
-<script src="resources/scripts/services/page.service.js"></script>
-<script src="resources/scripts/services/song.service.js"></script>
-<script src="resources/scripts/services/search.service.js"></script>
 <script src="resources/scripts/services/analytics.service.js"></script>
+<script src="resources/scripts/services/charts.service.js"></script>
+<script src="resources/scripts/services/credentials.service.js"></script>
+<script src="resources/scripts/services/follow.service.js"></script>
+<script src="resources/scripts/services/likes.service.js"></script>
+<script src="resources/scripts/services/login.service.js"></script>
+<script src="resources/scripts/services/music-service.js"></script>
+<script src="resources/scripts/services/page.service.js"></script>
+<script src="resources/scripts/services/permission.js"></script>
+<script src="resources/scripts/services/playlist.service.js"></script>
+<script src="resources/scripts/services/recommend.service.js"></script>
+<script src="resources/scripts/services/search.service.js"></script>
+<script src="resources/scripts/services/settings.service.js"></script>
+<script src="resources/scripts/services/song.service.js"></script>
+<script src="resources/scripts/services/user.service.js"></script>
 <%-- Services --%>
 
 <%-- Directive --%>
-<script src="resources/scripts/directives/ng-enter.js"></script>
 <script src="resources/scripts/directives/auto-focus.js"></script>
 <script src="resources/scripts/directives/circle-check.js"></script>
 <script src="resources/scripts/directives/circle-error.js"></script>
+<script src="resources/scripts/directives/ng-enter.js"></script>
 <%-- Directive --%>
 
 <%-- Components --%>
-<script src="resources/scripts/components/music-player/music-player.js"></script>
-<script src="resources/scripts/components/following-card/following-card.js"></script>
-<script src="resources/scripts/components/playlist/playlist-card.js"></script>
-<script src="resources/scripts/components/search/search-bar.js"></script>
-<script src="resources/scripts/components/music-table/music-table.js"></script>
 <script src="resources/scripts/components/common/common-modal.js"></script>
 <script src="resources/scripts/components/dashboard/dashboard.js"></script>
+<script src="resources/scripts/components/following-card/following-card.js"></script>
+<script src="resources/scripts/components/music-player/music-player.js"></script>
+<script src="resources/scripts/components/music-table/music-table.js"></script>
+<script src="resources/scripts/components/playlist-card/playlist-card.js"></script>
+<script src="resources/scripts/components/search/search-bar.js"></script>
 <script src="resources/scripts/components/upload-music/upload-music.js"></script>
 <%-- Components --%>
 
 <%-- Controllers --%>
-<script src="resources/scripts/controllers/nav/nav.js"></script>
-<script src="resources/scripts/controllers/landing/landing.js"></script>
-<script src="resources/scripts/controllers/login/login.js"></script>
 <script src="resources/scripts/controllers/artist/artist.js"></script>
-<script src="resources/scripts/controllers/playlist/playlist.js"></script>
-<script src="resources/scripts/controllers/settings/settings.js"></script>
 <script src="resources/scripts/controllers/browse/browse.js"></script>
 <script src="resources/scripts/controllers/charts/charts.js"></script>
+<script src="resources/scripts/controllers/landing/landing.js"></script>
+<script src="resources/scripts/controllers/login/login.js"></script>
+<script src="resources/scripts/controllers/nav/nav.js"></script>
+<script src="resources/scripts/controllers/playlist/playlist.js"></script>
+<script src="resources/scripts/controllers/settings/settings.js"></script>
 <%-- Controllers --%>
 
 <script>

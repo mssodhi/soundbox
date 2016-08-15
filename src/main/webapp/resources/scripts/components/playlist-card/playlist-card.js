@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app').component('playlistCard', {
-    templateUrl: 'resources/scripts/components/playlist/playlist-card.html',
+    templateUrl: 'resources/scripts/components/playlist-card/playlist-card.html',
     controllerAs: 'ctrl',
     controller: function ($route, PlaylistService, $location, UserService) {
         var ctrl = this;

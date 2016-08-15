@@ -16,24 +16,9 @@ angular.module('app').controller('BrowseCtrl', function ($http, profile, Recomme
     };
 
     function getRecommendations() {
-        RecommendService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (recommendations) {
-            for(var i = 0; i < recommendations.length; i++){
-                SC.get('/search/', {q: recommendations[i], limit: 20}).then(function (res) {
-                    // three objs from each collection
-                    var y = 0;
-                    for(var a = 0; (a === res.collection.length || y < 1 )&& ctrl.tracks.length < limit; a++){
-                        var obj = res.collection[a];
-                        if(obj.kind === 'track'){
-                            if(!_.some(ctrl.tracks, obj)){
-                                ctrl.tracks.push(obj);
-                                y++;
-                            }
-                        }
-                    }
-                });
-            }
-        })
-
+        // RecommendService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (recommendations) {
+        //
+        // })
     }
 
     function getPlaylists() {
