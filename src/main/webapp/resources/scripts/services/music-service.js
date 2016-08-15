@@ -25,7 +25,10 @@ angular.module('app').factory('MusicService', function ($timeout, SongService, $
         },
         stream: function (song) {
             if(isPlaying){
-                player.pause();
+                if(player){
+                    player.pause();
+                }
+                isPlaying = false;
             }
             if(song !== null && song.id !== null){
                 SongService.getSongContent({id: song.id}).$promise.then(function (res) {
