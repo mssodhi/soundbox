@@ -33,20 +33,23 @@ angular.module('app').controller('LoginCtrl', function ($location, profile, $uib
                 function loginUser() {
                     FB.api('/me', function (response) {
                         LoginService.checkUser({uid: response.id}, response.name).$promise.then(function (user) {
-                            if (user.id && user.pic_url === null) {
-                                FB.api('/' + response.id + '/picture',
-                                    function (response) {
-                                        if (response && !response.error) {
-                                            UserService.setPic({id: user.fb_id}, response.data.url);
+                            if(user.id){
+                                if(user.pic_url === null){
+                                    FB.api('/' + response.id + '/picture', {height: 200, width: 200},
+                                        function (response) {
+                                            if (response && !response.error) {
+                                                user.pic_url = response.data.url;
+                                                UserService.setPic({id: user.fb_id}, user.pic_url);
+                                            }
                                         }
-                                    }
-                                );
-                            }
-                            if (!user.username) {
-                                ctrl.user = user;
-                                ctrl.showLoginForm = true;
-                            } else {
-                                goToLanding();
+                                    );
+                                }
+                                if (!user.username) {
+                                    ctrl.user = user;
+                                    ctrl.showLoginForm = true;
+                                } else {
+                                    goToLanding();
+                                }
                             }
                         });
                     });
