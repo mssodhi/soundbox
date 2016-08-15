@@ -27,12 +27,16 @@ public class AwsHelper {
     @Value("${aws.s3.secret.key}")
     private String secret_access_key;
 
+    @Value("${aws.s3.key.prefix}")
+    private String keyPrefix;
+
     public String put(MultipartFile file, String keyName) throws Exception{
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key_id, secret_access_key);
         AmazonS3 s3client = new AmazonS3Client(awsCreds);
 
         try {
             InputStream stream = file.getInputStream();
+            keyName = keyPrefix + keyName;
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, keyName, stream, new ObjectMetadata());
             putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
             s3client.putObject(putObjectRequest);
