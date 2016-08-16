@@ -26,6 +26,8 @@ public class CommentsController {
     @RequestMapping(value = "song/{id}", method = RequestMethod.POST)
     public Object postComment(@PathVariable Integer id, @RequestBody Comments comment){
         Song song = songService.findById(id);
+        song.setComments_length(song.getComments_length() + 1);
+        song = songService.save(song);
         comment.setSong(song);
         return commentsService.save(comment);
     }

@@ -1,12 +1,14 @@
 package app.web.domain;
 
+import app.web.domain.Base.AuditableEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "comments")
-public class Comments {
+public class Comments extends AuditableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,14 +28,6 @@ public class Comments {
     @JoinColumn(foreignKey = @ForeignKey(name ="FK_Artist_User"), name = "author_id", referencedColumnName = "id")
     @JsonProperty
     private User author;
-
-    public Comments(User author, String text, Song song){
-        this.author = author;
-        this.text = text;
-        this.song = song;
-    }
-
-    public Comments(){}
 
     public Integer getId() {
         return id;

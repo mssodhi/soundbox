@@ -46,6 +46,10 @@ public class Song extends AuditableEntity implements Serializable{
     @JsonProperty
     private String song_url;
 
+    @Column(name = "comments_length", nullable = false)
+    @JsonProperty
+    private Integer comments_length = 0;
+
     @Column(name = "identifier", nullable = false)
     @JsonProperty
     private String identifier = UUID.randomUUID().toString();
@@ -112,6 +116,14 @@ public class Song extends AuditableEntity implements Serializable{
 
     public void setSong_url(String song_url) {
         this.song_url = song_url;
+    }
+
+    public Integer getComments_length() {
+        return comments_length;
+    }
+
+    public void setComments_length(Integer comments_length) {
+        this.comments_length = comments_length;
     }
 
     public String getIdentifier() {
