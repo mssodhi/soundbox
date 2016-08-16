@@ -9,26 +9,35 @@
     </span>
 </div>
 
-<div class="song-list" ng-if="false">
-    <div class="panel pl0 pr0 col-xs-12" ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id" title="{{song.title}}"
-         ng-class="{button: !ctrl.isPlaying(song), trackplaying: ctrl.isPlaying(song)}">
-        <div class="panel-body" ng-click="ctrl.select(song)">
+<div class="song-list" ng-if="true">
+    <div class="panel pl0 pr0 col-xs-5 ml10 mr10 mt15" ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id" title="{{song.title}}"
+         ng-class="{button: !ctrl.isPlaying(song)}">
+        <div class="panel-body col-md-7" ng-click="ctrl.select(song)">
             <img ng-if="song.artwork_url !== null" class="" ng-src="{{song.artwork_url}}">
             <img ng-if="song.artwork_url === null" class="" src="resources/images/noImage.jpg">
 
-            <div class="info pull-left col-md-8 col-sm-9 col-xs-12">
-                <span class="title">{{song.title}}</span>
-                <span class="artist">{{song.user.username}}</span>
+            <div class="info pull-left pt10" style="width: 69.6%;">
+                <span class="title">{{song.title}}</span><br>
+                <span class="artist"><a href ng-click="ctrl.goToArtist(song.user)">{{song.user.username}}</a></span>
                 <p>{{ctrl.milliToTime(song.duration)}}</p>
             </div>
         </div>
-        <!--<div class="actions pull-right col-md-3 col-xs-12 pt15">-->
-            <!--<button class="btn-primary btn pull-right">View artist</button>-->
-            <!--<a ng-click="ctrl.likeSong(song)" href>-->
-                <!--<i ng-if="ctrl.isLiked(song)" class="fa fa-thumbs-up"></i>-->
-                <!--<i ng-if="!ctrl.isLiked(song)" class="fa fa-thumbs-o-up" style="padding-right: 2px; color: black;"></i>-->
-            <!--</a>-->
-        <!--</div>-->
+        <div class="actions col-md-5 button">
+            <div class="col-xs-6 pl0 pr0" style="background-color: #ffa726">
+                <span>View Artist</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0 button" ng-click="ctrl.likeSong(song)" style="background-color: #00bcd4">
+                <span ng-if="ctrl.isLiked(song)">Unlike</span>
+                <span ng-if="!ctrl.isLiked(song)">Like</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0 button" ng-click="showComments = !showComments" style="background-color: #ba68c8">
+                <span>Comments</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0" style="background-color: #8bc34a">
+                <span>More</span>
+            </div>
+        </div>
+        <comments-card song="song" show="showComments"></comments-card>
     </div>
 </div>
 

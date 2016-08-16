@@ -64,6 +64,7 @@
 <%-- Directive --%>
 
 <%-- Components --%>
+<script src="resources/scripts/components/comments/comments-card.js"></script>
 <script src="resources/scripts/components/common/common-modal.js"></script>
 <script src="resources/scripts/components/dashboard/dashboard.js"></script>
 <script src="resources/scripts/components/following-card/following-card.js"></script>

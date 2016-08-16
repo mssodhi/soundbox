@@ -20,7 +20,7 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.goToArtist = function (artist) {
-            $location.path('/artist/'+artist.username);
+            $location.path('/artist/' + artist.username);
         };
 
         ctrl.likeSong = function (song) {

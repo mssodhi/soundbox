@@ -1,0 +1,16 @@
+<div ng-init="ctrl.init()">
+    <div ng-if="ctrl.show" class="col-xs-12">
+        <button class="btn btn-primary" ng-click="showForm = true">Add comment</button>
+        <div ng-if="showForm">
+            <form class="form-register">
+                <span class="pull-left">Comment: </span>
+                <textarea rows="3" ng-model="comment.text" class="form-control" maxlength="1000"></textarea>
+            </form>
+            <button class="btn btn-soundcloud" ng-click="ctrl.postComment(comment.text)" ng-disabled="!comment.text">Post Comment</button>
+        </div>
+        <div ng-repeat="comment in ctrl.comments">
+            <span>{{comment.text}}</span><br>
+            <span>{{comment.author.username}}</span>
+        </div>
+    </div>
+</div>

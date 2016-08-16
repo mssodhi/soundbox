@@ -1999,7 +1999,13 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 /* Artist page card css end */
 
 .song-list .panel-body{
-    padding: 10px;
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    padding: 0;
+    background-color: rgb(228,102,100);
+}
+
+.song-list .panel-body:hover{
+    background-color: rgb(218,102,100);
 }
 
 .song-list .panel .panel-body img{
@@ -2010,23 +2016,46 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 
 .song-list .panel .panel-body .info .title{
-    margin-top: 5px;
     display: inline-block;
-    font-size: large;
+    font-family: inherit;
+    font-size: 1.5em;
+    color: white;
+    font-weight: 200;
 }
 
-.song-list .panel .panel-body .info .artist{
-    display: block;
+.song-list .panel .panel-body .info .artist a{
     font-size: small;
-    color: gray;
+    color: honeydew;
+}
+
+.song-list .panel .panel-body .info .artist a:hover{
+    color: lightgray;
 }
 
 .song-list .panel .panel-body p{
     display: block;
     font-size: small;
-    color: black;
+    color: white;
+    font-style: oblique;
 }
 
+.song-list .panel .actions{
+    padding: 0;
+}
+
+.song-list .panel .actions div{
+    height: 45px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    padding-top: 4px;
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    font-size: 1.4em;
+}
+
+.song-list .panel .actions div:hover{
+    opacity: .8;
+}
 
 .side-card-main{
     max-height: 460px;
