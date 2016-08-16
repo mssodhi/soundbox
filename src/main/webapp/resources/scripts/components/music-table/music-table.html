@@ -10,9 +10,8 @@
 </div>
 
 <div class="song-list" ng-if="true">
-    <div class="panel pl0 pr0 col-xs-5 ml10 mr10 mt15" ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id" title="{{song.title}}"
-         ng-class="{button: !ctrl.isPlaying(song)}">
-        <div class="panel-body col-md-7" ng-click="ctrl.select(song)">
+    <div class="panel pl0 pr0 col-xs-5 ml10 mr10 mt15" ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id" title="{{song.title}}">
+        <div class="panel-body col-md-7" ng-click="ctrl.select(song)" ng-class="{button: !ctrl.isPlaying(song)}">
             <img ng-if="song.artwork_url !== null" class="" ng-src="{{song.artwork_url}}">
             <img ng-if="song.artwork_url === null" class="" src="resources/images/noImage.jpg">
 

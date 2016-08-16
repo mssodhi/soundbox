@@ -19,7 +19,7 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
 
     function getMusicByUser(user) {
         UserService.getMusicByUser({id: user.fb_id}).$promise.then(function (response) {
-            response.map(function (track) {
+            response.forEach(function (track) {
                 ctrl.tracks.push(track);
             });
         });
@@ -28,7 +28,7 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
     function getFollowing() {
         FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
             ctrl.following = res;
-            res.map(getMusicByUser);
+            res.forEach(getMusicByUser);
         });
     }
 
