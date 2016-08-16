@@ -21,8 +21,8 @@
                 <p>{{ctrl.milliToTime(song.duration)}}</p>
             </div>
         </div>
-        <div class="actions col-md-5 button">
-            <div class="col-xs-6 pl0 pr0" style="background-color: #ffa726">
+        <div class="actions col-md-5">
+            <div class="col-xs-6 pl0 pr0 button" ng-click="ctrl.goToArtist(song.user)" style="background-color: #ffa726">
                 <span>View Artist</span>
             </div>
             <div class="col-xs-6 pl0 pr0 button" ng-click="ctrl.likeSong(song)" style="background-color: #00bcd4">
@@ -32,7 +32,7 @@
             <div class="col-xs-6 pl0 pr0 button" ng-click="showComments = !showComments" style="background-color: #ba68c8">
                 <span>Comments</span>
             </div>
-            <div class="col-xs-6 pl0 pr0" style="background-color: #8bc34a">
+            <div class="col-xs-6 pl0 pr0 button" ng-click="song.showMore = !song.showMore" style="background-color: #8bc34a">
                 <span>More</span>
             </div>
         </div>
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<table class="col-md-12 table mt15 pl0 pr0">
+<table class="col-md-12 table mt15 pl0 pr0" hidden>
     <thead class="custom-font">
         <tr>
             <th class="hidden-xs" style="padding-bottom: 13px"> <span class="label label-success">{{ctrl.tracks.length}}</span></th>

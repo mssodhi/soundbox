@@ -1,8 +1,11 @@
 <div ng-init="ctrl.init()">
     <div ng-if="ctrl.show" class="col-xs-12 pl0 pr0">
+        <span class="pull-left pt5 pl5 col-xs-12" style="border-bottom: 1px dashed #eee">
+                {{ctrl.song.comments_length}} comment<span ng-if="ctrl.song.comments_length !== 1">s</span>
+            </span>
         <div ng-repeat="comment in ctrl.comments track by comment.id" class="col-xs-12 pl0 pr0" style="border-bottom: 1px solid #eee">
             <div class="comment col-xs-12" style="padding: 5px">
-                <img ng-src="comment.author.pic_url" height="73px" width="73px" ng-if="comment.author.pic_url !== null">
+                <img ng-src="{{comment.author.pic_url}}" height="73px" width="73px" ng-if="comment.author.pic_url !== null">
                 <img src="resources/images/noImage.jpg" height="73px" width="73px" ng-if="comment.author.pic_url === null">
                 <div class="info pull-right col-xs-10 pl0 pr0">
                     <span>{{comment.text}}</span><br>

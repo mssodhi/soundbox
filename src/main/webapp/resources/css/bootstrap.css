@@ -1853,7 +1853,7 @@ and (-webkit-min-device-pixel-ratio: 2){
         font-size: 40px !important;
     }
     .page-one{
-        height: 677px !important;
+        /*height: 677px !important;*/
     }
 
     .brand{
@@ -1933,7 +1933,7 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
         font-size: 50px !important;
     }
     .page-one{
-        height: 1034px !important;
+        /*height: 1034px !important;*/
     }
 }
 
@@ -2124,7 +2124,7 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 
 .login-page{
-    margin: -30px 0 0 0;
+    margin: 0;
     /*height: 100%;*/
     /*width: 100%;*/
     /*background-color: #0f4bac;*/
@@ -2163,12 +2163,14 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 }
 
 .page-one{
-    height: 101%;
-    background: url('../images/desk.jpg') no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    /*height: auto;*/
+    min-height: 100%;
+    background-color: rgb(228,102,100);
+    /*background: url('../images/desk.jpg') no-repeat center center;*/
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
     /*-webkit-filter: blur(5px);*/
     /*-moz-filter: blur(5px);*/
     /*-o-filter: blur(5px);*/
@@ -2189,12 +2191,15 @@ and (max-device-width : 1024px)  { /* STYLES GO HERE */
 
 .landing-main-text .headliner{
     font-size: 175px;
-    color: coral;
+    color: white;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 100;
 }
 .landing-main-text .subliner{
     color: deepskyblue;
     font-size: 50px;
-    margin-top: -30px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 300;
 
 }
 
