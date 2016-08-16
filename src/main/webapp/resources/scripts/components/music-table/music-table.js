@@ -37,13 +37,9 @@ angular.module('app').component("musicTable", {
         };
 
         ctrl.addSongToPlaylist = function (song, playlist) {
-            var duplicate = null;
-            for(var i = 0; i < playlist.playlistSongs.length; i++){
-                if(parseInt(playlist.playlistSongs[i].song.id) === parseInt(song.id)){
-                    duplicate = true;
-                    break;
-                }
-            }
+            var duplicate = _.some(playlist.playlistSongs, function (playlistSong) {
+                return playlistSong.id === song.id;
+            });
             if(!duplicate) {
                 PlaylistService.addSongToPlaylist({songId: song.id}, playlist).$promise.then(function (response) {
                     playlist.playlistSongs = response.playlistSongs;

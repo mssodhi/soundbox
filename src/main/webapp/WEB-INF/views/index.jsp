@@ -40,6 +40,7 @@
 <%-- Services --%>
 <script src="resources/scripts/services/analytics.service.js"></script>
 <script src="resources/scripts/services/charts.service.js"></script>
+<script src="resources/scripts/services/comments.service.js"></script>
 <script src="resources/scripts/services/credentials.service.js"></script>
 <script src="resources/scripts/services/follow.service.js"></script>
 <script src="resources/scripts/services/likes.service.js"></script>
