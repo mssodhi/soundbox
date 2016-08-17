@@ -26,7 +26,7 @@ angular.module('app').component("musicTable", {
         ctrl.likeSong = function (song) {
             LikesService.toggleLike({songId: song.id, userId: ctrl.currentUser.fb_id}).$promise.then(function (response) {
                 if(ctrl.isLiked(song)){
-                    var ind = _.findIndex(ctrl.likes, {id: song.id});
+                    var ind = _.findIndex(ctrl.likes, {song_id: song.id});
                     ctrl.likes.splice(ind,1);
                 }else if(response.id){
                     ctrl.likes.push(response);
