@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
-import java.net.URL;
 
 @Component
 public class AwsHelper {
@@ -30,18 +29,17 @@ public class AwsHelper {
     @Value("${aws.s3.key.prefix}")
     private String keyPrefix;
 
-    public String put(MultipartFile file, String keyName) throws Exception{
+    public String put(MultipartFile file, String keyName, ObjectMetadata objectMetadata) throws Exception{
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key_id, secret_access_key);
         AmazonS3 s3client = new AmazonS3Client(awsCreds);
 
         try {
             InputStream stream = file.getInputStream();
             keyName = keyPrefix + keyName;
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, keyName, stream, new ObjectMetadata());
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, keyName, stream, objectMetadata);
             putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
             s3client.putObject(putObjectRequest);
-            URL fileUrl = s3client.getUrl(bucketName, keyName);
-            return fileUrl.toString();
+            return s3client.getUrl(bucketName, keyName).toString();
         } catch (AmazonServiceException ase) {
             System.out.println("Caught an AmazonServiceException, which " +
                     "means your request made it " +

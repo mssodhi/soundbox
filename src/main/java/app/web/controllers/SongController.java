@@ -7,6 +7,7 @@ import app.web.helper.AwsHelper;
 import app.web.services.AnalyticsService;
 import app.web.services.SongService;
 import app.web.services.UserService;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +41,9 @@ public class SongController {
     public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
         String keyName = "songs/" + song.getIdentifier();
-        String url = awsHelper.put(musicFile, keyName);
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType("audio/mpeg");
+        String url = awsHelper.put(musicFile, keyName, objectMetadata);
         if(url.length() > 0){
             song.setSong_url(url);
             return songService.save(song);
@@ -52,7 +55,9 @@ public class SongController {
     public void savePic(MultipartFile image, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
         String keyName = "images/" + song.getIdentifier();
-        String imageUrl = awsHelper.put(image, keyName);
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType("image/jpeg");
+        String imageUrl = awsHelper.put(image, keyName, objectMetadata);
         if(imageUrl.length() > 0){
             song.setArtwork_url(imageUrl);
             songService.save(song);

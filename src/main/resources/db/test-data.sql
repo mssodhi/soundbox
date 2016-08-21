@@ -1,6 +1,6 @@
 INSERT INTO soundbox.user (`id`, `name`, `email`,`created_date`, `last_modified_date`, `fb_id`, `username`, `songs_length`, `followers`, `following`) VALUES ('1', 'Demo', 'a', '2016-06-05 12:47:00', '2016-06-05 12:47:00', '1209', 'demo', 1, 0, 0)
 
-INSERT INTO soundbox.song (`title`, `active`, `duration`, `plays`, `likes`, `comments_length`, `user_id`, `identifier`, `created_date`, `last_modified_date`) VALUES ('First', 1, 1200, 0, 0, 0, 1, 21, '2016-06-05 12:47:00', '2016-06-05 12:47:00')
+INSERT INTO soundbox.song (`title`, `active`, `duration`, `plays`, `likes`, `comments_length`, `user_id`, `identifier`, `created_date`, `last_modified_date`, `song_url`) VALUES ('First', 1, 1200, 0, 0, 0, 1, 21, '2016-06-05 12:47:00', '2016-06-05 12:47:00', 'https://s3-us-west-1.amazonaws.com/soundbox-prod/local/songs/testsong')
 INSERT INTO soundbox.analytics (`id`, `user_id`, `daily_views_count`, `previous_views_count`, `plays_today`, `reset_date`) VALUES (1, 1, 0, 0, 0, '2016-08-14 00:00:00')
 
 INSERT INTO soundbox.genres (`id`, `name`, `value`) VALUES ('1', 'All', 'all-music')

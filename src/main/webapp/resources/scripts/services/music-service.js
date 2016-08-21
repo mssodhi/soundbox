@@ -40,12 +40,11 @@ angular.module('app').factory('MusicService', function (SongService, UserService
                 player = document.createElement("AUDIO");
                 player.setAttribute("id", "soundbox-player");
                 player.setAttribute("controls", "true");
-                player.setAttribute("msAudioCategory", "backgroundcapablemedia");
                 player.setAttribute("src", song.song_url);
                 player.setAttribute("title", song.title);
                 player.setAttribute("name", song.user.name);
                 player.setAttribute("autoplay", "true");
-
+                player.setAttribute("type", "audio/mpeg");
                 player.play();
                 track = song;
                 isPlaying = true;
