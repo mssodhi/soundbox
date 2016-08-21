@@ -5,7 +5,8 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-    font-family: sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 300;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -1412,8 +1413,9 @@ html {
 }
 
 body {
-    font-family: kepler-std,serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 15px;
+    font-weight: 300;
     line-height: 1.42857143;
     color: #333;
     background-color: #e9eaed;
@@ -2242,12 +2244,6 @@ a#loginBtn:hover{
 html, body {
     height: 100%;
     margin: 0;
-}
-
-.custom-font {
-    font-family: kepler-std,serif;
-    font-style: normal;
-    /*font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;*/
 }
 
 .custom-white {

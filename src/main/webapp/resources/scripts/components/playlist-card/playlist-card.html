@@ -2,7 +2,7 @@
     <div class="side-card-main">
         <!-- Header -->
         <div class="card-purple panel-body" ng-if="!ctrl.showSearch" style="height: 68px">
-            <div class="pull-left custom-font pt5">
+            <div class="pull-left pt5">
                 <span class="pl10" style="font-size: 18px">Playlists ({{ctrl.playlists.length}})</span>
             </div>
             <div class="pull-right pt5">
@@ -51,7 +51,7 @@
         <!-- Message when there are no playlists -->
         <div ng-if="!ctrl.showPlaylistForm && ctrl.playlists.length === 0">
             <div class="panel-body col-md-12 text-center">
-                <h4 class="custom-font"> You have no playlists</h4>
+                <span> You have no playlists</span>
             </div>
         </div>
     </div>

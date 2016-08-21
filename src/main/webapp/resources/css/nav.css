@@ -135,7 +135,8 @@
 
 .project a{
     color: #FFFFFF;
-    font-weight: lighter;
+    font-weight: 100;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .app:hover, .project:hover{
     /*color: gainsboro;*/
@@ -149,7 +150,7 @@
 .navbar-default .navbar-header .app{
     color: royalblue;
     font-weight: 500;
-    padding: 13px 10px 16px 10px;
+    padding: 5px 10px 0 10px;
     font-family: fantasy;
     font-size: 30px;
     height: 57px;
@@ -157,6 +158,8 @@
 
 .app a{
     color: whitesmoke;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 100;
 }
 
 /* for iphone only*/
@@ -255,9 +258,8 @@ and (max-device-width : 1024px)  {
 }
 
 .navbar-default .navbar-header .brand, .navbar-default .navbar-header .project {
-    padding: 13px 10px 16px 10px;
     font-size: 30px;
-    font-family: fantasy;
+    padding: 5px 10px 0px 10px;
     height: 57px;
 }
 
@@ -284,7 +286,8 @@ and (max-device-width : 1024px)  {
 
 .navbar-default .navbar-right a {
     color: dodgerblue;
-    font-family: fantasy;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 100;
     display: inline-block;
     vertical-align: top;
 }

@@ -64,7 +64,7 @@
         <!-- Table -->
         <div class="col-md-4" ng-if="!ctrl.artist_grid && ctrl.following.length > 0">
             <table class="col-md-12 table mt15 pl0 pr0">
-                <thead class="custom-font">
+                <thead>
                 <tr>
                     <th class="hidden-xs">#</th>
                     <th class="button">Name</th>
@@ -113,7 +113,7 @@
         <div ng-if="ctrl.pl_grid">
             <div class="col-md-2 col-xs-12 col-sm-4 pt15 pb10" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                 <div class="card col-xs-12 text-center button mb0" ng-click="ctrl.goToPlaylist(playlist)" style="background-color: deepskyblue">
-                    <h4 class="custom-font">
+                    <h4>
                         <a ng-href="#/playlist/{{playlist.id}}" style="color: white">{{playlist.name | limitTo: 70}}</a>
                         <span ng-if="playlist.name > 70"> . . . </span>
                     </h4>
@@ -133,7 +133,7 @@
         <!-- Table -->
         <div class="col-md-4" ng-if="!ctrl.pl_grid && ctrl.playlists.length > 0">
             <table class="col-md-12 table mt15 pl0 pr0 pb10">
-                <thead class="custom-font">
+                <thead>
                 <tr>
                     <th class="hidden-xs">#</th>
                     <th class="button">Name</th>

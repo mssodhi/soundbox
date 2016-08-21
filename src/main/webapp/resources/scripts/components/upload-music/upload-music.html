@@ -23,8 +23,9 @@
                             <span class="pull-left" ng-if="song.success">{{song.title}}</span>
                         </div>
 
-                        <div class="col-md-9 col-xs-8 pt5 pb5" style="display: inline-block">
+                        <div class="col-md-9 col-xs-8 pt5 pb5" style="display: inline-block"  ng-init="song.active = true || song.active">
                             <span class="pull-left">{{ctrl.milliToTime(song.duration)}}</span>
+                            <a class="pull-left pl10" style="padding-top: 3px" href ng-click="song.active = !song.active"><i class="fa fa-toggle-on" ng-if="song.active"></i><i class="fa fa-toggle-off" ng-if="!song.active"></i></a>
                         </div>
                     </div>
 

@@ -54,6 +54,10 @@ public class Song extends AuditableEntity implements Serializable{
     @JsonProperty
     private String identifier = UUID.randomUUID().toString();
 
+    @Column(name = "active", nullable = false)
+    @JsonProperty
+    private Boolean active = true;
+
     public Integer getId() {
         return id;
     }
@@ -132,5 +136,13 @@ public class Song extends AuditableEntity implements Serializable{
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

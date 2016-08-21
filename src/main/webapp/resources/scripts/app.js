@@ -26,6 +26,13 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'ng
                         return PermissionService.permissionCheck();
                     }
                 }
+            }).when('/upload', {
+                templateUrl: 'resources/scripts/controllers/upload/upload-view.html',
+                resolve:{
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    }
+                }
             }).when('/charts', {
                 templateUrl: 'resources/scripts/controllers/charts/charts.html',
                 controller: 'ChartsCtrl',

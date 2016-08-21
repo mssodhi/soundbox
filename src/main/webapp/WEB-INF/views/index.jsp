@@ -38,6 +38,7 @@
 <script src="resources/scripts/app.js"></script>
 
 <%-- Services --%>
+<script src="resources/scripts/services/album.service.js"></script>
 <script src="resources/scripts/services/analytics.service.js"></script>
 <script src="resources/scripts/services/charts.service.js"></script>
 <script src="resources/scripts/services/comments.service.js"></script>
@@ -84,6 +85,7 @@
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <script src="resources/scripts/controllers/settings/settings.js"></script>
+<%--<script src="resources/scripts/controllers/upload/upload-view.js"></script>--%>
 <%-- Controllers --%>
 
 <script>
