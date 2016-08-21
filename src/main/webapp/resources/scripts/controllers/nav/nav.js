@@ -6,10 +6,16 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
     $scope.$watchCollection(function() { return $location.path(); }, function(route){
         ctrl.inApp = !(route === '/login' || route === '/deny');
         if(ctrl.inApp){
-            ctrl.menuItems = [];
+            ctrl.mainMenuItems = [];
+            ctrl.sideMenuItems = [];
             UserService.getCurrentUser().$promise.then(function (res) {
                 ctrl.currentUser = res;
-                ctrl.menuItems.push(
+                ctrl.mainMenuItems.push(
+                    {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
+                    {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
+                    {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'}
+                );
+                ctrl.sideMenuItems.push(
                     {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
                     {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
                     {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},

@@ -7,7 +7,7 @@
                     <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
                 </div>
                 <div class="menu-items col-md-10 pl0">
-                    <div ng-repeat="menuItem in ctrl.menuItems" class="pull-left">
+                    <div ng-repeat="menuItem in ctrl.mainMenuItems" class="pull-left">
                         <div class="project">
                             <a ng-href="{{menuItem.link}}"> <i ng-class="'{{menuItem.icon}}'"> </i> {{menuItem.title}}</a>
                         </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="sidebar">
             <ul class="sidebar-nav">
-                <li ng-repeat="menuItem in ctrl.menuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
+                <li ng-repeat="menuItem in ctrl.sideMenuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
                     <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link"> <i ng-class="'{{menuItem.icon}} pr10'"> </i> {{menuItem.title}}</a>
                     <div ng-if="!menuItem.link">{{menuItem.title}}</div>
                     <ul ng-if="menuItem.children" ng-repeat="subMenuItem in menuItem.children" class="list-unstyled">
