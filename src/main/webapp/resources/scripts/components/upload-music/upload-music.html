@@ -1,47 +1,129 @@
 <div class="col-md-12 card card-pink" ng-init="ctrl.init()">
     <div class="panel-body">
         <span class="value text-center">Upload music</span>
-        <span class="title text-center"><a class="btn btn-info" ng-if="!ctrl.showForm" ng-click="ctrl.showUploadForm()">Upload</a></span>
+        <!--<span class="title text-center"><a class="btn btn-info" ng-if="!ctrl.showForm" ng-click="ctrl.showUploadForm()">Upload</a></span>-->
 
-        <div class="col-xs-12 pl0 pr0" ng-if="ctrl.showForm">
+        <!--<div class="col-xs-12 pl0 pr0" ng-if="ctrl.showForm">-->
+        <div class="col-xs-12 pl0 pr0">
             <hr class="col-xs-12 pl0 pr0">
 
             <div ng-if="ctrl.files.length === 0" ngf-drop class="drop-box col-xs-12 pl0 pr0" ngf-select ng-model="ctrl.files" ngf-multiple="true"
                  ngf-validate="{size: {min: 10, max: '20MB'}, duration: {min: '10s', max: '10m'}, pattern: '.mp3'}">
-                <span class="">Drag and drop MP3 files</span></div>
+                <span>Drag and drop MP3 files</span>
+            </div>
 
-            <div class="pt10 col-xs-12 pl0 pr0">
-                <div class="col-xs-12 pl0 pr0 pb10" ng-repeat="song in ctrl.songs" ng-init="song.pic = null">
-                    <div class="col-xs-9 pl0 pr0">
+            <div class="col-xs-12 pl0 pr0 pb10" ng-repeat="song in ctrl.songs" ng-init="song.pic = null">
+                <div ng-init="ctrl.switchTab(song, 'details')">
+                    <div class="col-xs-3 pt10 pb10 mq-tab" ng-click="ctrl.switchTab(song, 'details')"
+                         ng-class="{'current': song.showDetailsTab}">
+                        <h4>Details</h4>
+                    </div>
+                    <div class="col-xs-3 pt10 pb10 mq-tab" ng-click="ctrl.switchTab(song, 'lyrics')"
+                         ng-class="{'current': song.showLyricsTab}">
+                        <h4>Lyrics</h4>
+                    </div>
+                    <div class="col-xs-3 pt10 pb10 mq-tab" ng-click="ctrl.switchTab(song, 'release')"
+                         ng-class="{'current': song.showReleaseTab}">
+                        <h4>Release Info</h4>
+                    </div>
+                    <div class="col-xs-3 pt10 pb10 mq-tab" ng-click="ctrl.switchTab(song, 'confirm')"
+                         ng-class="{'current': song.showConfirmTab}">
+                        <h4>Confirm</h4>
+                    </div>
+                </div>
 
-                        <div ng-if="song.pic === null && !song.success" ngf-drop class="drop-box pl0 pr0 pt15 pb0 col-xs-3" style="height: 75px; width: 75px;" ngf-select ng-model="song.pic" ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork</div>
-                        <img ng-if="song.pic !== null" class="pl0 pr0 pull-left" ng-src="{{song.artwork_url}}" height="75px" width="75px">
-                        <img ng-if="song.pic === null && song.success" class="pl0 pr0 pull-left" src="resources/images/noImage.jpg" height="75px" width="75px">
+                <!-- Details Tab -->
+                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showDetailsTab">
+                    <div ng-if="song.pic === null && !song.success" ngf-drop class="drop-box pl0 pr0 pt10 pb0 col-xs-3"
+                         style="height: 64px; width: 64px;" ngf-select ng-model="song.pic"
+                         ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork
+                    </div>
+                    <img ng-if="song.pic !== null" class="pl0 pr0 pull-left" ng-src="{{song.artwork_url}}" height="64px" width="64px">
+                    <img ng-if="song.pic === null && song.success" class="pl0 pr0 pull-left" src="resources/images/noImage.jpg" height="64px" width="64px">
+                    <div class="col-md-9 col-xs-8 pt15 pb15" style="display: inline-block">
+                        <input type="text" class="form-control" ng-if="!song.success" ng-model="song.title">
+                        <span class="pull-left" ng-if="song.success" style="font-size: 25px">{{song.title}}</span>
+                    </div>
 
-                        <div class="col-md-9 col-xs-8 pt5 pb5" style="display: inline-block">
-                            <input type="text col-xs-12" class="form-control" ng-if="!song.success" ng-model="song.title">
-                            <span class="pull-left" ng-if="song.success">{{song.title}}</span>
-                        </div>
+                    <div class="form-group col-md-4 pl0 pt10">
+                        <label for="duration">Duration</label>
+                        <span class="pull-left form-control disabled" id="duration">{{ctrl.milliToTime(song.duration)}}</span>
+                    </div>
 
-                        <div class="col-md-9 col-xs-8 pt5 pb5" style="display: inline-block"  ng-init="song.active = true || song.active">
-                            <span class="pull-left">{{ctrl.milliToTime(song.duration)}}</span>
-                            <a class="pull-left pl10" style="padding-top: 3px" href ng-click="song.active = !song.active"><i class="fa fa-toggle-on" ng-if="song.active"></i><i class="fa fa-toggle-off" ng-if="!song.active"></i></a>
+                    <div class="form-group col-xs-5 pl0 pt10">
+                        <i class="fa fa-info-circle"></i>
+                        <span>Is this track part of an album?</span>
+                        <br>
+                        <div class="btn-group btn-group-md mt5">
+                            <button ng-disabled="song.success" class="btn" ng-class="{ 'btn-primary' : !song.inAlbum, 'light-gray-back' : song.inAlbum}" ng-click="song.inAlbum = !song.inAlbum">No</button>
+                            <button ng-disabled="song.success" class="btn" ng-class="{ 'btn-primary' : song.inAlbum, 'light-gray-back' : !song.inAlbum}" ng-click="song.inAlbum = !song.inAlbum">Yes</button>
                         </div>
                     </div>
 
-                    <div class="col-xs-3 pl0 pr0 pt5">
-                        <span ng-if="song.showProgress">
-                            <i ng-if="!song.success" class="fa fa-spinner faa-spin animated"></i><span> {{song.file.progress}} / 100 </span>
+                    <div class="form-group col-md-4 pl0 pt10" ng-if="song.inAlbum">
+                        <label for="album">Album</label>
+                        <input id="album" class="form-control" type="text" ng-model="song.album" ng-disabled="song.success">
+                    </div>
+
+                </div>
+
+                <!-- Lyrics Tab -->
+
+                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showLyricsTab">
+                    <div class="form-group col-xs-12 pl0 pr0">
+                        <label for="lyrics">Lyrics</label>
+                        <textarea id="lyrics" class="form-control" rows="5" ng-model="song.lyrics" ng-maxlength="1000" maxlength="1000" ng-disabled="song.success"></textarea>
+                    </div>
+                </div>
+
+                <!-- Release Tab -->
+                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showReleaseTab">
+
+                    <div class="form-group col-md-12 pl0">
+                        <i class="fa fa-info-circle"></i>
+                        <span>Publish and release track immediately?</span>
+                        <br>
+                        <div class="btn-group btn-group-md mt5">
+                            <button ng-disabled="song.success" class="btn" ng-class="{ 'btn-primary' : !song.releaseImmediately, 'light-gray-back' : song.releaseImmediately}" ng-click="ctrl.toggleRelease(song)">No</button>
+                            <button ng-disabled="song.success" class="btn" ng-class="{ 'btn-primary' : song.releaseImmediately, 'light-gray-back' : !song.releaseImmediately}" ng-click="ctrl.toggleRelease(song)">Yes</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 pl0">
+                        <label for="date">Release date</label>
+                        <input id="date" type="date" class="form-control" ng-model="song.releaseDate" ng-disabled="song.success || song.releaseImmediately">
+                    </div>
+                </div>
+
+                <!-- Confirm Tab -->
+                <div class="col-xs-12 pl0 pr0 pt15 text-center" ng-if="song.showConfirmTab">
+
+                    <div class="form-group col-xs-12 pl0 pr0" ng-if="!song.success">
+                        <span ng-if="song.file.showProgress">
+                            <span>File upload: </span>
+                            <span ng-if="song.file.progress !== 100">{{song.file.progress}} % </span>
+                            <i ng-if="song.file.progress === 100" class="fa fa-check-circle-o fa-2x custom-green"></i>
                         </span>
-                        <i ng-if="song.success" class="fa fa-check-circle-o fa-2x custom-green"></i>
-                        <button ng-if="!song.success" class="btn btn-primary pull-right" ng-click="ctrl.saveFile(song)">Save</button>
+                        <span ng-if="song.pic.showProgress">
+                            <span>Artwork upload: </span>
+                            <span ng-if="song.pic.progress !== 100">{{song.pic.progress}} % </span>
+                            <i ng-if="song.pic.progress === 100" class="fa fa-check-circle-o fa-2x custom-green"></i>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-xs-12 pl0 pr0">
+                        <span ng-if="song.success">Upload successful! <i class="fa fa-check-circle-o fa-2x custom-green"></i></span>
+
+                        <button ng-if="!song.success && !song.hideSaveBtn" class="btn btn-primary" ng-click="ctrl.upload(song); song.hideSaveBtn = true">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="panel-footer col-xs-12" ng-if="ctrl.showForm">
-        <button class="btn btn-github pull-left" ng-click="ctrl.hideUploadForm()">Close</button>
+    <div class="panel-footer col-xs-12" ng-if="ctrl.songs.length > 0">
+        <button class="btn btn-github pull-left" ng-click="ctrl.files = []">Close</button>
     </div>
 </div>

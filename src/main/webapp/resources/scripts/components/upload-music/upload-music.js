@@ -13,29 +13,29 @@ angular.module('app').component("uploadMusic", {
             })
         };
 
-        ctrl.showUploadForm = function () {
-            ctrl.showForm = true;
-            ctrl.files = [];
-        };
-
-        ctrl.hideUploadForm = function () {
-            ctrl.showForm = false;
-            ctrl.files = [];
+        ctrl.toggleRelease = function (song) {
+            song.releaseImmediately = !song.releaseImmediately;
+            if(song.releaseImmediately){
+                song.releaseDate = new Date();
+            }else{
+                song.releaseDate = null;
+            }
         };
 
         $scope.$watchCollection('ctrl.files', function () {
             ctrl.songs = ctrl.files.map(function (file) {
-                var song = {
+                return {
                     title: file.name,
                     duration: file.$ngfDuration * 1000,
-                    file: file
-                };
-                return song;
+                    file: file,
+                    releaseImmediately: true,
+                    releaseDate: new Date(),
+                    inAlbum: false
+                }
             });
         });
 
-        ctrl.saveFile = function (song) {
-            song.showProgress = true;
+        ctrl.upload = function (song) {
             var payload = {
                 title: song.title,
                 duration: song.file.$ngfDuration * 1000
@@ -55,7 +55,9 @@ angular.module('app').component("uploadMusic", {
                     musicFile: song.file
                 }
             }).progress(function(evt) {
+                song.file.showProgress = true;
                 song.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                console.log(song.file.progress);
             }).success(function() {
                 if(song.pic){
                     song.file.progress = 0;
@@ -75,12 +77,45 @@ angular.module('app').component("uploadMusic", {
                     image: song.pic
                 }
             }).progress(function (evt) {
-                song.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                song.pic.showProgress = true;
+                song.pic.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                console.log(song.pic.progress);
             }).success(function() {
                 song.success = true;
                 song.showProgress = false;
             });
         }
+
+        ctrl.switchTab = function (song, tab) {
+            switch (tab){
+                case 'details':
+                    song.showDetailsTab = true;
+                    song.showLyricsTab = false;
+                    song.showReleaseTab = false;
+                    song.showConfirmTab = false;
+                    break;
+                case 'lyrics':
+                    song.showDetailsTab = false;
+                    song.showLyricsTab = true;
+                    song.showReleaseTab = false;
+                    song.showConfirmTab = false;
+                    break;
+                case 'release':
+                    song.showDetailsTab = false;
+                    song.showLyricsTab = false;
+                    song.showReleaseTab = true;
+                    song.showConfirmTab = false;
+                    break;
+                case 'confirm':
+                    song.showDetailsTab = false;
+                    song.showLyricsTab = false;
+                    song.showReleaseTab = false;
+                    song.showConfirmTab = true;
+                    break;
+                default:
+                    break;
+            }
+        };
 
         ctrl.milliToTime = function (milli) {
             var minutes = Math.floor(milli / 60000);

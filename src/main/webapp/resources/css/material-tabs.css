@@ -1,0 +1,19 @@
+.mq-tab {
+    cursor: pointer;
+    text-align: center;
+    color: #767676;
+}
+.mq-tab:hover{
+    color: black;
+}
+.mq-tab.current {
+    border-bottom: 3px solid #55a7d6;
+    box-sizing: border-box;
+    background-color: #FFF;
+    font-size: 14px;
+    color: #000;
+}
+
+.btn:focus{
+    outline: none;
+}
