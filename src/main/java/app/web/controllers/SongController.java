@@ -1,10 +1,12 @@
 package app.web.controllers;
 
 import app.web.domain.Analytics;
+import app.web.domain.Lyrics;
 import app.web.domain.Song;
 import app.web.domain.User;
 import app.web.helper.AwsHelper;
 import app.web.services.AnalyticsService;
+import app.web.services.LyricsService;
 import app.web.services.SongService;
 import app.web.services.UserService;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -28,6 +30,9 @@ public class SongController {
     @Autowired
     private AnalyticsService analyticsService;
 
+    @Autowired
+    private LyricsService lyricsService;
+
     @RequestMapping(value = "save/user/{id}", method = RequestMethod.POST)
     public Object saveSong(@RequestBody Song song, @PathVariable String id){
         User user = userService.getByFbId(id);
@@ -37,7 +42,12 @@ public class SongController {
         return songService.save(song);
     }
 
-    @RequestMapping(value = "{id}/content/save", method = RequestMethod.POST)
+    @RequestMapping(value = "lyrics/save", method = RequestMethod.PUT)
+    public Object saveLyrics(@RequestBody Lyrics lyrics){
+        return lyricsService.save(lyrics);
+    }
+
+    @RequestMapping(value = "{id}/file/save", method = RequestMethod.POST)
     public Object saveFile(MultipartFile musicFile, @PathVariable Integer id) throws Exception {
         Song song = songService.findById(id);
         String keyName = "songs/" + song.getIdentifier();

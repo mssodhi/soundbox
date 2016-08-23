@@ -43,6 +43,16 @@ angular.module('app').component("uploadMusic", {
             SongService.save({id: ctrl.currentUser.fb_id}, payload).$promise.then(function (res) {
                 if(res.id){
                     uploadFile(res, song);
+                    if(song.lyrics.length > 0){
+                        var lyrics = {
+                            text: song.lyrics,
+                            song: res
+                        };
+
+                        SongService.saveLyrics(lyrics).$promise.then(function (res) {
+                            console.log(res);
+                        });
+                    }
                 }
             })
         };
@@ -50,7 +60,7 @@ angular.module('app').component("uploadMusic", {
         function uploadFile(res, song) {
             Upload.upload({
                 method: 'POST',
-                url: 'api/song/' + res.id + '/content/save',
+                url: 'api/song/' + res.id + '/file/save',
                 data: {
                     musicFile: song.file
                 }
