@@ -43,7 +43,7 @@ angular.module('app').component("uploadMusic", {
             SongService.save({id: ctrl.currentUser.fb_id}, payload).$promise.then(function (res) {
                 if(res.id){
                     uploadFile(res, song);
-                    if(song.lyrics.length > 0){
+                    if(song.lyrics && song.lyrics.length > 0){
                         var lyrics = {
                             text: song.lyrics,
                             song: res

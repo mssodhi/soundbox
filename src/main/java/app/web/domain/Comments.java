@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Comments extends AuditableEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty
     private Integer id;
 

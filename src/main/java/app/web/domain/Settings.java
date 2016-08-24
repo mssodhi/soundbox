@@ -12,11 +12,11 @@ public class Settings {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty
     private Integer id;
 
-    @Column(name = "notifications", nullable = true)
+    @Column(name = "notifications")
     @JsonProperty
     private Boolean notifications;
 
