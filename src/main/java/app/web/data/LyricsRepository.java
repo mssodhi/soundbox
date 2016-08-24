@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface LyricsRepository extends JpaRepository<Lyrics, Integer> {
 
-    @Query("select l from lyrics l where l.song.id = ?1")
+    @Query("select l from Lyrics l where l.song.id = ?1")
     Lyrics findBySong(Integer id);
 }

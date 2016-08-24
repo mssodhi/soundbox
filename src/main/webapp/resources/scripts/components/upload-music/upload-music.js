@@ -48,10 +48,7 @@ angular.module('app').component("uploadMusic", {
                             text: song.lyrics,
                             song: res
                         };
-
-                        SongService.saveLyrics(lyrics).$promise.then(function (res) {
-                            console.log(res);
-                        });
+                        SongService.saveLyrics(lyrics);
                     }
                 }
             })
@@ -67,7 +64,6 @@ angular.module('app').component("uploadMusic", {
             }).progress(function(evt) {
                 song.file.showProgress = true;
                 song.file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                console.log(song.file.progress);
             }).success(function() {
                 if(song.pic){
                     song.file.progress = 0;
@@ -89,7 +85,6 @@ angular.module('app').component("uploadMusic", {
             }).progress(function (evt) {
                 song.pic.showProgress = true;
                 song.pic.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                console.log(song.pic.progress);
             }).success(function() {
                 song.success = true;
                 song.showProgress = false;

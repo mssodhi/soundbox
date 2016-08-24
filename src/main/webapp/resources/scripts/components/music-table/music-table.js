@@ -3,7 +3,7 @@
 angular.module('app').component("musicTable", {
     templateUrl: 'resources/scripts/components/music-table/music-table.html',
     controllerAs: 'ctrl',
-    controller: function (MusicService, PlaylistService, LikesService, $location, UserService) {
+    controller: function (MusicService, PlaylistService, LikesService, $location, UserService, SongService) {
         var ctrl = this;
         ctrl.likes = [];
         ctrl.limit = 50;
@@ -16,6 +16,12 @@ angular.module('app').component("musicTable", {
                 LikesService.get({id: ctrl.currentUser.fb_id}).$promise.then(function (response) {
                     ctrl.likes = response;
                 });
+            });
+        };
+
+        ctrl.viewLyrics = function (song) {
+            SongService.getLyrics({id: song.id}).$promise.then(function (lyrics) {
+                console.log(lyrics);
             });
         };
 

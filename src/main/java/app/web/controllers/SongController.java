@@ -44,6 +44,9 @@ public class SongController {
 
     @RequestMapping(value = "lyrics/save", method = RequestMethod.PUT)
     public Object saveLyrics(@RequestBody Lyrics lyrics){
+        Song song = lyrics.getSong();
+        song.setHas_lyrics(true);
+        songService.save(song);
         return lyricsService.save(lyrics);
     }
 
@@ -85,5 +88,11 @@ public class SongController {
             analytics.setPlays_today(analytics.getPlays_today() + 1);
             analyticsService.save(analytics);
         }
+    }
+
+    @RequestMapping(value = "{id}/lyrics", method = RequestMethod.GET)
+    public Object getLyrics(@PathVariable Integer id){
+        Song song = songService.findById(id);
+        return lyricsService.findBySong(song);
     }
 }

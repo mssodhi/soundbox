@@ -58,6 +58,10 @@ public class Song extends AuditableEntity implements Serializable{
     @JsonProperty
     private Boolean active = true;
 
+    @Column(name = "has_lyrics")
+    @JsonProperty
+    private Boolean has_lyrics;
+
     public Integer getId() {
         return id;
     }
@@ -144,5 +148,13 @@ public class Song extends AuditableEntity implements Serializable{
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Boolean getHas_lyrics() {
+        return has_lyrics;
+    }
+
+    public void setHas_lyrics(Boolean has_lyrics) {
+        this.has_lyrics = has_lyrics;
     }
 }
