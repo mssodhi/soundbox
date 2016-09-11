@@ -101,6 +101,14 @@ public class SongController {
         Song song = songService.findById(id);
         User requestUser = userService.getByFbId(user.getFb_id());
         if(requestUser.getFb_id().equals(song.getUser().getFb_id())){
+            requestUser.setSongs_length(requestUser.getSongs_length() - 1);
+            userService.save(requestUser);
+            String fileKeyName = "songs/" + song.getIdentifier();
+            try {
+                awsHelper.delete(fileKeyName);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if(song.getArtwork_url() != null){
                 String keyName = "images/" + song.getIdentifier();
                 try {
@@ -109,15 +117,7 @@ public class SongController {
                     e.printStackTrace();
                 }
             }
-            String fileKeyName = "songs/" + song.getIdentifier();
-            try {
-                awsHelper.delete(fileKeyName);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
             songService.delete(song);
-            requestUser.setSongs_length(user.getSongs_length() - 1);
-            userService.save(requestUser);
             return "{\"status\":\"success\"}";
         }
         return null;
