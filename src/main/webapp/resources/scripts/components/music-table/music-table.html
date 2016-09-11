@@ -85,7 +85,7 @@
                         <li class="menu-item"><a ng-click="ctrl.goToArtist(song.user)" href> View artist </a></li>
                         <li class="menu-item" ng-if="song.has_lyrics"><a ng-click="ctrl.viewLyrics(song)" href> View lyrics </a></li>
                         <!--<li class="menu-item"><a ng-click="ctrl.addToNext(song)" href> Queue next </a></li>-->
-                        <li class="menu-item"><a ng-click="ctrl.deleteSong(song)" href> Delete Song </a></li>
+                        <li class="menu-item"><a ng-if="song.user.fb_id === ctrl.currentUser.fb_id" ng-click="ctrl.deleteSong(song)" href> Delete Song </a></li>
                         <li ng-if="ctrl.isplaylist && ctrl.currentplaylist.owner.fb_id === ctrl.currentUser.fb_id" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                             <a ng-if="playlist.id !== ctrl.currentplaylist.id" href ng-click="ctrl.addSongToPlaylist(song, playlist)">Add to {{playlist.name}}</a>
