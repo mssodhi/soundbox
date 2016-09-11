@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FollowService, UserService) {
+angular.module('app').controller('LandingCtrl', function (profile, PlaylistService, FollowService, SongService) {
     var ctrl = this;
     ctrl.currentUser = profile;
 
@@ -18,7 +18,7 @@ angular.module('app').controller('LandingCtrl', function (profile, PlaylistServi
     }
 
     function getMusicByUser(user) {
-        UserService.getMusicByUser({id: user.fb_id}).$promise.then(function (response) {
+        SongService.getMusicByUser({fbId: user.fb_id}, true).$promise.then(function (response) {
             response.forEach(function (track) {
                 ctrl.tracks.push(track);
             });

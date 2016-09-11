@@ -63,10 +63,4 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "getMusicByUser/{id}", method = RequestMethod.GET)
-    public Object getMusicByUser(@PathVariable String id){
-        User user = userService.getByFbId(id);
-        return songService.getMusicByUser(user);
-    }
-
 }

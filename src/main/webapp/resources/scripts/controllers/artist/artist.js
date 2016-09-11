@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FollowService, PlaylistService, UserService) {
+angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeParams, FollowService, PlaylistService, UserService, SongService) {
 
     var ctrl = this;
     ctrl.currentUser = profile;
@@ -37,11 +37,8 @@ angular.module('app').controller('ArtistCtrl', function ($http, profile, $routeP
 
     function getTracks (artist) {
         ctrl.loading = true;
-        UserService.getMusicByUser({id: artist.fb_id}).$promise.then(function (tracks) {
+        SongService.getMusicByUser({fbId: artist.fb_id}, true).$promise.then(function (tracks) {
             ctrl.tracks = tracks;
-            if(tracks.length !== artist.songs_length){
-                ctrl.errorGettingAll = true;
-            }
             ctrl.loading = false;
         })
     }

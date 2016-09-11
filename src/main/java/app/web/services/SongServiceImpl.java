@@ -11,7 +11,10 @@ import app.web.services.Base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 @Service
 public class SongServiceImpl extends BaseServiceImpl<Song,Integer> implements SongService {
@@ -47,10 +50,14 @@ public class SongServiceImpl extends BaseServiceImpl<Song,Integer> implements So
     }
 
     @Override
-    public Set<Song> getMusicByUser(User user){
+    public Set<Song> getMusicByUserAndStatus(User user, Boolean active){
         Set<Song> songs = repository.getByUser(user.getFb_id());
         if(songs.size() > 0){
-            return songs;
+            if(active){
+                return songs.stream().filter(song -> song.getRelease_date().compareTo(new Date()) < 0).collect(toSet());
+            }else{
+                return songs;
+            }
         }else{
             return null;
         }

@@ -84,6 +84,7 @@
 <script src="resources/scripts/controllers/charts/charts.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>
 <script src="resources/scripts/controllers/login/login.js"></script>
+<script src="resources/scripts/controllers/manage/manage.js"></script>
 <script src="resources/scripts/controllers/nav/nav.js"></script>
 <script src="resources/scripts/controllers/playlist/playlist.js"></script>
 <script src="resources/scripts/controllers/settings/settings.js"></script>

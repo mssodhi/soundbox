@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
+import java.util.Date;
 
 @Entity
 @Table(name = "song")
@@ -54,9 +55,9 @@ public class Song extends AuditableEntity implements Serializable{
     @JsonProperty
     private String identifier = UUID.randomUUID().toString();
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "release_date", nullable = false)
     @JsonProperty
-    private Boolean active = true;
+    private Date releaseDate = new Date();
 
     @Column(name = "has_lyrics")
     @JsonProperty
@@ -142,12 +143,12 @@ public class Song extends AuditableEntity implements Serializable{
         this.identifier = identifier;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Date getRelease_date() {
+        return releaseDate;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setRelease_date(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public Boolean getHas_lyrics() {

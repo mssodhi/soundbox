@@ -14,16 +14,16 @@
                 </div>
             </div>
         </div>
-        <div class="add-comment-section col-xs-12" style="padding: 5px">
-            <button class="btn btn-primary pull-right" ng-click="ctrl.showForm = true" ng-if="!ctrl.showForm">Add comment</button>
-            <div ng-if="ctrl.showForm" class="col-xs-12" style="padding: 10px">
-                <form class="form-register">
-                    <span class="pull-left">Comment: </span>
-                    <textarea rows="3" ng-model="comment.text" class="form-control" maxlength="1000"></textarea>
-                </form>
-                <button class="btn btn-default" ng-click="ctrl.showForm = false">Cancel</button>
-                <button class="btn btn-soundcloud pull-right" ng-click="ctrl.postComment(comment.text)" ng-disabled="!comment.text">Post Comment</button>
-            </div>
-        </div>
+        <!--<div class="add-comment-section col-xs-12" style="padding: 5px">-->
+            <!--<button class="btn btn-primary pull-right" ng-click="ctrl.showForm = true" ng-if="!ctrl.showForm">Add comment</button>-->
+            <!--<div ng-if="ctrl.showForm" class="col-xs-12" style="padding: 10px">-->
+                <!--<form class="form-register">-->
+                    <!--<span class="pull-left">Comment: </span>-->
+                    <!--<textarea rows="3" ng-model="comment.text" class="form-control" maxlength="1000"></textarea>-->
+                <!--</form>-->
+                <!--<button class="btn btn-default" ng-click="ctrl.showForm = false">Cancel</button>-->
+                <!--<button class="btn btn-soundcloud pull-right" ng-click="ctrl.postComment(comment.text)" ng-disabled="!comment.text">Post Comment</button>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>

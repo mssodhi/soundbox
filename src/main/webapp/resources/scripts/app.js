@@ -96,6 +96,18 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'ng
                         return UserService.getCurrentUser().$promise;
                     }
                 }
+            }).when('/manage', {
+                templateUrl: 'resources/scripts/controllers/manage/manage.html',
+                controller: 'ManageCtrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
+                    }
+                }
             }).when('/browse', {
                 templateUrl: 'resources/scripts/controllers/browse/browse.html',
                 controller: 'BrowseCtrl',

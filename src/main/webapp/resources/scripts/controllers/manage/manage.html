@@ -1,0 +1,42 @@
+<div class="col-md-12 col-sm-12 pl0 pr0 pt15" ng-init="ctrl.init()">
+    <span class="pull-left col-md-2 col-xs-12 pl0 pr0" ng-if="ctrl.tracks.length === 0">
+        <b><i class="fa fa-exclamation-circle custom-blue"></i> 0 tracks available</b>
+    </span>
+    <span class="pull-right col-md-3 col-xs-12 pl0 pr0 pb10" ng-if="ctrl.tracks.length > 0">
+        <input placeholder="Filter list"
+               ng-model="ctrl.searchQuery" type="text"
+               class="pull-right col-xs-12 col-sm-6 form-control">
+    </span>
+</div>
+
+<div class="song-list" ng-if="ctrl.tracks.length > 0">
+    <div class="panel pl0 pr0 col-xs-5 ml10 mr10 mt15"
+         ng-repeat="song in ctrl.tracks | filter: ctrl.searchQuery| limitTo: ctrl.limit track by song.id"
+         title="{{song.title}}">
+        <div class="panel-body col-md-7" ng-click="ctrl.select(song)" ng-class="{button: !ctrl.isPlaying(song)}">
+            <img ng-if="song.artwork_url !== null" class="" ng-src="{{song.artwork_url}}">
+            <img ng-if="song.artwork_url === null" class="" src="resources/images/noImage.jpg">
+
+            <div class="info pull-left pt10" style="width: 69.6%;">
+                <span class="title">{{song.title}}</span><br>
+                <span class="artist"><a href ng-click="ctrl.goToArtist(song.user)">{{song.user.username}}</a></span>
+                <p>{{ctrl.milliToTime(song.duration)}}</p>
+            </div>
+        </div>
+        <div class="actions col-md-5">
+            <div class="col-xs-6 pl0 pr0 button" ng-click="ctrl.deleteSong(song)" style="background-color: #ffa726">
+                <span>Delete</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0 button" ng-click="ctrl.likeSong(song)" style="background-color: #00bcd4">
+                <span>Edit</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0 button" ng-click="showComments = !showComments" style="background-color: #ba68c8">
+                <span>Comments</span>
+            </div>
+            <div class="col-xs-6 pl0 pr0 button" ng-click="song.showMore = !song.showMore" style="background-color: #8bc34a">
+                <span>More</span>
+            </div>
+        </div>
+        <comments-card song="song" show="showComments"></comments-card>
+    </div>
+</div>

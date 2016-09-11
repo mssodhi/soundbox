@@ -14,7 +14,7 @@ public interface SongService extends BaseService<Song, Integer> {
 
     Set<Song> searchByName(String name);
 
-    Set<Song> getMusicByUser(User user);
+    Set<Song> getMusicByUserAndStatus(User user, Boolean status);
 
     void delete(Song song);
 }

@@ -38,7 +38,8 @@ angular.module('app').component("uploadMusic", {
         ctrl.upload = function (song) {
             var payload = {
                 title: song.title,
-                duration: song.file.$ngfDuration * 1000
+                duration: song.file.$ngfDuration * 1000,
+                releaseDate: song.releaseDate
             };
             SongService.save({id: ctrl.currentUser.fb_id}, payload).$promise.then(function (res) {
                 if(res.id){

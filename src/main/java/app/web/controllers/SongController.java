@@ -122,4 +122,10 @@ public class SongController {
         }
         return null;
     }
+
+    @RequestMapping(value = "getMusicByUser/{fbId}", method = RequestMethod.POST)
+    public Object getMusicByUser(@PathVariable String fbId, @RequestBody Boolean active){
+        User user = userService.getByFbId(fbId);
+        return songService.getMusicByUserAndStatus(user, active);
+    }
 }

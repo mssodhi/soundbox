@@ -12,12 +12,13 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
                 ctrl.currentUser = res;
                 ctrl.mainMenuItems.push(
                     {title: 'Upload',    link: '#/upload', icon: 'fa fa-upload'},
-                    {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
+                    {title: 'Profile',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
                     // {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
                     {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'}
                 );
                 ctrl.sideMenuItems.push(
-                    {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
+                    {title: 'Profile',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
+                    {title: 'Manage music',        link: '#/manage', icon: 'fa fa-gears'},
                     {title: 'Upload',    link: '#/upload', icon: 'fa fa-upload'},
                     {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
                     // {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
@@ -49,10 +50,6 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
         if(location.substr(1, location.length) === $location.path()){
             return 'active-menu-item';
         }
-    };
-
-    ctrl.goToArtist = function (artist) {
-        $location.path('/artist/'+artist.username);
     };
 
     ctrl.currentPath = function () {

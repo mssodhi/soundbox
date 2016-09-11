@@ -72,19 +72,6 @@ angular.module('app').component("musicTable", {
         //     MusicService.addNext(song);
         // };
 
-        ctrl.deleteSong = function (song) {
-            if(song.user.fb_id === ctrl.currentUser.fb_id){
-                SongService.deleteSong({id: song.id}, ctrl.currentUser).$promise.then(function (response) {
-                    if(response.status === 'success'){
-                        var index = _.findIndex(ctrl.tracks, function (track) {
-                            return track.id === song.id;
-                        });
-                        ctrl.tracks.splice(index, 1);
-                    }
-                })
-            }
-        };
-
         ctrl.isLiked = function (song) {
             return _.some(ctrl.likes, function (like) {
                 return like.song_id === song.id;

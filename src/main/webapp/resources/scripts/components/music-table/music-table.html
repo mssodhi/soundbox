@@ -65,7 +65,7 @@
             <td ng-click="ctrl.select(song)" ng-if="ctrl.showartist">{{song.user.name}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{song.plays}}</td>
             <td ng-click="ctrl.select(song)" class="hidden-xs">{{ctrl.milliToTime(song.duration)}}</td>
-            <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.created_date)}}</td>
+            <td ng-click="ctrl.select(song)" class="hidden-xs" ng-if="ctrl.showdate">{{ctrl.getDate(song.releaseDate)}}</td>
             <td ng-click="ctrl.likeSong(song)" class="hidden-xs">
                 <div class="pt5" style="font-size: 25px;">
                    <a ng-if="ctrl.isLiked(song)">
@@ -85,7 +85,6 @@
                         <li class="menu-item"><a ng-click="ctrl.goToArtist(song.user)" href> View artist </a></li>
                         <li class="menu-item" ng-if="song.has_lyrics"><a ng-click="ctrl.viewLyrics(song)" href> View lyrics </a></li>
                         <!--<li class="menu-item"><a ng-click="ctrl.addToNext(song)" href> Queue next </a></li>-->
-                        <li class="menu-item"><a ng-if="song.user.fb_id === ctrl.currentUser.fb_id" ng-click="ctrl.deleteSong(song)" href> Delete Song </a></li>
                         <li ng-if="ctrl.isplaylist && ctrl.currentplaylist.owner.fb_id === ctrl.currentUser.fb_id" class="menu-item"><a ng-click="ctrl.removeSongFromPlaylist(song)" href><i class="fa fa-trash-o"></i> Delete </a></li>
                         <li class="menu-item" ng-repeat="playlist in ctrl.playlists track by playlist.id">
                             <a ng-if="playlist.id !== ctrl.currentplaylist.id" href ng-click="ctrl.addSongToPlaylist(song, playlist)">Add to {{playlist.name}}</a>
@@ -93,6 +92,11 @@
                     </ul>
                 </div>
             </td>
+            <!--<td>-->
+                <!--<div class="pt5 text-center" style="font-size: 25px">-->
+                    <!--<a class="custom-orange"><i class="fa fa-comment-o"></i></a>-->
+                <!--</div>-->
+            <!--</td>-->
         </tr>
         <tr ng-if="ctrl.tracks.length > ctrl.limit">
             <td class="hidden-xs"></td>
