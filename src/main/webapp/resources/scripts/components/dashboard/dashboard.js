@@ -3,7 +3,7 @@
 angular.module('app').component("dashboard", {
     templateUrl: 'resources/scripts/components/dashboard/dashboard.html',
     controllerAs: 'ctrl',
-    controller: function ($location, UserService, AnalyticsService) {
+    controller: function ($location, UserService, AnalyticsService, FollowService) {
         var ctrl = this;
         ctrl.init = function () {
             UserService.getCurrentUser().$promise.then(function (res) {
@@ -18,11 +18,12 @@ angular.module('app').component("dashboard", {
                         }
                     }
                 });
+                FollowService.getFollowing({id: ctrl.currentUser.fb_id}).$promise.then(function (res) {
+                    ctrl.following = res;
+                });
 
             })
         };
     },
-    bindings: {
-        following: '='
-    }
+    bindings: {}
 });

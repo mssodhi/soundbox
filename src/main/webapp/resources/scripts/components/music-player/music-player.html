@@ -20,13 +20,13 @@
             </div>
         </div>
 
-        <div class="col-md-1 pull-right">
-            <a href uib-popover-template="'template.html'" ng-click="ctrl.getQueue()" class="custom-white pt15 fa fa-2x fa-list-alt" popover-trigger="focus"></a>
-        </div>
+        <!--<div class="col-md-1 pull-right">-->
+            <!--<a href uib-popover-template="'template.html'" ng-click="ctrl.getQueue()" class="custom-white pt15 fa fa-2x fa-list-alt" popover-trigger="focus"></a>-->
+        <!--</div>-->
     </div>
-    <script id="template.html" type="text/ng-template">
-        <div ng-repeat="song in ctrl.queue track by song.id">
-            <span ng-class="{activeList: song.id === ctrl.track.id}" style="color: black">{{song.title | limitTo: 20}}</span>
-        </div>
-    </script>
+    <!--<script id="template.html" type="text/ng-template">-->
+        <!--<div ng-repeat="song in ctrl.queue track by song.id">-->
+            <!--<span ng-class="{activeList: song.id === ctrl.track.id}" style="color: black">{{song.title | limitTo: 20}}</span>-->
+        <!--</div>-->
+    <!--</script>-->
 </div>

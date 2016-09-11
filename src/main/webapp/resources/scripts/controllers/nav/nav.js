@@ -13,15 +13,16 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
                 ctrl.mainMenuItems.push(
                     {title: 'Upload',    link: '#/upload', icon: 'fa fa-upload'},
                     {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
-                    {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
-                    {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'}
+                    // {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
+                    {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'}
                 );
                 ctrl.sideMenuItems.push(
                     {title: 'Me',        link: '#/artist/' + ctrl.currentUser.username, icon: 'fa fa-user'},
                     {title: 'Upload',    link: '#/upload', icon: 'fa fa-upload'},
                     {title: 'Browse',    link: '#/browse', icon: 'fa fa-list-alt'},
-                    {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
-                    {title: 'Settings',  link: '#/settings', icon: 'fa fa-gears'}
+                    // {title: 'Charts',    link: '#/charts', icon: 'fa fa-bar-chart-o'},
+                    {title: 'Settings',  link: '#/settings', icon: 'fa fa-gears'},
+                    {title: 'Analytics',  link: '#/analytics', icon: 'fa fa-line-chart'}
                 );
             });
         }

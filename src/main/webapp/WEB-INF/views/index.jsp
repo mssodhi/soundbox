@@ -79,6 +79,7 @@
 
 <%-- Controllers --%>
 <script src="resources/scripts/controllers/artist/artist.js"></script>
+<script src="resources/scripts/controllers/analytics/analytics.js"></script>
 <script src="resources/scripts/controllers/browse/browse.js"></script>
 <script src="resources/scripts/controllers/charts/charts.js"></script>
 <script src="resources/scripts/controllers/landing/landing.js"></script>

@@ -32,8 +32,8 @@
                                 <i class="fa fa-minus-circle"></i> Unfollow artist
                             </span>
                         </a>
-                        <br>
-                        <span>Tracks: {{ctrl.artist.songs_length}}</span>
+                        <!--<br>-->
+                        <!--<span>Tracks: {{ctrl.artist.songs_length}}</span>-->
                         <!--<br>-->
                         <!--<span>Followers: {{ctrl.artist.followers}}</span>-->
                         <!--<br>-->
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <upload-music class="col-md-6 col-xs-12 pl0 pr0 pull-right pt10" ng-if="ctrl.currentUser.fb_id === ctrl.artist.fb_id"></upload-music>
+            <!--<upload-music class="col-md-6 col-xs-12 pl0 pr0 pull-right pt10" ng-if="ctrl.currentUser.fb_id === ctrl.artist.fb_id"></upload-music>-->
 
             <h3 class="col-xs-12" ng-if="ctrl.loading">Loading...</h3>
             <h3 class="col-xs-12" ng-if="ctrl.errorGettingAll">Error getting all tracks</h3>

@@ -95,4 +95,31 @@ public class SongController {
         Song song = songService.findById(id);
         return lyricsService.findBySong(song);
     }
+
+    @RequestMapping(value = "{id}/delete", method = RequestMethod.POST)
+    public Object deleteSong(@PathVariable Integer id, @RequestBody User user){
+        Song song = songService.findById(id);
+        User requestUser = userService.getByFbId(user.getFb_id());
+        if(requestUser.getFb_id().equals(song.getUser().getFb_id())){
+            if(song.getArtwork_url() != null){
+                String keyName = "images/" + song.getIdentifier();
+                try {
+                    awsHelper.delete(keyName);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            String fileKeyName = "songs/" + song.getIdentifier();
+            try {
+                awsHelper.delete(fileKeyName);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            songService.delete(song);
+            requestUser.setSongs_length(user.getSongs_length() - 1);
+            userService.save(requestUser);
+            return "{\"status\":\"success\"}";
+        }
+        return null;
+    }
 }

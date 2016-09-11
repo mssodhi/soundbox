@@ -2,6 +2,7 @@ package app.web.services;
 
 import app.web.data.AlbumSongRepository;
 import app.web.domain.AlbumSong;
+import app.web.domain.Song;
 import app.web.services.Base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,10 @@ public class AlbumSongServiceImpl extends BaseServiceImpl<AlbumSong,Integer> imp
     @Override
     public AlbumSong findById(Integer id){
         return albumSongRepository.findOne(id);
+    }
+
+    @Override
+    public AlbumSong findBySong(Song song){
+        return albumSongRepository.findBySong(song.getId());
     }
 }

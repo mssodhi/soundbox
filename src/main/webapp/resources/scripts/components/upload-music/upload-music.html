@@ -33,7 +33,7 @@
                 </div>
 
                 <!-- Details Tab -->
-                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showDetailsTab">
+                <div class="col-xs-12 pt15" ng-if="song.showDetailsTab">
                     <div ng-if="song.pic === null && !song.success" ngf-drop class="drop-box pl0 pr0 pt10 pb0 col-xs-3"
                          style="height: 64px; width: 64px;" ngf-select ng-model="song.pic"
                          ng-change="ctrl.makeUrl(song)" ngf-multiple="false">Track artwork
@@ -69,15 +69,15 @@
 
                 <!-- Lyrics Tab -->
 
-                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showLyricsTab">
+                <div class="col-xs-12 pt15" ng-if="song.showLyricsTab">
                     <div class="form-group col-xs-12 pl0 pr0">
                         <label for="lyrics">Lyrics</label>
-                        <textarea id="lyrics" class="form-control" rows="5" ng-model="song.lyrics" ng-maxlength="1000" maxlength="1000" ng-disabled="song.success"></textarea>
+                        <textarea id="lyrics" class="form-control" rows="5" ng-model="song.lyrics" ng-maxlength="1000" maxlength="1000" ng-disabled="song.success" style="resize: vertical"></textarea>
                     </div>
                 </div>
 
                 <!-- Release Tab -->
-                <div class="col-xs-12 pl0 pr0 pt15" ng-if="song.showReleaseTab">
+                <div class="col-xs-12 pt15" ng-if="song.showReleaseTab">
 
                     <div class="form-group col-md-12 pl0">
                         <i class="fa fa-info-circle"></i>
@@ -96,18 +96,14 @@
                 </div>
 
                 <!-- Confirm Tab -->
-                <div class="col-xs-12 pl0 pr0 pt15 text-center" ng-if="song.showConfirmTab">
+                <div class="col-xs-12 pt15 text-center" ng-if="song.showConfirmTab">
 
                     <div class="form-group col-xs-12 pl0 pr0" ng-if="!song.success">
                         <span ng-if="song.file.showProgress">
-                            <span>File upload: </span>
-                            <span ng-if="song.file.progress !== 100">{{song.file.progress}} % </span>
-                            <i ng-if="song.file.progress === 100" class="fa fa-check-circle-o fa-2x custom-green"></i>
+                            <span>File upload in progress... </span>
                         </span>
                         <span ng-if="song.pic.showProgress">
-                            <span>Artwork upload: </span>
-                            <span ng-if="song.pic.progress !== 100">{{song.pic.progress}} % </span>
-                            <i ng-if="song.pic.progress === 100" class="fa fa-check-circle-o fa-2x custom-green"></i>
+                            <span>Artwork upload in progress... </span>
                         </span>
                     </div>
 

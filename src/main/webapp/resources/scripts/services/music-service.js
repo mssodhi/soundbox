@@ -15,14 +15,14 @@ angular.module('app').factory('MusicService', function (SongService, UserService
                 return song;
             });
         },
-        getQueue: function () {
-            var index = list.indexOf(track);
-            var retList = [];
-            for(var i = index-1; i < index+2; i++){
-                retList.push(list[i]);
-            }
-            return retList;
-        },
+        // getQueue: function () {
+        //     var index = list.indexOf(track);
+        //     var retList = [];
+        //     for(var i = index-1; i < index+2; i++){
+        //         retList.push(list[i]);
+        //     }
+        //     return retList;
+        // },
         stream: function (song) {
             if(isPlaying){
                 if(player){
@@ -66,31 +66,31 @@ angular.module('app').factory('MusicService', function (SongService, UserService
 
 
         },
-        addNext: function (tr) {
-            var i, tmp;
-            var pos1 = _.findIndex(list, {id: tr.id});
-            if(pos1 === -1){
-                list.push(tr);
-                pos1 = list.indexOf(tr);
-            }
-            var pos2 = list.indexOf(track);
-
-            if (pos1 !== pos2 && 0 <= pos1 && pos1 <= list.length && 0 <= pos2 && pos2 <= list.length) {
-                tmp = list[pos1];
-                if (pos1 < pos2) {
-                    for (i = pos1; i < pos2; i++) {
-                        list[i] = list[i + 1];
-                    }
-                    list[pos2] = tmp;
-                }
-                else {
-                    for (i = pos1; i > pos2 + 1; i--) {
-                        list[i] = list[i - 1];
-                    }
-                    list[pos2+1] = tmp;
-                }
-            }
-        },
+        // addNext: function (tr) {
+        //     var i, tmp;
+        //     var pos1 = _.findIndex(list, {id: tr.id});
+        //     if(pos1 === -1){
+        //         list.push(tr);
+        //         pos1 = list.indexOf(tr);
+        //     }
+        //     var pos2 = list.indexOf(track);
+        //
+        //     if (pos1 !== pos2 && 0 <= pos1 && pos1 <= list.length && 0 <= pos2 && pos2 <= list.length) {
+        //         tmp = list[pos1];
+        //         if (pos1 < pos2) {
+        //             for (i = pos1; i < pos2; i++) {
+        //                 list[i] = list[i + 1];
+        //             }
+        //             list[pos2] = tmp;
+        //         }
+        //         else {
+        //             for (i = pos1; i > pos2 + 1; i--) {
+        //                 list[i] = list[i - 1];
+        //             }
+        //             list[pos2+1] = tmp;
+        //         }
+        //     }
+        // },
         getTrack: function() {
             return track;
         },

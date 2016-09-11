@@ -12,9 +12,9 @@ angular.module('app').component('musicPlayer', {
             registerKeys();
         };
 
-        ctrl.getQueue = function () {
-            ctrl.queue = MusicService.getQueue();
-        };
+        // ctrl.getQueue = function () {
+        //     ctrl.queue = MusicService.getQueue();
+        // };
 
         function runLoop() {
             ctrl.player = MusicService.getPlayer();

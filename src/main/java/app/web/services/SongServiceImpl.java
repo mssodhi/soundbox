@@ -1,6 +1,10 @@
 package app.web.services;
 
+import app.web.data.AlbumSongRepository;
+import app.web.data.LyricsRepository;
 import app.web.data.SongRepository;
+import app.web.domain.AlbumSong;
+import app.web.domain.Lyrics;
 import app.web.domain.Song;
 import app.web.domain.User;
 import app.web.services.Base.BaseServiceImpl;
@@ -14,6 +18,18 @@ public class SongServiceImpl extends BaseServiceImpl<Song,Integer> implements So
 
     @Autowired
     private SongRepository repository;
+
+    @Autowired
+    private LyricsService lyricsService;
+
+    @Autowired
+    private LyricsRepository lyricsRepository;
+
+    @Autowired
+    private AlbumSongService albumSongService;
+
+    @Autowired
+    private AlbumSongRepository albumSongRepository;
 
     @Override
     public Song findById(Integer id){
@@ -38,5 +54,18 @@ public class SongServiceImpl extends BaseServiceImpl<Song,Integer> implements So
         }else{
             return null;
         }
+    }
+
+    @Override
+    public void delete(Song song){
+        Lyrics lyrics = lyricsService.findBySong(song);
+        AlbumSong albumSong = albumSongService.findBySong(song);
+        if(lyrics != null){
+            lyricsRepository.delete(lyrics);
+        }
+        if(albumSong != null){
+            albumSongRepository.delete(albumSong);
+        }
+        repository.delete(song);
     }
 }

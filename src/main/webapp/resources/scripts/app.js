@@ -45,6 +45,18 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'ng
                         return UserService.getCurrentUser().$promise;
                     }
                 }
+            }).when('/analytics', {
+                templateUrl: 'resources/scripts/controllers/analytics/analytics.html',
+                controller: 'AnalyticsCtrl',
+                controllerAs: 'ctrl',
+                resolve:{
+                    permissions: function(PermissionService){
+                        return PermissionService.permissionCheck();
+                    },
+                    profile: function(UserService){
+                        return UserService.getCurrentUser().$promise;
+                    }
+                }
             }).when('/artist/:permalink', {
                 templateUrl: 'resources/scripts/controllers/artist/artist.html',
                 controller: 'ArtistCtrl',
