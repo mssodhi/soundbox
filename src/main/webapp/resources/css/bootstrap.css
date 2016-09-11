@@ -1842,7 +1842,7 @@ and (-webkit-min-device-pixel-ratio: 2){
     }
 
     .landing-main-text{
-        padding-top: 10px !important;
+        padding-top: 70px !important;
     }
 
     .landing-main-text .headliner{
@@ -1901,7 +1901,7 @@ and (-webkit-min-device-pixel-ratio: 2){
     .music-player-info{
         background-color: coral !important;
         height: 60px !important;
-        width: 84% !important;
+        width: 83.96% !important;
     }
 }
 

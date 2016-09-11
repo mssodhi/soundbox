@@ -55,8 +55,7 @@ angular.module('app').controller('NavCtrl', function ($scope, LoginService, $loc
             ctrl.currentUser = null;
             $location.path('/login');
             if(MusicService.getIsPlaying()){
-                MusicService.stream(null);
-                MusicService.pause();
+                MusicService.setPlayer();
             }
         });
     };
