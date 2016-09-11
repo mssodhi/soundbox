@@ -2,23 +2,28 @@
     <div ng-if="ctrl.inApp">
         <div class="navbar navbar-default navbar-fixed-top" ng-class="{'navbar-shadow': ctrl.isScrolled()}">
             <div class="navbar-header">
-                <div class="side-toggle"><a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a></div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/charts')"><a ng-href="#/charts">Charts</a></div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/browse')"><a href="#/browse">Browse</a></div>
-                <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
-                <div class="project hidden-xs" ng-class="ctrl.isActive('#/settings')"><a ng-href="#/settings">Settings</a></div>
-                <div class="project hidden-xs"><a href ng-click="ctrl.signOut()">Logout</a></div>
+                <div class="side-toggle pull-left">
+                    <a href ng-click="ctrl.showSideMenu = !ctrl.showSideMenu" ng-blur="ctrl.hideSideMenu()" class="hamburger"></a>
+                    <div class="app" ng-class="ctrl.isActive('#/')"><a href="#/">SoundBox</a></div>
+                </div>
+                <div class="menu-items col-md-10 pl0">
+                    <div ng-repeat="menuItem in ctrl.mainMenuItems" class="pull-left">
+                        <div class="project">
+                            <a ng-href="{{menuItem.link}}"> <i ng-class="'{{menuItem.icon}}'"> </i> {{menuItem.title}}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="navbar-right" ng-if="ctrl.currentUser.name !== 'Demo'">
-                <div class="user-profile pull-right col-xs-12 pl0 pr0" ng-class="{'open': ctrl.openProfile}">
-                    <img class="img-circle img-bordered" ng-src="{{ctrl.currentUser.pic_url}}">
-                    <a href ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">
-                        <span class="pull-right hidden-xs">{{ctrl.currentUser.name}}</span>
-                    </a>
+            <div class="navbar-right">
+                <div class="user-profile pull-right pl0 pr0" ng-class="{'open': ctrl.openProfile}"
+                     ng-click="ctrl.openProfile = !ctrl.openProfile" ng-blur="ctrl.hideProfile()">
+                    <img class="img-circle img-bordered" ng-if="ctrl.currentUser.pic_url" ng-src="{{ctrl.currentUser.pic_url}}">
+                    <img class="img-circle img-bordered" ng-if="!ctrl.currentUser.pic_url" src="resources/images/noImage.jpg">
                     <!--<ul class ="dropdown-menu dropdown-menu-right">-->
                         <!--<li>-->
-                            <!--<div class="options">-->
+                            <!--<span class="col-xs-12 pt5 pb5 hidden-xs">{{ctrl.currentUser.name}}</span>-->
+                            <!--<div class="options col-xs-12 pl0 pr0">-->
                                 <!--<div class="col-sm-6 right-border"><a href ng-href="#/settings"><span class="fa fa-gears"></span>Settings</a></div>-->
                                 <!--<div class="col-sm-6"><a ng-click="ctrl.signOut()" href><span class="fa fa-sign-out"></span>Sign Out</a></div>-->
                             <!--</div>-->
@@ -29,8 +34,8 @@
         </div>
         <div class="sidebar">
             <ul class="sidebar-nav">
-                <li ng-repeat="menuItem in ctrl.menuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
-                    <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link">{{menuItem.title}}</a>
+                <li ng-repeat="menuItem in ctrl.sideMenuItems" ng-class="{'active': menuItem.link === ctrl.currentPath()}">
+                    <a ng-href="{{menuItem.link}}" ng-if="menuItem.link" class="e2e-sidebar-link"> <i ng-class="'{{menuItem.icon}} pr10'"> </i> {{menuItem.title}}</a>
                     <div ng-if="!menuItem.link">{{menuItem.title}}</div>
                     <ul ng-if="menuItem.children" ng-repeat="subMenuItem in menuItem.children" class="list-unstyled">
                         <li ng-class="{'active': subMenuItem.link === ctrl.currentPath()}">
@@ -38,7 +43,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href ng-click="ctrl.signOut()">Logout</a></li>
+                <li><a href ng-click="ctrl.signOut()"> <i class="fa fa-sign-out pr10"> </i> Logout</a></li>
             </ul>
         </div>
     </div>

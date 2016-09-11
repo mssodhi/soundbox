@@ -65,18 +65,18 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                         return PlaylistService.getPlaylistById({id: $route.current.params.id}).$promise;
                     }
                 }
-            }).when('/settings', {
-                templateUrl: 'resources/scripts/controllers/settings/settings.html',
-                controller: 'SettingsCtrl',
-                controllerAs: 'ctrl',
-                resolve: {
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck();
-                    },
-                    profile: function(UserService){
-                        return UserService.getCurrentUser().$promise;
-                    }
-                }
+            // }).when('/settings', {
+            //     templateUrl: 'resources/scripts/controllers/settings/settings.html',
+            //     controller: 'SettingsCtrl',
+            //     controllerAs: 'ctrl',
+            //     resolve: {
+            //         permissions: function(PermissionService){
+            //             return PermissionService.permissionCheck();
+            //         },
+            //         profile: function(UserService){
+            //             return UserService.getCurrentUser().$promise;
+            //         }
+            //     }
             }).when('/browse', {
                 templateUrl: 'resources/scripts/controllers/browse/browse.html',
                 controller: 'BrowseCtrl',
