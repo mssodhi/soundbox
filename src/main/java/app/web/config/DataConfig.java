@@ -35,7 +35,7 @@ public class DataConfig {
     @Autowired
     private Environment environment;
 
-    @Value("classpath:db/test-data.sql")
+    @Value("classpath:db/local.sql")
     private Resource dataScript;
 
     @Bean
