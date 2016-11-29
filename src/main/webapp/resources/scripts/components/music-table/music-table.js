@@ -17,17 +17,7 @@ angular.module('app').component("musicTable", {
                     ctrl.likes = response;
                 });
             });
-            registerScroll();
         };
-
-        function registerScroll() {
-            document.onscroll = function() {
-                if(document.getElementById('show-more') !== null){
-                    console.log('I see it!');
-                    ctrl.limit += 50;
-                }
-            }
-        }
 
         ctrl.goToArtist = function (artist) {
             $location.path('/artist/'+artist.permalink);
