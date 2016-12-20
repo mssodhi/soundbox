@@ -31,9 +31,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
                 controller: 'ChartsCtrl',
                 controllerAs: 'ctrl',
                 resolve:{
-                    permissions: function(PermissionService){
-                        return PermissionService.permissionCheck();
-                    },
+                    // permissions: function(PermissionService){
+                    //     return PermissionService.permissionCheck();
+                    // },
                     profile: function(UserService){
                         return UserService.getCurrentUser().$promise;
                     }
