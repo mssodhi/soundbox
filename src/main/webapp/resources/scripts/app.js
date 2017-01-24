@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate'])
+angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngAnimate', 'angulartics', 'angulartics.google.analytics'])
     .config(function ($routeProvider, $httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
